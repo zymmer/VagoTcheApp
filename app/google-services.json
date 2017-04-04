@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "448809906574",
+    "project_id": "vagotche-1295"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:448809906574:android:41b532c1cf6e33e4",
+        "android_client_info": {
+          "package_name": "br.com.vagotche.vagotcheapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "448809906574-jupknsj38vgpamsop1q2shhnj1ff2eth.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.com.vagotche.vagotcheapp",
+            "certificate_hash": "ef2a55b13af2c26b57fb4022ae318afe7b9a9814"
+          }
+        },
+        {
+          "client_id": "448809906574-rbsu2bcdl4rrmqt9v1lq5429dbukvp84.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6ynaT_kB1JmNyNGB7RdGrumx0bhj7gEY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

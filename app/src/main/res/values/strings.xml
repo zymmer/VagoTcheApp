@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">VagoTcheApp</string>
+    <string name="facebook_app_id">187171295121507</string>
+    <string name="google_maps_key">AIzaSyA4T_jVEZvNG2wNiARtWjblo8po7UvvCl0</string>
+
+    <!--Main -->
+    <string name="Email">Email</string>
+    <string name="Senha">Senha</string>
+    <string name="Entrar">Entrar</string>
+
+    <!-- Menu -->
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
