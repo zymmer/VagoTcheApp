@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.com.vagotche.vagotcheapp.MenuActivity">
+    tools:context="br.com.vagotche.vagotcheapp.MenuActivity"
+    android:background="@drawable/gradient_background">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -13,11 +14,11 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="www.vagotche.com.br"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -39,6 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
         android:clickable="true"
+        app:backgroundTint="@color/corgoogleMapsBtn"
         />
 
     <android.support.design.widget.FloatingActionButton
@@ -49,6 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
         android:clickable="true"
+        app:backgroundTint="@color/corgoogleMapsBtn"
         />
 
     <android.support.design.widget.FloatingActionButton
@@ -59,11 +62,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
         android:clickable="true"
+        app:backgroundTint="@color/corgoogleMapsBtn"
         />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/googleMapsBtn"
-        android:src="@mipmap/parquimetro_40x40"
+        android:src="@mipmap/ic_parquimetro"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
@@ -78,6 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
         android:clickable="true"
+        app:backgroundTint="@color/corgoogleMapsBtn"
         />
 
     <android.support.design.widget.FloatingActionButton
@@ -87,6 +92,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
         android:clickable="true"
+        app:backgroundTint="@color/corgoogleMapsBtn"
         />
 
     <android.support.design.widget.FloatingActionButton
@@ -96,6 +102,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
         android:clickable="true"
+        app:backgroundTint="@color/corgoogleMapsBtn"
         />
 
     <android.support.design.widget.FloatingActionButton
@@ -106,6 +113,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
         android:clickable="true"
+        app:backgroundTint="@color/corgoogleMapsBtn"
         />
 
     <android.support.design.widget.FloatingActionButton
@@ -116,6 +124,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
         android:clickable="true"
+        app:backgroundTint="@color/corgoogleMapsBtn"
         />
 
 </android.support.design.widget.CoordinatorLayout>

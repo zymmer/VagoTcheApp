@@ -3,55 +3,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
+    android:background="@drawable/bkg"
+    android:gravity="center"
+    android:orientation="vertical"
     android:paddingBottom="16dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="16dp"
-    android:orientation="vertical"
-    android:gravity="center"
     android:weightSum="1">
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/ic_launcher_round"
+        android:textAlignment="center" />
 
-        <ImageView
-            android:textAlignment="center"
-            android:background="@mipmap/ic_launcher"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/editEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:textAlignment="center" />
 
-        <EditText
-            android:id="@+id/editEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:hint="Email" />
+    <EditText
+        android:id="@+id/editPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textAlignment="center" />
 
-        <EditText
-            android:id="@+id/editPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:hint="Password"
-            android:inputType="textPassword"/>
-        <Button
-            android:id="@+id/btnEntrar"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Entrar"/>
+    <Button
+        android:id="@+id/btnEntrar"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Entrar" />
 
-        <TextView
-            android:id="@+id/txtCadastrar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Não tem uma conta? Crie uma!" />
+    <TextView
+        android:id="@+id/txtCadastrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Não tem uma conta? Crie uma!" />
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_weight="0.08">
+        android:weightSum="1">
 
         <com.facebook.login.widget.LoginButton
             android:id="@+id/fbLogin"
@@ -63,12 +64,13 @@
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/ggLogin"
-            android:layout_width="wrap_content"
+            android:layout_width="128dp"
             android:layout_height="32dp"
+            android:layout_below="@+id/ggLogin"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:layout_below="@+id/ggLogin" />
+            android:layout_weight="0.05" />
 
     </LinearLayout>
 </LinearLayout>
