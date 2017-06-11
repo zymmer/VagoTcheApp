@@ -67,9 +67,9 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/googleMapsBtn"
-        android:src="@mipmap/ic_parquimetro"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
+        android:src="@mipmap/parquimetro_40x40"
+        android:layout_width="65dp"
+        android:layout_height="72dp"
         android:layout_gravity="center_vertical|center_horizontal"
         android:clickable="true"
         app:backgroundTint="@color/corgoogleMapsBtn"
