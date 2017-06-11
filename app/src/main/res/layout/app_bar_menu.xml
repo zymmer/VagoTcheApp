@@ -25,65 +25,120 @@
     <include layout="@layout/content_menu"
         android:id="@+id/include" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <!--Créditos -->
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/teste1Btn"
-        android:layout_width="100dp"
-        android:layout_marginBottom="250dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:clickable="true"
-        app:backgroundTint="@color/corgoogleMapsBtn"
-        />
+        android:textStyle="bold"
+        android:layout_marginBottom="330dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginRight="80dp"
+        android:text="@string/Créditos"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="center_vertical|left" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/teste2Btn"
-        android:layout_width="100dp"
+        android:src="@mipmap/credit"
         android:layout_marginRight="250dp"
+        android:layout_marginEnd="250dp"
         android:layout_marginBottom="250dp"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
+        android:layout_width="70dp"
         android:layout_gravity="center_vertical|center_horizontal"
         android:clickable="true"
         app:backgroundTint="@color/corgoogleMapsBtn"
         />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/teste3Btn"
-        android:layout_width="100dp"
-        android:layout_marginLeft="250dp"
-        android:layout_marginBottom="250dp"
+    <!--Cadastro de Veiculo -->
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:text="@string/CadastroVeículo"
+        android:layout_marginBottom="330dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginRight="80dp"
+        app:layout_anchor="@+id/include"
+        android:textStyle="bold"
+        app:layout_anchorGravity="center_vertical|center_horizontal" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/teste1Btn"
+        android:src="@mipmap/cadastroveiculo"
+
+        android:layout_marginBottom="250dp"
+        android:layout_height="80dp"
+        android:layout_width="70dp"
         android:layout_gravity="center_vertical|center_horizontal"
         android:clickable="true"
         app:backgroundTint="@color/corgoogleMapsBtn"
         />
+
+    <!--Configuração de Alertas -->
+    <TextView
+        android:layout_width="85dp"
+        android:layout_height="32dp"
+        android:text="@string/ConfiguracaoAlertas"
+        android:layout_marginBottom="320dp"
+        app:layout_anchor="@+id/include"
+        android:textStyle="bold"
+        app:layout_anchorGravity="center_vertical|right" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/teste3Btn"
+        android:src="@mipmap/alarm"
+        android:layout_width="80dp"
+        android:layout_marginLeft="250dp"
+        android:layout_marginStart="250dp"
+        android:layout_marginBottom="250dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:clickable="true"
+        app:backgroundTint="@color/corgoogleMapsBtn"
+        />
+
+    <!--Estacionamento -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:text="@string/Estacionamento"
+        app:layout_anchor="@+id/include"
+        android:textStyle="bold"
+        app:layout_anchorGravity="center_vertical|left" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/testeBtn"
+        android:src="@mipmap/estacionamento"
+        android:layout_width="80dp"
+        android:layout_height="70dp"
+
+        android:layout_marginRight="250dp"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:clickable="true"
+        app:backgroundTint="@color/corgoogleMapsBtn"
+        />
+
+    <!--Navegar -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:text="@string/Navegar"
+        app:layout_anchor="@+id/include"
+        android:textStyle="bold"
+        app:layout_anchorGravity="center_vertical|center_horizontal" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/googleMapsBtn"
         android:src="@mipmap/parquimetro_40x40"
-        android:layout_width="65dp"
-        android:layout_height="72dp"
+        android:layout_width="80dp"
+        android:layout_height="70dp"
         android:layout_gravity="center_vertical|center_horizontal"
         android:clickable="true"
         app:backgroundTint="@color/corgoogleMapsBtn"
        />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/testeBtn"
-        android:layout_width="100dp"
-        android:layout_marginRight="250dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:clickable="true"
-        app:backgroundTint="@color/corgoogleMapsBtn"
-        />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/cadastroveiculoBtn"

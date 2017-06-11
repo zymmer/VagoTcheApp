@@ -8,6 +8,13 @@
     <string name="Senha">Senha</string>
     <string name="Entrar">Entrar</string>
 
+    <!--App_bar_Menu -->
+    <string name="Créditos">Créditos</string>
+    <string name="CadastroVeículo">Cadastro de Veículo</string>
+    <string name="ConfiguracaoAlertas">Configuração de Alertas</string>
+    <string name="Estacionamento">Estacionamento</string>
+    <string name="Navegar">Navegar</string>
+
     <!-- Menu -->
     <string name="title_activity_menu">MenuActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>

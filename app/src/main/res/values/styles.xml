@@ -19,7 +19,7 @@
     <!-- Bem-Vindo Splash Screen -->
     <style name="UiTestTextView">
         <item name="android:textColor">@color/colorPrimaryDark</item>
-        <item name="android:textStyle">italic</item>
+        <item name="android:textStyle">normal</item>
         <item name="android:textSize">50sp</item>
 
         <item name="android:shadowColor">#ffffff</item>
@@ -29,8 +29,8 @@
     </style>
 
     <style name="StyledTilEditTextTheme">
-        <item name="colorControlNormal">#e6ffffff</item> // Cor padrão da linha
-        <item name="colorControlActivated">#faffffff</item> // Cor linha e texto quando recebe foco
+        <item name="colorControlNormal">#c8ffffff</item> // Cor padrão da linha
+        <item name="colorControlActivated">#c8ffffff</item> // Cor linha e texto quando recebe foco
     </style>
 
     <style name="StyledTilEditText">
