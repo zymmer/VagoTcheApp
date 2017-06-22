@@ -73,10 +73,15 @@
             android:name=".MenuActivity"
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <!-- Maps -->
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".CadastroActivity"></activity>
+
+        <!-- Cadastro -->
+        <activity
+            android:name=".CadastroActivity"/>
     </application>
 
 </manifest>
