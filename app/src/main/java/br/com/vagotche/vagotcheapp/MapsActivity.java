@@ -219,9 +219,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
         markerOptions.title("Parquímetro - Rua. Cel. Genuíno");
-        markerOptions.snippet("Vagas ocupadas Geral 4/20");
-        markerOptions.snippet("Vagas ocupadas DF 1/5");
-        markerOptions.snippet("Vagas ocupadas ID 2/2");
+        markerOptions.snippet("Vagas ocupadas 4/20");
         //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(R.mipmap.parquimetro_40x40));
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
         mMap.addMarker(markerOptions);
@@ -233,9 +231,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
         markerOptions.title("Parquímetro - Rua. Cel. Fernando Machado");
-        markerOptions.snippet("Vagas ocupadas Geral 20/20");
-        markerOptions.snippet("Vagas ocupadas DF 5/5");
-        markerOptions.snippet("Vagas ocupadas ID 2/2");
+        markerOptions.snippet("Vagas ocupadas 10/10");
         //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(R.mipmap.parquimetro_40x40));
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
         mMap.addMarker(markerOptions);
@@ -247,9 +243,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
         markerOptions.title("Parquímetro - Rua. Mal. Floriano Peixoto");
-        markerOptions.snippet("Vagas ocupadas Geral 8/20");
-        markerOptions.snippet("Vagas ocupadas DF 1/5");
-        markerOptions.snippet("Vagas ocupadas ID 2/2");
+        markerOptions.snippet("Vagas ocupadas 8/10");
         //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(R.mipmap.parquimetro_40x40));
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
         mMap.addMarker(markerOptions);
