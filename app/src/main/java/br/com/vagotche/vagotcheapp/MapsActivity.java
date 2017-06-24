@@ -64,7 +64,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
         //Testes Parquimetros
-        addParquimetroAugustoSevero();
+        addParquimetroCelGenuino();
+        addParquimetroCelFernandoMachado();
+        addParquimetroMalFloriadoPeixoto();
 
 
         //Initialize Google Play Services
@@ -211,14 +213,45 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     //TESTES PARQUIMETRO
-    public void addParquimetroAugustoSevero() {
-        //Parquimetro Augusto Severo
-        LatLng latLng = new LatLng(-30.006279, -51.188965);
+    public void addParquimetroCelGenuino() {
+        //Parquimetro Rua. Cel. Genuíno
+        LatLng latLng = new LatLng(-30.035315, -51.226739);
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
-        markerOptions.title("Parquímetro - R. Augusto Severo");
+        markerOptions.title("Parquímetro - Rua. Cel. Genuíno");
+        markerOptions.snippet("Vagas ocupadas Geral 4/20");
+        markerOptions.snippet("Vagas ocupadas DF 1/5");
+        markerOptions.snippet("Vagas ocupadas ID 2/2");
         //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(R.mipmap.parquimetro_40x40));
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+        mMap.addMarker(markerOptions);
+    }
+
+    public void addParquimetroCelFernandoMachado() {
+        //Parquimetro Fernando Machado
+        LatLng latLng = new LatLng(-30.034922, -51.226855);
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(latLng);
+        markerOptions.title("Parquímetro - Rua. Cel. Fernando Machado");
+        markerOptions.snippet("Vagas ocupadas Geral 20/20");
+        markerOptions.snippet("Vagas ocupadas DF 5/5");
+        markerOptions.snippet("Vagas ocupadas ID 2/2");
+        //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(R.mipmap.parquimetro_40x40));
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+        mMap.addMarker(markerOptions);
+    }
+
+    public void addParquimetroMalFloriadoPeixoto() {
+        //Parquimetro Fernando Machado
+        LatLng latLng = new LatLng(-30.035166, -51.227233);
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(latLng);
+        markerOptions.title("Parquímetro - Rua. Mal. Floriano Peixoto");
+        markerOptions.snippet("Vagas ocupadas Geral 8/20");
+        markerOptions.snippet("Vagas ocupadas DF 1/5");
+        markerOptions.snippet("Vagas ocupadas ID 2/2");
+        //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(R.mipmap.parquimetro_40x40));
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
         mMap.addMarker(markerOptions);
     }
 
