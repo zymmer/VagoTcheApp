@@ -1,5 +1,7 @@
 package br.com.vagotche.vagotcheapp;
 
+import android.app.Activity;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStream;
@@ -12,7 +14,7 @@ import java.net.URL;
  * Created by guilherme on 20/08/17.
  */
 
-public class ConexaoBD {
+public class ConexaoApp extends Activity{
 
     public static String postDados (String urlUsuario, String parametrosUsuario){
         URL url;

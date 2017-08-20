@@ -82,14 +82,30 @@
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <!-- Cadastro -->
+        <activity
+            android:name=".CadastroActivity"/>
+
+        <!-- CadastroVeiculo -->
+        <activity
+            android:name=".CadastroVeiculoActivity"/>
+
+        <!-- ConfiguracaoAlertasActivity -->
+        <activity
+            android:name=".ConfiguracaoAlertasActivity"/>
+
+        <!-- CreditosActivity -->
+        <activity
+            android:name=".CreditosActivity"/>
+
+        <!-- CreditosActivity -->
+        <activity
+            android:name=".ZonaAzulActivity"/>
+
         <!-- Maps -->
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
-
-        <!-- Cadastro -->
-        <activity
-            android:name=".CadastroActivity"/>
 
         <!-- Bluetooth -->
         <activity

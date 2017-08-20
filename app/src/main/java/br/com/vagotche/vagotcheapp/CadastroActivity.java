@@ -76,7 +76,7 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
         @Override
         protected String doInBackground(String... urls){
 
-            return ConexaoBD.postDados(urls[0], parametros);
+            return ConexaoApp.postDados(urls[0], parametros);
 
         }
 
