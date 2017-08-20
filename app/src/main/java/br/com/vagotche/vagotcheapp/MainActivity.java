@@ -1,7 +1,11 @@
 package br.com.vagotche.vagotcheapp;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -25,6 +29,8 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.facebook.FacebookSdk;
 
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,GoogleApiClient.OnConnectionFailedListener {
 
     private static final String TAG = "SignInActivity";
@@ -38,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnEntrar;
     TextView txtCadastrar;
 
+    String url = "";
+    String parametros = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,31 +153,78 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // [START signIn]
     private void iniciar() {
-        //TextView txtEmail = (TextView) findViewById(R.id.txtEmail);
-        //TextView txtPassword = (TextView) findViewById(R.id.txtPassword);
-        String email = editEmail1.getText().toString();
-        String password = editPassword1.getText().toString();
 
-        if (email.equals("guizymmer@gmail.com") && password.equals("123")) {
-            alert("Login realizado com sucesso");
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()){
 
-            Intent it = new Intent(MainActivity.this, MenuActivity.class);
-            startActivity(it);
+            String email = editEmail1.getText().toString();
+            String senha = editPassword1.getText().toString();
+
+            if(email.isEmpty() || senha.isEmpty()){
+                Toast.makeText(getApplicationContext(), "Nenhum campo pode estar vazio", Toast.LENGTH_LONG).show();
+            }else {
+                url = "http://192.168.100.9:8090/login/logar.php";
+
+                parametros = "email" + email + "&senha" + senha;
+
+                new SolicitaDados().execute(url);
             }
-        else {
 
-            alert("Login ou senha incorretos");
+        } else {
+            Toast.makeText(getApplicationContext(), "Nenhuma conexão foi detectada", Toast.LENGTH_LONG).show();
         }
 
+//
+//        String email = editEmail1.getText().toString();
+//        String password = editPassword1.getText().toString();
+//
+//        if (email.equals("guizymmer@gmail.com") && password.equals("123")) {
+//            alert("Login realizado com sucesso");
+//
+//            Intent it = new Intent(MainActivity.this, MenuActivity.class);
+//            startActivity(it);
+//            }
+//        else {
+//
+//            alert("Login ou senha incorretos");
+//        }
+
     }
+
+    private class SolicitaDados extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... urls){
+
+            return ConexaoBD.postDados(urls[0], parametros);
+
+        }
+
+        @Override
+        protected void onPostExecute(String resultado){
+
+            if (resultado.contains("login_ok")) {
+            alert("Login realizado com sucesso");
+
+           Intent it = new Intent(MainActivity.this, MenuActivity.class);
+           startActivity(it);
+            }
+            else {
+
+            alert("E-mail ou senha incorretos");
+            }
+
+        }
+    }
+
 
     // [END signIn]
 
     private void alert(String s){
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
     }
-
-
 
     // [START cadastro]
     private void cadastrar() {
@@ -270,4 +325,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //    break;
         }
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
+    }
+
 }

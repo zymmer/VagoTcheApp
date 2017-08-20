@@ -41,7 +41,7 @@
         android:inputType="textPassword"/>
 
     <EditText
-        android:id="@+id/editRSenha"
+        android:id="@+id/editPassword3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
@@ -56,12 +56,14 @@
             android:id="@+id/btnCancelar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Cancelar" />
 
         <Button
             android:id="@+id/btnRegistrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Registrar" />
     </LinearLayout>
 
