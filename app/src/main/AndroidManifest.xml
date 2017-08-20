@@ -82,6 +82,11 @@
             android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <!-- Maps -->
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps" />
+
         <!-- Cadastro -->
         <activity
             android:name=".CadastroActivity"/>
@@ -89,6 +94,10 @@
         <!-- CadastroVeiculo -->
         <activity
             android:name=".CadastroVeiculoActivity"/>
+
+        <!-- ConexaoApp -->
+        <activity
+            android:name=".ConexaoApp"/>
 
         <!-- ConfiguracaoAlertasActivity -->
         <activity
@@ -98,14 +107,9 @@
         <activity
             android:name=".CreditosActivity"/>
 
-        <!-- CreditosActivity -->
+        <!-- ZonaAzulActivity -->
         <activity
             android:name=".ZonaAzulActivity"/>
-
-        <!-- Maps -->
-        <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" />
 
         <!-- Bluetooth -->
         <activity
