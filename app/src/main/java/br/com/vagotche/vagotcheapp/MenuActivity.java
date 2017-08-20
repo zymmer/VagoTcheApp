@@ -26,6 +26,13 @@ public class MenuActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         FloatingActionButton gmb = (FloatingActionButton) findViewById(R.id.googleMapsBtn);
+        FloatingActionButton cb = (FloatingActionButton) findViewById(R.id.CreditosBtn);
+        FloatingActionButton cvb = (FloatingActionButton) findViewById(R.id.CadastroVeiculoBtn);
+        FloatingActionButton cab = (FloatingActionButton) findViewById(R.id.ConfiguracaoAlertasBtn);
+        FloatingActionButton zab = (FloatingActionButton) findViewById(R.id.ZonaAzulBtn);
+        FloatingActionButton teste = (FloatingActionButton) findViewById(R.id.teste6Btn);
+
+        //Redirecionamento Botoes
 
         gmb.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +42,48 @@ public class MenuActivity extends AppCompatActivity
             }
         });
 
+        cb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(MenuActivity.this, CreditosActivity.class);
+                startActivity(it);
+            }
+        });
+
+        cvb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(MenuActivity.this, CadastroVeiculoActivity.class);
+                startActivity(it);
+            }
+        });
+
+        cab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(MenuActivity.this, ConfiguracaoAlertasActivity.class);
+                startActivity(it);
+            }
+        });
+
+        zab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(MenuActivity.this, ZonaAzulActivity.class);
+                startActivity(it);
+            }
+        });
+
+        // Teste
+        teste.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(MenuActivity.this, SensorActivity.class);
+                startActivity(it);
+            }
+        });
+
+        //Fim Redirecionamento
 
         //FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         //fab.setOnClickListener(new View.OnClickListener() {

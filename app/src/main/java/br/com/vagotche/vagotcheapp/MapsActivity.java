@@ -63,7 +63,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
+        //Parquimetros Reais
+        addParquimetrosArray();
+
         //Testes Parquimetros
+
         addParquimetroCelGenuino();
         addParquimetroCelFernandoMachado();
         addParquimetroMalFloriadoPeixoto();
@@ -210,6 +214,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // You can add here other case statements according to your requirement.
         }
     }
+
+    //Parquímetros Reais
+    public void addParquimetrosArray() {
+        //Parquimetro Av. Osvaldo Aranha, n° 374
+        LatLng latLng = new LatLng(-30.035315, -51.226739);
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(latLng);
+        markerOptions.title("Parquímetro - Av. Osvaldo Aranha, n° 374");
+        markerOptions.snippet("Vagas ocupadas 4/13");
+        //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(R.mipmap.parquimetro_40x40));
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+        mMap.addMarker(markerOptions);
+    }
+
+
+
 
 
     //TESTES PARQUIMETRO

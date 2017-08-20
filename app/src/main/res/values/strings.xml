@@ -12,7 +12,7 @@
     <string name="Créditos">Créditos</string>
     <string name="CadastroVeículo">Cadastro de Veículo</string>
     <string name="ConfiguracaoAlertas">Configuração de Alertas</string>
-    <string name="Estacionamento">Estacionamento</string>
+    <string name="ZonaAzul">Zona Azul</string>
     <string name="Navegar">Navegar</string>
 
     <!-- Menu -->
@@ -21,4 +21,28 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_maps">Map</string>
+
+    <!-- Creditos -->
+    <string name="CréditosAdquiridos">Créditos Adquiridos</string>
+    <string name="CréditosUsados">Créditos Usados</string>
+    <string name="Histórico">Histórico</string>
+    <string name="Saldo">Saldo</string>
+
+    <!-- Zona Azul -->
+    <string name="PlacaVeículo">Placa do Veículo</string>
+    <string name="Cidade">Cidade</string>
+    <string name="Parquímetro">Parquímetro</string>
+    <string name="VagasTotais">Vagas Totais</string>
+    <string name="VagasDisponíveis">Vagas Disponíveis</string>
+    <string name="HorarioFuncionamento">Horário de Funcionamento da Cidade/Vaga</string>
+
+    <!-- Alertas -->
+    <string name="Aviso1">Avisar-me de movimentação indevida do meu véiculo</string>
+
+    <!-- Cadastro Veículo -->
+    <string name="Modelo">Modelo</string>
+    <string name="Marca">Marca</string>
+    <string name="Placa1">Placa</string>
+    <string name="Ano">Ano</string>
+
 </resources>

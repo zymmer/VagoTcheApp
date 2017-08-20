@@ -11,58 +11,39 @@
     android:orientation="vertical"
     android:weightSum="1">
 
-    <EditText
-        android:id="@+id/editNome"
+    <AutoCompleteTextView
+        android:id="@+id/ACviewModelo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:hint="Nome" />
+        android:text="@string/Modelo" />
 
-    <EditText
-        android:id="@+id/editSobrenome"
+    <AutoCompleteTextView
+        android:id="@+id/ACviewMarca"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:hint="Sobrenome" />
+        android:text="@string/Marca" />
 
     <EditText
-        android:id="@+id/editEmail2"
+        android:id="@+id/editPlaca"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:hint="Email" />
+        android:text="@string/Placa1" />
 
-    <EditText
-        android:id="@+id/editPassword2"
+    <TextView
+        android:id="@+id/viewAno"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:hint="Senha"
-        android:inputType="textPassword"/>
+        android:text="@string/Ano" />
 
-    <EditText
-        android:id="@+id/editRSenha"
+    <CalendarView
+        android:id="@+id/editAno"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:hint="Repita sua senha" />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/btnCancelar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cancelar" />
-
-        <Button
-            android:id="@+id/btnRegistrar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Registrar" />
-    </LinearLayout>
+        />
 
 </LinearLayout>

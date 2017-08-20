@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView mStatusTextView;
     private ProgressDialog mProgressDialog;
 
-    EditText editEmail,editPassword;
+    EditText editEmail1,editPassword1;
     Button btnEntrar;
     TextView txtCadastrar;
 
@@ -46,8 +46,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // [START customize_button]
         // Set the dimensions of the sign-in button.
-        editEmail = (EditText)findViewById(R.id.editEmail);
-        editPassword = (EditText)findViewById(R.id.editPassword);
+        editEmail1 = (EditText)findViewById(R.id.editEmail1);
+        editPassword1 = (EditText)findViewById(R.id.editPassword1);
         btnEntrar = (Button)findViewById(R.id.btnEntrar);
         txtCadastrar = (TextView)findViewById(R.id.txtCadastrar);
 
@@ -147,8 +147,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void iniciar() {
         //TextView txtEmail = (TextView) findViewById(R.id.txtEmail);
         //TextView txtPassword = (TextView) findViewById(R.id.txtPassword);
-        String email = editEmail.getText().toString();
-        String password = editPassword.getText().toString();
+        String email = editEmail1.getText().toString();
+        String password = editPassword1.getText().toString();
 
         if (email.equals("guizymmer@gmail.com") && password.equals("123")) {
             alert("Login realizado com sucesso");

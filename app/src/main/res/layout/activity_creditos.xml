@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <TextView
+        android:id="@+id/viewCréditosAdquiridos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="@string/CréditosAdquiridos" />
+
+    <TextView
+        android:id="@+id/viewCréditosUsados"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="@string/CréditosUsados" />
+
+    <TextView
+        android:id="@+id/viewHistórico"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="@string/Histórico" />
+
+    <GridView
+        android:layout_width="match_parent"
+        android:layout_height="345dp"></GridView>
+
+    <TextView
+        android:id="@+id/viewSaldo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Saldo"
+        android:textAlignment="center" />
+
+</LinearLayout>
