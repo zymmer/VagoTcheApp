@@ -19,7 +19,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.UiLifecycleHelper;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -44,8 +48,6 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
     private GoogleApiClient mGoogleApiClient;
     private TextView mStatusTextView;
     private ProgressDialog mProgressDialog;
-    private UiLifecycleHelper uiHelper;
-
 
     EditText editEmail1,editPassword1;
     Button btnEntrar;
@@ -53,6 +55,9 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     String url = "";
     String parametros = "";
+
+    LoginButton fbLogin;
+    CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,11 +69,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         editEmail1 = (EditText)findViewById(R.id.editEmail1);
         editPassword1 = (EditText)findViewById(R.id.editPassword1);
         btnEntrar = (Button)findViewById(R.id.btnEntrar);
+        fbLogin = (LoginButton) findViewById(R.id.fbLogin); 
         txtCadastrar = (TextView)findViewById(R.id.txtCadastrar);
 
         //FB
-        LoginButton lb = (LoginButton) findViewById(R.id.fbLogin);
-        lb.setPublishPermissions(Arrays.asList("email","public_profile","user_friends"));
+        callbackManager = CallbackManager.Factory.create();
+        //lb.setPublishPermissions(Arrays.asList("email","public_profile","user_friends"));
 
         SignInButton signInButton = (SignInButton) findViewById(R.id.ggLogin);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
@@ -79,6 +85,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
         // Button listeners
         btnEntrar.setOnClickListener(this);
+        fbLogin.setOnClickListener(this);
         txtCadastrar.setOnClickListener(this);
         findViewById(R.id.ggLogin).setOnClickListener(this);
         //findViewById(R.id.sign_out_button).setOnClickListener(this);
@@ -101,6 +108,28 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 .build();
         // [END build_client]
 
+    }
+
+    private void iniciarComFacebook(){
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                alert("Login realizado com sucesso \n" + loginResult.getAccessToken());
+
+                Intent it = new Intent(MainActivity.this, MenuActivity.class);
+                startActivity(it);
+            }
+
+            @Override
+            public void onCancel() {
+                alert("Login Cancelado");
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+                alert("Login com erro: " + error.getMessage());
+            }
+        });
     }
 
     //@Override
@@ -140,6 +169,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             handleSignInResult(result);
         }
 
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+
     }
     // [END onActivityResult]
 
@@ -174,7 +205,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             String senha = editPassword1.getText().toString();
 
             if(email.isEmpty() || senha.isEmpty()){
-                Toast.makeText(getApplicationContext(), "Nenhum campo pode estar vazio", Toast.LENGTH_LONG).show();
+                alert("Nenhum campo pode estar vazio");
             }else {
                 url = "http://192.168.100.9:8090/login/logar.php";
 
@@ -184,7 +215,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             }
 
         } else {
-            Toast.makeText(getApplicationContext(), "Nenhuma conexão foi detectada", Toast.LENGTH_LONG).show();
+            alert("Nenhuma conexão foi detectada");
         }
 
 //
@@ -332,18 +363,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
                 iniciarComGoogle();
                 break;
             case R.id.fbLogin:
-                ();
+                iniciarComFacebook();
                 break;
             //case R.id.disconnect_button:
             //    revokeAccess();
             //    break;
         }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        finish();
     }
 
 }
