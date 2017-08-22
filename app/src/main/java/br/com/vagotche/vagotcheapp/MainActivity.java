@@ -16,13 +16,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
@@ -63,9 +66,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     AccessTokenTracker accessTokenTracker;
     ProfileTracker profileTracker;
 
+    // Nav_Header_Menu
+    ImageView imageView1;
+    TextView name, editEmail3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_main);
 
         // [START customize_button]
@@ -75,9 +83,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnEntrar = (Button)findViewById(R.id.btnEntrar);
         fbLogin = (LoginButton) findViewById(R.id.fbLogin);
         txtCadastrar = (TextView)findViewById(R.id.txtCadastrar);
-
-        //FB
-        callbackManager = CallbackManager.Factory.create();
 
         SignInButton signInButton = (SignInButton) findViewById(R.id.ggLogin);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
@@ -114,10 +119,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void iniciarComFacebook(){
-        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+
+        //FB
+        callbackManager = CallbackManager.Factory.create();
+        accessTokenTracker = new AccessTokenTracker() {
+            @Override
+            protected void onCurrentAccessTokenChanged(AccessToken oldToken, AccessToken currentToken) {
+
+            }
+        };
+
+        profileTracker = new ProfileTracker() {
+            @Override
+            protected void onCurrentProfileChanged(Profile oldProfile, Profile newProfile) {
+                nextActivity(newProfile);
+            }
+        };
+
+        accessTokenTracker.startTracking();
+        profileTracker.startTracking();
+
+        FacebookCallback<LoginResult> callback = new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                loginResult.getAccessToken();
+                Profile profile = Profile.getCurrentProfile();
+                nextActivity(profile);
+                Toast.makeText(getApplicationContext(), "Loggin in...", Toast.LENGTH_SHORT).show();
 
                 Intent it = new Intent(MainActivity.this, MenuActivity.class);
                 startActivity(it);
@@ -132,8 +159,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onError(FacebookException error) {
                 alert("Login com erro: " + error.getMessage());
             }
-        });
+        };
+        //fbLogin.setLoginBehavior("Read_friends");
+        fbLogin.registerCallback(callbackManager, callback);
     }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        Profile profile = Profile.getCurrentProfile();
+        nextActivity(profile);
+    }
+
+
 
     //@Override
     //public void onStart() {
@@ -176,6 +214,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
     // [END onActivityResult]
+
+    private void nextActivity(Profile profile){
+        if (profile != null){
+            Intent main = new Intent(MainActivity.this, MenuActivity.class);
+            main.putExtra("name", profile.getFirstName());
+            main.putExtra("surname", profile.getLastName());
+            main.putExtra("imageUrl", profile.getProfilePictureUri(200,200).toString());
+
+        }
+    }
 
     // [START handleSignInResult]
     private void handleSignInResult(GoogleSignInResult result) {
@@ -377,7 +425,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onPause() {
         super.onPause();
-        finish();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        accessTokenTracker.stopTracking();
+        profileTracker.stopTracking();
     }
 
 }
