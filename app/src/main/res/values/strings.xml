@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">VagoTche</string>
+
+    <!--Facebook -->
     <string name="facebook_app_id">187171295121507</string>
+    <string name="fb_login_protocol_scheme">fb187171295121507</string>
+
+    <!--Google -->
     <string name="google_maps_key">AIzaSyA4T_jVEZvNG2wNiARtWjblo8po7UvvCl0</string>
 
     <!--Main -->

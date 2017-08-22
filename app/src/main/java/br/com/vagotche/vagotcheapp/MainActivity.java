@@ -1,5 +1,6 @@
 package br.com.vagotche.vagotcheapp;
 
+import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -7,14 +8,19 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.UiLifecycleHelper;
+import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -25,7 +31,12 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener,GoogleApiClient.OnConnectionFailedListener {
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+
+import java.util.Arrays;
+
+public class MainActivity extends FragmentActivity implements View.OnClickListener,GoogleApiClient.OnConnectionFailedListener {
 
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
@@ -33,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private GoogleApiClient mGoogleApiClient;
     private TextView mStatusTextView;
     private ProgressDialog mProgressDialog;
+    private UiLifecycleHelper uiHelper;
+
 
     EditText editEmail1,editPassword1;
     Button btnEntrar;
@@ -52,6 +65,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editPassword1 = (EditText)findViewById(R.id.editPassword1);
         btnEntrar = (Button)findViewById(R.id.btnEntrar);
         txtCadastrar = (TextView)findViewById(R.id.txtCadastrar);
+
+        //FB
+        LoginButton lb = (LoginButton) findViewById(R.id.fbLogin);
+        lb.setPublishPermissions(Arrays.asList("email","public_profile","user_friends"));
 
         SignInButton signInButton = (SignInButton) findViewById(R.id.ggLogin);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
@@ -83,7 +100,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
         // [END build_client]
-
 
     }
 
@@ -123,6 +139,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleSignInResult(result);
         }
+
     }
     // [END onActivityResult]
 
@@ -187,6 +204,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+
+
     private class SolicitaDados extends AsyncTask<String, Void, String> {
 
         @Override
@@ -199,7 +218,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected void onPostExecute(String resultado){
 
-            if (resultado.contains("login_ok")) {
+            if (resultado.contains("OK")) {
             alert("Login realizado com sucesso");
 
            Intent it = new Intent(MainActivity.this, MenuActivity.class);
@@ -216,6 +235,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // [END signIn]
 
+    //Default alert
     private void alert(String s){
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
     }
@@ -226,7 +246,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(it);
 
     }
-    // [END signIn]
+    // [END cadastro]
 
     // [START google signIn]
     private void iniciarComGoogle() {
@@ -311,9 +331,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.ggLogin:
                 iniciarComGoogle();
                 break;
-            //case R.id.sign_out_button:
-            //    signOut();
-            //    break;
+            case R.id.fbLogin:
+                ();
+                break;
             //case R.id.disconnect_button:
             //    revokeAccess();
             //    break;
