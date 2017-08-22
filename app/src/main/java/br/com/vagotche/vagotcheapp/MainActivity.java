@@ -19,9 +19,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -40,7 +42,7 @@ import com.facebook.appevents.AppEventsLogger;
 
 import java.util.Arrays;
 
-public class MainActivity extends FragmentActivity implements View.OnClickListener,GoogleApiClient.OnConnectionFailedListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener,GoogleApiClient.OnConnectionFailedListener {
 
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
@@ -58,6 +60,8 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
 
     LoginButton fbLogin;
     CallbackManager callbackManager;
+    AccessTokenTracker accessTokenTracker;
+    ProfileTracker profileTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,12 +73,11 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         editEmail1 = (EditText)findViewById(R.id.editEmail1);
         editPassword1 = (EditText)findViewById(R.id.editPassword1);
         btnEntrar = (Button)findViewById(R.id.btnEntrar);
-        fbLogin = (LoginButton) findViewById(R.id.fbLogin); 
+        fbLogin = (LoginButton) findViewById(R.id.fbLogin);
         txtCadastrar = (TextView)findViewById(R.id.txtCadastrar);
 
         //FB
         callbackManager = CallbackManager.Factory.create();
-        //lb.setPublishPermissions(Arrays.asList("email","public_profile","user_friends"));
 
         SignInButton signInButton = (SignInButton) findViewById(R.id.ggLogin);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
@@ -114,7 +117,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                alert("Login realizado com sucesso \n" + loginResult.getAccessToken());
+                loginResult.getAccessToken();
 
                 Intent it = new Intent(MainActivity.this, MenuActivity.class);
                 startActivity(it);
@@ -369,6 +372,12 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
             //    revokeAccess();
             //    break;
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        finish();
     }
 
 }
