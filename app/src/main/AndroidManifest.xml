@@ -131,6 +131,10 @@
         <activity
             android:name=".SensorActivity"/>
 
+        <!-- NavHeaderMenuActivity -->
+        <activity
+            android:name=".NavHeaderMenuActivity"/>
+
     </application>
 
 </manifest>

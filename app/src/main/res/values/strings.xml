@@ -10,7 +10,7 @@
     <string name="google_maps_key">AIzaSyA4T_jVEZvNG2wNiARtWjblo8po7UvvCl0</string>
 
     <!--Main -->
-    <string name="CPF">CPF</string>
+    <string name="CPF">CPF: Apenas números</string>
     <string name="Senha">Senha</string>
     <string name="Entrar">Entrar</string>
 

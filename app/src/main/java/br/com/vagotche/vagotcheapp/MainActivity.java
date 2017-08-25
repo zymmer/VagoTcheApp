@@ -258,31 +258,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if(cpf.isEmpty() || senha.isEmpty()){
                 alert("Nenhum campo pode estar vazio");
             }else {
-                url = "http://fabrica.govbr.com.br/index.php/Login/ValidarLogin";
+                url = "http://fabrica.govbrsul.com.br/vagotche/index.php/Login/ValidarLogin";
 
-                parametros = "cpf" + cpf + "&senha" + senha;
+                parametros = "cpf=" + cpf + "&senha=" + senha;
 
                 new SolicitaDados().execute(url);
             }
 
         } else {
-            alert("Nenhuma conexão foi detectada");
+            alert("Nenhuma conexão de rede foi detectada");
         }
-
-//
-//        String email = editEmail1.getText().toString();
-//        String password = editPassword1.getText().toString();
-//
-//        if (email.equals("guizymmer@gmail.com") && password.equals("123")) {
-//            alert("Login realizado com sucesso");
-//
-//            Intent it = new Intent(MainActivity.this, MenuActivity.class);
-//            startActivity(it);
-//            }
-//        else {
-//
-//            alert("Login ou senha incorretos");
-//        }
 
     }
 
@@ -300,19 +285,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected void onPostExecute(String resultado){
 
-            editCPF1.setText(resultado);
-            /*
-            if (resultado.contains("OK")) {
-            alert("Login realizado com sucesso");
+            //editCPF1.setText(resultado);
 
-           Intent it = new Intent(MainActivity.this, MenuActivity.class);
-           startActivity(it);
-            }
-            else {
 
-            alert("E-mail ou senha incorretos");
+            if (resultado.contains("login_ok")) {
+
+                alert("Login realizado com sucesso");
+
+                //String[] dados = resultado.split(",");
+
+                Intent it = new Intent(MainActivity.this, MenuActivity.class);
+                //it.putExtra("nome_usuario", dados[1]);
+                //it.putExtra("email_usuario", dados[2]);
+                startActivity(it);
             }
-            */
+            else if (resultado.contains("cpf_invalido")){
+                alert("CPF inválido");
+
+            } else if (resultado.contains("cpf_nao_encontrado")){
+                alert("CPF não cadastrado");
+
+            }
 
         }
     }
@@ -425,16 +418,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        accessTokenTracker.stopTracking();
-        profileTracker.stopTracking();
-    }
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//    }
+//
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        accessTokenTracker.stopTracking();
+//        profileTracker.stopTracking();
+//    }
 
 }
