@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView mStatusTextView;
     private ProgressDialog mProgressDialog;
 
-    EditText editEmail1,editPassword1;
+    EditText editCPF1,editPassword1;
     Button btnEntrar;
     TextView txtCadastrar;
 
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // [START customize_button]
         // Set the dimensions of the sign-in button.
-        editEmail1 = (EditText)findViewById(R.id.editEmail1);
+        editCPF1 = (EditText)findViewById(R.id.editCPF1);
         editPassword1 = (EditText)findViewById(R.id.editPassword1);
         btnEntrar = (Button)findViewById(R.id.btnEntrar);
         fbLogin = (LoginButton) findViewById(R.id.fbLogin);
@@ -252,15 +252,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected()){
 
-            String email = editEmail1.getText().toString();
+            String cpf = editCPF1.getText().toString();
             String senha = editPassword1.getText().toString();
 
-            if(email.isEmpty() || senha.isEmpty()){
+            if(cpf.isEmpty() || senha.isEmpty()){
                 alert("Nenhum campo pode estar vazio");
             }else {
-                url = "http://192.168.100.9:8090/login/logar.php";
+                url = "http://fabrica.govbr.com.br/index.php/Login/ValidarLogin";
 
-                parametros = "email" + email + "&senha" + senha;
+                parametros = "cpf" + cpf + "&senha" + senha;
 
                 new SolicitaDados().execute(url);
             }
@@ -300,6 +300,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected void onPostExecute(String resultado){
 
+            editCPF1.setText(resultado);
+            /*
             if (resultado.contains("OK")) {
             alert("Login realizado com sucesso");
 
@@ -310,6 +312,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             alert("E-mail ou senha incorretos");
             }
+            */
 
         }
     }

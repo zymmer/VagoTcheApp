@@ -10,9 +10,13 @@
     <string name="google_maps_key">AIzaSyA4T_jVEZvNG2wNiARtWjblo8po7UvvCl0</string>
 
     <!--Main -->
-    <string name="Email">Email</string>
+    <string name="CPF">CPF</string>
     <string name="Senha">Senha</string>
     <string name="Entrar">Entrar</string>
+
+    <!--Main -->
+    <string name="Nome">Nome</string>
+    <string name="Sobrenome">Sobrenome</string>
 
     <!--App_bar_Menu -->
     <string name="Créditos">Créditos</string>
@@ -44,6 +48,7 @@
 
     <!-- Alertas -->
     <string name="Aviso1">Avisar-me de movimentação indevida do meu véiculo</string>
+    <string name="Aviso2">Permitir envio de e-mails de segurança</string>
 
     <!-- Cadastro Veículo -->
     <string name="Modelo">Modelo</string>

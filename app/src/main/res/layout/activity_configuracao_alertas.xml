@@ -27,7 +27,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:text="@string/Aviso1" />
+        android:text="@string/Aviso2" />
 
     <CheckBox
         android:layout_width="30dp"
