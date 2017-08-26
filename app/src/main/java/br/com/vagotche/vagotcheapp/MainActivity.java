@@ -250,6 +250,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ConnectivityManager connMgr = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
         if (networkInfo != null && networkInfo.isConnected()){
 
             String cpf = editCPF1.getText().toString();
@@ -290,13 +291,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             if (resultado.contains("login_ok")) {
 
-                //alert("Login realizado com sucesso");
+                alert("Login realizado com sucesso");
 
-                String[] dados = resultado.split(",");
+                //String[] dados = resultado.split(",");
 
-                Intent it = new Intent(MainActivity.this, MenuActivity.class);
-                it.putExtra("nome_usuario", dados[1]);
-                it.putExtra("email_usuario", dados[2]);
+                Intent it = new Intent(MainActivity.this, NavHeaderMenuActivity.class);
+                //it.putExtra("nome_usuario", dados[1]);
+                //it.putExtra("email_usuario", dados[2]);
                 startActivity(it);
             }
             else if (resultado.contains("cpf_invalido")){

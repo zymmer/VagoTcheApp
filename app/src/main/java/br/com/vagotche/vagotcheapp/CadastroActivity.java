@@ -45,9 +45,10 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
 
     private void registrar() {
 
-    ConnectivityManager connMgr = (ConnectivityManager)
+        ConnectivityManager connMgr = (ConnectivityManager)
             getSystemService(Context.CONNECTIVITY_SERVICE);
-    NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
         if (networkInfo != null && networkInfo.isConnected()){
 
             String nome = editNome.getText().toString();
@@ -57,18 +58,18 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
             String repitasenha = editPassword3.getText().toString();
 
         if(nome.isEmpty() || cpf.isEmpty() || email.isEmpty() || senha.isEmpty()){
-            Toast.makeText(getApplicationContext(), "Nenhum campo pode estar vazio", Toast.LENGTH_LONG).show();
+            alert("Nenhum campo pode estar vazio");
         }else {
-            url = "http://192.168.100.9:8090/login/logar.php";
+            url = "http://fabrica.govbrsul.com.br/vagotche/index.php/Cadastro/CadastrarLogin";
 
-            parametros = "nome" + nome + "&cpf" + cpf + "&email" + email + "&senha" + senha + "&repitasenha" + repitasenha;
+            parametros = "nome" + nome + "&cpf" + cpf + "&email" + email + "&senha" + senha + "&repitasenha" + senha;
 
             new SolicitaDados().execute(url);
         }
 
-    } else {
-        Toast.makeText(getApplicationContext(), "Nenhuma conexão foi detectada", Toast.LENGTH_LONG).show();
-    }
+        } else {
+            alert("Nenhuma conexão foi detectada");
+        }
     }
 
     private class SolicitaDados extends AsyncTask<String, Void, String> {
@@ -83,18 +84,23 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
         @Override
         protected void onPostExecute(String resultado){
 
-            if (resultado.contains("email_erro")) {
-                alert("Este e-mail já está cadastrado");
-            }
-            else if (resultado.contains("registro_ok")) {
-                alert("Registro concluído com sucesso");
+            if (resultado.contains("senha_invalida")) {
+                alert("Senha deve conter ao menos 8 caracteres");
+
+            } else if (resultado.contains("cpf_invalido")) {
+                alert("CPF inválido");
+
+            } else if (resultado.contains("email_invalido")) {
+                alert("E-mail inválido");
+
+            } else if (resultado.contains("cadastro_ok")) {
+                alert("Registro realizado com sucesso...");
 
                 Intent it = new Intent(CadastroActivity.this, MainActivity.class);
                 startActivity(it);
-            }
-            else {
+            } else {
 
-                alert("Ocorreu um erro");
+                alert("Erro inesperado");
             }
 
         }
