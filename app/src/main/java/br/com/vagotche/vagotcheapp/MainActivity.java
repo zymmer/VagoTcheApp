@@ -290,7 +290,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             if (resultado.contains("login_ok")) {
 
-                alert("Login realizado com sucesso");
+                //alert("Login realizado com sucesso");
 
                 String[] dados = resultado.split(",");
 

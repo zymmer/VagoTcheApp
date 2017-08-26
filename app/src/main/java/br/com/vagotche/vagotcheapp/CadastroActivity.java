@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 public class CadastroActivity extends AppCompatActivity implements View.OnClickListener {
 
-    EditText editNome, editSobrenome, editEmail2, editPassword2, editPassword3;
+    EditText editNome, editCPF2, editEmail2, editPassword2, editPassword3;
     Button btnCancelar, btnRegistrar;
 
     String url = "";
@@ -30,7 +30,7 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_cadastro);
 
         editNome = (EditText) findViewById(R.id.editNome);
-        editSobrenome = (EditText) findViewById(R.id.editSobrenome);
+        editCPF2 = (EditText) findViewById(R.id.editCPF2);
         editEmail2 = (EditText) findViewById(R.id.editEmail2);
         editPassword2 = (EditText) findViewById(R.id.editPassword2);
         editPassword3 = (EditText) findViewById(R.id.editPassword3);
@@ -51,17 +51,17 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
         if (networkInfo != null && networkInfo.isConnected()){
 
             String nome = editNome.getText().toString();
-            String sobrenome = editNome.getText().toString();
+            String cpf = editCPF2.getText().toString();
             String email = editEmail2.getText().toString();
             String senha = editPassword2.getText().toString();
             String repitasenha = editPassword3.getText().toString();
 
-        if(nome.isEmpty() || sobrenome.isEmpty() || email.isEmpty() || senha.isEmpty()){
+        if(nome.isEmpty() || cpf.isEmpty() || email.isEmpty() || senha.isEmpty()){
             Toast.makeText(getApplicationContext(), "Nenhum campo pode estar vazio", Toast.LENGTH_LONG).show();
         }else {
             url = "http://192.168.100.9:8090/login/logar.php";
 
-            parametros = "nome" + nome + "&sobrenome" + sobrenome + "&email" + email + "&senha" + senha + "&repitasenha" + repitasenha;
+            parametros = "nome" + nome + "&cpf" + cpf + "&email" + email + "&senha" + senha + "&repitasenha" + repitasenha;
 
             new SolicitaDados().execute(url);
         }
