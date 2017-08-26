@@ -228,10 +228,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(markerOptions);
     }
 
-
-
-
-
     //TESTES PARQUIMETRO
     public void addParquimetroCelGenuino() {
         //Parquimetro Rua. Cel. Genuíno

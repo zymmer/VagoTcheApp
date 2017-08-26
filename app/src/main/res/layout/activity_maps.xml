@@ -11,27 +11,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="br.com.vagotche.vagotcheapp.MapsActivity"
-    android:onClick="restartCounter"/>
+    android:onClick="restartCounter">
 
-    <!--
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Bluetooth"
-        android:id="@+id/counterMessage"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="@dimen/abc_text_size_display_3_material"
-        android:textColor="#ffffffff"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Status do bluetooh!"
-        android:id="@+id/statusMessage"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:textColor="#ffffffff"/>
-    -->
+    </fragment>
 </FrameLayout>
