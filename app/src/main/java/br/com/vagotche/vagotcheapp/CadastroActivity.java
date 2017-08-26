@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 public class CadastroActivity extends AppCompatActivity implements View.OnClickListener {
 
-    EditText editNome, editCPF2, editEmail2, editPassword2, editPassword3;
+    EditText editNome, editCPF2, editEmail, editPassword2, editPassword3;
     Button btnCancelar, btnRegistrar;
 
     String url = "";
@@ -31,9 +31,9 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
 
         editNome = (EditText) findViewById(R.id.editNome);
         editCPF2 = (EditText) findViewById(R.id.editCPF2);
-        editEmail2 = (EditText) findViewById(R.id.editEmail2);
+        editEmail = (EditText) findViewById(R.id.editEmail1);
         editPassword2 = (EditText) findViewById(R.id.editPassword2);
-        editPassword3 = (EditText) findViewById(R.id.editPassword3);
+        //editPassword3 = (EditText) findViewById(R.id.editPassword3);
         btnCancelar = (Button) findViewById(R.id.btnCancelar);
         btnRegistrar = (Button) findViewById(R.id.btnRegistrar);
 
@@ -53,8 +53,9 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
 
             String nome = editNome.getText().toString();
             String cpf = editCPF2.getText().toString();
-            String email = editEmail2.getText().toString();
+            String email = editEmail.getText().toString();
             String senha = editPassword2.getText().toString();
+
 
         if(nome.isEmpty() || cpf.isEmpty() || email.isEmpty() || senha.isEmpty()){
             alert("Nenhum campo pode estar vazio");
@@ -83,25 +84,28 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
         @Override
         protected void onPostExecute(String resultado){
 
-            if (resultado.contains("cadastro_ok")) {
-                alert("Registro realizado com sucesso...");
+            //teste
+            editNome.setText(resultado);
 
-                Intent it = new Intent(CadastroActivity.this, MainActivity.class);
-                startActivity(it);
-
-            } else if (resultado.contains("cpf_invalido")) {
-                alert("CPF inválido");
-
-            } else if (resultado.contains("email_invalido")) {
-                alert("E-mail inválido");
-
-            } else if (resultado.contains("senha_invalida")) {
-                alert("Senha deve conter ao menos 8 caracteres");
-
-            } else {
-                alert("Erro inesperado");
-
-            }
+//            if (resultado.contains("cadastro_ok")) {
+//                alert("Registro realizado com sucesso...");
+//
+//                Intent it = new Intent(CadastroActivity.this, MenuActivity.class);
+//                startActivity(it);
+//
+//            } else if (resultado.contains("cpf_invalido")) {
+//                alert("CPF inválido");
+//
+//            } else if (resultado.contains("email_invalido")) {
+//                alert("E-mail inválido");
+//
+//            } else if (resultado.contains("senha_invalida")) {
+//                alert("Senha deve conter ao menos 8 caracteres");
+//
+//            } else {
+//                alert("Erro inesperado");
+//
+//            }
 
         }
     }

@@ -22,8 +22,8 @@ public class NavHeaderMenuActivity extends AppCompatActivity {
         txtNome = (TextView) findViewById(R.id.txtNome);
         txtEmail = (TextView) findViewById(R.id.txtEmail3);
 
-        nomeUsuario = getIntent().getExtras().getString("nome_usuario");
-        emailUsuario = getIntent().getExtras().getString("email_usuario");
+        //nomeUsuario = getIntent().getExtras().getString("nome_usuario");
+        //emailUsuario = getIntent().getExtras().getString("email_usuario");
 
         txtNome.setText(nomeUsuario);
         txtEmail.setText(emailUsuario);
