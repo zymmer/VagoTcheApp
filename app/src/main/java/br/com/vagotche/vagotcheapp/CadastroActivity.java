@@ -55,14 +55,13 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
             String cpf = editCPF2.getText().toString();
             String email = editEmail2.getText().toString();
             String senha = editPassword2.getText().toString();
-            String repitasenha = editPassword3.getText().toString();
 
         if(nome.isEmpty() || cpf.isEmpty() || email.isEmpty() || senha.isEmpty()){
             alert("Nenhum campo pode estar vazio");
         }else {
             url = "http://fabrica.govbrsul.com.br/vagotche/index.php/Cadastro/CadastrarLogin";
 
-            parametros = "nome" + nome + "&cpf" + cpf + "&email" + email + "&senha" + senha + "&repitasenha" + senha;
+            parametros = "nome" + nome + "&cpf" + cpf + "&email" + email + "&senha" + senha;
 
             new SolicitaDados().execute(url);
         }
@@ -84,8 +83,11 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
         @Override
         protected void onPostExecute(String resultado){
 
-            if (resultado.contains("senha_invalida")) {
-                alert("Senha deve conter ao menos 8 caracteres");
+            if (resultado.contains("cadastro_ok")) {
+                alert("Registro realizado com sucesso...");
+
+                Intent it = new Intent(CadastroActivity.this, MainActivity.class);
+                startActivity(it);
 
             } else if (resultado.contains("cpf_invalido")) {
                 alert("CPF inválido");
@@ -93,14 +95,12 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
             } else if (resultado.contains("email_invalido")) {
                 alert("E-mail inválido");
 
-            } else if (resultado.contains("cadastro_ok")) {
-                alert("Registro realizado com sucesso...");
+            } else if (resultado.contains("senha_invalida")) {
+                alert("Senha deve conter ao menos 8 caracteres");
 
-                Intent it = new Intent(CadastroActivity.this, MainActivity.class);
-                startActivity(it);
             } else {
-
                 alert("Erro inesperado");
+
             }
 
         }
