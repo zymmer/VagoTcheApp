@@ -292,11 +292,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 alert("Login realizado com sucesso");
 
-                //String[] dados = resultado.split(",");
+                String[] dados = resultado.split(",");
 
                 Intent it = new Intent(MainActivity.this, MenuActivity.class);
-                //it.putExtra("nome_usuario", dados[1]);
-                //it.putExtra("email_usuario", dados[2]);
+                it.putExtra("nome_usuario", dados[1]);
+                it.putExtra("email_usuario", dados[2]);
                 startActivity(it);
             }
             else if (resultado.contains("cpf_invalido")){

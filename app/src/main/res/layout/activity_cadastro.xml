@@ -26,25 +26,20 @@
         android:hint="@string/Nome" />
 
     <EditText
-        android:id="@+id/editSobrenome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:hint="@string/Sobrenome" />
-
-    <EditText
         android:id="@+id/editCPF2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:hint="@string/CPF" />
+        android:hint="@string/CPF"
+        android:inputType="number"/>
 
     <EditText
         android:id="@+id/editEmail2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:hint="Email" />
+        android:hint="Email"
+        android:inputType="textEmailAddress"/>
 
     <EditText
         android:id="@+id/editPassword2"
@@ -59,7 +54,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:hint="Repita sua senha" />
+        android:hint="Repita sua senha"
+        android:inputType="textPassword"/>
 
     <LinearLayout
         android:orientation="horizontal"
