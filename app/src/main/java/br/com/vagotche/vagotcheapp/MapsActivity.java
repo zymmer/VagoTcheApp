@@ -12,6 +12,8 @@ package br.com.vagotche.vagotcheapp;
         import android.support.v4.widget.DrawerLayout;
         import android.support.v7.app.ActionBarDrawerToggle;
         import android.support.v7.widget.Toolbar;
+        import android.widget.ArrayAdapter;
+        import android.widget.Spinner;
         import android.widget.Toast;
 
         import com.google.android.gms.common.ConnectionResult;
@@ -43,6 +45,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        //Teste Spinner
+        Spinner spinner = (Spinner) findViewById(R.id.spinner1);
+
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MapsActivity.this,
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.names));
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        spinner.setAdapter(arrayAdapter);
 
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

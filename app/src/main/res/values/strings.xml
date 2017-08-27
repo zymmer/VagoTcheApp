@@ -30,7 +30,6 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_maps">Map</string>
 
     <!-- Creditos -->
     <string name="CréditosAdquiridos">Créditos Adquiridos</string>
@@ -39,6 +38,7 @@
     <string name="Saldo">Seu Saldo</string>
 
     <!-- Zona Azul -->
+    <string name="title_activity_zona_azul">Pagamento Zona Azul</string>
     <string name="PlacaVeículo">Placa do Veículo</string>
     <string name="Cidade">Cidade</string>
     <string name="Parquímetro">Parquímetro</string>
@@ -57,8 +57,12 @@
     <string name="Ano">Ano</string>
 
     <!-- Maps -->
-    <string name="Normal">Normal</string>
-    <string name="DFísico">D. Físico</string>
-    <string name="Idoso">Idoso</string>
+    <string name="title_activity_maps">Map</string>
+    <string-array name="names">
+        <item>Filtrar vagas por...</item>
+        <item>Normal</item>
+        <item>DFísico</item>
+        <item>Idoso</item>
+    </string-array>
 
 </resources>

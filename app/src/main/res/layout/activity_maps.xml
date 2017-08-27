@@ -15,16 +15,11 @@
     tools:context="br.com.vagotche.vagotcheapp.MapsActivity"
     android:onClick="restartCounter" />
 
-    <ListView
-        android:id="@+id/listFilter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Submit"
-        />
+    <Spinner
+        style="@style/spinner_style"
+        android:id="@+id/spinner1"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"/>
 
 </FrameLayout>
