@@ -16,9 +16,11 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        android:background="@color/cardview_dark_background">
+        >
 
     <EditText
+        android:background="@drawable/modelo_edit"
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editNome"
@@ -26,6 +28,9 @@
         android:hint="@string/Nome" />
 
     <EditText
+        android:background="@drawable/modelo_edit"
+        android:padding="10dp"
+        android:layout_marginTop="5dp"
         android:id="@+id/editCPF2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,6 +39,9 @@
         android:inputType="number"/>
 
     <EditText
+        android:background="@drawable/modelo_edit"
+        android:padding="10dp"
+        android:layout_marginTop="5dp"
         android:id="@+id/editEmail1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,6 +50,9 @@
         android:inputType="textEmailAddress"/>
 
     <EditText
+        android:background="@drawable/modelo_edit"
+        android:padding="10dp"
+        android:layout_marginTop="5dp"
         android:id="@+id/editPassword2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

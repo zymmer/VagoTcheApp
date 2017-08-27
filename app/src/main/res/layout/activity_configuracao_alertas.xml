@@ -33,4 +33,26 @@
         android:layout_width="30dp"
         android:layout_height="30dp" />
 
+    <TextView
+        android:id="@+id/viewAlerta3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="@string/Aviso2" />
+
+    <CheckBox
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
+
+    <TextView
+        android:id="@+id/viewAlerta4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="@string/Aviso2" />
+
+    <CheckBox
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
+
 </LinearLayout>

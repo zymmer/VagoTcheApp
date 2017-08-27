@@ -49,10 +49,16 @@
     <!-- Alertas -->
     <string name="Aviso1">Avisar-me de movimentação indevida do meu véiculo</string>
     <string name="Aviso2">Permitir envio de e-mails de segurança</string>
+    <string name="Aviso3">Permitir envio de e-mails de segurança</string>
+    <string name="Aviso4">Permitir envio de e-mails de segurança</string>
+
+    <!-- Cadastro -->
+    <string name="title_activity_cadastro">Cadastro</string>
 
     <!-- Cadastro Veículo -->
+    <string name="title_activity_cadastro_veiculo">Cadastro de Veículo</string>
     <string name="Modelo">Modelo</string>
-    <string name="Marca">Marca</string>
+    <string name="Marca1">Marca</string>
     <string name="Placa1">Placa</string>
     <string name="Ano">Ano</string>
 

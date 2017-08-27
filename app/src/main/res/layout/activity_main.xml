@@ -48,6 +48,7 @@
         android:text="Entrar" />
 
     <TextView
+        android:background="#66000000"
         android:id="@+id/txtCadastrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
