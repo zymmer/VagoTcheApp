@@ -15,21 +15,16 @@
     tools:context="br.com.vagotche.vagotcheapp.MapsActivity"
     android:onClick="restartCounter" />
 
-    <!--<android.support.v4.widget.DrawerLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="85dp"-->
-        <!--android:orientation="horizontal">-->
+    <ListView
+        android:id="@+id/listFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
-        <!--<Button-->
-            <!--android:id="@+id/btnCancelar"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight=""-->
-            <!--android:text="Filtro" />-->
-        <!--<CheckBox-->
-            <!--android:layout_width="30dp"-->
-            <!--android:layout_height="30dp" />-->
-
-    <!--</android.support.v4.widget.DrawerLayout>-->
+    <Button
+        android:id="@+id/submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        />
 
 </FrameLayout>

@@ -56,4 +56,9 @@
     <string name="Placa1">Placa</string>
     <string name="Ano">Ano</string>
 
+    <!-- Maps -->
+    <string name="Normal">Normal</string>
+    <string name="DFísico">D. Físico</string>
+    <string name="Idoso">Idoso</string>
+
 </resources>
