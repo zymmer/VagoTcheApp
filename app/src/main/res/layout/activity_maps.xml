@@ -1,5 +1,7 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -11,7 +13,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="br.com.vagotche.vagotcheapp.MapsActivity"
-    android:onClick="restartCounter">
+    android:onClick="restartCounter" />
 
-    </fragment>
+    <!--<android.support.v4.widget.DrawerLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="85dp"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<Button-->
+            <!--android:id="@+id/btnCancelar"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight=""-->
+            <!--android:text="Filtro" />-->
+        <!--<CheckBox-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="30dp" />-->
+
+    <!--</android.support.v4.widget.DrawerLayout>-->
+
 </FrameLayout>
