@@ -4,6 +4,8 @@
     <color name="colorWhite">#FFFAFA</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#3F51B5</color>
+    <color name="colorPretoTransparente">#66000000</color>
+    <color name="colorCinzaTransparente">#90696969</color>
 
     //Cores app_bar_menu
     <color name="corgoogleMapsBtn">#303F9F</color>

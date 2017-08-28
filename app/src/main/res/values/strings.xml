@@ -52,6 +52,7 @@
 
     <!-- Cadastro -->
     <string name="title_activity_cadastro">Cadastro</string>
+    <string name="Nome">Nome</string>
 
     <!-- Cadastro Veículo -->
     <string name="title_activity_cadastro_veiculo">Cadastro de Veículo</string>

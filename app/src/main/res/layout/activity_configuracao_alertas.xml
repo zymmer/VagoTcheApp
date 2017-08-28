@@ -13,6 +13,7 @@
 
     <TextView
         android:background="@drawable/modelo_edit"
+        android:padding="10dp"
         android:id="@+id/viewAlerta1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -25,6 +26,7 @@
 
     <TextView
         android:background="@drawable/modelo_edit"
+        android:padding="10dp"
         android:id="@+id/viewAlerta2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,6 +39,7 @@
 
     <TextView
         android:background="@drawable/modelo_edit"
+        android:padding="10dp"
         android:id="@+id/viewAlerta3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,6 +52,7 @@
 
     <TextView
         android:background="@drawable/modelo_edit"
+        android:padding="10dp"
         android:id="@+id/viewAlerta4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,5 +62,25 @@
     <CheckBox
         android:layout_width="30dp"
         android:layout_height="30dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancelar" />
+
+        <Button
+            android:id="@+id/btnRegistrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Salvar" />
+    </LinearLayout>
 
 </LinearLayout>
