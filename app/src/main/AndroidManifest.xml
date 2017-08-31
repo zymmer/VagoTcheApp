@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="br.com.vagotche.vagotcheapp">
+    package="br.com.vagotche.vagotcheapp"
+    android:versionCode="1"
+    android:versionName="1.0">
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -8,6 +10,8 @@
          location permissions for the 'MyLocation' functionality. 
     -->
 
+    <uses-sdk android:minSdkVersion="18"
+        android:targetSdkVersion="18"/>
 
     <!-- Permissions -->
     <permission
