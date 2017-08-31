@@ -3,30 +3,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
+    android:background="@drawable/side_nav_bar"
     android:paddingBottom="16dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="16dp"
     android:orientation="vertical"
+    android:gravity="center"
     android:weightSum="1">
+
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="200dp"
+        android:layout_marginLeft="100dp"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/viewSaldo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
             android:text="@string/Saldo" />
 
         <TextView
             android:background="@drawable/modelo_edit"
             android:layout_width="53dp"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
+            android:padding="5dp"
+            android:paddingLeft="10dp"
             android:text=" R$ 0"/>
 
     </LinearLayout>
@@ -41,6 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
+        android:textColor="@color/colorWhite"
         android:text="@string/PlacaVeículo" />
 
     <Spinner
@@ -54,6 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
+        android:textColor="@color/colorWhite"
         android:text="@string/Cidade" />
 
     <Spinner
@@ -67,6 +74,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
+        android:textColor="@color/colorWhite"
         android:text="@string/Parquímetro" />
 
     <Spinner
@@ -79,6 +87,7 @@
         android:id="@+id/viewHorarioFuncionamento"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
         android:text="@string/HorarioFuncionamento"
         android:textAlignment="center" />
 

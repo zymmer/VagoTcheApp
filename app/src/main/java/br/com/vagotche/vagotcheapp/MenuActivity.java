@@ -78,7 +78,7 @@ public class MenuActivity extends AppCompatActivity
         teste.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent it = new Intent(MenuActivity.this, SensorActivity.class);
+                Intent it = new Intent(MenuActivity.this, DeviceControlActivity.class);
                 startActivity(it);
             }
         });

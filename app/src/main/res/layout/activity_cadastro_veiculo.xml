@@ -18,6 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
+        android:textColor="@color/colorWhite"
         android:text="@string/Modelo" />
 
     <AutoCompleteTextView
@@ -26,8 +27,7 @@
         android:id="@+id/ACviewModelo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text="@string/Modelo" />
+        android:textAlignment="center" />
 
     <TextView
         android:layout_marginTop="5dp"
@@ -35,6 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
+        android:textColor="@color/colorWhite"
         android:text="@string/Marca1" />
 
     <AutoCompleteTextView
@@ -44,8 +45,7 @@
         android:id="@+id/ACviewMarca"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text="@string/Marca1" />
+        android:textAlignment="center" />
 
     <TextView
         android:layout_marginTop="5dp"
@@ -53,6 +53,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
+        android:textColor="@color/colorWhite"
         android:text="@string/Placa1" />
 
     <EditText
@@ -62,8 +63,7 @@
         android:id="@+id/editPlaca"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text="@string/Placa1" />
+        android:textAlignment="center" />
 
     <TextView
         android:layout_marginTop="5dp"
@@ -71,16 +71,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
+        android:textColor="@color/colorWhite"
         android:text="@string/Ano" />
 
     <AutoCompleteTextView
         android:background="@drawable/modelo_edit"
         android:padding="10dp"
         android:layout_marginTop="5dp"
-        android:id="@+id/ACviewMarca"
+        android:id="@+id/ACviewAno"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text="@string/Ano" />
+        android:textAlignment="center" />
 
 </LinearLayout>
