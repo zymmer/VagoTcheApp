@@ -90,11 +90,7 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
             if (resultado.contains("cadastro_ok")) {
                 alert("Registro realizado com sucesso...");
 
-                String[] dados = resultado.split(",");
-
-                Intent it = new Intent(CadastroActivity.this, MenuActivity.class);
-                it.putExtra("nome_usuario", dados[1]);
-                it.putExtra("email_usuario", dados[2]);
+                Intent it = new Intent(CadastroActivity.this, MainActivity.class);
                 startActivity(it);
             } else if (resultado.contains("cpf_ja_cadastrado")) {
                 alert("CPF já está cadastrado");

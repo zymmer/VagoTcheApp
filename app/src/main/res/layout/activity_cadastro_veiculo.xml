@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         android:text="@string/Modelo" />
 
     <AutoCompleteTextView
@@ -36,6 +37,7 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         android:text="@string/Marca1" />
 
     <AutoCompleteTextView
@@ -54,6 +56,7 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         android:text="@string/Placa1" />
 
     <EditText
@@ -72,6 +75,7 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         android:text="@string/Ano" />
 
     <AutoCompleteTextView
@@ -82,5 +86,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center" />
+
+    <LinearLayout
+        android:padding="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnCancelar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancelar" />
+
+        <Button
+            android:id="@+id/btnRegistrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Registrar" />
+    </LinearLayout>
 
 </LinearLayout>
