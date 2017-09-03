@@ -293,11 +293,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 alert("Login realizado com sucesso");
 
                 String[] dados = resultado.split(",");
+                int cdUsuario = Integer.parseInt(dados[1]);
 
-                //editCPF1.setText(dados[0] + " - " + dados[1] + " + " + dados[2]);
+                //alert("id= " + cdUsuario);
 
                 Intent it = new Intent(MainActivity.this, MenuActivity.class);
-                it.putExtra("id_usuario", dados[1]);
+                it.putExtra("id_usuario", cdUsuario);
                 it.putExtra("nome_usuario", dados[2]);
                 it.putExtra("email_usuario", dados[3]);
                 startActivity(it);

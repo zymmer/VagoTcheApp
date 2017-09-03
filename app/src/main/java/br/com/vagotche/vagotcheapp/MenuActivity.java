@@ -15,13 +15,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    //Variaveis
+    int cdUsuario;
     TextView txtNome, txtEmail;
-
     String nomeUsuario, emailUsuario;
+
+    //alerta
+    private void alert(String s){
+        Toast.makeText(this,s,Toast.LENGTH_LONG).show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +36,10 @@ public class MenuActivity extends AppCompatActivity
         setContentView(R.layout.activity_menu);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //Pega ID do Usuario em memoria
+        cdUsuario = getIntent().getIntExtra("id_usuario", 0);
+        //alert("ID in menu= "+ cdUsuario);
 
         FloatingActionButton gmb = (FloatingActionButton) findViewById(R.id.googleMapsBtn);
         FloatingActionButton cb = (FloatingActionButton) findViewById(R.id.CreditosBtn);
@@ -43,6 +54,7 @@ public class MenuActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent it = new Intent(MenuActivity.this, MapsActivity.class);
+                it.putExtra("id_usuario", cdUsuario);
                 startActivity(it);
             }
         });
@@ -51,6 +63,7 @@ public class MenuActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent it = new Intent(MenuActivity.this, CreditosActivity.class);
+                it.putExtra("id_usuario", cdUsuario);
                 startActivity(it);
             }
         });
@@ -59,6 +72,7 @@ public class MenuActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent it = new Intent(MenuActivity.this, CadastroVeiculoActivity.class);
+                it.putExtra("id_usuario", cdUsuario);
                 startActivity(it);
             }
         });
@@ -67,6 +81,7 @@ public class MenuActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent it = new Intent(MenuActivity.this, ConfiguracaoAlertasActivity.class);
+                it.putExtra("id_usuario", cdUsuario);
                 startActivity(it);
             }
         });
@@ -75,6 +90,7 @@ public class MenuActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent it = new Intent(MenuActivity.this, ZonaAzulActivity.class);
+                it.putExtra("id_usuario", cdUsuario);
                 startActivity(it);
             }
         });
@@ -84,6 +100,7 @@ public class MenuActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent it = new Intent(MenuActivity.this, DeviceControlActivity.class);
+                it.putExtra("id_usuario", cdUsuario);
                 startActivity(it);
             }
         });
@@ -137,20 +154,20 @@ public class MenuActivity extends AppCompatActivity
         return true;
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
