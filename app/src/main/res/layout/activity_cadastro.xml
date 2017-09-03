@@ -81,6 +81,8 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:clickable="true"
+            android:background="@drawable/button_icons_bg"
             android:id="@+id/btnCancelar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -88,6 +90,9 @@
             android:text="Cancelar" />
 
         <Button
+            android:clickable="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/button_icons_bg"
             android:id="@+id/btnRegistrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

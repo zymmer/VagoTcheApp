@@ -20,6 +20,7 @@
         android:textAlignment="center" />
 
     <EditText
+        android:padding="10dp"
         style="@style/StyledTilEditText"
         android:id="@+id/editCPF1"
         android:layout_width="match_parent"
@@ -30,6 +31,7 @@
         android:textAlignment="center" />
 
     <EditText
+        android:padding="10dp"
         style="@style/StyledTilEditText"
         android:id="@+id/editPassword1"
         android:layout_width="match_parent"
@@ -40,8 +42,10 @@
         android:textAlignment="center" />
 
     <Button
+        android:clickable="true"
+        android:background="@drawable/button_icons_bg"
         android:id="@+id/btnEntrar"
-        android:layout_width="250dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:bufferType="@color/colorWhite"

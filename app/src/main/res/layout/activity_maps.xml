@@ -20,6 +20,6 @@
         android:id="@+id/spinner1"
         android:layout_width="180dp"
         android:layout_height="50dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
 </FrameLayout>

@@ -85,6 +85,8 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:clickable="true"
+            android:background="@drawable/button_icons_bg"
             android:id="@+id/btnCancelarVeic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -92,6 +94,9 @@
             android:text="Cancelar" />
 
         <Button
+            android:clickable="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/button_icons_bg"
             android:id="@+id/btnRegistrarVeic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -100,9 +105,11 @@
     </LinearLayout>
 
     <Button
+        android:clickable="true"
+        android:background="@drawable/button_icons_bg"
         android:drawableEnd="@mipmap/carchanginglanes"
         android:id="@+id/btnAlterarVeic"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Meus Veículos" />
 
