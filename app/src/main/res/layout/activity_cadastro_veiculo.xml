@@ -13,7 +13,16 @@
     android:weightSum="1">
 
     <TextView
-        android:layout_marginTop="5dp"
+        android:drawableStart="@mipmap/cadastroveiculo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:text="Cadastro de Veículo" />
+
+    <TextView
+        android:layout_marginTop="40dp"
         android:id="@+id/viewMarcas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
