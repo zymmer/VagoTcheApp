@@ -297,7 +297,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //editCPF1.setText(dados[0] + " - " + dados[1] + " + " + dados[2]);
 
                 Intent it = new Intent(MainActivity.this, MenuActivity.class);
-                it.putExtra("id_usuario", Integer.parseInt(dados[1]));
+                it.putExtra("id_usuario", dados[1]);
                 it.putExtra("nome_usuario", dados[2]);
                 it.putExtra("email_usuario", dados[3]);
                 startActivity(it);

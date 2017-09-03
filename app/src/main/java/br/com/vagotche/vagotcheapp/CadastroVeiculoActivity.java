@@ -66,14 +66,14 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
             String marcaModelo = txtmarca.getText().toString();
             String placa = editplaca.getText().toString();
             String ano = txtano.getText().toString();
-            Integer cdUsuario = getIntent().getExtras().getInt("id_usuario");
+            String cdUsuario = getIntent().getExtras().getString("id_usuario");
 
             if(marcaModelo.isEmpty() || placa.isEmpty() || ano.isEmpty()){
                 alert("Nenhum campo pode estar vazio");
             }else {
                 url = "http://fabrica.govbrsul.com.br/vagotche/index.php/CadastroVeiculo/CadastrarVeiculo";
 
-                parametros = "marcaModelo=" + marcaModelo + "&placa=" + placa + "&ano=" + ano + "&cdUsuario" + cdUsuario;
+                parametros = "marcaModelo=" + marcaModelo + "&placa=" + placa + "&ano=" + ano + "&cdUsuario=" + Integer.parseInt(cdUsuario);
 
                 new SolicitaDados().execute(url);
             }
