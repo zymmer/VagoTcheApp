@@ -142,9 +142,6 @@
         <activity android:name=".DeviceControlActivity"/>
         <service android:name=".BluetoothLeService" android:enabled="true"/>
 
-        <!-- NavHeaderMenuActivity -->
-        <activity
-            android:name=".NavHeaderMenuActivity"/>
 
     </application>
 

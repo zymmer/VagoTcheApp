@@ -30,16 +30,6 @@ public class MenuActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //NavHeader
-        txtNome = (TextView) findViewById(R.id.txtNome);
-        txtEmail = (TextView) findViewById(R.id.txtEmail3);
-
-        nomeUsuario = getIntent().getExtras().getString("nome_usuario");
-        emailUsuario = getIntent().getExtras().getString("email_usuario");
-
-        txtNome.setText(nomeUsuario);
-        txtEmail.setText(emailUsuario);
-
         FloatingActionButton gmb = (FloatingActionButton) findViewById(R.id.googleMapsBtn);
         FloatingActionButton cb = (FloatingActionButton) findViewById(R.id.CreditosBtn);
         FloatingActionButton cvb = (FloatingActionButton) findViewById(R.id.CadastroVeiculoBtn);
@@ -131,6 +121,17 @@ public class MenuActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+
+        //NavHeader
+        txtNome = (TextView) findViewById(R.id.txtNome);
+        txtEmail = (TextView) findViewById(R.id.txtEmail3);
+
+        nomeUsuario = getIntent().getExtras().getString("nome_usuario");
+        emailUsuario = getIntent().getExtras().getString("email_usuario");
+
+        txtNome.setText(nomeUsuario);
+        txtEmail.setText(emailUsuario);
+
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu, menu);
         return true;
