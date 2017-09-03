@@ -22,6 +22,7 @@
         android:text="@string/Aviso1" />
 
     <CheckBox
+        android:buttonTint="#FFFFFF"
         android:layout_width="30dp"
         android:layout_height="30dp" />
 
@@ -35,6 +36,7 @@
         android:text="@string/Aviso2" />
 
     <CheckBox
+        android:buttonTint="#FFFFFF"
         android:layout_width="30dp"
         android:layout_height="30dp" />
 
@@ -48,6 +50,7 @@
         android:text="@string/Aviso3" />
 
     <CheckBox
+        android:buttonTint="#FFFFFF"
         android:layout_width="30dp"
         android:layout_height="30dp" />
 
@@ -61,6 +64,7 @@
         android:text="@string/Aviso4" />
 
     <CheckBox
+        android:buttonTint="#FFFFFF"
         android:layout_width="30dp"
         android:layout_height="30dp" />
 

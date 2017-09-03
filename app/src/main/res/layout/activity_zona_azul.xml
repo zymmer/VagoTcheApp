@@ -24,6 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/colorWhite"
+
             android:text="@string/Saldo" />
 
         <TextView
@@ -32,6 +33,7 @@
             android:layout_height="25dp"
             android:padding="5dp"
             android:paddingLeft="10dp"
+
             android:text=" R$ 0"/>
 
     </LinearLayout>
@@ -47,10 +49,12 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         android:text="@string/PlacaVeículo" />
 
     <Spinner
         style="@style/spinner_style"
+        android:backgroundTint="#FFFFFF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </Spinner>
@@ -61,10 +65,12 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         android:text="@string/Cidade" />
 
     <Spinner
         style="@style/spinner_style"
+        android:backgroundTint="#FFFFFF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </Spinner>
@@ -75,10 +81,12 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         android:text="@string/Parquímetro" />
 
     <Spinner
         style="@style/spinner_style"
+        android:backgroundTint="#FFFFFF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </Spinner>
@@ -89,6 +97,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/colorWhite"
         android:text="@string/HorarioFuncionamento"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         android:textAlignment="center" />
 
     </LinearLayout>
