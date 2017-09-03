@@ -52,8 +52,8 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
         txtano.setThreshold(3);
         txtano.setAdapter(adapter2);
 
-        btnCancelar = (Button) findViewById(R.id.btnCancelar2);
-        btnRegistrar = (Button) findViewById(R.id.btnRegistrar2);
+        btnCancelar = (Button) findViewById(R.id.btnCancelarVeic);
+        btnRegistrar = (Button) findViewById(R.id.btnRegistrarVeic);
         // Button listeners
         btnCancelar.setOnClickListener(this);
         btnRegistrar.setOnClickListener(this);
@@ -121,10 +121,10 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnCancelar2:
+            case R.id.btnCancelarVeic:
                 finish();
                 break;
-            case R.id.btnRegistrar2:
+            case R.id.btnRegistrarVeic:
                 registrar();
                 break;
         }

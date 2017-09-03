@@ -12,8 +12,17 @@
     android:gravity="center"
     android:weightSum="1">
 
+    <TextView
+        android:drawableStart="@mipmap/vehicle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:text=" Pagamento Zona Azul" />
 
     <LinearLayout
+        android:layout_marginTop="40dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
@@ -131,7 +140,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnCancelar"
+            android:id="@+id/btnUtilizarCred"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

@@ -13,6 +13,16 @@
     android:weightSum="1">
 
     <TextView
+        android:drawableStart="@mipmap/alarm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:text="Configuração de Alertas" />
+
+    <TextView
+        android:layout_marginTop="40dp"
         android:background="@drawable/modelo_edit"
         android:padding="10dp"
         android:id="@+id/viewAlerta1"
@@ -74,14 +84,14 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/btnCancelar3"
+            android:id="@+id/btnCancelarConf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Cancelar" />
 
         <Button
-            android:id="@+id/btnRegistrar3"
+            android:id="@+id/btnRegistrarConf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
