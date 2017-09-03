@@ -18,14 +18,12 @@ import java.util.List;
 
 public class CadastroVeiculoActivity extends AppCompatActivity implements View.OnClickListener{
 
-    TextView txtmarca, txtano;
+    AutoCompleteTextView txtmarca, txtano;
     EditText editplaca;
     Button btnCancelar, btnRegistrar;
 
-    //teste AutoComplete
     List listMarcasModelos = new Veiculos().marcasModelos;
     List listAno = new Veiculos().ano;
-    AutoCompleteTextView textView, textView2;
 
     String url = "";
     String parametros = "";
@@ -39,19 +37,17 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_veiculo);
 
-        txtmarca = (TextView) findViewById(R.id.ACviewMarca);
-        txtano = (TextView) findViewById(R.id.ACviewAno);
         editplaca = (EditText) findViewById(R.id.editPlaca);
 
-        textView = (AutoCompleteTextView) findViewById(R.id.ACviewMarca);
+        txtmarca = (AutoCompleteTextView) findViewById(R.id.ACviewMarca);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, listMarcasModelos);
-        textView.setThreshold(3);
-        textView.setAdapter(adapter);
+        txtmarca.setThreshold(3);
+        txtmarca.setAdapter(adapter);
 
-        textView2 = (AutoCompleteTextView) findViewById(R.id.ACviewAno);
+        txtano = (AutoCompleteTextView) findViewById(R.id.ACviewAno);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, listAno);
-        textView2.setThreshold(3);
-        textView2.setAdapter(adapter2);
+        txtano.setThreshold(3);
+        txtano.setAdapter(adapter2);
 
         btnCancelar = (Button) findViewById(R.id.btnCancelar2);
         btnRegistrar = (Button) findViewById(R.id.btnRegistrar2);
@@ -124,10 +120,10 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnCancelar:
+            case R.id.btnCancelar2:
                 finish();
                 break;
-            case R.id.btnRegistrar:
+            case R.id.btnRegistrar2:
                 registrar();
                 break;
         }
