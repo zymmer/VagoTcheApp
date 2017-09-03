@@ -76,18 +76,25 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/btnCancelar2"
+            android:id="@+id/btnCancelarVeic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Cancelar" />
 
         <Button
-            android:id="@+id/btnRegistrar2"
+            android:id="@+id/btnRegistrarVeic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Registrar" />
     </LinearLayout>
+
+    <Button
+        android:drawableEnd="@mipmap/carchanginglanes"
+        android:id="@+id/btnAlterarVeic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Meus Veículos" />
 
 </LinearLayout>
