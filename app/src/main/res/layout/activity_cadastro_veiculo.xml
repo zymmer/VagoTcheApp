@@ -33,24 +33,6 @@
 
     <TextView
         android:layout_marginTop="5dp"
-        android:id="@+id/viewModelo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textColor="@color/colorWhite"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-        android:text="@string/Modelo" />
-
-    <AutoCompleteTextView
-        android:background="@drawable/modelo_edit"
-        android:padding="10dp"
-        android:id="@+id/ACviewModelo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center" />
-
-    <TextView
-        android:layout_marginTop="5dp"
         android:id="@+id/viewPlaca"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -94,14 +76,14 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/btnCancelar"
+            android:id="@+id/btnCancelar2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Cancelar" />
 
         <Button
-            android:id="@+id/btnRegistrar"
+            android:id="@+id/btnRegistrar2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

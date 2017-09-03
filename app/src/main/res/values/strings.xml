@@ -57,7 +57,7 @@
     <!-- Cadastro Veículo -->
     <string name="title_activity_cadastro_veiculo">Cadastro de Veículo</string>
     <string name="Modelo">Modelo</string>
-    <string name="Marca1">Marca</string>
+    <string name="Marca1">Marca/Modelo</string>
     <string name="Placa1">Placa</string>
     <string name="Ano">Ano</string>
 
