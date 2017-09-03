@@ -135,7 +135,7 @@ public class DeviceControlActivity extends Activity {
          mConnectionState = (TextView) findViewById(R.id.connection_state);
         // is serial present?
         isSerial = (TextView) findViewById(R.id.isSerial);
-   
+
         mDataField = (TextView) findViewById(R.id.data_value);
         mRed = (SeekBar) findViewById(R.id.seekRed);
         mGreen = (SeekBar) findViewById(R.id.seekGreen);
@@ -144,11 +144,13 @@ public class DeviceControlActivity extends Activity {
         readSeek(mRed,0);
         readSeek(mGreen,1);
         readSeek(mBlue,2);
-     
-        getActionBar().setTitle(mDeviceName);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
-        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
+
+        //Verificar problema
+//        getActionBar().setTitle(mDeviceName);
+//        getActionBar().setDisplayHomeAsUpEnabled(true);
+//
+//        Intent gattServiceIntent = new Intent(this, BluetoothLeService.class);
+//        bindService(gattServiceIntent, mServiceConnection, BIND_AUTO_CREATE);
     }
 
     @Override

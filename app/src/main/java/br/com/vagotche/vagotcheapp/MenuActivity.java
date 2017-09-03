@@ -14,9 +14,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class MenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    TextView txtNome, txtEmail;
+
+    String nomeUsuario, emailUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +29,16 @@ public class MenuActivity extends AppCompatActivity
         setContentView(R.layout.activity_menu);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        //NavHeader
+        txtNome = (TextView) findViewById(R.id.txtNome);
+        txtEmail = (TextView) findViewById(R.id.txtEmail3);
+
+        nomeUsuario = getIntent().getExtras().getString("nome_usuario");
+        emailUsuario = getIntent().getExtras().getString("email_usuario");
+
+        txtNome.setText(nomeUsuario);
+        txtEmail.setText(emailUsuario);
 
         FloatingActionButton gmb = (FloatingActionButton) findViewById(R.id.googleMapsBtn);
         FloatingActionButton cb = (FloatingActionButton) findViewById(R.id.CreditosBtn);

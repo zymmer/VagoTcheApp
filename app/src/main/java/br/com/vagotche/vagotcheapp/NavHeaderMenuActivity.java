@@ -10,22 +10,22 @@ import android.widget.TextView;
 
 public class NavHeaderMenuActivity extends AppCompatActivity {
 
-    TextView txtNome, txtEmail;
-
-    String nomeUsuario, emailUsuario;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.nav_header_menu);
-
-        txtNome = (TextView) findViewById(R.id.txtNome);
-        txtEmail = (TextView) findViewById(R.id.txtEmail3);
-
-        //nomeUsuario = getIntent().getExtras().getString("nome_usuario");
-        //emailUsuario = getIntent().getExtras().getString("email_usuario");
-
-        txtNome.setText(nomeUsuario);
-        txtEmail.setText(emailUsuario);
-    }
+//    TextView txtNome, txtEmail;
+//
+//    String nomeUsuario, emailUsuario;
+//
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.nav_header_menu);
+//
+//        txtNome = (TextView) findViewById(R.id.txtNome);
+//        txtEmail = (TextView) findViewById(R.id.txtEmail3);
+//
+//        nomeUsuario = getIntent().getExtras().getString("nome_usuario");
+//        emailUsuario = getIntent().getExtras().getString("email_usuario");
+//
+//        txtNome.setText(nomeUsuario);
+//        txtEmail.setText(emailUsuario);
+//    }
 }

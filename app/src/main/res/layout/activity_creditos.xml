@@ -27,6 +27,7 @@
 
     <TextView
         android:background="@drawable/modelo_edit"
+        android:layout_marginLeft="60dp"
         android:layout_width="53dp"
         android:layout_height="30dp"
         android:text=" R$ 0"/>
@@ -49,6 +50,7 @@
 
         <TextView
             android:background="@drawable/modelo_edit"
+            android:layout_marginLeft="80dp"
             android:layout_width="53dp"
             android:layout_height="30dp"
             android:text=" R$ 0"/>

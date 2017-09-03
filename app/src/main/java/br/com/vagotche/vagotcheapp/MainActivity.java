@@ -272,8 +272,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-
-
     private class SolicitaDados extends AsyncTask<String, Void, String> {
 
         @Override
@@ -287,18 +285,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         protected void onPostExecute(String resultado){
 
             //teste
-            editCPF1.setText(resultado);
+            //editCPF1.setText(resultado);
 
 
             if (resultado.contains("login_ok")) {
 
                 alert("Login realizado com sucesso");
 
-                //String[] dados = resultado.split(",");
+                String[] dados = resultado.split(",");
+
+                //editCPF1.setText(dados[0] + " - " + dados[1] + " + " + dados[2]);
 
                 Intent it = new Intent(MainActivity.this, MenuActivity.class);
-                //it.putExtra("nome_usuario", dados[1]);
-                //it.putExtra("email_usuario", dados[2]);
+                it.putExtra("nome_usuario", dados[1]);
+                it.putExtra("email_usuario", dados[2]);
                 startActivity(it);
             }
               else if (resultado.contains("cpf_invalido")){
