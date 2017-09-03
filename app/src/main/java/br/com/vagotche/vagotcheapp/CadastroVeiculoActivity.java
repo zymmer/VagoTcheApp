@@ -1,7 +1,6 @@
 package br.com.vagotche.vagotcheapp;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -69,16 +68,17 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
 
         if (networkInfo != null && networkInfo.isConnected()){
 
-            String marca = txtmarca.getText().toString();
+            String marcaModelo = txtmarca.getText().toString();
             String placa = editplaca.getText().toString();
             String ano = txtano.getText().toString();
+            Integer cdUsuario = getIntent().getExtras().getInt("id_usuario");
 
-            if(marca.isEmpty() || placa.isEmpty() || ano.isEmpty()){
+            if(marcaModelo.isEmpty() || placa.isEmpty() || ano.isEmpty()){
                 alert("Nenhum campo pode estar vazio");
             }else {
-                url = "http://fabrica.govbrsul.com.br/vagotche/index.php/Cadastro/CadastrarLogin";
+                url = "http://fabrica.govbrsul.com.br/vagotche/index.php/CadastroVeiculo/CadastrarVeiculo";
 
-                parametros = "marca=" + marca + "&placa=" + placa + "&ano=" + ano;
+                parametros = "marcaModelo=" + marcaModelo + "&placa=" + placa + "&ano=" + ano + "&cdUsuario" + cdUsuario;
 
                 new SolicitaDados().execute(url);
             }
@@ -101,22 +101,22 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
         protected void onPostExecute(String resultado) {
 
             //teste
-            //alert(resultado);
+            alert(resultado);
 
-            if (resultado.contains("cadastro_ok")) {
-                alert("Registro realizado com sucesso...");
-
-                Intent it = new Intent(CadastroVeiculoActivity.this, MenuActivity.class);
-                startActivity(it);
-            } else if (resultado.contains("cpf_ja_cadastrado")) {
-                alert("CPF já está cadastrado");
-
-            } else if (resultado.contains("email_ja_cadastrado")) {
-                alert("Endereço de e-mail já está cadastrado");
-
-            } else if (resultado.contains("error_system")) {
-                alert("Ocorreu um erro");
-            }
+//            if (resultado.contains("cadastro_ok")) {
+//                alert("Registro realizado com sucesso...");
+//
+//                Intent it = new Intent(CadastroVeiculoActivity.this, MenuActivity.class);
+//                startActivity(it);
+//            } else if (resultado.contains("cpf_ja_cadastrado")) {
+//                alert("CPF já está cadastrado");
+//
+//            } else if (resultado.contains("email_ja_cadastrado")) {
+//                alert("Endereço de e-mail já está cadastrado");
+//
+//            } else if (resultado.contains("error_system")) {
+//                alert("Ocorreu um erro");
+//            }
 
         }
     }
