@@ -24,6 +24,7 @@
         android:textColor="@color/colorWhite"
         android:padding="10dp"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
         android:text="@string/CréditosAdquiridos" />
 
     <TextView
@@ -49,6 +50,7 @@
         android:textColor="@color/colorWhite"
         android:padding="10dp"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
         android:text="@string/CréditosUsados" />
 
         <TextView
@@ -69,6 +71,7 @@
         android:textColor="@color/colorWhite"
         android:padding="10dp"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
         android:text="@string/Histórico" />
 
     <ScrollView
@@ -76,11 +79,5 @@
         android:layout_width="match_parent"
         android:layout_height="395dp"></ScrollView>
 
-    <TextView
-        android:id="@+id/viewSaldo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/Saldo"
-        android:textAlignment="center" />
 
 </LinearLayout>
