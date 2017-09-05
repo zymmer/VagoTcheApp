@@ -17,6 +17,18 @@
         android:orientation="vertical"
         android:gravity="center">
 
+        <TextView
+            android:layout_marginTop="2dp"
+            android:drawableStart="@mipmap/inspection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textStyle="bold"
+            android:text="Cadastro ao Sistema"
+            android:gravity="center"/>
+
     <ImageView
         android:padding="10dp"
         android:layout_width="wrap_content"

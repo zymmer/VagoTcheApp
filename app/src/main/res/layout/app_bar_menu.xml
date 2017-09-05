@@ -19,6 +19,29 @@
     <include layout="@layout/content_menu"
         android:id="@+id/include" />
 
+    <TextView
+        android:drawableLeft="@mipmap/parquimetro_40x40"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="120dp"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
+        android:text="VagoTchê"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginLeft="20dp"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+        android:textStyle="bold"
+        android:text="Localização de Vagas Urbanas"
+        android:gravity="center"/>
+
     <LinearLayout
         android:layout_marginTop="60dp"
         android:layout_width="match_parent"

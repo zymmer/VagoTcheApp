@@ -20,7 +20,8 @@
         android:textColor="@color/colorWhite"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:textStyle="bold"
-        android:text=" Pagamento Zona Azul" />
+        android:text=" Pagamento Zona Azul"
+        android:gravity="center"/>
 
     <LinearLayout
         android:layout_marginTop="40dp"

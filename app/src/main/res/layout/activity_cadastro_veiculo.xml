@@ -20,7 +20,8 @@
         android:textColor="@color/colorWhite"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:textStyle="bold"
-        android:text="Cadastro de Veículo" />
+        android:text="Cadastro de Veículo"
+        android:gravity="center"/>
 
     <TextView
         android:layout_marginTop="40dp"
