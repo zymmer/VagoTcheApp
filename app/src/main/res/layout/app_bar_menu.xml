@@ -103,9 +103,10 @@
             android:id="@+id/viewCadastroCarro"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
             android:text="Cadastrar Veículo"
             android:textAlignment="center"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorWhite"
             android:textStyle="bold" />
@@ -118,7 +119,7 @@
             android:textColor="@color/colorWhite"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textStyle="bold"
-            android:layout_marginLeft="20dp"
+            android:layout_marginRight="2dp"
             android:text="Configurar Alertas" />
 
     </LinearLayout>
@@ -185,7 +186,8 @@
             android:id="@+id/viewMaps"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:text="Localizar Vaga"
             android:textAlignment="center"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
@@ -200,7 +202,7 @@
             android:textColor="@color/colorWhite"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textStyle="bold"
-            android:layout_marginLeft="20dp"
+            android:layout_marginRight="2dp"
             android:text="Irregularidades" />
 
     </LinearLayout>

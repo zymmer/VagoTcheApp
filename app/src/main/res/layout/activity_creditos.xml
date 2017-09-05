@@ -11,7 +11,26 @@
     android:orientation="vertical"
     android:weightSum="1">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:src="@mipmap/arrowpointingtoright"
+        android:gravity="top"/>
+
+    <TextView
+        android:drawableStart="@mipmap/credit2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textColor="@color/colorWhite"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+        android:text=" Créditos"
+        android:gravity="center"/>
+
     <LinearLayout
+        android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -77,7 +96,7 @@
     <ScrollView
         android:background="@drawable/modelo_edit"
         android:layout_width="match_parent"
-        android:layout_height="395dp"></ScrollView>
+        android:layout_height="300dp"></ScrollView>
 
 
 </LinearLayout>

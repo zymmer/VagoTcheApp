@@ -4,7 +4,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@mipmap/medicalhistory"
             android:title="Meus Dados" />
         <item
             android:id="@+id/nav_gallery"
@@ -12,7 +12,7 @@
             android:title="Entre em Contato" />
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@mipmap/medicalhistory"
             android:title="Movimentações" />
         <item
             android:id="@+id/nav_manage"
