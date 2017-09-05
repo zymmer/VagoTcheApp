@@ -69,6 +69,7 @@
         android:inputType="textEmailAddress"/>
 
     <EditText
+        android:drawableEnd="@android:drawable/ic_secure"
         android:background="@drawable/modelo_edit"
         android:padding="10dp"
         android:layout_marginTop="5dp"
@@ -104,7 +105,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textStyle="bold"
-            android:text="Cancelar" />
+            android:text="Cancelar"
+            android:drawableEnd="@android:drawable/ic_delete"/>
 
         <Button
             android:clickable="true"
@@ -115,7 +117,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textStyle="bold"
-            android:text="Registrar" />
+            android:text="Registrar"
+            android:drawableEnd="@android:drawable/ic_delete"/>
+
     </LinearLayout>
 
     </LinearLayout>
