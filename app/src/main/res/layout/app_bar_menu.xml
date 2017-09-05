@@ -20,137 +20,89 @@
         android:id="@+id/include" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <!--Créditos -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:layout_marginBottom="350dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginLeft="25dp"
-            android:text="@string/Créditos"
-            app:layout_anchor="@+id/include"
-            app:layout_anchorGravity="center_vertical|left" />
+        android:orientation="horizontal"
+        android:gravity="center">
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/CreditosBtn"
             android:src="@mipmap/credit"
-            android:layout_marginRight="250dp"
-            android:layout_marginEnd="250dp"
-            android:layout_marginBottom="250dp"
             android:layout_height="200dp"
             android:layout_width="100dp"
-            android:layout_gravity="center_vertical|center_horizontal"
             android:clickable="true"
             app:backgroundTint="@color/com_facebook_button_background_color_disabled"
             app:borderWidth="2dp"
             />
 
-        <!--Cadastro de Veiculo -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:text="@string/CadastroVeículo"
-            android:layout_marginBottom="350dp"
-            android:layout_marginEnd="80dp"
-            android:layout_marginRight="80dp"
-            app:layout_anchor="@+id/include"
-            android:textStyle="bold"
-            app:layout_anchorGravity="center_vertical|center_horizontal" />
-
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/CadastroVeiculoBtn"
             android:src="@mipmap/cadastroveiculo"
-            android:layout_marginBottom="250dp"
             android:layout_height="200dp"
             android:layout_width="100dp"
-            android:layout_gravity="center_vertical|center_horizontal"
             android:clickable="true"
+            android:layout_marginLeft="20dp"
             app:backgroundTint="@color/com_facebook_button_background_color_disabled"
             />
-
-        <!--Configuração de Alertas -->
-        <TextView
-            android:layout_width="85dp"
-            android:layout_height="32dp"
-            android:text="@string/ConfiguracaoAlertas"
-            android:layout_marginBottom="340dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginRight="15dp"
-            app:layout_anchor="@+id/include"
-            android:textStyle="bold"
-            app:layout_anchorGravity="center_vertical|right" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/ConfiguracaoAlertasBtn"
             android:src="@mipmap/alarm"
-            android:layout_marginLeft="250dp"
-            android:layout_marginStart="250dp"
-            android:layout_marginBottom="250dp"
             android:layout_height="200dp"
             android:layout_width="100dp"
-            android:layout_gravity="center_vertical|center_horizontal"
             android:clickable="true"
+            android:layout_marginLeft="20dp"
             app:backgroundTint="@color/com_facebook_button_background_color_disabled"
             />
 
     </LinearLayout>
 
-
-    <!--Zona Azul -->
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_marginTop="250dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginLeft="25dp"
-        android:layout_gravity="bottom|center_horizontal"
-        android:text="@string/ZonaAzul"
-        app:layout_anchor="@+id/include"
-        android:textStyle="bold"
-        app:layout_anchorGravity="center_vertical|left" />
+        android:orientation="horizontal"
+        android:gravity="center">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/ZonaAzulBtn"
-        android:src="@mipmap/estacionamento"
-        android:layout_height="200dp"
-        android:layout_width="100dp"
-        android:layout_marginRight="250dp"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:clickable="true"
-        app:backgroundTint="@color/com_facebook_button_background_color_disabled"
-        />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/ZonaAzulBtn"
+            android:src="@mipmap/estacionamento"
+            android:layout_height="200dp"
+            android:layout_width="100dp"
+            android:clickable="true"
+            app:backgroundTint="@color/com_facebook_button_background_color_disabled"
+            />
 
-    <!--Navegar -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:text="@string/Navegar"
-        app:layout_anchor="@+id/include"
-        android:textStyle="bold"
-        app:layout_anchorGravity="center_vertical|center_horizontal" />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/googleMapsBtn"
+            android:src="@mipmap/parquimetro_40x40"
+            android:layout_height="200dp"
+            android:layout_width="100dp"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:clickable="true"
+            android:layout_marginLeft="20dp"
+            app:backgroundTint="@color/com_facebook_button_background_color_disabled"
+            />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/googleMapsBtn"
-        android:src="@mipmap/parquimetro_40x40"
-        android:layout_height="200dp"
-        android:layout_width="100dp"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:clickable="true"
-        app:backgroundTint="@color/com_facebook_button_background_color_disabled"
-       />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/IrregularidadesBtn"
+            android:src="@mipmap/parquimetro_40x40"
+            android:layout_height="200dp"
+            android:layout_width="100dp"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:clickable="true"
+            android:layout_marginLeft="20dp"
+            app:backgroundTint="@color/com_facebook_button_background_color_disabled"
+            />
+
+    </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/teste6Btn"
         android:layout_width="100dp"
         android:layout_marginLeft="250dp"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="400dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
         android:clickable="true"
