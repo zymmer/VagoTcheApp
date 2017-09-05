@@ -4,11 +4,11 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_camera"
-            android:icon="@mipmap/medicalhistory"
+            android:icon="@mipmap/people2"
             android:title="Meus Dados" />
         <item
             android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@mipmap/oldhandphone"
             android:title="Entre em Contato" />
         <item
             android:id="@+id/nav_slideshow"
@@ -16,7 +16,7 @@
             android:title="Movimentações" />
         <item
             android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@mipmap/fileinfolder"
             android:title="Informações" />
     </group>
 
