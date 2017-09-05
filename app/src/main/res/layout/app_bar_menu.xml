@@ -20,7 +20,7 @@
         android:id="@+id/include" />
 
     <LinearLayout
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="60dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -59,7 +59,49 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="170dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/viewCredito"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp"
+            android:text="Créditos" />
+
+        <TextView
+            android:id="@+id/viewCadastroCarro"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:text="Cadastrar Veículo"
+            android:textAlignment="center"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/viewCidade"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp"
+            android:text="Configurar Alertas" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="230dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -67,7 +109,7 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/ZonaAzulBtn"
-            android:src="@mipmap/estacionamento"
+            android:src=""
             android:layout_height="200dp"
             android:layout_width="100dp"
             android:clickable="true"
@@ -76,7 +118,7 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/googleMapsBtn"
-            android:src="@mipmap/parquimetro_40x40"
+            android:src=""
             android:layout_height="200dp"
             android:layout_width="100dp"
             android:layout_gravity="center_vertical|center_horizontal"
@@ -87,7 +129,7 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/IrregularidadesBtn"
-            android:src="@mipmap/parquimetro_40x40"
+            android:src="@mipmap/carcollision"
             android:layout_height="200dp"
             android:layout_width="100dp"
             android:layout_gravity="center_vertical|center_horizontal"
@@ -95,6 +137,48 @@
             android:layout_marginLeft="20dp"
             app:backgroundTint="@color/com_facebook_button_background_color_disabled"
             />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="340dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/viewZonaAzul"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp"
+            android:text="Pagamento Zona Azul" />
+
+        <TextView
+            android:id="@+id/viewMaps"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:text="Localizar Vaga"
+            android:textAlignment="center"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/viewIrregularidades"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp"
+            android:text="Configurar Alertas" />
 
     </LinearLayout>
 
