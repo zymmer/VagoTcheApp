@@ -43,7 +43,7 @@
         android:gravity="center"/>
 
     <LinearLayout
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="100dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -51,7 +51,7 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/CreditosBtn"
-            android:src="@mipmap/credit"
+            android:src="@mipmap/credit2"
             android:layout_height="200dp"
             android:layout_width="100dp"
             android:clickable="true"
@@ -82,7 +82,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="200dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -124,7 +124,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="230dp"
+        android:layout_marginTop="250dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -132,7 +132,7 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/ZonaAzulBtn"
-            android:src=""
+            android:src="@mipmap/money"
             android:layout_height="200dp"
             android:layout_width="100dp"
             android:clickable="true"
@@ -141,7 +141,7 @@
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/googleMapsBtn"
-            android:src=""
+            android:src="@mipmap/map"
             android:layout_height="200dp"
             android:layout_width="100dp"
             android:layout_gravity="center_vertical|center_horizontal"
@@ -159,12 +159,12 @@
             android:clickable="true"
             android:layout_marginLeft="20dp"
             app:backgroundTint="@color/com_facebook_button_background_color_disabled"
-            />
+        />
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="340dp"
+        android:layout_marginTop="350dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -201,7 +201,7 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textStyle="bold"
             android:layout_marginLeft="20dp"
-            android:text="Configurar Alertas" />
+            android:text="Irregularidades" />
 
     </LinearLayout>
 

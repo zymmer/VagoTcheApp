@@ -96,19 +96,16 @@
 
         <!-- Activity Principal -->
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" />
+            android:name=".MainActivity"/>
 
         <!-- Menu -->
         <activity
             android:name=".MenuActivity"
-            android:label="@string/title_activity_menu"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <!-- Maps -->
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" />
 
         <!-- Cadastro -->
         <activity
