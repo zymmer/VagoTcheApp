@@ -95,7 +95,9 @@
 
         <!-- Activity Principal -->
         <activity
-            android:name=".MainActivity"/>
+            android:name=".MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
+
 
         <!-- Menu -->
         <activity

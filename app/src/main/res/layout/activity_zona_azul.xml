@@ -12,6 +12,13 @@
     android:gravity="center"
     android:weightSum="1">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:src="@mipmap/arrowpointingtoright"
+        android:gravity="top"/>
+
     <TextView
         android:drawableStart="@mipmap/zonaAzul2"
         android:layout_width="match_parent"
@@ -24,7 +31,7 @@
         android:gravity="center"/>
 
     <LinearLayout
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
@@ -119,13 +126,14 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="00dp"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:orientation="horizontal"
         android:gravity="center">
 
         <android.support.design.widget.FloatingActionButton
+            android:src="@android:drawable/btn_radio"
             android:layout_width="89dp"
             android:layout_height="72dp"
             android:layout_weight="0.04" />
@@ -147,7 +155,7 @@
 
     <LinearLayout
         android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center">
