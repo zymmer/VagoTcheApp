@@ -47,5 +47,16 @@
         <item name="android:popupBackground">#CCFFFFFF</item>
     </style>
 
+    <style name="shadoweffect">
+        <item name="android:paddingLeft">4px</item>
+        <item name="android:paddingBottom">4px</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">40sp</item>
+        <item name="android:shadowColor">@color/colorPrimaryDark</item>
+        <item name="android:shadowDx">100</item>
+        <item name="android:shadowDy">100</item>
+        <item name="android:shadowRadius">10</item>
+    </style>
+
 
 </resources>

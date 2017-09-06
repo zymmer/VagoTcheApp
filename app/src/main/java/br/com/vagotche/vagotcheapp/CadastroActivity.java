@@ -88,7 +88,7 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
             //alert(resultado);
 
             if (resultado.contains("cadastro_ok")) {
-                alert("Registro realizado com sucesso...");
+                alert("Cadastro realizado com sucesso...");
 
                 Intent it = new Intent(CadastroActivity.this, MainActivity.class);
                 startActivity(it);

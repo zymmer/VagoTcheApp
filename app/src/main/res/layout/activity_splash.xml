@@ -4,20 +4,32 @@
     android:layout_height="wrap_content"
     android:background="@drawable/background" >
 
-    <ImageView
-        android:id="@+id/imgLogo"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:src="@drawable/logo_vagotche" />
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="@style/UiTestTextView"
-        android:layout_centerInParent="true"
-        android:gravity="center_horizontal"
-        android:text="Bem Vindo ao VagoTchê"/>
+        <TextView
+            android:drawableLeft="@mipmap/parquimetro_40x40"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            style="@style/shadoweffect"
+            android:text="VagoTchê" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            android:text="Localização de Vagas Urbanas"
+            />
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="fill_parent"
