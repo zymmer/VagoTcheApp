@@ -29,6 +29,7 @@
 
     <!-- Creditos -->
     <string name="title_activity_creditos">VagoCred</string>
+    <string name="CredVago">Créditos Adquiridos</string>
     <string name="CréditosAdquiridos">Créditos Adquiridos</string>
     <string name="CréditosUsados">Créditos Usados</string>
     <string name="Histórico">Histórico</string>
@@ -44,8 +45,10 @@
     <string name="HorarioFuncionamento">Horário de Funcionamento da Cidade/Vaga</string>
 
     <!-- Alertas -->
-    <string name="title_activity_configuracao_alertas">Configuração de Alertas</string>
-    <string name="Aviso1">Avisar-me de movimentação indevida do meu véiculo</string>
+
+    <string name="Titulo">Configuração de Alertas</string>
+    <string name="Subtitulo">Envio de mensagem via SMS</string>
+    <string name="Aviso1">Avisar-me de movimentação indevida do meu veículo</string>
     <string name="Aviso2">Permitir envio de e-mails de segurança</string>
     <string name="Aviso3">Permitir envio de e-mails via SMS</string>
     <string name="Aviso4">Permitir envio de e-mails de segurança</string>

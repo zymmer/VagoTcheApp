@@ -21,7 +21,17 @@
         android:textStyle="bold"
         android:textColor="@color/colorWhite"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-        android:text="Configuração de Alertas"
+        android:text="@string/Titulo"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textColor="@color/colorWhite"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+        android:text="@string/Subtitulo"
         android:gravity="center"/>
 
     <TextView
@@ -36,9 +46,11 @@
         android:text="@string/Aviso1" />
 
     <CheckBox
+        android:id="@+id/alerta1"
         android:buttonTint="#FFFFFF"
         android:layout_width="30dp"
-        android:layout_height="30dp" />
+        android:layout_height="30dp"
+        android:onClick="onCheckboxClicked"/>
 
     <TextView
         android:background="@drawable/modelo_edit"
@@ -51,9 +63,11 @@
         android:text="@string/Aviso2" />
 
     <CheckBox
+        android:id="@+id/alerta2"
         android:buttonTint="#FFFFFF"
         android:layout_width="30dp"
-        android:layout_height="30dp" />
+        android:layout_height="30dp"
+        android:onClick="onCheckboxClicked"/>
 
     <TextView
         android:background="@drawable/modelo_edit"
@@ -66,9 +80,11 @@
         android:text="@string/Aviso3" />
 
     <CheckBox
+        android:id="@+id/alerta3"
         android:buttonTint="#FFFFFF"
         android:layout_width="30dp"
-        android:layout_height="30dp" />
+        android:layout_height="30dp"
+        android:onClick="onCheckboxClicked"/>
 
     <TextView
         android:background="@drawable/modelo_edit"
@@ -81,9 +97,11 @@
         android:text="@string/Aviso4" />
 
     <CheckBox
+        android:id="@+id/alerta4"
         android:buttonTint="#FFFFFF"
         android:layout_width="30dp"
-        android:layout_height="30dp" />
+        android:layout_height="30dp"
+        android:onClick="onCheckboxClicked"/>
 
     <LinearLayout
         android:padding="20dp"
