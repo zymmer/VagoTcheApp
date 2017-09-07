@@ -50,8 +50,8 @@ public class ConfiguracaoAlertasActivity extends AppCompatActivity implements Vi
 
                 url = "http://fabrica.govbrsul.com.br/vagotche/index.php/ConfAlertas/ConfigurarAlertas";
 
-                parametros =    "cdUsuario=" + cdUsuario + "&alerta1=" + alerta1 + "&alerta2=" + alerta2 +
-                                "&alerta3=" + alerta3 + "&alerta4=" + alerta4;
+                parametros =    "alerta1=" + alerta1 + "&alerta2=" + alerta2 +
+                                "&alerta3=" + alerta3 + "&alerta4=" + alerta4 + "$cdUsuario=" + cdUsuario;
 
                 new SolicitaDados().execute(url);
             }
@@ -76,7 +76,7 @@ public class ConfiguracaoAlertasActivity extends AppCompatActivity implements Vi
             if (resultado.contains("conf_atualizada")) {
                 alert("Configurações Atualizadas");
 
-                Intent it = new Intent(ConfiguracaoAlertasActivity.this, MainActivity.class);
+                Intent it = new Intent(ConfiguracaoAlertasActivity.this, MenuActivity.class);
                 startActivity(it);
             }
 

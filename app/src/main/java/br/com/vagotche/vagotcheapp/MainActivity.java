@@ -306,7 +306,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 alert("CPF inválido");
 
             } else if (resultado.contains("cpf_nao_cadastrado_ou_senha_invalida")){
-                alert("CPF não cadastrado");
+                alert("CPF não cadastrado ou senha incorreta");
 
             }
 
