@@ -34,7 +34,7 @@
         android:gravity="center"/>
 
     <EditText
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="0dp"
         android:padding="10dp"
         style="@style/StyledTilEditText"
         android:id="@+id/editCPF1"

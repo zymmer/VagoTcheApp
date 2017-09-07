@@ -133,7 +133,6 @@
         android:gravity="center">
 
         <android.support.design.widget.FloatingActionButton
-            android:src="@android:drawable/btn_radio"
             android:layout_width="89dp"
             android:layout_height="72dp"
             android:layout_weight="0.04" />
