@@ -71,7 +71,7 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
             String placa = editplaca.getText().toString();
             String ano = txtano.getText().toString();
 
-            alert("Id= " + cdUsuario);
+            //alert("Id= " + cdUsuario);
 
             if(marcaModelo.isEmpty() || placa.isEmpty() || ano.isEmpty()){
                 alert("Nenhum campo pode estar vazio");

@@ -17,9 +17,9 @@ public class ConfiguracaoAlertasActivity extends AppCompatActivity implements Vi
     //Variaveis
     int cdUsuario;
     Button btnCancelar, btnSalvar;
+    Boolean alerta1, alerta2, alerta3, alerta4;
     String url = "";
     String parametros = "";
-    Boolean alerta1, alerta2, alerta3, alerta4;
 
     private void alert(String s){
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
@@ -40,7 +40,7 @@ public class ConfiguracaoAlertasActivity extends AppCompatActivity implements Vi
         btnSalvar.setOnClickListener(this);
     }
 
-    private void salvar() {
+    private void salvarConf() {
 
         ConnectivityManager connMgr = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -48,10 +48,24 @@ public class ConfiguracaoAlertasActivity extends AppCompatActivity implements Vi
 
         if (networkInfo != null && networkInfo.isConnected()){
 
+            if (alerta1 == null ){
+                alerta1 = false;
+            }
+            if (alerta2 == null ){
+                alerta2 = false;
+            }
+            if (alerta3 == null ){
+                alerta3 = false;
+            }
+            if (alerta4 == null ){
+                alerta4 = false;
+            }
+
+            //alert("alerta1= " + alerta1 + " + " +"alerta2= " + alerta2 + " + " +"alerta3= " + alerta3 + " + " +"alerta4= " + alerta4);
+
                 url = "http://fabrica.govbrsul.com.br/vagotche/index.php/ConfAlertas/ConfigurarAlertas";
 
-                parametros =    "alerta1=" + alerta1 + "&alerta2=" + alerta2 +
-                                "&alerta3=" + alerta3 + "&alerta4=" + alerta4 + "$cdUsuario=" + cdUsuario;
+                parametros = "alerta1=" + alerta1 + "&alerta2=" + alerta2 + "&alerta3=" + alerta3 + "&alerta4=" + alerta4 + "&cdUsuario=" + cdUsuario;
 
                 new SolicitaDados().execute(url);
             }
@@ -71,7 +85,7 @@ public class ConfiguracaoAlertasActivity extends AppCompatActivity implements Vi
         protected void onPostExecute(String resultado) {
 
             //teste
-            alert(resultado);
+            //alert(resultado);
 
             if (resultado.contains("conf_atualizada")) {
                 alert("Configurações Atualizadas");
@@ -123,7 +137,7 @@ public class ConfiguracaoAlertasActivity extends AppCompatActivity implements Vi
                 finish();
                 break;
             case R.id.btnSalvarConf:
-                salvar();
+                salvarConf();
                 break;
         }
     }
