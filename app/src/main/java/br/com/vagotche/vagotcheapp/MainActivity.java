@@ -302,11 +302,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 it.putExtra("nome_usuario", dados[2]);
                 it.putExtra("email_usuario", dados[3]);
                 startActivity(it);
-            }
-              else if (resultado.contains("cpf_invalido")){
+            } else if (resultado.contains("cpf_invalido")){
                 alert("CPF inválido");
 
-            } else if (resultado.contains("cpf_nao_encontrado")){
+            } else if (resultado.contains("cpf_nao_cadastrado_ou_senha_invalida")){
                 alert("CPF não cadastrado");
 
             }

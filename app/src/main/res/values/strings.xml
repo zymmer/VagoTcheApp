@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">VagoTche</string>
+    <string name="app_name">VagoTchê</string>
 
     <!--Facebook -->
     <string name="facebook_app_id">187171295121507</string>
@@ -48,7 +48,7 @@
 
     <string name="Titulo">Configuração de Alertas</string>
     <string name="Subtitulo">Envio de mensagem via SMS</string>
-    <string name="Aviso1">Permitir envio de mensagens quando houver um deslocamento indevido do meu veículo enquanto estiver na vaga</string>
+    <string name="Aviso1">Permitir envio de mensagens quando houver um deslocamento indevido do meu veículo na vaga</string>
     <string name="Aviso2">Permitir envio de mensagens ao comprar mais créditos</string>
     <string name="Aviso3">Permitir envio de mensagens ao utilizar meus créditos</string>
     <string name="Aviso4">Permitir envio de mensagens quando estiver próximo de retirar meu carro da vaga</string>
