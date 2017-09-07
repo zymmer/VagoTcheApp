@@ -123,7 +123,7 @@
             android:clickable="true"
             android:layout_marginLeft="10dp"
             android:background="@drawable/button_icons_bg"
-            android:id="@+id/btnRegistrarConf"
+            android:id="@+id/btnSalvarConf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
