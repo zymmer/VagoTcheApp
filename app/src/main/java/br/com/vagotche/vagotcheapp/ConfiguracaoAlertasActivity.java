@@ -27,7 +27,7 @@ public class ConfiguracaoAlertasActivity extends AppCompatActivity {
             else
                 // Remove the meat
                 break;
-            case R.id.checkbox_cheese:
+            case R.id.alerta2:
                 if (checked)
                 // Cheese me
             else
