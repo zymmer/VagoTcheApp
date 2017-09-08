@@ -183,7 +183,7 @@ public class MenuActivity extends AppCompatActivity
 
                 String[] dados = resultado.split(",");
 
-                
+
                 Intent it = new Intent(MenuActivity.this, ConfiguracaoAlertasActivity.class);
                 it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 it.putExtra("status1", dados[1]);

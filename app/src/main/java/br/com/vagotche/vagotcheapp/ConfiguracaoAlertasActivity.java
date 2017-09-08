@@ -17,9 +17,10 @@ public class ConfiguracaoAlertasActivity extends AppCompatActivity implements Vi
     //Variaveis
     int cdUsuario;
     Button btnCancelar, btnSalvar;
-    Boolean alerta1, alerta2, alerta3, alerta4;
+    Boolean b1, b2, b3, b4;
     String url = "";
     String parametros = "";
+    CheckBox alerta1,alerta2,alerta3,alerta4;
 
     private void alert(String s){
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
@@ -31,6 +32,25 @@ public class ConfiguracaoAlertasActivity extends AppCompatActivity implements Vi
         setContentView(R.layout.activity_configuracao_alertas);
 
         cdUsuario = getIntent().getIntExtra("id_usuario", 0);
+
+        // Get Checkbox
+        alerta1 = (CheckBox) findViewById(R.id.alerta1);
+        alerta2 = (CheckBox) findViewById(R.id.alerta2);
+        alerta3 = (CheckBox) findViewById(R.id.alerta3);
+        alerta4 = (CheckBox) findViewById(R.id.alerta4);
+
+        if (getIntent().getIntExtra("status1", 0) == 1 ){
+            alerta1.setChecked(true);
+        }
+            if (getIntent().getIntExtra("status2", 0) == 1 ){
+                alerta2.setChecked(true);
+            }
+                if (getIntent().getIntExtra("status3", 0) == 1 ){
+                    alerta3.setChecked(true);
+                }
+                    if (getIntent().getIntExtra("status4", 0) == 1 ){
+                        alerta4.setChecked(true);
+                    }
 
         // Get IDs
         btnCancelar = (Button) findViewById(R.id.btnCancelarConf);
@@ -48,17 +68,17 @@ public class ConfiguracaoAlertasActivity extends AppCompatActivity implements Vi
 
         if (networkInfo != null && networkInfo.isConnected()){
 
-            if (alerta1 == null ){
-                alerta1 = false;
+            if (b1 == null ){
+                b1 = false;
             }
-            if (alerta2 == null ){
-                alerta2 = false;
+            if (b2 == null ){
+                b2 = false;
             }
-            if (alerta3 == null ){
-                alerta3 = false;
+            if (b3 == null ){
+                b3 = false;
             }
-            if (alerta4 == null ){
-                alerta4 = false;
+            if (b4 == null ){
+                b4 = false;
             }
 
                 url = "http://fabrica.govbrsul.com.br/vagotche/index.php/ConfAlertas/ConfigurarAlertas";
@@ -102,27 +122,27 @@ public class ConfiguracaoAlertasActivity extends AppCompatActivity implements Vi
         switch(view.getId()) {
             case R.id.alerta1:
                 if (checked)
-                    alerta1 = true;
+                    b1 = true;
             else
-                    alerta1 = false;
+                    b1 = false;
                 break;
             case R.id.alerta2:
                 if (checked)
-                    alerta2 = true;
+                    b2 = true;
             else
-                    alerta2 = false;
+                    b2 = false;
                 break;
             case R.id.alerta3:
                 if (checked)
-                    alerta3 = true;
+                    b3 = true;
                 else
-                    alerta3 = false;
+                    b3 = false;
                 break;
             case R.id.alerta4:
                 if (checked)
-                    alerta4 = true;
+                    b4 = true;
                 else
-                    alerta4 = false;
+                    b4 = false;
                 break;
         }
     }
