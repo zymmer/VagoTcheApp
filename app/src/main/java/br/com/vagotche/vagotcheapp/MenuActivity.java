@@ -180,28 +180,30 @@ public class MenuActivity extends AppCompatActivity
             alert(resultado);
 
 
-//            if (resultado.contains("login_ok")) {
-//
-//                alert("Login realizado com sucesso");
-//
-//                String[] dados = resultado.split(",");
-//                int cdUsuario = Integer.parseInt(dados[1]);
-//
-//                //alert("id= " + cdUsuario);
-//
-//                Intent it = new Intent(MainActivity.this, MenuActivity.class);
+            if (resultado.contains("response_ok")) {
+
+                //teste
+                alert(resultado);
+
+                String[] dados = resultado.split(",");
+                alert("1= " + dados[1] + "2= " + dados[2]);
+
+//                Intent it = new Intent(MenuActivity.this, MenuActivity.class);
 //                it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                it.putExtra("id_usuario", cdUsuario);
-//                it.putExtra("nome_usuario", dados[2]);
-//                it.putExtra("email_usuario", dados[3]);
+//                it.putExtra("alerta1", cdUsuario);
+//                it.putExtra("alerta2", dados[2]);
+//                it.putExtra("alerta3", dados[3]);
+//                it.putExtra("alerta3", dados[3]);
+//                it.putExtra("alerta3", dados[3]);
+//                it.putExtra("alerta3", dados[3]);
 //                startActivity(it);
-//            } else if (resultado.contains("cpf_invalido")){
-//                alert("CPF inválido");
-//
-//            } else if (resultado.contains("cpf_nao_cadastrado_ou_senha_invalida")){
-//                alert("CPF não cadastrado ou senha incorreta");
-//
-//            }
+            } else if (resultado.contains("cpf_invalido")){
+                alert("CPF inválido");
+
+            } else if (resultado.contains("cpf_nao_cadastrado_ou_senha_invalida")){
+                alert("CPF não cadastrado ou senha incorreta");
+
+            }
 
         }
     }
