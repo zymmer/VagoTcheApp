@@ -298,6 +298,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //alert("id= " + cdUsuario);
 
                 Intent it = new Intent(MainActivity.this, MenuActivity.class);
+                it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 it.putExtra("id_usuario", cdUsuario);
                 it.putExtra("nome_usuario", dados[2]);
                 it.putExtra("email_usuario", dados[3]);

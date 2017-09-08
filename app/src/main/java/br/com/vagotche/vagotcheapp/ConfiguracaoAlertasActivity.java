@@ -32,9 +32,9 @@ public class ConfiguracaoAlertasActivity extends AppCompatActivity implements Vi
 
         cdUsuario = getIntent().getIntExtra("id_usuario", 0);
 
+        // Get IDs
         btnCancelar = (Button) findViewById(R.id.btnCancelarConf);
         btnSalvar = (Button) findViewById(R.id.btnSalvarConf);
-
         // Button listeners
         btnCancelar.setOnClickListener(this);
         btnSalvar.setOnClickListener(this);
@@ -61,8 +61,6 @@ public class ConfiguracaoAlertasActivity extends AppCompatActivity implements Vi
                 alerta4 = false;
             }
 
-            //alert("alerta1= " + alerta1 + " + " +"alerta2= " + alerta2 + " + " +"alerta3= " + alerta3 + " + " +"alerta4= " + alerta4);
-
                 url = "http://fabrica.govbrsul.com.br/vagotche/index.php/ConfAlertas/ConfigurarAlertas";
 
                 parametros = "alerta1=" + alerta1 + "&alerta2=" + alerta2 + "&alerta3=" + alerta3 + "&alerta4=" + alerta4 + "&cdUsuario=" + cdUsuario;
@@ -88,10 +86,9 @@ public class ConfiguracaoAlertasActivity extends AppCompatActivity implements Vi
             //alert(resultado);
 
             if (resultado.contains("conf_atualizada")) {
-                alert("Configurações Atualizadas");
+                alert("Configurações Atualizadas...");
 
-                Intent it = new Intent(ConfiguracaoAlertasActivity.this, MenuActivity.class);
-                startActivity(it);
+                finish();
             }
 
         }

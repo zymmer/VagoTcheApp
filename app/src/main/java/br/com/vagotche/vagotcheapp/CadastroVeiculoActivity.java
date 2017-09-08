@@ -106,8 +106,7 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
             if (resultado.contains("veiculo_registrado")) {
                 alert("Veículo registrado com sucesso...");
 
-                Intent it = new Intent(CadastroVeiculoActivity.this, MenuActivity.class);
-                startActivity(it);
+                finish();
             } else if (resultado.contains("placa_ja_cadastrada")) {
                 alert("A placa informada já está cadastrada");
 

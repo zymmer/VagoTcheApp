@@ -1,6 +1,10 @@
 package br.com.vagotche.vagotcheapp;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -24,6 +28,9 @@ public class MenuActivity extends AppCompatActivity
     int cdUsuario;
     TextView txtNome, txtEmail;
     String nomeUsuario, emailUsuario;
+
+    String url = "";
+    String parametros = "";
 
     //alerta
     private void alert(String s){
@@ -80,6 +87,7 @@ public class MenuActivity extends AppCompatActivity
         cab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                VerificaConfs();
                 Intent it = new Intent(MenuActivity.this, ConfiguracaoAlertasActivity.class);
                 it.putExtra("id_usuario", cdUsuario);
                 startActivity(it);
@@ -133,6 +141,68 @@ public class MenuActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+        }
+    }
+
+    // [START signIn]
+    private void VerificaConfs() {
+
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+        if (networkInfo != null && networkInfo.isConnected()) {
+
+            url = "http://fabrica.govbrsul.com.br/vagotche/index.php/ConfAlertas/VerificarAlertas";
+
+            parametros = "cdUsuario=" + cdUsuario;
+
+            new SolicitaDados().execute(url);
+        } else {
+            alert("Nenhuma conexão de rede foi detectada");
+        }
+    }
+
+
+    private class SolicitaDados extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... urls){
+
+            return ConexaoApp.postDados(urls[0], parametros);
+
+        }
+
+        @Override
+        protected void onPostExecute(String resultado){
+
+            //teste
+            alert(resultado);
+
+
+//            if (resultado.contains("login_ok")) {
+//
+//                alert("Login realizado com sucesso");
+//
+//                String[] dados = resultado.split(",");
+//                int cdUsuario = Integer.parseInt(dados[1]);
+//
+//                //alert("id= " + cdUsuario);
+//
+//                Intent it = new Intent(MainActivity.this, MenuActivity.class);
+//                it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                it.putExtra("id_usuario", cdUsuario);
+//                it.putExtra("nome_usuario", dados[2]);
+//                it.putExtra("email_usuario", dados[3]);
+//                startActivity(it);
+//            } else if (resultado.contains("cpf_invalido")){
+//                alert("CPF inválido");
+//
+//            } else if (resultado.contains("cpf_nao_cadastrado_ou_senha_invalida")){
+//                alert("CPF não cadastrado ou senha incorreta");
+//
+//            }
+
         }
     }
 
@@ -193,4 +263,5 @@ public class MenuActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

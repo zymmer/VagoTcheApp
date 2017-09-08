@@ -91,6 +91,7 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
                 alert("Cadastro realizado com sucesso...");
 
                 Intent it = new Intent(CadastroActivity.this, MainActivity.class);
+                it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(it);
             } else if (resultado.contains("cpf_ja_cadastrado")) {
                 alert("CPF já está cadastrado");
