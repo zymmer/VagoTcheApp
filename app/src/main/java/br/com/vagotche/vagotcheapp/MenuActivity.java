@@ -88,9 +88,6 @@ public class MenuActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 VerificaConfs();
-                Intent it = new Intent(MenuActivity.this, ConfiguracaoAlertasActivity.class);
-                it.putExtra("id_usuario", cdUsuario);
-                startActivity(it);
             }
         });
 
@@ -177,26 +174,29 @@ public class MenuActivity extends AppCompatActivity
         protected void onPostExecute(String resultado){
 
             //teste
-            alert(resultado);
-
+            //alert(resultado);
 
             if (resultado.contains("response_ok")) {
 
                 //teste
-                alert(resultado);
+                //alert(resultado);
 
                 String[] dados = resultado.split(",");
-                alert("1= " + dados[1] + "2= " + dados[2]);
 
-//                Intent it = new Intent(MenuActivity.this, MenuActivity.class);
-//                it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                it.putExtra("alerta1", cdUsuario);
-//                it.putExtra("alerta2", dados[2]);
-//                it.putExtra("alerta3", dados[3]);
-//                it.putExtra("alerta3", dados[3]);
-//                it.putExtra("alerta3", dados[3]);
-//                it.putExtra("alerta3", dados[3]);
-//                startActivity(it);
+                
+                Intent it = new Intent(MenuActivity.this, ConfiguracaoAlertasActivity.class);
+                it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                it.putExtra("status1", dados[1]);
+                it.putExtra("alerta1", dados[2]);
+                it.putExtra("status2", dados[3]);
+                it.putExtra("alerta2", dados[4]);
+                it.putExtra("status3", dados[5]);
+                it.putExtra("alerta3", dados[6]);
+                it.putExtra("status4", dados[7]);
+                it.putExtra("alerta4", dados[8]);
+                it.putExtra("id_usuario", cdUsuario);
+
+                startActivity(it);
             } else if (resultado.contains("cpf_invalido")){
                 alert("CPF inválido");
 
