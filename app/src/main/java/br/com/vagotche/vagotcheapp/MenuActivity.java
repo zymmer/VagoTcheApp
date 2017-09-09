@@ -176,39 +176,39 @@ public class MenuActivity extends AppCompatActivity
             //teste
             //alert(resultado);
 
-            if (resultado.contains("response_ok")) {
-
-                //teste
-                //alert(resultado);
+            //VerificaAlertas
+            if (resultado.contains("verifica_alertas_ok")) {
 
                 String[] dados = resultado.split(",");
 
-                alert("Status1= " + dados[1] + "Status2= " + dados[2] + "Status3= " + dados[3] + "Status4= " + dados[4]);
+                alert("Status1= " + dados[1] + "Status2= " + dados[2] +
+                        "Status3= " + dados[3] + "Status4= " + dados[4]);
 
-                boolean b1new = Boolean.parseBoolean(dados[1]);
-                boolean b2new = Boolean.parseBoolean(dados[2]);
-                boolean b3new = Boolean.parseBoolean(dados[3]);
-                boolean b4new = Boolean.parseBoolean(dados[4]);
+                boolean b1new = false;
+                boolean b2new = false;
+                boolean b3new = false;
+                boolean b4new = false;
+
+                if (dados[1].equals("1")) {
+                    b1new = true;
+                }
+                if (dados[2].equals("1")) {
+                    b2new = true;
+                }
+                if (dados[3].equals("1")) {
+                    b3new = true;
+                }
+                if (dados[4].equals("1")) {
+                    b4new = true;
+                }
 
                 Intent it = new Intent(MenuActivity.this, ConfiguracaoAlertasActivity.class);
                 it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 it.putExtra("status1", b1new);
-                //it.putExtra("alerta1", dados[2]);
                 it.putExtra("status2", b2new);
-                //it.putExtra("alerta2", dados[4]);
                 it.putExtra("status3", b3new);
-                //it.putExtra("alerta3", dados[6]);
                 it.putExtra("status4", b4new);
-                //it.putExtra("alerta4", dados[8]);
                 it.putExtra("id_usuario", cdUsuario);
-
-                alert(""+b1new+" "+b2new+" "+b3new+" "+b4new);
-
-//                alert("Status1= " + getIntent().getBooleanExtra("status1", false) + " " +
-//                        "Status2= " + getIntent().getBooleanExtra("status2", false) + " " +
-//                        "Status3= " + getIntent().getBooleanExtra("status3", false) + " " +
-//                        "Status4= " + getIntent().getBooleanExtra("status4", false)
-//                );
 
                 startActivity(it);
             } else if (resultado.contains("cpf_invalido")){
