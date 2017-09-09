@@ -181,29 +181,23 @@ public class MenuActivity extends AppCompatActivity
 
                 String[] dados = resultado.split(",");
 
-                alert("Status1= " + dados[1] + "Status2= " + dados[2] +
-                        "Status3= " + dados[3] + "Status4= " + dados[4]);
-
                 boolean b1new = false;
                 boolean b2new = false;
                 boolean b3new = false;
-                boolean b4new = true;
+                boolean b4new = false;
 
-                if (dados[1].equals("1")) {
+                if (dados[1].contains("1")) {
                     b1new = true;
                 }
-                if (dados[2].equals("1")) {
+                if (dados[2].contains("1")) {
                     b2new = true;
                 }
-                if (dados[3].equals("1")) {
+                if (dados[3].contains("1")) {
                     b3new = true;
                 }
-                if (dados[4].equals("1")) {
+                if (dados[4].contains("1")) {
                     b4new = true;
-                    alert("B1" + b4new);
                 }
-
-                //alert("B1: " + b1new + "B2: " + b2new + "B3: " + b3new + "B4: " + b4new);
 
                 Intent it = new Intent(MenuActivity.this, ConfiguracaoAlertasActivity.class);
                 it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
