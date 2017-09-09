@@ -40,6 +40,17 @@
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
         android:textAlignment="center" />
 
+    <TextView
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/modelo_edit"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:padding="5dp"
+        android:paddingLeft="10dp"
+        android:text=" R$ 0"/>
+
     <LinearLayout
         android:layout_marginTop="00dp"
         android:layout_width="match_parent"
@@ -64,6 +75,27 @@
             android:layout_width="89dp"
             android:layout_height="72dp"
             android:layout_weight="0.04" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_gravity="center">
+
+        <Button
+            android:clickable="true"
+            android:background="@drawable/button_icons_bg"
+            android:id="@+id/btnUtilizarCred"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/ComprarCreditos"
+            android:drawableEnd="@mipmap/money1"
+            />
 
     </LinearLayout>
 

@@ -29,8 +29,8 @@
 
     <!-- Creditos -->
     <string name="title_activity_creditos">VagoCred</string>
-    <string name="CredVago">Créditos Adquiridos</string>
-    <string name="CréditosAdquiridos">Créditos Adquiridos</string>
+    <string name="CredVago">Selecione o valor do crédito a ser adquirido para o credVAGO</string>
+    <string name="ComprarCreditos">Comprar Créditos</string>
     <string name="CréditosUsados">Créditos Usados</string>
     <string name="Histórico">Histórico</string>
     <string name="Saldo">Seu Saldo</string>
