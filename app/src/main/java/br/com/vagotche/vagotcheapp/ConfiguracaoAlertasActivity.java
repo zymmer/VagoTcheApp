@@ -39,16 +39,21 @@ public class ConfiguracaoAlertasActivity extends AppCompatActivity implements Vi
         alerta3 = (CheckBox) findViewById(R.id.alerta3);
         alerta4 = (CheckBox) findViewById(R.id.alerta4);
 
-        if (getIntent().getBooleanExtra("status1", false)){
+//        alert("Extra1" + getIntent().getBooleanExtra("status1", true) +
+//                "Extra2" + getIntent().getBooleanExtra("status2", true) +
+//                "Extra3" + getIntent().getBooleanExtra("status3", true) +
+//                "Extra4" + getIntent().getBooleanExtra("status4", true));
+
+        if (getIntent().getBooleanExtra("status1", true)){
             alerta1.setChecked(true);
         }
-            if (getIntent().getBooleanExtra("status2", false)){
+            if (getIntent().getBooleanExtra("status2", true)){
                 alerta2.setChecked(true);
             }
-                if (getIntent().getBooleanExtra("status3", false)){
+                if (getIntent().getBooleanExtra("status3", true)){
                     alerta3.setChecked(true);
                 }
-                    if (getIntent().getBooleanExtra("status4", false)){
+                    if (getIntent().getBooleanExtra("status4", true)){
                         alerta4.setChecked(true);
                     }
 
@@ -68,18 +73,31 @@ public class ConfiguracaoAlertasActivity extends AppCompatActivity implements Vi
 
         if (networkInfo != null && networkInfo.isConnected()){
 
-            if (b1 == null ){
+            if (alerta1.isChecked()){
+                b1 = true;
+            } else {
                 b1 = false;
             }
-            if (b2 == null ){
+
+            if (alerta2.isChecked()){
+                b2 = true;
+            } else {
                 b2 = false;
             }
-            if (b3 == null ){
+
+            if (alerta3.isChecked()){
+                b3 = true;
+            } else {
                 b3 = false;
             }
-            if (b4 == null ){
+
+            if (alerta4.isChecked()){
+                b4 = true;
+            } else {
                 b4 = false;
             }
+
+            alert(" " + b1 + " - " + b2 + " - " + b3 + " - " + b4);
 
                 url = "http://fabrica.govbrsul.com.br/vagotche/index.php/ConfAlertas/ConfigurarAlertas";
 
