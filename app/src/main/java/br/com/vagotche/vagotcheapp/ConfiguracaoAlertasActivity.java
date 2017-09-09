@@ -39,10 +39,10 @@ public class ConfiguracaoAlertasActivity extends AppCompatActivity implements Vi
         alerta3 = (CheckBox) findViewById(R.id.alerta3);
         alerta4 = (CheckBox) findViewById(R.id.alerta4);
 
-//        alert("Extra1" + getIntent().getBooleanExtra("status1", true) +
-//                "Extra2" + getIntent().getBooleanExtra("status2", true) +
-//                "Extra3" + getIntent().getBooleanExtra("status3", true) +
-//                "Extra4" + getIntent().getBooleanExtra("status4", true));
+        alert("Extra1" + getIntent().getBooleanExtra("status1", true) +
+                "Extra2" + getIntent().getBooleanExtra("status2", true) +
+                "Extra3" + getIntent().getBooleanExtra("status3", true) +
+                "Extra4" + getIntent().getBooleanExtra("status4", true));
 
         if (getIntent().getBooleanExtra("status1", true)){
             alerta1.setChecked(true);

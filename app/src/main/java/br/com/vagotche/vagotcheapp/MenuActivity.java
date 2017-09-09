@@ -187,7 +187,7 @@ public class MenuActivity extends AppCompatActivity
                 boolean b1new = false;
                 boolean b2new = false;
                 boolean b3new = false;
-                boolean b4new = false;
+                boolean b4new = true;
 
                 if (dados[1].equals("1")) {
                     b1new = true;
@@ -200,7 +200,10 @@ public class MenuActivity extends AppCompatActivity
                 }
                 if (dados[4].equals("1")) {
                     b4new = true;
+                    alert("B1" + b4new);
                 }
+
+                //alert("B1: " + b1new + "B2: " + b2new + "B3: " + b3new + "B4: " + b4new);
 
                 Intent it = new Intent(MenuActivity.this, ConfiguracaoAlertasActivity.class);
                 it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
