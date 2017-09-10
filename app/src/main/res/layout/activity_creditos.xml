@@ -111,7 +111,7 @@
         <TextView
             android:id="@+id/creditos5"
             android:clickable="true"
-            android:text="+ R$ 5"
+            android:text="+ R$   5,00"
             android:textColor="@color/colorWhite"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textStyle="bold"
@@ -124,7 +124,7 @@
         <TextView
             android:id="@+id/creditos10"
             android:clickable="true"
-            android:text="+ R$ 10"
+            android:text="+ R$ 10,00"
             android:textStyle="bold"
             android:textColor="@color/colorWhite"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
@@ -137,7 +137,7 @@
         <TextView
             android:id="@+id/creditos15"
             android:clickable="true"
-            android:text="+ R$ 15"
+            android:text="+ R$ 15,00"
             android:textColor="@color/colorWhite"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textStyle="bold"

@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,8 +24,9 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
 
     //Variaveis
     int cdUsuario;
-    TextView seuSaldo, valor, creditos5, creditos10, creditos15;
-    Double saldo = 0.00;
+    TextView seuSaldo;
+    Spinner spinnerPlaca, spinnerCidade, spinnerParquimetro;
+    Double valor = 0.00;
     Button btnComprar, btnLimparCred;
     ImageView btnVoltar;
     String url = "";
@@ -49,28 +51,29 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
         cdUsuario = getIntent().getIntExtra("id_usuario", 0);
 
         //Saldo
-        seuSaldo = (TextView) findViewById(R.id.viewSaldoCreditos);
+        seuSaldo = (TextView) findViewById(R.id.viewSaldoCreditosZA);
         seuSaldo.setText(getIntent().getStringExtra("saldo"));
 
         // Get IDs
-        creditos5 = (TextView) findViewById(R.id.creditos5);
-        creditos10 = (TextView) findViewById(R.id.creditos10);
-        creditos15 = (TextView) findViewById(R.id.creditos15);
-        valor = (TextView) findViewById(R.id.CampoValor);
+        spinnerPlaca = (Spinner) findViewById(R.id.spinnerPlaca);
+        spinnerPlaca.setSelection(getIntent().getStringExtra("placa"));
+        spinnerCidade = (Spinner) findViewById(R.id.spinnerCidade);
+        spinnerParquimetro = (Spinner) findViewById(R.id.spinnerParquimetro);
+
         btnComprar = (Button) findViewById(R.id.btnComprarCred);
-        btnVoltar = (ImageView) findViewById(R.id.imvVoltarCredito);
+        btnVoltar = (ImageView) findViewById(R.id.imvVoltarZonaAzul);
         btnLimparCred = (Button) findViewById(R.id.btnLimparCred);
         // Button listeners
-        creditos5.setOnClickListener(this);
-        creditos10.setOnClickListener(this);
-        creditos15.setOnClickListener(this);
+        spinnerPlaca.setOnClickListener(this);
+        spinnerCidade.setOnClickListener(this);
+        spinnerParquimetro.setOnClickListener(this);
         btnComprar.setOnClickListener(this);
         btnVoltar.setOnClickListener(this);
         btnLimparCred.setOnClickListener(this);
 
     }
 
-    private void ComprarCredito() {
+    private void UtilizarCredito() {
 
         ConnectivityManager connMgr = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -80,7 +83,7 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
 
             url = "http://fabrica.govbrsul.com.br/vagotche/index.php/Creditos/ComprarCreditos";
 
-            parametros = "saldo=" + saldo + "&cdUsuario=" + cdUsuario;
+            parametros = "saldo=" + valor + "&cdUsuario=" + cdUsuario;
 
             new SolicitaDados().execute(url);
         }
@@ -112,27 +115,27 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.creditos5:
-                saldo = saldo + 5;
-                valor.setText(df2.format(saldo));
+                valor = valor + 5;
+                valor.setText(df2.format(valor));
                 break;
             case R.id.creditos10:
-                saldo = saldo + 10;
-                valor.setText(df2.format(saldo));
+                valor = valor + 10;
+                valor.setText(df2.format(valor));
                 break;
             case R.id.creditos15:
-                saldo = saldo + 15;
-                valor.setText(df2.format(saldo));
+                valor = valor + 15;
+                valor.setText(df2.format(valor));
                 break;
             case R.id.btnLimparCred:
-                saldo = 0.00;
-                valor.setText(df2.format(saldo));
+                valor = 0.00;
+                valor.setText(df2.format(valor));
                 break;
-            case R.id.imvVoltarCredito:
+            case R.id.imvVoltarZonaAzul:
                 finish();
                 break;
             case R.id.btnComprarCred:
-                if (saldo >= 5){
-                    ComprarCredito();
+                if (valor >= 5){
+                    UtilizarCredito();
                 } else {
                     alert("Você deve informar um valor");
                 }

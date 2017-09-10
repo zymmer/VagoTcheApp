@@ -177,6 +177,25 @@ public class MenuActivity extends AppCompatActivity
         }
     }
 
+    // Verifica placas do usuário
+    private void VerificaPlacas() {
+
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+        if (networkInfo != null && networkInfo.isConnected()) {
+
+            url = "http://fabrica.govbrsul.com.br/vagotche/index.php/ZonaAzul/VerificarCarros";
+
+            parametros = "cdUsuario=" + cdUsuario;
+
+            new SolicitaDados().execute(url);
+        } else {
+            alert("Nenhuma conexão de rede foi detectada");
+        }
+    }
+
 
     private class SolicitaDados extends AsyncTask<String, Void, String> {
 
@@ -229,12 +248,12 @@ public class MenuActivity extends AppCompatActivity
 
                 String[] dados = resultado.split(",");
 
-                if(auxiliar == "credito") {
+                if(auxiliar.contains("credito")) {
                     Intent it = new Intent(MenuActivity.this, CreditosActivity.class);
                     it.putExtra("saldo", dados[1]);
                     it.putExtra("id_usuario", cdUsuario);
                     startActivity(it);
-                } else if (auxiliar == "zonaazul") {
+                } else if (auxiliar.contains("zonaazul")) {
                     Intent it = new Intent(MenuActivity.this, ZonaAzulActivity.class);
                     it.putExtra("saldo", dados[1]);
                     it.putExtra("id_usuario", cdUsuario);
@@ -242,6 +261,19 @@ public class MenuActivity extends AppCompatActivity
                 };
 
             }
+
+            //VerificaPlacas
+            if (resultado.contains("verifica_placas_ok")) {
+
+                String[] dados = resultado.split(",");
+
+                    Intent it = new Intent(MenuActivity.this, ZonaAzulActivity.class);
+                    it.putExtra("placa", dados[1]);
+                    it.putExtra("id_usuario", cdUsuario);
+                    startActivity(it);
+
+            }
+
         }
     }
 
