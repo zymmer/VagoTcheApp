@@ -48,7 +48,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //Teste Spinner
         Spinner spinner = (Spinner) findViewById(R.id.spinner1);
-
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MapsActivity.this,
                 android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.names));
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
@@ -76,7 +75,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         //Parquimetros Reais
         addParquimetrosArray();
