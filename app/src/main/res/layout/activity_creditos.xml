@@ -61,24 +61,45 @@
             android:gravity="center"
             android:layout_marginLeft="10dp"
             android:background="@drawable/modelo_edit"
-            android:layout_width="60dp"
-            android:layout_height="30dp"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
             android:padding="5dp"
             android:paddingLeft="10dp"
             android:hint=" R$ 0"/>
 
     </LinearLayout>
 
+    <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center">
+
     <TextView
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         android:id="@+id/CampoValor"
-        android:layout_gravity="center"
+        android:layout_gravity="top"
         android:gravity="center"
-        android:layout_marginTop="30dp"
         android:background="@drawable/modelo_edit"
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:padding="5dp"
         android:hint=" R$ 0"/>
+
+    <Button
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+        android:clickable="true"
+        android:background="@drawable/button_icons_bg"
+        android:id="@+id/btnLimparCred"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:textStyle="bold"
+        android:text="@string/LimparCreditos"
+        />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_marginTop="10dp"

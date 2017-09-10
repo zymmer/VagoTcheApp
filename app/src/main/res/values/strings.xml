@@ -34,6 +34,7 @@
     <string name="CréditosUsados">Créditos Usados</string>
     <string name="Histórico">Histórico</string>
     <string name="Saldo">Seu Saldo</string>
+    <string name="LimparCreditos">Limpar</string>
 
     <!-- Zona Azul -->
     <string name="title_activity_zona_azul">Pagamento Zona Azul</string>
