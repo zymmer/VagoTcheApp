@@ -132,7 +132,12 @@ public class CreditosActivity extends AppCompatActivity implements View.OnClickL
                 finish();
                 break;
             case R.id.btnComprarCred:
+                if (saldo >= 5){
+                    alert("Saldo: " + saldo);
                 ComprarCredito();
+                } else {
+                    alert("Você deve informar um valor");
+                }
                 break;
         }
     }
