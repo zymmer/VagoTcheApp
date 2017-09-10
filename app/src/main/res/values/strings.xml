@@ -40,7 +40,7 @@
     <string name="title_activity_zona_azul">Pagamento Zona Azul</string>
     <string name="PlacaVeículo">Placa do Veículo</string>
     <string name="Cidade">Cidade</string>
-    <string name="Parquímetro">Parquímetro</string>
+    <string name="Parquímetro">Parquímetro/Setor</string>
     <string name="VagasTotais">Vagas Totais</string>
     <string name="VagasDisponíveis">Vagas Disponíveis</string>
     <string name="HorarioFuncionamento">Horário de Funcionamento da Cidade/Vaga</string>

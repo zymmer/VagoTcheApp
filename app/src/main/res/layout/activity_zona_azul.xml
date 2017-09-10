@@ -139,6 +139,8 @@
         android:gravity="center">
 
         <TextView
+            android:id="@+id/txvTempo30"
+            android:clickable="true"
             android:text="R$ 0,50"
             android:textColor="@color/colorWhite"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
@@ -150,6 +152,8 @@
             />
 
         <TextView
+            android:id="@+id/txvTempo1"
+            android:clickable="true"
             android:text="R$ 1,00"
             android:textColor="@color/colorWhite"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
@@ -161,6 +165,8 @@
             />
 
         <TextView
+            android:id="@+id/txvTempo130"
+            android:clickable="true"
             android:text="R$ 1,50"
             android:textColor="@color/colorWhite"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
@@ -172,6 +178,8 @@
             />
 
         <TextView
+            android:id="@+id/txvTempo2"
+            android:clickable="true"
             android:text="R$ 2,00"
             android:textColor="@color/colorWhite"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"

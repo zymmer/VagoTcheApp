@@ -24,7 +24,7 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
 
     //Variaveis
     int cdUsuario;
-    TextView seuSaldo;
+    TextView seuSaldo, txvTempo30, txvTempo1, txvTempo130, txvTempo2;
     Spinner spinnerPlaca, spinnerCidade, spinnerParquimetro;
     Double valor = 0.00;
     Button btnComprar, btnLimparCred;
@@ -56,14 +56,22 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
 
         // Get IDs
         spinnerPlaca = (Spinner) findViewById(R.id.spinnerPlaca);
-        spinnerPlaca.setSelection(getIntent().getStringExtra("placa"));
+        //spinnerPlaca.getSelectedItem(getIntent().getStringExtra("placa"));
         spinnerCidade = (Spinner) findViewById(R.id.spinnerCidade);
         spinnerParquimetro = (Spinner) findViewById(R.id.spinnerParquimetro);
+        txvTempo30 = (TextView) findViewById(R.id.txvTempo30);
+        txvTempo1 = (TextView) findViewById(R.id.txvTempo1);
+        txvTempo130 = (TextView) findViewById(R.id.txvTempo130);
+        txvTempo2 = (TextView) findViewById(R.id.txvTempo2);
 
         btnComprar = (Button) findViewById(R.id.btnComprarCred);
         btnVoltar = (ImageView) findViewById(R.id.imvVoltarZonaAzul);
         btnLimparCred = (Button) findViewById(R.id.btnLimparCred);
         // Button listeners
+        txvTempo30.setOnClickListener(this);
+        txvTempo1.setOnClickListener(this);
+        txvTempo130.setOnClickListener(this);
+        txvTempo2.setOnClickListener(this);
         spinnerPlaca.setOnClickListener(this);
         spinnerCidade.setOnClickListener(this);
         spinnerParquimetro.setOnClickListener(this);
@@ -114,21 +122,21 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.creditos5:
-                valor = valor + 5;
-                valor.setText(df2.format(valor));
+            case R.id.txvTempo30:
+                //valor = valor + 5;
+                //valor.setText(df2.format(valor));
                 break;
-            case R.id.creditos10:
-                valor = valor + 10;
-                valor.setText(df2.format(valor));
+            case R.id.txvTempo1:
+                //valor = valor + 10;
+                //valor.setText(df2.format(valor));
                 break;
-            case R.id.creditos15:
-                valor = valor + 15;
-                valor.setText(df2.format(valor));
+            case R.id.txvTempo130:
+                //valor = valor + 15;
+                //valor.setText(df2.format(valor));
                 break;
-            case R.id.btnLimparCred:
-                valor = 0.00;
-                valor.setText(df2.format(valor));
+            case R.id.txvTempo2:
+                //valor = 0.00;
+                //valor.setText(df2.format(valor));
                 break;
             case R.id.imvVoltarZonaAzul:
                 finish();
