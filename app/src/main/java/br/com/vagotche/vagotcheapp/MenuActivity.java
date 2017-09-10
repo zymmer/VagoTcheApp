@@ -93,8 +93,9 @@ public class MenuActivity extends AppCompatActivity
         zab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                auxiliar = "zonaazul";
-                VerificaCreditos();
+                //auxiliar = "zonaazul";
+                VerificaPlacas();
+                //VerificaCreditos();
             }
         });
 
@@ -267,6 +268,7 @@ public class MenuActivity extends AppCompatActivity
 
                 String[] dados = resultado.split(",");
 
+                alert("Teste");
                     Intent it = new Intent(MenuActivity.this, ZonaAzulActivity.class);
                     it.putExtra("placa", dados[1]);
                     it.putExtra("id_usuario", cdUsuario);

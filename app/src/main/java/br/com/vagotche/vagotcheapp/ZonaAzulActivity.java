@@ -27,7 +27,7 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
     TextView seuSaldo, txvTempo30, txvTempo1, txvTempo130, txvTempo2;
     Spinner spinnerPlaca, spinnerCidade, spinnerParquimetro;
     Double valor = 0.00;
-    Button btnComprar, btnLimparCred;
+    Button btnUtilizarCred, btnLimparCred;
     ImageView btnVoltar;
     String url = "";
     String parametros = "";
@@ -50,34 +50,33 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
 
         cdUsuario = getIntent().getIntExtra("id_usuario", 0);
 
-        //Saldo
-        seuSaldo = (TextView) findViewById(R.id.viewSaldoCreditosZA);
-        seuSaldo.setText(getIntent().getStringExtra("saldo"));
+//        //Saldo
+//        seuSaldo = (TextView) findViewById(R.id.viewSaldoCreditosZA);
+//        seuSaldo.setText(getIntent().getStringExtra("saldo"));
 
-        // Get IDs
-        spinnerPlaca = (Spinner) findViewById(R.id.spinnerPlaca);
-        //spinnerPlaca.getSelectedItem(getIntent().getStringExtra("placa"));
-        spinnerCidade = (Spinner) findViewById(R.id.spinnerCidade);
-        spinnerParquimetro = (Spinner) findViewById(R.id.spinnerParquimetro);
-        txvTempo30 = (TextView) findViewById(R.id.txvTempo30);
-        txvTempo1 = (TextView) findViewById(R.id.txvTempo1);
-        txvTempo130 = (TextView) findViewById(R.id.txvTempo130);
-        txvTempo2 = (TextView) findViewById(R.id.txvTempo2);
-
-        btnComprar = (Button) findViewById(R.id.btnComprarCred);
-        btnVoltar = (ImageView) findViewById(R.id.imvVoltarZonaAzul);
-        btnLimparCred = (Button) findViewById(R.id.btnLimparCred);
-        // Button listeners
-        txvTempo30.setOnClickListener(this);
-        txvTempo1.setOnClickListener(this);
-        txvTempo130.setOnClickListener(this);
-        txvTempo2.setOnClickListener(this);
-        spinnerPlaca.setOnClickListener(this);
-        spinnerCidade.setOnClickListener(this);
-        spinnerParquimetro.setOnClickListener(this);
-        btnComprar.setOnClickListener(this);
-        btnVoltar.setOnClickListener(this);
-        btnLimparCred.setOnClickListener(this);
+//        // Get IDs
+//        spinnerPlaca = (Spinner) findViewById(R.id.spinnerPlaca);
+//        //spinnerPlaca.getSelectedItem(getIntent().getStringExtra("placa"));
+//        spinnerCidade = (Spinner) findViewById(R.id.spinnerCidade);
+//        spinnerParquimetro = (Spinner) findViewById(R.id.spinnerParquimetro);
+//        txvTempo30 = (TextView) findViewById(R.id.txvTempo30);
+//        txvTempo1 = (TextView) findViewById(R.id.txvTempo1);
+//        txvTempo130 = (TextView) findViewById(R.id.txvTempo130);
+//        txvTempo2 = (TextView) findViewById(R.id.txvTempo2);
+//
+//        btnUtilizarCred = (Button) findViewById(R.id.btnUtilizarCred);
+//        btnVoltar = (ImageView) findViewById(R.id.imvVoltarZonaAzul);
+//
+//        // Button listeners
+//        txvTempo30.setOnClickListener(this);
+//        txvTempo1.setOnClickListener(this);
+//        txvTempo130.setOnClickListener(this);
+//        txvTempo2.setOnClickListener(this);
+//        spinnerPlaca.setOnClickListener(this);
+//        spinnerCidade.setOnClickListener(this);
+//        spinnerParquimetro.setOnClickListener(this);
+//        btnUtilizarCred.setOnClickListener(this);
+//        btnVoltar.setOnClickListener(this);
 
     }
 
@@ -141,7 +140,7 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
             case R.id.imvVoltarZonaAzul:
                 finish();
                 break;
-            case R.id.btnComprarCred:
+            case R.id.btnUtilizarCred:
                 if (valor >= 5){
                     UtilizarCredito();
                 } else {
