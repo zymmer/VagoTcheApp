@@ -12,6 +12,7 @@
     android:weightSum="1">
 
     <ImageView
+        android:id="@+id/imvVoltarCredito"
         android:clickable="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,7 +42,35 @@
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
         android:textAlignment="center" />
 
+    <LinearLayout
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:text="@string/Saldo" />
+
+        <TextView
+            android:id="@+id/viewSaldoCreditos"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/modelo_edit"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:padding="5dp"
+            android:paddingLeft="10dp"
+            android:hint=" R$ 0"/>
+
+    </LinearLayout>
+
     <TextView
+        android:id="@+id/CampoValor"
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_marginTop="30dp"
@@ -49,8 +78,7 @@
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:padding="5dp"
-        android:paddingLeft="10dp"
-        android:text=" R$ 0"/>
+        android:hint=" R$ 0"/>
 
     <LinearLayout
         android:layout_marginTop="10dp"
@@ -60,6 +88,7 @@
         android:gravity="center">
 
         <TextView
+            android:id="@+id/creditos5"
             android:clickable="true"
             android:text="+ R$ 5"
             android:textColor="@color/colorWhite"
@@ -72,6 +101,7 @@
             />
 
         <TextView
+            android:id="@+id/creditos10"
             android:clickable="true"
             android:text="+ R$ 10"
             android:textStyle="bold"
@@ -84,6 +114,7 @@
             />
 
         <TextView
+            android:id="@+id/creditos15"
             android:clickable="true"
             android:text="+ R$ 15"
             android:textColor="@color/colorWhite"
@@ -108,7 +139,7 @@
         <Button
             android:clickable="true"
             android:background="@drawable/button_icons_bg"
-            android:id="@+id/btnUtilizarCred"
+            android:id="@+id/btnComprarCred"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:textStyle="bold"

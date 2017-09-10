@@ -92,8 +92,6 @@ public class ConfiguracaoAlertasActivity extends AppCompatActivity implements Vi
                 b4 = false;
             }
 
-            alert(" " + b1 + " - " + b2 + " - " + b3 + " - " + b4);
-
                 url = "http://fabrica.govbrsul.com.br/vagotche/index.php/ConfAlertas/ConfigurarAlertas";
 
                 parametros = "alerta1=" + b1 + "&alerta2=" + b2 + "&alerta3=" + b3 + "&alerta4=" + b4 + "&cdUsuario=" + cdUsuario;

@@ -69,9 +69,7 @@ public class MenuActivity extends AppCompatActivity
         cb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent it = new Intent(MenuActivity.this, CreditosActivity.class);
-                it.putExtra("id_usuario", cdUsuario);
-                startActivity(it);
+                VerificaCreditos();
             }
         });
 
@@ -141,7 +139,7 @@ public class MenuActivity extends AppCompatActivity
         }
     }
 
-    // [START signIn]
+    // Verifica configurações de alerta do usuário
     private void VerificaConfs() {
 
         ConnectivityManager connMgr = (ConnectivityManager)
@@ -151,6 +149,25 @@ public class MenuActivity extends AppCompatActivity
         if (networkInfo != null && networkInfo.isConnected()) {
 
             url = "http://fabrica.govbrsul.com.br/vagotche/index.php/ConfAlertas/VerificarAlertas";
+
+            parametros = "cdUsuario=" + cdUsuario;
+
+            new SolicitaDados().execute(url);
+        } else {
+            alert("Nenhuma conexão de rede foi detectada");
+        }
+    }
+
+    // Verifica saldo do usuário
+    private void VerificaCreditos() {
+
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+        if (networkInfo != null && networkInfo.isConnected()) {
+
+            url = "http://fabrica.govbrsul.com.br/vagotche/index.php/Creditos/VerificarCreditos";
 
             parametros = "cdUsuario=" + cdUsuario;
 
@@ -172,9 +189,6 @@ public class MenuActivity extends AppCompatActivity
 
         @Override
         protected void onPostExecute(String resultado){
-
-            //teste
-            //alert(resultado);
 
             //VerificaAlertas
             if (resultado.contains("verifica_alertas_ok")) {
@@ -208,14 +222,20 @@ public class MenuActivity extends AppCompatActivity
                 it.putExtra("id_usuario", cdUsuario);
 
                 startActivity(it);
-            } else if (resultado.contains("cpf_invalido")){
-                alert("CPF inválido");
-
-            } else if (resultado.contains("cpf_nao_cadastrado_ou_senha_invalida")){
-                alert("CPF não cadastrado ou senha incorreta");
-
             }
 
+            //VerificaSaldo
+            if (resultado.contains("verifica_creditos_ok")) {
+
+                String[] dados = resultado.split(",");
+
+                Intent it = new Intent(MenuActivity.this, ConfiguracaoAlertasActivity.class);
+                it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                it.putExtra("saldo", dados[1]);
+                it.putExtra("id_usuario", cdUsuario);
+                startActivity(it);
+
+            }
         }
     }
 
@@ -237,20 +257,20 @@ public class MenuActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
