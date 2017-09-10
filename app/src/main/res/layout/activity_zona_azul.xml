@@ -119,13 +119,14 @@
     </Spinner>
 
     <TextView
+        android:gravity="center"
         android:layout_marginTop="20dp"
         android:id="@+id/viewHorarioFuncionamento"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/colorWhite"
         android:textStyle="bold"
-        android:text="@string/HorarioFuncionamento"
+        android:text="@string/SelecionarTempo"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
         android:textAlignment="center" />
 

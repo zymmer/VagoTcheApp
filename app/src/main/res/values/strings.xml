@@ -44,6 +44,7 @@
     <string name="VagasTotais">Vagas Totais</string>
     <string name="VagasDisponíveis">Vagas Disponíveis</string>
     <string name="HorarioFuncionamento">Horário de Funcionamento da Cidade/Vaga</string>
+    <string name="SelecionarTempo">Selecione o valor/tempo</string>
 
     <!-- Alertas -->
 
