@@ -46,7 +46,7 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_creditos);
+        setContentView(R.layout.activity_zona_azul);
 
         cdUsuario = getIntent().getIntExtra("id_usuario", 0);
 
