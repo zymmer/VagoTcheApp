@@ -78,7 +78,6 @@ public class CreditosActivity extends AppCompatActivity implements View.OnClickL
 
         if (networkInfo != null && networkInfo.isConnected()){
 
-
             url = "http://fabrica.govbrsul.com.br/vagotche/index.php/Creditos/ComprarCreditos";
 
             parametros = "saldo=" + saldo + "&cdUsuario=" + cdUsuario;
@@ -100,8 +99,8 @@ public class CreditosActivity extends AppCompatActivity implements View.OnClickL
         @Override
         protected void onPostExecute(String resultado) {
 
-            if (resultado.contains("conf_atualizada")) {
-                alert("Configurações Atualizadas...");
+            if (resultado.contains("credito_adquirido")) {
+                alert("Créditos Adquiridos...");
 
                 finish();
             }
@@ -133,7 +132,6 @@ public class CreditosActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.btnComprarCred:
                 if (saldo >= 5){
-                    alert("Saldo: " + saldo);
                 ComprarCredito();
                 } else {
                     alert("Você deve informar um valor");

@@ -27,7 +27,7 @@ public class MenuActivity extends AppCompatActivity
     //Variaveis
     int cdUsuario;
     TextView txtNome, txtEmail;
-    String nomeUsuario, emailUsuario;
+    String nomeUsuario, emailUsuario, auxiliar;
 
     String url = "";
     String parametros = "";
@@ -69,6 +69,7 @@ public class MenuActivity extends AppCompatActivity
         cb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                auxiliar = "credito";
                 VerificaCreditos();
             }
         });
@@ -92,9 +93,8 @@ public class MenuActivity extends AppCompatActivity
         zab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent it = new Intent(MenuActivity.this, ZonaAzulActivity.class);
-                it.putExtra("id_usuario", cdUsuario);
-                startActivity(it);
+                auxiliar = "zonaazul";
+                VerificaCreditos();
             }
         });
 
@@ -229,10 +229,17 @@ public class MenuActivity extends AppCompatActivity
 
                 String[] dados = resultado.split(",");
 
-                Intent it = new Intent(MenuActivity.this, CreditosActivity.class);
-                it.putExtra("saldo", dados[1]);
-                it.putExtra("id_usuario", cdUsuario);
-                startActivity(it);
+                if(auxiliar == "credito") {
+                    Intent it = new Intent(MenuActivity.this, CreditosActivity.class);
+                    it.putExtra("saldo", dados[1]);
+                    it.putExtra("id_usuario", cdUsuario);
+                    startActivity(it);
+                } else if (auxiliar == "zonaazul") {
+                    Intent it = new Intent(MenuActivity.this, ZonaAzulActivity.class);
+                    it.putExtra("saldo", dados[1]);
+                    it.putExtra("id_usuario", cdUsuario);
+                    startActivity(it);
+                };
 
             }
         }
