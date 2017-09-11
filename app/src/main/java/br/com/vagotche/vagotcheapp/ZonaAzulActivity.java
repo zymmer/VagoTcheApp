@@ -27,7 +27,7 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
     TextView seuSaldo, txvTempo30, txvTempo1, txvTempo130, txvTempo2;
     Spinner spinnerPlaca, spinnerCidade, spinnerParquimetro;
     Double valor = 0.00;
-    Button btnUtilizarCred, btnLimparCred;
+    Button btnUtilizarCred;
     ImageView btnVoltar;
     String url = "";
     String parametros = "";
@@ -50,9 +50,10 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
 
         cdUsuario = getIntent().getIntExtra("id_usuario", 0);
 
-//        //Saldo
-//        seuSaldo = (TextView) findViewById(R.id.viewSaldoCreditosZA);
-//        seuSaldo.setText(getIntent().getStringExtra("saldo"));
+        alert(getIntent().getStringExtra("saldoZA"));
+        //Saldo
+        seuSaldo = (TextView) findViewById(R.id.viewSaldoCreditosZA);
+        seuSaldo.setText(getIntent().getStringExtra("saldoZA"));
 
 //        // Get IDs
 //        spinnerPlaca = (Spinner) findViewById(R.id.spinnerPlaca);

@@ -28,7 +28,6 @@ public class MenuActivity extends AppCompatActivity
     int cdUsuario;
     TextView txtNome, txtEmail;
     String nomeUsuario, emailUsuario, auxiliar;
-
     String url = "";
     String parametros = "";
 
@@ -93,9 +92,8 @@ public class MenuActivity extends AppCompatActivity
         zab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //auxiliar = "zonaazul";
-                VerificaPlacas();
-                //VerificaCreditos();
+                auxiliar = "zonaazul";
+                VerificaCreditos();
             }
         });
 
@@ -256,7 +254,8 @@ public class MenuActivity extends AppCompatActivity
                     startActivity(it);
                 } else if (auxiliar.contains("zonaazul")) {
                     Intent it = new Intent(MenuActivity.this, ZonaAzulActivity.class);
-                    it.putExtra("saldo", dados[1]);
+                    alert(dados[1]);
+                    it.putExtra("saldoZA", dados[1]);
                     it.putExtra("id_usuario", cdUsuario);
                     startActivity(it);
                 };
@@ -268,12 +267,11 @@ public class MenuActivity extends AppCompatActivity
 
                 String[] dados = resultado.split(",");
 
-                alert("Teste");
-                    Intent it = new Intent(MenuActivity.this, ZonaAzulActivity.class);
-                    it.putExtra("placa", dados[1]);
-                    it.putExtra("id_usuario", cdUsuario);
-                    startActivity(it);
-
+                alert(dados[1]);
+                Intent it = new Intent(MenuActivity.this, ZonaAzulActivity.class);
+                it.putExtra("placa", dados[1]);
+                it.putExtra("id_usuario", cdUsuario);
+                startActivity(it);
             }
 
         }
