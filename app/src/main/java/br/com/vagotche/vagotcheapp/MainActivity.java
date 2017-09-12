@@ -74,12 +74,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
         //Facebook
         FacebookSdk.sdkInitialize(getApplicationContext());
-
-
-        setContentView(R.layout.activity_main);
 
         // [START customize_button]
         // Set the dimensions of the sign-in button.
@@ -90,7 +88,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //Facebook Buttons
         //lb.setPublishPermissions(Arrays.asList("email","public_profile","user_friends"));
-        initializeControls();
 
         //Google Buttons
         SignInButton signInButton = (SignInButton) findViewById(R.id.ggLogin);
@@ -126,38 +123,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void initializeControls(){
-        callbackManager = CallbackManager.Factory.create();
-        //teste
-        fbLogin = (LoginButton) findViewById(R.id.fbLogin);
-    }
-
     private void iniciarComFacebook(){
 
-//        callbackManager = CallbackManager.Factory.create();
-//        accessTokenTracker = new AccessTokenTracker() {
-//            @Override
-//            protected void onCurrentAccessTokenChanged(AccessToken oldToken, AccessToken currentToken) {
-//
-//            }
-//        };
-//
-//        profileTracker = new ProfileTracker() {
-//            @Override
-//            protected void onCurrentProfileChanged(Profile oldProfile, Profile newProfile) {
-//                nextActivity(newProfile);
-//            }
-//        };
-//
-//        accessTokenTracker.startTracking();
-//        profileTracker.startTracking();
+        callbackManager = CallbackManager.Factory.create();
+        accessTokenTracker = new AccessTokenTracker() {
+            @Override
+            protected void onCurrentAccessTokenChanged(AccessToken oldToken, AccessToken currentToken) {
 
-        //FacebookCallback<LoginResult> callback = new FacebookCallback<LoginResult>()
-        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            }
+        };
+
+        profileTracker = new ProfileTracker() {
+            @Override
+            protected void onCurrentProfileChanged(Profile oldProfile, Profile newProfile) {
+                nextActivity(newProfile);
+            }
+        };
+
+        accessTokenTracker.startTracking();
+        profileTracker.startTracking();
+
+        fbLogin = (LoginButton) findViewById(R.id.fbLogin);
+        FacebookCallback<LoginResult> callback = new FacebookCallback<LoginResult>(){
             @Override
             public void onSuccess(LoginResult loginResult) {
-                //Profile profile = Profile.getCurrentProfile();
-                //nextActivity(profile);
+                Profile profile = Profile.getCurrentProfile();
+                nextActivity(profile);
                 Toast.makeText(getApplicationContext(), "Loggin in...", Toast.LENGTH_SHORT).show();
 
 //                Intent it = new Intent(MainActivity.this, MenuActivity.class);
@@ -173,9 +164,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onError(FacebookException error) {
                 alert("Login com erro: " + error.getMessage());
             }
-        });
-        //fbLogin.setLoginBehavior("Read_friends");
-        //fbLogin.registerCallback(callbackManager, callback);
+        };
+        fbLogin.setReadPermissions("user_friends");
+        fbLogin.registerCallback(callbackManager, callback);
     }
 
     @Override
@@ -215,16 +206,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     // [START onActivityResult]
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    public void onActivityResult(int requestCode, int responseCode, Intent intent) {
+        super.onActivityResult(requestCode, responseCode, intent);
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(intent);
             handleSignInResult(result);
         }
 
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, responseCode, intent);
 
     }
     // [END onActivityResult]
@@ -436,16 +427,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//    }
-//
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        accessTokenTracker.stopTracking();
-//        profileTracker.stopTracking();
-//    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        accessTokenTracker.stopTracking();
+        profileTracker.stopTracking();
+    }
 
 }
