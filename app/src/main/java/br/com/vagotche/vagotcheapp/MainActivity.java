@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String url = "";
     String parametros = "";
 
+    //FB
     LoginButton fbLogin;
     CallbackManager callbackManager;
     AccessTokenTracker accessTokenTracker;
@@ -73,7 +74,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Facebook
         FacebookSdk.sdkInitialize(getApplicationContext());
+
+
         setContentView(R.layout.activity_main);
 
         // [START customize_button]
@@ -81,9 +86,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editCPF1 = (EditText)findViewById(R.id.editCPF1);
         editPassword1 = (EditText)findViewById(R.id.editPassword1);
         btnEntrar = (Button)findViewById(R.id.btnEntrar);
-        fbLogin = (LoginButton) findViewById(R.id.fbLogin);
         txtCadastrar = (TextView)findViewById(R.id.txtCadastrar);
 
+        //Facebook Buttons
+        //lb.setPublishPermissions(Arrays.asList("email","public_profile","user_friends"));
+        initializeControls();
+
+        //Google Buttons
         SignInButton signInButton = (SignInButton) findViewById(R.id.ggLogin);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
         // [END customize_button]
@@ -93,7 +102,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // Button listeners
         btnEntrar.setOnClickListener(this);
-        fbLogin.setOnClickListener(this);
         txtCadastrar.setOnClickListener(this);
         findViewById(R.id.ggLogin).setOnClickListener(this);
         //findViewById(R.id.sign_out_button).setOnClickListener(this);
@@ -118,36 +126,42 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    private void initializeControls(){
+        callbackManager = CallbackManager.Factory.create();
+        //teste
+        fbLogin = (LoginButton) findViewById(R.id.fbLogin);
+    }
+
     private void iniciarComFacebook(){
 
-        //FB
-        callbackManager = CallbackManager.Factory.create();
-        accessTokenTracker = new AccessTokenTracker() {
-            @Override
-            protected void onCurrentAccessTokenChanged(AccessToken oldToken, AccessToken currentToken) {
+//        callbackManager = CallbackManager.Factory.create();
+//        accessTokenTracker = new AccessTokenTracker() {
+//            @Override
+//            protected void onCurrentAccessTokenChanged(AccessToken oldToken, AccessToken currentToken) {
+//
+//            }
+//        };
+//
+//        profileTracker = new ProfileTracker() {
+//            @Override
+//            protected void onCurrentProfileChanged(Profile oldProfile, Profile newProfile) {
+//                nextActivity(newProfile);
+//            }
+//        };
+//
+//        accessTokenTracker.startTracking();
+//        profileTracker.startTracking();
 
-            }
-        };
-
-        profileTracker = new ProfileTracker() {
-            @Override
-            protected void onCurrentProfileChanged(Profile oldProfile, Profile newProfile) {
-                nextActivity(newProfile);
-            }
-        };
-
-        accessTokenTracker.startTracking();
-        profileTracker.startTracking();
-
-        FacebookCallback<LoginResult> callback = new FacebookCallback<LoginResult>() {
+        //FacebookCallback<LoginResult> callback = new FacebookCallback<LoginResult>()
+        LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                Profile profile = Profile.getCurrentProfile();
-                nextActivity(profile);
+                //Profile profile = Profile.getCurrentProfile();
+                //nextActivity(profile);
                 Toast.makeText(getApplicationContext(), "Loggin in...", Toast.LENGTH_SHORT).show();
 
-                Intent it = new Intent(MainActivity.this, MenuActivity.class);
-                startActivity(it);
+//                Intent it = new Intent(MainActivity.this, MenuActivity.class);
+//                startActivity(it);
             }
 
             @Override
@@ -159,9 +173,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onError(FacebookException error) {
                 alert("Login com erro: " + error.getMessage());
             }
-        };
+        });
         //fbLogin.setLoginBehavior("Read_friends");
-        fbLogin.registerCallback(callbackManager, callback);
+        //fbLogin.registerCallback(callbackManager, callback);
     }
 
     @Override
