@@ -23,7 +23,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:textColor="@color/colorWhite"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
             android:textStyle="bold"
             android:text=" Cadastro ao Sistema"
@@ -81,15 +80,36 @@
         android:hint="Senha"
         android:inputType="textPassword"/>
 
-    <!--
-    <EditText
-        android:id="@+id/editPassword3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:hint="Repita sua senha"
-        android:inputType="textPassword"/>
-        -->
+        <LinearLayout
+            android:padding="20dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:clickable="true"
+                android:background="@drawable/modelo_edit"
+                android:id="@+id/rbtnIdoso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:text="Idoso"
+                android:drawableEnd="@mipmap/idoso16"/>
+
+            <RadioButton
+                android:clickable="true"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/modelo_edit"
+                android:id="@+id/rbtnDF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textStyle="bold"
+                android:text="Deficiente Físico"
+                android:drawableEnd="@mipmap/df16"/>
+
+        </LinearLayout>
 
     <LinearLayout
         android:padding="20dp"

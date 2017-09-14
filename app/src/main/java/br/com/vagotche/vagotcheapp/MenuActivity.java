@@ -18,8 +18,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 
 public class MenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -30,6 +36,8 @@ public class MenuActivity extends AppCompatActivity
     String nomeUsuario, emailUsuario, auxiliar;
     String url = "";
     String parametros = "";
+    private ShareDialog shareDialog;
+    private Button logout;
 
     //alerta
     private void alert(String s){
@@ -45,7 +53,9 @@ public class MenuActivity extends AppCompatActivity
 
         //Pega ID do Usuario em memoria
         cdUsuario = getIntent().getIntExtra("id_usuario", 0);
-        //alert("ID in menu= "+ cdUsuario);
+
+        //FB
+        FacebookSdk.sdkInitialize(this);
 
         FloatingActionButton gmb = (FloatingActionButton) findViewById(R.id.googleMapsBtn);
         FloatingActionButton cb = (FloatingActionButton) findViewById(R.id.CreditosBtn);
@@ -126,6 +136,40 @@ public class MenuActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        //Testes FB
+        shareDialog = new ShareDialog(this);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShareLinkContent content = new ShareLinkContent.Builder().build();
+                shareDialog.show(content);
+            }
+        });
+
+        Bundle inBundle = getIntent().getExtras();
+        String name = inBundle.get("name").toString();
+        String surname = inBundle.get("surname").toString();
+        String imageUrl = inBundle.get("imageUrl").toString();
+
+        TextView nameView = (TextView) findViewById(R.id.nameAndSurname);
+        nameView.setText("" + name + " " + surname);
+        //Button logout = (Button) findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LoginManager.getInstance().logOut();
+                Intent login = new Intent(MenuActivity.this, MainActivity.class);
+                startActivity(login);
+                finish();
+            }
+
+        });
+        //new MenuActivity.DownloadImage(ImageView)findView
+
     }
 
     @Override
