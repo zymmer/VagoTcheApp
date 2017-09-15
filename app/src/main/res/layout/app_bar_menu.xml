@@ -96,7 +96,7 @@
             android:textColor="@color/colorWhite"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             android:textStyle="bold"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="40dp"
             android:text="Comprar Créditos" />
 
         <TextView
@@ -207,15 +207,15 @@
 
     </LinearLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/teste6Btn"
-        android:layout_width="100dp"
-        android:layout_marginLeft="250dp"
-        android:layout_marginTop="400dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical|center_horizontal"
-        android:clickable="true"
-        app:backgroundTint="@color/corgoogleMapsBtn"
-        />
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/teste6Btn"-->
+        <!--android:layout_width="100dp"-->
+        <!--android:layout_marginLeft="250dp"-->
+        <!--android:layout_marginTop="400dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="center_vertical|center_horizontal"-->
+        <!--android:clickable="true"-->
+        <!--app:backgroundTint="@color/corgoogleMapsBtn"-->
+        <!--/>-->
 
 </android.support.design.widget.CoordinatorLayout>

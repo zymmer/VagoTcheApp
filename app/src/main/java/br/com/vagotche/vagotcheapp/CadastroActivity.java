@@ -9,14 +9,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 public class CadastroActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText editNome, editCPF2, editEmail1, editPassword2, editPassword3;
     Button btnCancelar, btnRegistrar;
-
+    CheckBox rdbIdoso, rdbDF;
+    Boolean b1, b2;
     String url = "";
     String parametros = "";
 
@@ -36,6 +39,9 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
         //editPassword3 = (EditText) findViewById(R.id.editPassword3);
         btnCancelar = (Button) findViewById(R.id.btnCancelar);
         btnRegistrar = (Button) findViewById(R.id.btnRegistrar);
+        // Get RadioButton
+        rdbIdoso = (CheckBox) findViewById(R.id.rbtnIdoso);
+        rdbDF = (CheckBox) findViewById(R.id.rbtnDF);
 
         // Button listeners
         btnCancelar.setOnClickListener(this);
@@ -62,7 +68,7 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
         }else {
             url = "http://fabrica.govbrsul.com.br/vagotche/index.php/Cadastro/CadastrarLogin";
 
-            parametros = "nome=" + nome + "&cpf=" + cpf + "&email=" + email + "&senha=" + senha;
+            parametros = "nome=" + nome + "&cpf=" + cpf + "&email=" + email + "&senha=" + senha + "&idoso=" + b1 + "&df=" + b2;
 
             new SolicitaDados().execute(url);
         }
@@ -103,6 +109,27 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
                 alert("Ocorreu um erro");
             }
 
+        }
+    }
+
+    public void onCheckboxClicked(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
+
+        // Check which checkbox was clicked
+        switch(view.getId()) {
+            case R.id.rbtnIdoso:
+                if (checked)
+                    b1 = true;
+                else
+                    b1 = false;
+                break;
+            case R.id.rbtnDF:
+                if (checked)
+                    b2 = true;
+                else
+                    b2 = false;
+                break;
         }
     }
 

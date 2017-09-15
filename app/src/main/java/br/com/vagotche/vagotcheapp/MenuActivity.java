@@ -62,7 +62,7 @@ public class MenuActivity extends AppCompatActivity
         FloatingActionButton cvb = (FloatingActionButton) findViewById(R.id.CadastroVeiculoBtn);
         FloatingActionButton cab = (FloatingActionButton) findViewById(R.id.ConfiguracaoAlertasBtn);
         FloatingActionButton zab = (FloatingActionButton) findViewById(R.id.ZonaAzulBtn);
-        FloatingActionButton teste = (FloatingActionButton) findViewById(R.id.teste6Btn);
+        //FloatingActionButton teste = (FloatingActionButton) findViewById(R.id.teste6Btn);
 
         //Redirecionamento Botoes
 
@@ -108,14 +108,14 @@ public class MenuActivity extends AppCompatActivity
         });
 
         // Teste
-        teste.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent it = new Intent(MenuActivity.this, DeviceControlActivity.class);
-                it.putExtra("id_usuario", cdUsuario);
-                startActivity(it);
-            }
-        });
+//        teste.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent it = new Intent(MenuActivity.this, DeviceControlActivity.class);
+//                it.putExtra("id_usuario", cdUsuario);
+//                startActivity(it);
+//            }
+//        });
 
         //Fim Redirecionamento
 
@@ -141,34 +141,34 @@ public class MenuActivity extends AppCompatActivity
         //Testes FB
         shareDialog = new ShareDialog(this);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ShareLinkContent content = new ShareLinkContent.Builder().build();
-                shareDialog.show(content);
-            }
-        });
-
-        Bundle inBundle = getIntent().getExtras();
-        String name = inBundle.get("name").toString();
-        String surname = inBundle.get("surname").toString();
-        String imageUrl = inBundle.get("imageUrl").toString();
-
-        TextView nameView = (TextView) findViewById(R.id.nameAndSurname);
-        nameView.setText("" + name + " " + surname);
-        //Button logout = (Button) findViewById(R.id.logout);
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LoginManager.getInstance().logOut();
-                Intent login = new Intent(MenuActivity.this, MainActivity.class);
-                startActivity(login);
-                finish();
-            }
-
-        });
-        //new MenuActivity.DownloadImage(ImageView)findView
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ShareLinkContent content = new ShareLinkContent.Builder().build();
+//                shareDialog.show(content);
+//            }
+//        });
+//
+//        Bundle inBundle = getIntent().getExtras();
+//        String name = inBundle.get("name").toString();
+//        String surname = inBundle.get("surname").toString();
+//        String imageUrl = inBundle.get("imageUrl").toString();
+//
+//        TextView nameView = (TextView) findViewById(R.id.nameAndSurname);
+//        nameView.setText("" + name + " " + surname);
+//        Button logout = (Button) findViewById(R.id.logout);
+//        logout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                LoginManager.getInstance().logOut();
+//                Intent login = new Intent(MenuActivity.this, MainActivity.class);
+//                startActivity(login);
+//                finish();
+//            }
+//
+//        });
+//        new MenuActivity.DownloadImage(ImageView)findView
 
     }
 

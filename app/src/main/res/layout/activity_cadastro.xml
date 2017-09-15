@@ -86,7 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <RadioButton
+            <CheckBox
                 android:clickable="true"
                 android:background="@drawable/modelo_edit"
                 android:id="@+id/rbtnIdoso"
@@ -97,7 +97,7 @@
                 android:text="Idoso"
                 android:drawableEnd="@mipmap/idoso16"/>
 
-            <RadioButton
+            <CheckBox
                 android:clickable="true"
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/modelo_edit"

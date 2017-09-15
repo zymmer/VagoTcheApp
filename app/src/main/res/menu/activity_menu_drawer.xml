@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
         <item
@@ -18,20 +19,24 @@
             android:id="@+id/nav_manage"
             android:icon="@mipmap/fileinfolder"
             android:title="Informações" />
+        <item
+            android:id="@+id/nav_send"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Atualizações do sistema" />
     </group>
 
-    <!--
-    <item android:title="Communicate">
+
+    <item android:title="Redes Socias">
         <menu>
             <item
                 android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:icon="@mipmap/facebook16"
+                android:title="Curta nossa página" />
         </menu>
     </item>
-    -->
+
+    <item android:title="www.vagotche.com.br">
+
+    </item>
+
 </menu>
