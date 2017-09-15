@@ -123,58 +123,58 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private void iniciarComFacebook(){
+//    private void iniciarComFacebook(){
+//
+//        callbackManager = CallbackManager.Factory.create();
+//        accessTokenTracker = new AccessTokenTracker() {
+//            @Override
+//            protected void onCurrentAccessTokenChanged(AccessToken oldToken, AccessToken currentToken) {
+//
+//            }
+//        };
+//
+//        profileTracker = new ProfileTracker() {
+//            @Override
+//            protected void onCurrentProfileChanged(Profile oldProfile, Profile newProfile) {
+//                nextActivity(newProfile);
+//            }
+//        };
+//
+//        accessTokenTracker.startTracking();
+//        profileTracker.startTracking();
+//
+//        fbLogin = (LoginButton) findViewById(R.id.fbLogin);
+//        FacebookCallback<LoginResult> callback = new FacebookCallback<LoginResult>(){
+//            @Override
+//            public void onSuccess(LoginResult loginResult) {
+//                Profile profile = Profile.getCurrentProfile();
+//                nextActivity(profile);
+//                Toast.makeText(getApplicationContext(), "Loggin in...", Toast.LENGTH_SHORT).show();
+//
+////                Intent it = new Intent(MainActivity.this, MenuActivity.class);
+////                startActivity(it);
+//            }
+//
+//            @Override
+//            public void onCancel() {
+//                alert("Login Cancelado");
+//            }
+//
+//            @Override
+//            public void onError(FacebookException error) {
+//                alert("Login com erro: " + error.getMessage());
+//            }
+//        };
+//        fbLogin.setReadPermissions("user_friends");
+//        fbLogin.registerCallback(callbackManager, callback);
+//    }
 
-        callbackManager = CallbackManager.Factory.create();
-        accessTokenTracker = new AccessTokenTracker() {
-            @Override
-            protected void onCurrentAccessTokenChanged(AccessToken oldToken, AccessToken currentToken) {
-
-            }
-        };
-
-        profileTracker = new ProfileTracker() {
-            @Override
-            protected void onCurrentProfileChanged(Profile oldProfile, Profile newProfile) {
-                nextActivity(newProfile);
-            }
-        };
-
-        accessTokenTracker.startTracking();
-        profileTracker.startTracking();
-
-        fbLogin = (LoginButton) findViewById(R.id.fbLogin);
-        FacebookCallback<LoginResult> callback = new FacebookCallback<LoginResult>(){
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                Profile profile = Profile.getCurrentProfile();
-                nextActivity(profile);
-                Toast.makeText(getApplicationContext(), "Loggin in...", Toast.LENGTH_SHORT).show();
-
-//                Intent it = new Intent(MainActivity.this, MenuActivity.class);
-//                startActivity(it);
-            }
-
-            @Override
-            public void onCancel() {
-                alert("Login Cancelado");
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-                alert("Login com erro: " + error.getMessage());
-            }
-        };
-        fbLogin.setReadPermissions("user_friends");
-        fbLogin.registerCallback(callbackManager, callback);
-    }
-
-    @Override
-    protected void onResume(){
-        super.onResume();
-        Profile profile = Profile.getCurrentProfile();
-        nextActivity(profile);
-    }
+//    @Override
+//    protected void onResume(){
+//        super.onResume();
+//        Profile profile = Profile.getCurrentProfile();
+//        nextActivity(profile);
+//    }
 
 
 
@@ -220,15 +220,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     // [END onActivityResult]
 
-    private void nextActivity(Profile profile){
-        if (profile != null){
-            Intent main = new Intent(MainActivity.this, MenuActivity.class);
-            main.putExtra("name", profile.getFirstName());
-            main.putExtra("surname", profile.getLastName());
-            main.putExtra("imageUrl", profile.getProfilePictureUri(200,200).toString());
-
-        }
-    }
+//    //FB
+//    private void nextActivity(Profile profile){
+//        if (profile != null){
+//            Intent main = new Intent(MainActivity.this, MenuActivity.class);
+//            main.putExtra("name", profile.getFirstName());
+//            main.putExtra("surname", profile.getLastName());
+//            main.putExtra("imageUrl", profile.getProfilePictureUri(200,200).toString());
+//
+//        }
+//    }
 
     // [START handleSignInResult]
     private void handleSignInResult(GoogleSignInResult result) {
@@ -419,7 +420,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 iniciarComGoogle();
                 break;
             case R.id.fbLogin:
-                iniciarComFacebook();
+                //iniciarComFacebook();
                 break;
             //case R.id.disconnect_button:
             //    revokeAccess();
@@ -427,16 +428,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        accessTokenTracker.stopTracking();
-        profileTracker.stopTracking();
-    }
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//    }
+//
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//        accessTokenTracker.stopTracking();
+//        profileTracker.stopTracking();
+//    }
 
 }

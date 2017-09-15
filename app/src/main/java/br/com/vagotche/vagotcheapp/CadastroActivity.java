@@ -62,6 +62,18 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
             String email = editEmail1.getText().toString();
             String senha = editPassword2.getText().toString();
 
+            if (rdbIdoso.isChecked()){
+                b1 = true;
+            } else {
+                b1 = false;
+            }
+
+            if (rdbDF.isChecked()){
+                b2 = true;
+            } else {
+                b2 = false;
+            }
+
 
         if(nome.isEmpty() || cpf.isEmpty() || email.isEmpty() || senha.isEmpty()){
             alert("Nenhum campo pode estar vazio");

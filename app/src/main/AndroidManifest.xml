@@ -121,10 +121,12 @@
         <!-- ZonaAzulActivity -->
         <activity android:name=".ZonaAzulActivity"/>
 
+        <!-- Irregularidadesctivity -->
+        <activity android:name=".IrregularidadesActivity"/>
+
         <!-- Bluetooth -->
         <activity android:name=".DeviceScanActivity"/>
         <activity android:name=".DeviceControlActivity"/>
-
 
         <!-- SERVICES -->
         <service android:name=".BluetoothLeService" android:enabled="true"/>
