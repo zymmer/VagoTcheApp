@@ -305,7 +305,6 @@ public class MenuActivity extends AppCompatActivity
                     startActivity(it);
                 } else if (auxiliar.contains("zonaazul")) {
                     Intent it = new Intent(MenuActivity.this, ZonaAzulActivity.class);
-                    alert(dados[1]);
                     it.putExtra("saldoZA", dados[1]);
                     it.putExtra("id_usuario", cdUsuario);
                     startActivity(it);
@@ -317,8 +316,7 @@ public class MenuActivity extends AppCompatActivity
             if (resultado.contains("verifica_placas_ok")) {
 
                 String[] dados = resultado.split(",");
-
-                alert(dados[1]);
+                
                 Intent it = new Intent(MenuActivity.this, ZonaAzulActivity.class);
                 it.putExtra("placa", dados[1]);
                 it.putExtra("id_usuario", cdUsuario);
