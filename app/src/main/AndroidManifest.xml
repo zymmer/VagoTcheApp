@@ -124,6 +124,9 @@
         <!-- Irregularidadesctivity -->
         <activity android:name=".IrregularidadesActivity"/>
 
+        <!-- MeusVeiculosActivity -->
+        <activity android:name=".MeusVeiculosActivity"/>
+
         <!-- MeusDadosActivity -->
         <activity android:name=".MeusDadosActivity"/>
 
