@@ -1,6 +1,7 @@
 package br.com.vagotche.vagotcheapp;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -78,7 +79,9 @@ public class MeusDadosActivity extends AppCompatActivity
             Intent it = new Intent(MeusDadosActivity.this, MeusDadosActivity.class);
             startActivity(it);
         } else if (id == R.id.itemwww) {
-
+            Uri uri = Uri.parse("www.vagotche.com.br");
+            Intent it = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(it);
             //} else if (id == R.id.nav_send) {
 
         }
