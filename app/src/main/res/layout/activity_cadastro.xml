@@ -24,10 +24,6 @@
             android:text=" Cadastro ao Sistema"
             android:gravity="center"/>
 
-    <ImageView
-        android:padding="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
     <EditText
         android:background="@drawable/modelo_edit"

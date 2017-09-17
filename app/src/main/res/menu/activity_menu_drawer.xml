@@ -4,15 +4,15 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
+            android:id="@+id/nav_meusdados"
             android:icon="@mipmap/people2"
             android:title="Meus Dados" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_contato"
             android:icon="@mipmap/oldhandphone"
             android:title="Entre em Contato" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_movimentacoes"
             android:icon="@mipmap/medicalhistory"
             android:title="Movimentações" />
         <item

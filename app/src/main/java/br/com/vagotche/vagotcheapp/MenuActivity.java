@@ -62,7 +62,7 @@ public class MenuActivity extends AppCompatActivity
         FloatingActionButton cvb = (FloatingActionButton) findViewById(R.id.CadastroVeiculoBtn);
         FloatingActionButton cab = (FloatingActionButton) findViewById(R.id.ConfiguracaoAlertasBtn);
         FloatingActionButton zab = (FloatingActionButton) findViewById(R.id.ZonaAzulBtn);
-        //FloatingActionButton teste = (FloatingActionButton) findViewById(R.id.teste6Btn);
+        FloatingActionButton Irrb = (FloatingActionButton) findViewById(R.id.IrregularidadesBtn);
 
         //Redirecionamento Botoes
 
@@ -107,15 +107,14 @@ public class MenuActivity extends AppCompatActivity
             }
         });
 
-        // Teste
-//        teste.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent it = new Intent(MenuActivity.this, DeviceControlActivity.class);
-//                it.putExtra("id_usuario", cdUsuario);
-//                startActivity(it);
-//            }
-//        });
+        Irrb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(MenuActivity.this, IrregularidadesActivity.class);
+                it.putExtra("id_usuario", cdUsuario);
+                startActivity(it);
+            }
+        });
 
         //Fim Redirecionamento
 
@@ -360,8 +359,9 @@ public class MenuActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
+        if (id == R.id.nav_meusdados) {
+            Intent it = new Intent(MenuActivity.this, MeusDadosActivity.class);
+            startActivity(it);
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {
