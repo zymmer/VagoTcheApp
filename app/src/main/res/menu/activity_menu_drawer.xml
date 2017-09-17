@@ -20,7 +20,7 @@
             android:icon="@mipmap/medicalhistory"
             android:title="Movimentações" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/nav_info"
             android:icon="@mipmap/fileinfolder"
             android:title="Informações" />
     </group>
@@ -35,7 +35,9 @@
         </menu>
     </item>
 
-    <item android:title="www.vagotche.com.br">
+    <item
+        android:id="itemWWW"
+        android:title="www.vagotche.com.br">
 
     </item>
 

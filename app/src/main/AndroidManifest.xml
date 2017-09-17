@@ -127,6 +127,15 @@
         <!-- MeusDadosActivity -->
         <activity android:name=".MeusDadosActivity"/>
 
+        <!-- ContatoActivity -->
+        <activity android:name=".ContatoActivity"/>
+
+        <!-- InfoActivity -->
+        <activity android:name=".InfoActivity"/>
+
+        <!-- MovimentacoesActivity -->
+        <activity android:name=".MovimentacoesActivity"/>
+
         <!-- Bluetooth -->
         <activity android:name=".DeviceScanActivity"/>
         <activity android:name=".DeviceControlActivity"/>
