@@ -1,6 +1,7 @@
 package br.com.vagotche.vagotcheapp;
 
 import android.content.Intent;
+import android.icu.text.IDNA;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,7 +20,7 @@ import android.widget.Toast;
 public class MovimentacoesActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
-    MenuItem nav_menu;
+    MenuItem nav_movimentacoes;
 
     private void alert(String s){
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
@@ -28,26 +29,26 @@ public class MovimentacoesActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu_meusdados);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_meusdados);
+        setContentView(R.layout.activity_menu_movimentacoes);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_movimentacoes);
         setSupportActionBar(toolbar);
 
-        nav_menu = (MenuItem) findViewById(R.id.nav_menu);
+        nav_movimentacoes = (MenuItem) findViewById(R.id.nav_movimentacoes);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_meusdados);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_movimentacoes);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_meusdados);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_movimentacoes);
         navigationView.setNavigationItemSelectedListener(this);
 
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_meusdados);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_movimentacoes);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -64,19 +65,22 @@ public class MovimentacoesActivity extends AppCompatActivity
         if (id == R.id.nav_menu) {
             Intent it = new Intent(MovimentacoesActivity.this, MenuActivity.class);
             startActivity(it);
+        } else if (id == R.id.nav_meusdados) {
+            Intent it = new Intent(MovimentacoesActivity.this, MeusDadosActivity.class);
+            startActivity(it);
         } else if (id == R.id.nav_contato) {
-
-        } else if (id == R.id.nav_movimentacoes) {
-
-        } else if (id == R.id.nav_manage) {
-
+            Intent it = new Intent(MovimentacoesActivity.this, ContatoActivity.class);
+            startActivity(it);
+        } else if (id == R.id.nav_info) {
+            Intent it = new Intent(MovimentacoesActivity.this, InfoActivity.class);
+            startActivity(it);
             //} //else if (id == R.id.nav_share) {
 
             //} else if (id == R.id.nav_send) {
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_meusdados);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_movimentacoes);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

@@ -19,7 +19,7 @@ import android.widget.Toast;
 public class MeusDadosActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
-    MenuItem nav_menu;
+    MenuItem nav_meusdados;
 
     private void alert(String s){
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
@@ -32,7 +32,7 @@ public class MeusDadosActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_meusdados);
         setSupportActionBar(toolbar);
 
-        nav_menu = (MenuItem) findViewById(R.id.nav_menu);
+        nav_meusdados = (MenuItem) findViewById(R.id.nav_meusdados);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_meusdados);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -65,11 +65,14 @@ public class MeusDadosActivity extends AppCompatActivity
             Intent it = new Intent(MeusDadosActivity.this, MenuActivity.class);
             startActivity(it);
         } else if (id == R.id.nav_contato) {
-
+            Intent it = new Intent(MeusDadosActivity.this, ContatoActivity.class);
+            startActivity(it);
         } else if (id == R.id.nav_movimentacoes) {
-
-        } else if (id == R.id.nav_manage) {
-
+            Intent it = new Intent(MeusDadosActivity.this, MovimentacoesActivity.class);
+            startActivity(it);
+        } else if (id == R.id.nav_info) {
+            Intent it = new Intent(MeusDadosActivity.this, MeusDadosActivity.class);
+            startActivity(it);
             //} //else if (id == R.id.nav_share) {
 
             //} else if (id == R.id.nav_send) {

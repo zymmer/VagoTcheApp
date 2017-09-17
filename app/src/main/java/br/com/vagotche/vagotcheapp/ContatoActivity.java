@@ -19,7 +19,7 @@ import android.widget.Toast;
 public class ContatoActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
-    MenuItem nav_menu;
+    MenuItem nav_contato;
 
     private void alert(String s){
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
@@ -28,26 +28,26 @@ public class ContatoActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu_meusdados);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_meusdados);
+        setContentView(R.layout.activity_menu_contato);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_contato);
         setSupportActionBar(toolbar);
 
-        nav_menu = (MenuItem) findViewById(R.id.nav_menu);
+        nav_contato = (MenuItem) findViewById(R.id.nav_contato);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_meusdados);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_contato);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_meusdados);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_contato);
         navigationView.setNavigationItemSelectedListener(this);
 
     }
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_meusdados);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_contato);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -64,19 +64,22 @@ public class ContatoActivity extends AppCompatActivity
         if (id == R.id.nav_menu) {
             Intent it = new Intent(ContatoActivity.this, MenuActivity.class);
             startActivity(it);
-        } else if (id == R.id.nav_contato) {
-
+        } else if (id == R.id.nav_meusdados) {
+            Intent it = new Intent(ContatoActivity.this, MeusDadosActivity.class);
+            startActivity(it);
         } else if (id == R.id.nav_movimentacoes) {
-
-        } else if (id == R.id.nav_manage) {
-
+            Intent it = new Intent(ContatoActivity.this, MovimentacoesActivity.class);
+            startActivity(it);
+        } else if (id == R.id.nav_info) {
+            Intent it = new Intent(ContatoActivity.this, ContatoActivity.class);
+            startActivity(it);
             //} //else if (id == R.id.nav_share) {
 
             //} else if (id == R.id.nav_send) {
 
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_meusdados);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_contato);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
