@@ -80,7 +80,7 @@ public class MovimentacoesActivity extends AppCompatActivity
             Intent it = new Intent(MovimentacoesActivity.this, InfoActivity.class);
             startActivity(it);
         } else if (id == R.id.itemwww) {
-            Uri uri = Uri.parse("www.vagotche.com.br");
+            Uri uri = Uri.parse("http://www.vagotche.com.br");
             Intent it = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(it);
             //} else if (id == R.id.nav_send) {
