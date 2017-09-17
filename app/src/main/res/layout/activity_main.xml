@@ -6,11 +6,20 @@
     android:background="@drawable/background"
     android:gravity="center"
     android:orientation="vertical"
-    android:paddingBottom="16dp"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp"
     android:weightSum="1">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@color/colorCinzaTransparente">
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="300dp"
+            android:layout_height="400dp"
+            android:orientation="vertical">
 
     <TextView
         android:drawableLeft="@mipmap/parquimetro_40x40"
@@ -34,7 +43,7 @@
         android:gravity="center"/>
 
     <EditText
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="20dp"
         android:padding="10dp"
         style="@style/StyledTilEditText"
         android:id="@+id/editCPF1"
@@ -76,12 +85,12 @@
         android:textColor="@color/colorWhite"/>
 
     <LinearLayout
+        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        android:weightSum="1"
-        android:layout_weight="0.17">
+        android:weightSum="1">
 
         <com.facebook.login.widget.LoginButton
             android:id="@+id/fbLogin"
@@ -90,14 +99,17 @@
             android:gravity="center" />
 
         <com.google.android.gms.common.SignInButton
-
+            android:layout_marginTop="5dp"
             android:id="@+id/ggLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center" />
 
+        </LinearLayout>
+
+        </LinearLayout>
+
     </LinearLayout>
+
 </LinearLayout>
-
-
 
