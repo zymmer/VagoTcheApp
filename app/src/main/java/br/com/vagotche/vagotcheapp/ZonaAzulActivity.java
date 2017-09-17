@@ -55,6 +55,7 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
         seuSaldo = (TextView) findViewById(R.id.viewSaldoCreditosZA);
         seuSaldo.setText(getIntent().getStringExtra("saldoZA"));
         btnVoltar = (ImageView) findViewById(R.id.imvVoltarZonaAzul);
+        btnVoltar.setOnClickListener(this);
 
 //        // Get IDs
 //        spinnerPlaca = (Spinner) findViewById(R.id.spinnerPlaca);

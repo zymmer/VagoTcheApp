@@ -24,12 +24,12 @@ public class IrregularidadesActivity extends AppCompatActivity implements View.O
         setContentView(R.layout.activity_irregularidades);
 
         btnVoltar = (ImageView) findViewById(R.id.imvVoltarIrregularidade);
+        btnVoltar.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
             case R.id.imvVoltarIrregularidade:
                 finish();
                 break;

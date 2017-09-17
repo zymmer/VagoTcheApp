@@ -33,6 +33,7 @@ public class MeusVeiculosActivity extends AppCompatActivity implements View.OnCl
 
         cdUsuario = getIntent().getIntExtra("id_usuario", 0);
         btnVoltar = (ImageView) findViewById(R.id.imvVoltarMeusVeiculos);
+        btnVoltar.setOnClickListener(this);
     }
 
     @Override

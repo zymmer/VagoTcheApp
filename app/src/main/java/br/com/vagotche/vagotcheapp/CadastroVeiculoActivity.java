@@ -22,7 +22,7 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
     int cdUsuario;
     AutoCompleteTextView txtmarca, txtano;
     EditText editplaca;
-    Button btnCancelar, btnRegistrar;
+    Button btnCancelar, btnRegistrar, btnAlterar;
     List listMarcasModelos = new Veiculos().marcasModelos;
     List listAno = new Veiculos().ano;
     String url = "";
@@ -52,11 +52,14 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
         txtano.setThreshold(3);
         txtano.setAdapter(adapter2);
 
+        //buttons
         btnCancelar = (Button) findViewById(R.id.btnCancelarVeic);
         btnRegistrar = (Button) findViewById(R.id.btnRegistrarVeic);
+        btnAlterar = (Button) findViewById(R.id.btnAlterarVeic);
         // Button listeners
         btnCancelar.setOnClickListener(this);
         btnRegistrar.setOnClickListener(this);
+        btnAlterar.setOnClickListener(this);
     }
 
     private void registrar() {
@@ -126,6 +129,9 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
             case R.id.btnRegistrarVeic:
                 registrar();
                 break;
+            case R.id.btnAlterarVeic:
+                Intent it = new Intent(CadastroVeiculoActivity.this, MeusVeiculosActivity.class);
+                startActivity(it);
         }
     }
 
