@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context="br.com.vagotche.vagotcheapp.MovimentacoesActivity"
+    android:background="@drawable/side_nav_bar">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_contato"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+
+    <include layout="@layout/content_menu"
+        android:id="@+id/include" />
+
+    <LinearLayout
+        android:layout_marginBottom="380dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+        <TextView
+            android:drawableStart="@mipmap/medicalhistory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:gravity="center"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textStyle="bold"
+            android:text=" Movimentações" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:weightSum="1">
+
+        <GridLayout
+            android:background="@drawable/modelo_edit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/gridMovimentacoes"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            />
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

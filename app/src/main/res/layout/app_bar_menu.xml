@@ -7,12 +7,11 @@
     tools:context="br.com.vagotche.vagotcheapp.MenuActivity"
     android:background="@drawable/side_nav_bar">
 
-        <android.support.v7.widget.Toolbar
+    <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:text="www.vagotche.com.br"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
 

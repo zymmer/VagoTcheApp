@@ -1,5 +1,6 @@
 package br.com.vagotche.vagotcheapp;
 
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -38,6 +39,7 @@ public class MenuActivity extends AppCompatActivity
     String parametros = "";
     private ShareDialog shareDialog;
     private Button logout;
+    MenuItem nav_meusdados;
 
     //alerta
     private void alert(String s){
@@ -63,6 +65,7 @@ public class MenuActivity extends AppCompatActivity
         FloatingActionButton cab = (FloatingActionButton) findViewById(R.id.ConfiguracaoAlertasBtn);
         FloatingActionButton zab = (FloatingActionButton) findViewById(R.id.ZonaAzulBtn);
         FloatingActionButton Irrb = (FloatingActionButton) findViewById(R.id.IrregularidadesBtn);
+        nav_meusdados = (MenuItem) findViewById(R.id.nav_meusdados);
 
         //Redirecionamento Botoes
 
@@ -362,9 +365,9 @@ public class MenuActivity extends AppCompatActivity
         if (id == R.id.nav_meusdados) {
             Intent it = new Intent(MenuActivity.this, MeusDadosActivity.class);
             startActivity(it);
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_contato) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_movimentacoes) {
 
         } else if (id == R.id.nav_manage) {
 

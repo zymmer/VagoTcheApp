@@ -4,20 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context="br.com.vagotche.vagotcheapp.MenuActivity"
+    tools:context="br.com.vagotche.vagotcheapp.MeusDadosActivity"
     android:background="@drawable/side_nav_bar">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbar_meusdados"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:text="www.vagotche.com.br"
         app:popupTheme="@style/AppTheme.PopupOverlay" />
 
 
     <include layout="@layout/content_menu"
         android:id="@+id/include" />
+
+    <LinearLayout
+        android:layout_width="286dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_gravity="center">
 
     <TextView
         android:drawableStart="@mipmap/people3"
@@ -79,10 +85,12 @@
         android:inputType="textPassword"/>
 
     <LinearLayout
-        android:padding="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:gravity="center"
+        android:layout_gravity="center">
 
         <CheckBox
             android:clickable="true"
@@ -109,17 +117,18 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="20dp">
+        <LinearLayout
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_gravity="center">
 
         <Button
             android:id="@+id/btnCancelar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:background="@drawable/button_icons_bg"
             android:clickable="true"
             android:drawableEnd="@mipmap/cross"
@@ -127,16 +136,18 @@
             android:textStyle="bold" />
 
         <Button
+
             android:id="@+id/btnRegistrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_weight="1"
             android:background="@drawable/button_icons_bg"
             android:clickable="true"
             android:drawableEnd="@mipmap/check"
             android:text="Salvar"
             android:textStyle="bold" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

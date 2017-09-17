@@ -16,7 +16,7 @@ import android.widget.Toast;
  * Created by guilherme on 14/09/17.
  */
 
-public class MeusDadosActivity extends AppCompatActivity
+public class ContatoActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
     MenuItem nav_menu;
@@ -62,7 +62,7 @@ public class MeusDadosActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_menu) {
-            Intent it = new Intent(MeusDadosActivity.this, MenuActivity.class);
+            Intent it = new Intent(ContatoActivity.this, MenuActivity.class);
             startActivity(it);
         } else if (id == R.id.nav_contato) {
 

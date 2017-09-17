@@ -124,6 +124,9 @@
         <!-- Irregularidadesctivity -->
         <activity android:name=".IrregularidadesActivity"/>
 
+        <!-- MeusDadosActivity -->
+        <activity android:name=".MeusDadosActivity"/>
+
         <!-- Bluetooth -->
         <activity android:name=".DeviceScanActivity"/>
         <activity android:name=".DeviceControlActivity"/>

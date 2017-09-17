@@ -4,6 +4,10 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_menu"
+            android:icon="@mipmap/people2"
+            android:title="Menu Principal" />
+        <item
             android:id="@+id/nav_meusdados"
             android:icon="@mipmap/people2"
             android:title="Meus Dados" />
@@ -19,10 +23,6 @@
             android:id="@+id/nav_manage"
             android:icon="@mipmap/fileinfolder"
             android:title="Informações" />
-        <item
-            android:id="@+id/nav_send"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Atualizações do sistema" />
     </group>
 
 
