@@ -36,7 +36,7 @@
     </item>
 
     <item
-        android:id="itemWWW"
+        android:id="@+id/itemwww"
         android:title="www.vagotche.com.br">
 
     </item>

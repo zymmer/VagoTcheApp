@@ -39,7 +39,7 @@ public class MenuActivity extends AppCompatActivity
     String parametros = "";
     private ShareDialog shareDialog;
     private Button logout;
-    MenuItem nav_meusdados;
+    MenuItem nav_meusdados, nav_contato, nav_movimentacoes, nav_info, itemwww;
 
     //alerta
     private void alert(String s){
@@ -65,7 +65,11 @@ public class MenuActivity extends AppCompatActivity
         FloatingActionButton cab = (FloatingActionButton) findViewById(R.id.ConfiguracaoAlertasBtn);
         FloatingActionButton zab = (FloatingActionButton) findViewById(R.id.ZonaAzulBtn);
         FloatingActionButton Irrb = (FloatingActionButton) findViewById(R.id.IrregularidadesBtn);
-        nav_meusdados = (MenuItem) findViewById(R.id.nav_meusdados);
+        nav_meusdados = (MenuItem)findViewById(R.id.nav_meusdados);
+        nav_contato = (MenuItem)findViewById(R.id.nav_contato);
+        nav_movimentacoes = (MenuItem)findViewById(R.id.nav_movimentacoes);
+        nav_info = (MenuItem)findViewById(R.id.nav_info);
+        itemwww = (MenuItem)findViewById(R.id.itemwww);
 
         //Redirecionamento Botoes
 
@@ -366,12 +370,15 @@ public class MenuActivity extends AppCompatActivity
             Intent it = new Intent(MenuActivity.this, MeusDadosActivity.class);
             startActivity(it);
         } else if (id == R.id.nav_contato) {
-
+            Intent it = new Intent(MenuActivity.this, ContatoActivity.class);
+            startActivity(it);
         } else if (id == R.id.nav_movimentacoes) {
-
-        } else if (id == R.id.nav_manage) {
-
-        //} //else if (id == R.id.nav_share) {
+            Intent it = new Intent(MenuActivity.this, MovimentacoesActivity.class);
+            startActivity(it);
+        } else if (id == R.id.nav_info) {
+            Intent it = new Intent(MenuActivity.this, InfoActivity.class);
+            startActivity(it);
+        } else if (id == R.id.itemwww) {
 
         //} else if (id == R.id.nav_send) {
 

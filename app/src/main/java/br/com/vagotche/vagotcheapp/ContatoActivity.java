@@ -19,7 +19,7 @@ import android.widget.Toast;
 public class ContatoActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
-    MenuItem nav_contato;
+    MenuItem nav_menu, nav_meusdados, nav_movimentacoes, nav_info, itemwww;
 
     private void alert(String s){
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
@@ -32,7 +32,11 @@ public class ContatoActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_contato);
         setSupportActionBar(toolbar);
 
-        nav_contato = (MenuItem) findViewById(R.id.nav_contato);
+        nav_menu = (MenuItem) findViewById(R.id.nav_menu);
+        nav_meusdados = (MenuItem) findViewById(R.id.nav_meusdados);
+        nav_movimentacoes = (MenuItem) findViewById(R.id.nav_movimentacoes);
+        nav_info = (MenuItem) findViewById(R.id.nav_info);
+        itemwww = (MenuItem) findViewById(R.id.itemwww);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_contato);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -73,7 +77,7 @@ public class ContatoActivity extends AppCompatActivity
         } else if (id == R.id.nav_info) {
             Intent it = new Intent(ContatoActivity.this, ContatoActivity.class);
             startActivity(it);
-            //} //else if (id == R.id.nav_share) {
+        } else if (id == R.id.itemwww) {
 
             //} else if (id == R.id.nav_send) {
 

@@ -19,7 +19,7 @@ import android.widget.Toast;
 public class InfoActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
-    MenuItem nav_info;
+    MenuItem nav_menu, nav_meusdados, nav_contato, nav_movimentacoes, itemwww;
 
     private void alert(String s){
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
@@ -32,7 +32,11 @@ public class InfoActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_info);
         setSupportActionBar(toolbar);
 
-        nav_info = (MenuItem) findViewById(R.id.nav_info);
+        nav_menu = (MenuItem) findViewById(R.id.nav_menu);
+        nav_meusdados = (MenuItem) findViewById(R.id.nav_meusdados);
+        nav_contato = (MenuItem) findViewById(R.id.nav_contato);
+        nav_movimentacoes = (MenuItem) findViewById(R.id.nav_movimentacoes);
+        itemwww = (MenuItem) findViewById(R.id.itemwww);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_info);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -73,7 +77,7 @@ public class InfoActivity extends AppCompatActivity
         } else if (id == R.id.nav_movimentacoes) {
             Intent it = new Intent(InfoActivity.this, MovimentacoesActivity.class);
             startActivity(it);
-            //} //else if (id == R.id.nav_share) {
+        } else if (id == R.id.itemwww) {
 
             //} else if (id == R.id.nav_send) {
 

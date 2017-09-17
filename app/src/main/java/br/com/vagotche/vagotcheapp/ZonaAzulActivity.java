@@ -50,10 +50,11 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
 
         cdUsuario = getIntent().getIntExtra("id_usuario", 0);
 
-        alert(getIntent().getStringExtra("saldoZA"));
+        //alert(getIntent().getStringExtra("saldoZA"));
         //Saldo
         seuSaldo = (TextView) findViewById(R.id.viewSaldoCreditosZA);
         seuSaldo.setText(getIntent().getStringExtra("saldoZA"));
+        btnVoltar = (ImageView) findViewById(R.id.imvVoltarZonaAzul);
 
 //        // Get IDs
 //        spinnerPlaca = (Spinner) findViewById(R.id.spinnerPlaca);
