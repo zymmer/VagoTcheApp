@@ -26,7 +26,7 @@
         android:layout_gravity="center">
 
     <TextView
-        android:drawableStart="@mipmap/oldhandphone"
+        android:drawableStart="@mipmap/telephonehandle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
@@ -38,19 +38,34 @@
 
     <LinearLayout
         android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_height="280dp"
         android:orientation="vertical"
         android:gravity="center"
         android:layout_gravity="center"
         android:weightSum="1">
 
         <TextView
+            android:gravity="center"
             android:background="@drawable/modelo_edit"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/editNome"
             android:textAlignment="center"
             android:textStyle="bold"
+            android:text="
+VagoTchê LTDA.
+
+Av. Benjamin Constant 293 AP 303
+CEP 90-4500-00
+(051)-997152881
+suporte@vagotche.com.br
+
+Horários de Atendimento
+Segunda a Sexta-Feira: 8h às 19h
+Sábados: 8h às 13h
+
+www.vagotche.com.br
+Porto Alegre, Brasil."
             />
 
 

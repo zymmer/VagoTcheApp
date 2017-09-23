@@ -91,6 +91,25 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
         }
     }
 
+    private void verificarMeusVeiculos() {
+
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+        if (networkInfo != null && networkInfo.isConnected()) {
+
+            url = "http://fabrica.govbrsul.com.br/vagotche/index.php/MeusVeiculos/VerificarVeiculos";
+
+            parametros = "cdUsuario=" + cdUsuario;
+
+            new SolicitaDados().execute(url);
+        } else {
+            alert("Nenhuma conexão de rede foi detectada");
+        }
+    }
+
+
     private class SolicitaDados extends AsyncTask<String, Void, String> {
 
         @Override
@@ -117,6 +136,21 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
                 alert("Ocorreu um erro");
             }
 
+            String[] dados = resultado.split(",");
+
+            if (resultado.contains("verifica_meusveiculos_ok")){
+                Intent it = new Intent(CadastroVeiculoActivity.this, MeusVeiculosActivity.class);
+                it.putExtra("id_usuario", cdUsuario);
+                it.putExtra("marcaModelo", dados[1]);
+                it.putExtra("placa", dados[2]);
+                it.putExtra("ano", dados[3]);
+                startActivity(it);
+            } else if (resultado.contains("nao_ha_veiculo_cadastrado")){
+                Intent it = new Intent(CadastroVeiculoActivity.this, MeusVeiculosActivity.class);
+                startActivity(it);
+            }
+
+
         }
     }
 
@@ -130,8 +164,7 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
                 registrar();
                 break;
             case R.id.btnAlterarVeic:
-                Intent it = new Intent(CadastroVeiculoActivity.this, MeusVeiculosActivity.class);
-                startActivity(it);
+                verificarMeusVeiculos();
         }
     }
 

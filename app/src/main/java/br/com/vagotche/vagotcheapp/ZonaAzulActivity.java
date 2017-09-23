@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.style.TtsSpan;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -31,6 +33,12 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
     ImageView btnVoltar;
     String url = "";
     String parametros = "";
+
+    String[] placas = {"ivx7090","jbj6787"};
+    String[] cidades = {"Porto Alegre"};
+    String[] parquimetros = {"R. Cel. Genuíno"};
+
+    ArrayAdapter <String> adapter;
 
     private void alert(String s){
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
@@ -57,9 +65,26 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
         btnVoltar = (ImageView) findViewById(R.id.imvVoltarZonaAzul);
         btnVoltar.setOnClickListener(this);
 
-//        // Get IDs
-//        spinnerPlaca = (Spinner) findViewById(R.id.spinnerPlaca);
-//        //spinnerPlaca.getSelectedItem(getIntent().getStringExtra("placa"));
+        // Spinner Placa
+        spinnerPlaca = (Spinner) findViewById(R.id.spinnerPlaca);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, placas);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerPlaca.setAdapter(adapter);
+
+        //Spinner Cidade
+        spinnerCidade = (Spinner) findViewById(R.id.spinnerCidade);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, cidades);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCidade.setAdapter(adapter);
+
+        //Spinner Parquimetro
+        spinnerParquimetro = (Spinner) findViewById(R.id.spinnerParquimetro);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, parquimetros);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerParquimetro.setAdapter(adapter);
+
+
+        //spinnerPlaca.getSelectedItem(getIntent().getStringExtra("placa"));
 //        spinnerCidade = (Spinner) findViewById(R.id.spinnerCidade);
 //        spinnerParquimetro = (Spinner) findViewById(R.id.spinnerParquimetro);
 //        txvTempo30 = (TextView) findViewById(R.id.txvTempo30);
@@ -75,7 +100,7 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
 //        txvTempo1.setOnClickListener(this);
 //        txvTempo130.setOnClickListener(this);
 //        txvTempo2.setOnClickListener(this);
-//        spinnerPlaca.setOnClickListener(this);
+          //spinnerPlaca.setOnClickListener(this);
 //        spinnerCidade.setOnClickListener(this);
 //        spinnerParquimetro.setOnClickListener(this);
 //        btnUtilizarCred.setOnClickListener(this);

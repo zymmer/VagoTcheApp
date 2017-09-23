@@ -3,6 +3,8 @@ package br.com.vagotche.vagotcheapp;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -10,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -29,6 +32,9 @@ import com.facebook.login.LoginManager;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
 
+import java.io.InputStream;
+import java.util.ArrayList;
+
 public class MenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -41,6 +47,9 @@ public class MenuActivity extends AppCompatActivity
     private ShareDialog shareDialog;
     private Button logout;
     MenuItem nav_meusdados, nav_contato, nav_movimentacoes, nav_info, itemwww;
+
+
+
 
     //alerta
     private void alert(String s){
@@ -57,8 +66,40 @@ public class MenuActivity extends AppCompatActivity
         //Pega ID do Usuario em memoria
         cdUsuario = getIntent().getIntExtra("id_usuario", 0);
 
-        //FB
-        FacebookSdk.sdkInitialize(this);
+//        //FB
+//        FacebookSdk.sdkInitialize(this);
+//
+//        //Testes FB
+//        shareDialog = new ShareDialog(this);
+//
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);dados
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ShareLinkContent content = new ShareLinkContent.Builder().build();
+//                shareDialog.show(content);
+//            }
+//        });
+//
+//        Bundle inBundle = getIntent().getExtras();
+//        String name = inBundle.get("name").toString();
+//        String surname = inBundle.get("surname").toString();
+//        String imageUrl = inBundle.get("imageUrl").toString();
+//
+//        TextView nameView = (TextView) findViewById(R.id.txtNameAndSurname);
+//        nameView.setText("" + name + " " + surname);
+//        Button logout = (Button) findViewById(R.id.logout);
+//        logout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                LoginManager.getInstance().logOut();
+//                Intent login = new Intent(MenuActivity.this, MainActivity.class);
+//                startActivity(login);
+//                finish();
+//            }
+//
+//        });
+//        new MenuActivity.DownloadImage((ImageView)findViewById(R.id.fbImg)).execute(imageUrl);
 
         FloatingActionButton gmb = (FloatingActionButton) findViewById(R.id.googleMapsBtn);
         FloatingActionButton cb = (FloatingActionButton) findViewById(R.id.CreditosBtn);
@@ -112,6 +153,7 @@ public class MenuActivity extends AppCompatActivity
             public void onClick(View view) {
                 auxiliar = "zonaazul";
                 VerificaCreditos();
+                //VerificaPlacas();
             }
         });
 
@@ -123,18 +165,18 @@ public class MenuActivity extends AppCompatActivity
                 startActivity(it);
             }
         });
-
-        //Fim Redirecionamento
-
-        //FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        //fab.setOnClickListener(new View.OnClickListener() {
-        //    @Override
-        //    public void onClick(View view) {
-        //        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-        //                .setAction("Action", null).show();
-        //    }
-        //});
-
+//
+//        //Fim Redirecionamento
+//
+//        //FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        //fab.setOnClickListener(new View.OnClickListener() {
+//        //    @Override
+//        //    public void onClick(View view) {
+//        //        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//        //                .setAction("Action", null).show();
+//        //    }
+//        //});
+//
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -145,39 +187,32 @@ public class MenuActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        //Testes FB
-        shareDialog = new ShareDialog(this);
-
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                ShareLinkContent content = new ShareLinkContent.Builder().build();
-//                shareDialog.show(content);
-//            }
-//        });
-//
-//        Bundle inBundle = getIntent().getExtras();
-//        String name = inBundle.get("name").toString();
-//        String surname = inBundle.get("surname").toString();
-//        String imageUrl = inBundle.get("imageUrl").toString();
-//
-//        TextView nameView = (TextView) findViewById(R.id.nameAndSurname);
-//        nameView.setText("" + name + " " + surname);
-//        Button logout = (Button) findViewById(R.id.logout);
-//        logout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                LoginManager.getInstance().logOut();
-//                Intent login = new Intent(MenuActivity.this, MainActivity.class);
-//                startActivity(login);
-//                finish();
-//            }
-//
-//        });
-//        new MenuActivity.DownloadImage(ImageView)findView
-
     }
+
+//    public class DownloadImage extends AsyncTask<String, Void, Bitmap>{
+//        ImageView bmImage;
+//
+//        public DownloadImage(ImageView bmImage){
+//            this.bmImage = bmImage;
+//        }
+//
+//        protected Bitmap doInBackground(String... urls){
+//            String urldisplay = urls[0];
+//            Bitmap mIconll = null;
+//            try {
+//                InputStream in = new java.net.URL(urldisplay).openStream();
+//                mIconll = BitmapFactory.decodeStream(in);
+//            } catch (Exception e){
+//                Log.e("Error", e.getMessage());
+//                e.printStackTrace();
+//            }
+//            return mIconll;
+//        }
+//
+//        protected void onPostExecute(Bitmap result){
+//            bmImage.setImageBitmap(result);
+//        }
+//    }
 
     @Override
     public void onBackPressed() {
@@ -296,16 +331,16 @@ public class MenuActivity extends AppCompatActivity
             //VerificaSaldo
             if (resultado.contains("verifica_creditos_ok")) {
 
-                String[] dados = resultado.split(",");
+                String[] dadosSaldo = resultado.split(",");
 
                 if(auxiliar.contains("credito")) {
                     Intent it = new Intent(MenuActivity.this, CreditosActivity.class);
-                    it.putExtra("saldo", dados[1]);
+                    it.putExtra("saldo", dadosSaldo[1]);
                     it.putExtra("id_usuario", cdUsuario);
                     startActivity(it);
                 } else if (auxiliar.contains("zonaazul")) {
                     Intent it = new Intent(MenuActivity.this, ZonaAzulActivity.class);
-                    it.putExtra("saldoZA", dados[1]);
+                    it.putExtra("saldoZA", dadosSaldo[1]);
                     it.putExtra("id_usuario", cdUsuario);
                     startActivity(it);
                 };
@@ -315,10 +350,10 @@ public class MenuActivity extends AppCompatActivity
             //VerificaPlacas
             if (resultado.contains("verifica_placas_ok")) {
 
-                String[] dados = resultado.split(",");
-                
+                String[] dadosPlacas = resultado.split(",");
+
                 Intent it = new Intent(MenuActivity.this, ZonaAzulActivity.class);
-                it.putExtra("placa", dados[1]);
+                it.putExtra("ArrayPlacas", dadosPlacas);
                 it.putExtra("id_usuario", cdUsuario);
                 startActivity(it);
             }
@@ -381,7 +416,7 @@ public class MenuActivity extends AppCompatActivity
             Uri uri = Uri.parse("http://www.vagotche.com.br");
             Intent it = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(it);
-        //} else if (id == R.id.nav_send) {
+            //} else if (id == R.id.nav_send) {
 
         }
 

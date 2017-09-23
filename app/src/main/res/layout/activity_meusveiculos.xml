@@ -46,7 +46,8 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <ExpandableListView
+        android:background="@drawable/modelo_edit"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:orientation="vertical"
@@ -54,15 +55,7 @@
         android:layout_gravity="center"
         android:weightSum="1">
 
-        <GridLayout
-            android:background="@drawable/modelo_edit"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/gridMeusVeiculos"
-            android:textAlignment="center"
-            android:textStyle="bold"
-            />
 
-    </LinearLayout>
+    </ExpandableListView>
 
 </android.support.design.widget.CoordinatorLayout>

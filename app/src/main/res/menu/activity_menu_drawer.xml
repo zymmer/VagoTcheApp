@@ -5,7 +5,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_menu"
-            android:icon="@mipmap/people2"
+            android:icon="@mipmap/home"
             android:title="Menu Principal" />
         <item
             android:id="@+id/nav_meusdados"
@@ -13,7 +13,7 @@
             android:title="Meus Dados" />
         <item
             android:id="@+id/nav_contato"
-            android:icon="@mipmap/oldhandphone"
+            android:icon="@mipmap/telephonehandle16"
             android:title="Entre em Contato" />
         <item
             android:id="@+id/nav_movimentacoes"

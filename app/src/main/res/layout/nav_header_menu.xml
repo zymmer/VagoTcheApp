@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:facebook="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
     android:background="@drawable/side_nav_bar"
@@ -38,21 +37,24 @@
         android:layout_height="wrap_content"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"/>
 
-    <!--<com.facebook.widget.ProfilePictureView-->
-        <!--android:id="@+id/fbImg"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--facebook:present_size="small" />-->
-    <!--<android.support.design.widget.FloatingActionButton-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/fab"/>-->
-
     <!--<TextView-->
-        <!--android:id="@+id/nameAndSurname"-->
+        <!--android:id="@+id/txtNameAndSurname"-->
         <!--android:text="nameAndSurname"-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"-->
         <!--android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"/>-->
+
+    <!--<ImageView-->
+        <!--android:id="@+id/fbImg"-->
+        <!--android:layout_height="100dp"-->
+        <!--android:layout_width="100dp"-->
+        <!--/>-->
+
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Logout"-->
+        <!--android:layout_gravity="end"-->
+        <!--android:id="@+id/logout"/>-->
 
 </LinearLayout>
