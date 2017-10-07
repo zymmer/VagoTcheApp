@@ -39,7 +39,7 @@
         android:textColor="@color/colorWhite"
         android:textStyle="bold"
         android:text="@string/CredVago"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         android:textAlignment="center" />
 
     <LinearLayout

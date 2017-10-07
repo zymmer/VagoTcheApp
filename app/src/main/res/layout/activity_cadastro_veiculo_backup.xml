@@ -23,42 +23,8 @@
         android:text="Cadastro de Veículo"
         android:gravity="center"/>
 
-    <LinearLayout
-        android:layout_marginTop="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-    <EditText
-        android:gravity="center"
-        android:textStyle="bold"
-        android:layout_weight="1"
-        android:background="@drawable/modelo_edit"
-        android:padding="10dp"
-        android:layout_marginTop="5dp"
-        android:id="@+id/editPlaca"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:hint="Placa"
-        />
-
-    <Button
-        android:layout_marginLeft="10dp"
-        android:clickable="true"
-        android:background="@drawable/button_icons_bg"
-        android:drawableEnd="@mipmap/carkey"
-        android:id="@+id/btnLocalizarVeic"
-        android:layout_width="180dp"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="Localizar meu Veículo" />
-
-    </LinearLayout>
-
     <TextView
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:id="@+id/viewMarcas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -68,11 +34,31 @@
         android:textStyle="bold"
         android:text="@string/Marca1" />
 
-    <TextView
+    <AutoCompleteTextView
         android:background="@drawable/modelo_edit"
-        android:padding="5dp"
+        android:padding="10dp"
         android:layout_marginTop="5dp"
-        android:id="@+id/TxtviewMarca"
+        android:id="@+id/ACviewMarca"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center" />
+
+    <TextView
+        android:layout_marginTop="5dp"
+        android:id="@+id/viewPlaca"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+        android:textStyle="bold"
+        android:text="@string/Placa1" />
+
+    <EditText
+        android:background="@drawable/modelo_edit"
+        android:padding="10dp"
+        android:layout_marginTop="5dp"
+        android:id="@+id/editPlaca"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center" />
@@ -88,31 +74,11 @@
         android:textStyle="bold"
         android:text="@string/Ano" />
 
-    <TextView
+    <AutoCompleteTextView
         android:background="@drawable/modelo_edit"
-        android:padding="5dp"
+        android:padding="10dp"
         android:layout_marginTop="5dp"
-        android:id="@+id/TxtviewAno"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center" />
-
-    <TextView
-        android:layout_marginTop="5dp"
-        android:id="@+id/viewCor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textColor="@color/colorWhite"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-        android:textStyle="bold"
-        android:text="@string/Cor" />
-
-    <TextView
-        android:background="@drawable/modelo_edit"
-        android:padding="5dp"
-        android:layout_marginTop="5dp"
-        android:id="@+id/TxtviewCor"
+        android:id="@+id/ACviewAno"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center" />

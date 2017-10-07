@@ -29,7 +29,7 @@
 
     <!-- Creditos -->
     <string name="title_activity_creditos">VagoCred</string>
-    <string name="CredVago">Selecione o valor do crédito a ser adquirido para o credVAGO</string>
+    <string name="CredVago">Selecione o valor do crédito a ser adquirido para o seu credVAGO</string>
     <string name="ComprarCreditos">Comprar Créditos</string>
     <string name="CréditosUsados">Créditos Usados</string>
     <string name="Histórico">Histórico</string>
@@ -65,6 +65,7 @@
     <string name="Marca1">Marca/Modelo</string>
     <string name="Placa1">Placa</string>
     <string name="Ano">Ano</string>
+    <string name="Cor">Cor</string>
 
     <!-- Maps -->
     <string name="title_activity_maps">Map</string>

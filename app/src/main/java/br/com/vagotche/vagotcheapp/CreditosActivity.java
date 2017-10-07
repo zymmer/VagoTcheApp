@@ -5,7 +5,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Telephony;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.SmsManager;
+import android.telephony.TelephonyManager;
 import android.text.style.TtsSpan;
 import android.view.View;
 import android.widget.Button;
@@ -101,6 +104,12 @@ public class CreditosActivity extends AppCompatActivity implements View.OnClickL
 
             if (resultado.contains("credito_adquirido")) {
                 alert("Créditos Adquiridos...");
+
+                TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+                //String number = tm.getLine1Number();
+                //alert("numero: " +number);
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage("51997152881", null, "Você adquiriu R$"+ saldo +" reais de crédito para o seu credVAGO", null, null);
 
                 finish();
             }

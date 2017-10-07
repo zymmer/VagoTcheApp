@@ -6,6 +6,8 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.SmsManager;
+import android.telephony.TelephonyManager;
 import android.text.style.TtsSpan;
 import android.view.View;
 import android.widget.AdapterView;
@@ -139,6 +141,12 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
 
             if (resultado.contains("credito_adquirido")) {
                 alert("Créditos Adquiridos...");
+
+                TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+                //String number = tm.getLine1Number();
+                //alert("numero: " +number);
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage("51997152881", null, "Você utilizou "+ valor +" créditos", null, null);
 
                 finish();
             }
