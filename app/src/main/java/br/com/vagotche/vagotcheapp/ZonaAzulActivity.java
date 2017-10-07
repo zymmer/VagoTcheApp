@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
 import android.text.style.TtsSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,6 +20,10 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -36,7 +41,7 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
     String url = "";
     String parametros = "";
 
-    String[] placas = {"ivx7090","jbj6787"};
+    Placa placa = new Placa();
     String[] cidades = {"Porto Alegre"};
     String[] parquimetros = {"R. Cel. Genuíno"};
 
@@ -60,6 +65,12 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
 
         cdUsuario = getIntent().getIntExtra("id_usuario", 0);
 
+        //Teste
+        url = "http://fabrica.govbrsul.com.br/vagotche/index.php/MeusVeiculos/VerificarVeiculos";
+        parametros = "cdUsuario=" + cdUsuario;
+        new SolicitaDados().execute(url);
+
+
         //alert(getIntent().getStringExtra("saldoZA"));
         //Saldo
         seuSaldo = (TextView) findViewById(R.id.viewSaldoCreditosZA);
@@ -67,9 +78,9 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
         btnVoltar = (ImageView) findViewById(R.id.imvVoltarZonaAzul);
         btnVoltar.setOnClickListener(this);
 
-        // Spinner Placa
+        // Spinner Placas
         spinnerPlaca = (Spinner) findViewById(R.id.spinnerPlaca);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, placas);
+        //adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, placa.getPlacas());
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerPlaca.setAdapter(adapter);
 
@@ -110,6 +121,28 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
+    private Placa degenerateJSON(String data){
+
+        try{
+            JSONObject jo = new JSONObject(data);
+            JSONArray ja;
+
+            ja = jo.getJSONArray("placas");
+            for(int i = 0, tam = ja.length(); i < tam; i++){
+
+                Placa p = new Placa();
+                placa.getPlacas().add(p);
+            }
+
+            // APRESENTAÇÃO
+            Log.i("Script", "Placa: "+placa.getPlacas());
+
+        }
+        catch(JSONException e){ e.printStackTrace(); }
+
+        return(placa);
+    }
+
     private void UtilizarCredito() {
 
         ConnectivityManager connMgr = (ConnectivityManager)
@@ -139,6 +172,8 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
         @Override
         protected void onPostExecute(String resultado) {
 
+            degenerateJSON(resultado);
+
             if (resultado.contains("credito_adquirido")) {
                 alert("Créditos Adquiridos...");
 
@@ -146,7 +181,7 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
                 //String number = tm.getLine1Number();
                 //alert("numero: " +number);
                 SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage("51997152881", null, "Você utilizou "+ valor +" créditos", null, null);
+                smsManager.sendTextMessage("51997152881", null, "Você utilizou R$"+ valor +" reais do credVAGO", null, null);
 
                 finish();
             }
