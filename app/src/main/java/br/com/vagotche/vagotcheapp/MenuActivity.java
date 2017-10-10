@@ -49,7 +49,7 @@ public class MenuActivity extends AppCompatActivity
     MenuItem nav_meusdados, nav_contato, nav_movimentacoes, nav_info, itemwww;
 
 
-
+    Intent it = new Intent(MenuActivity.this, ZonaAzulActivity.class);
 
     //alerta
     private void alert(String s){
@@ -150,9 +150,11 @@ public class MenuActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 auxiliar = "zonaazul";
-                //VerificaCreditos();
-                //VerificaPlacas();
+                VerificaCreditos();
+                VerificaPlacas();
                 VerificaParquimetros();
+                it.putExtra("id_usuario", cdUsuario);
+                startActivity(it);
             }
         });
 
@@ -289,7 +291,7 @@ public class MenuActivity extends AppCompatActivity
 
         if (networkInfo != null && networkInfo.isConnected()) {
 
-            url = "http://fabrica.govbrsul.com.br/vagotche/index.php/ZonaAzul/VerificarParquimetros";
+            url = "http://fabrica.govbrsul.com.br/vagotche/index.php/Maps/VerificarParquimetros";
 
             //parametros = "cdUsuario=" + cdUsuario;
 
@@ -376,31 +378,33 @@ public class MenuActivity extends AppCompatActivity
                     it.putExtra("id_usuario", cdUsuario);
                     startActivity(it);
                 } else if (auxiliar.contains("zonaazul")) {
-                    Intent it = new Intent(MenuActivity.this, ZonaAzulActivity.class);
+                    //Intent it = new Intent(MenuActivity.this, ZonaAzulActivity.class);
                     it.putExtra("saldoZA", dadosSaldo[1]);
-                    it.putExtra("id_usuario", cdUsuario);
-                    startActivity(it);
+                    //it.putExtra("id_usuario", cdUsuario);
+                    //startActivity(it);
                 };
 
             }
 
             //VerificaPlacas
             if (resultado.contains("verifica_placas_ok")) {
-
-                //String[] dadosPlacas = resultado.split(",");
-
-                Intent it = new Intent(MenuActivity.this, ZonaAzulActivity.class);
+                //Intent it = new Intent(MenuActivity.this, ZonaAzulActivity.class);
                 it.putExtra("ArrayPlacas", resultado);
-                it.putExtra("id_usuario", cdUsuario);
-                startActivity(it);
+                //it.putExtra("id_usuario", cdUsuario);
+                //startActivity(it);
             }
 
             //VerificaParquimetros
             if (resultado.contains("verifica_parquimetros_ok")) {
+                //Intent it = new Intent(MenuActivity.this, ZonaAzulActivity.class);
+                it.putExtra("ArrayParquimetros", resultado);
+                //it.putExtra("id_usuario", cdUsuario);
+                //startActivity(it);
+            }
 
-                //String[] dadosPlacas = resultado.split(",");
-
-                Intent it = new Intent(MenuActivity.this, ZonaAzulActivity.class);
+            //VerificaParquimetros
+            if (resultado.contains("maps_verifica_parquimetros_ok")) {
+                Intent it = new Intent(MenuActivity.this, MapsActivity.class);
                 it.putExtra("ArrayParquimetros", resultado);
                 it.putExtra("id_usuario", cdUsuario);
                 startActivity(it);

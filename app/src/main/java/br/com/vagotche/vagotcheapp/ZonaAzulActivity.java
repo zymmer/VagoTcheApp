@@ -69,20 +69,19 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
 
         cdUsuario = getIntent().getIntExtra("id_usuario", 0);
 
-
         //Saldo
-//        seuSaldo = (TextView) findViewById(R.id.viewSaldoCreditosZA);
-//        seuSaldo.setText(getIntent().getStringExtra("saldoZA"));
-//        btnVoltar = (ImageView) findViewById(R.id.imvVoltarZonaAzul);
-//        btnVoltar.setOnClickListener(this);
+        seuSaldo = (TextView) findViewById(R.id.viewSaldoCreditosZA);
+        seuSaldo.setText(getIntent().getStringExtra("saldoZA"));
+        btnVoltar = (ImageView) findViewById(R.id.imvVoltarZonaAzul);
+        btnVoltar.setOnClickListener(this);
 
-//        String[] dadosPlacas = getIntent().getStringExtra("ArrayPlacas").split(",");
-//        List<String> stringListPlacas = new ArrayList<String>(Arrays.asList(dadosPlacas));
-//        //Spinner Placas
-////        spinnerPlaca = (Spinner) findViewById(R.id.spinnerPlaca);
-////        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, stringListPlacas);
-////        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-////        spinnerPlaca.setAdapter(adapter);
+        String[] dadosPlacas = getIntent().getStringExtra("ArrayPlacas").split(",");
+        List<String> stringListPlacas = new ArrayList<String>(Arrays.asList(dadosPlacas));
+        //Spinner Placas
+        spinnerPlaca = (Spinner) findViewById(R.id.spinnerPlaca);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, stringListPlacas);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerPlaca.setAdapter(adapter);
 
         //Spinner Cidade
         spinnerCidade = (Spinner) findViewById(R.id.spinnerCidade);
