@@ -118,9 +118,7 @@ public class MenuActivity extends AppCompatActivity
         gmb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent it = new Intent(MenuActivity.this, MapsActivity.class);
-                it.putExtra("id_usuario", cdUsuario);
-                startActivity(it);
+                VerificaParquimetrosToMaps();
             }
         });
 
@@ -152,8 +150,9 @@ public class MenuActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 auxiliar = "zonaazul";
-                VerificaCreditos();
+                //VerificaCreditos();
                 //VerificaPlacas();
+                VerificaParquimetros();
             }
         });
 
@@ -281,6 +280,44 @@ public class MenuActivity extends AppCompatActivity
         }
     }
 
+    // Verifica placas do usuário
+    private void VerificaParquimetrosToMaps() {
+
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+        if (networkInfo != null && networkInfo.isConnected()) {
+
+            url = "http://fabrica.govbrsul.com.br/vagotche/index.php/ZonaAzul/VerificarParquimetros";
+
+            //parametros = "cdUsuario=" + cdUsuario;
+
+            new SolicitaDados().execute(url);
+        } else {
+            alert("Nenhuma conexão de rede foi detectada");
+        }
+    }
+
+    // Verifica placas do usuário
+    private void VerificaParquimetros() {
+
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+        if (networkInfo != null && networkInfo.isConnected()) {
+
+            url = "http://fabrica.govbrsul.com.br/vagotche/index.php/ZonaAzul/VerificarParquimetros";
+
+            //parametros = "cdUsuario=" + cdUsuario;
+
+            new SolicitaDados().execute(url);
+        } else {
+            alert("Nenhuma conexão de rede foi detectada");
+        }
+    }
+
 
     private class SolicitaDados extends AsyncTask<String, Void, String> {
 
@@ -350,10 +387,21 @@ public class MenuActivity extends AppCompatActivity
             //VerificaPlacas
             if (resultado.contains("verifica_placas_ok")) {
 
-                String[] dadosPlacas = resultado.split(",");
+                //String[] dadosPlacas = resultado.split(",");
 
                 Intent it = new Intent(MenuActivity.this, ZonaAzulActivity.class);
-                it.putExtra("ArrayPlacas", dadosPlacas);
+                it.putExtra("ArrayPlacas", resultado);
+                it.putExtra("id_usuario", cdUsuario);
+                startActivity(it);
+            }
+
+            //VerificaParquimetros
+            if (resultado.contains("verifica_parquimetros_ok")) {
+
+                //String[] dadosPlacas = resultado.split(",");
+
+                Intent it = new Intent(MenuActivity.this, ZonaAzulActivity.class);
+                it.putExtra("ArrayParquimetros", resultado);
                 it.putExtra("id_usuario", cdUsuario);
                 startActivity(it);
             }

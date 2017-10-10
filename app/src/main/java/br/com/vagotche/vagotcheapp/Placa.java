@@ -7,20 +7,20 @@ import java.util.List;
  */
 
 public class Placa {
-    private List<Placa> placas;
+    private String placas;
 
     public Placa() {
         super();
     }
-    public Placa(List<Placa> placas) {
+    public Placa(String placas) {
         super();
         this.placas = placas;
     }
 
-    public List<Placa> getPlacas() {
+    public String getPlaca() {
         return placas;
     }
-    public void setPlacas(List<Placa> placas) {
+    public void setPlaca(String placas) {
         this.placas = placas;
     }
 }

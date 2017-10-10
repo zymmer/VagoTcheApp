@@ -1,23 +1,26 @@
 package br.com.vagotche.vagotcheapp;
 
+import java.util.List;
+
 public class Carro {
 	private String placa;
 	private String modelo;
 	private String anoModelo;
 	private String ano;
 	private String cor;
-
+	private List<Placa> placas;
 
 	public Carro() {
 		super();
 	}
-	public Carro(String placa, String modelo, String anoModelo, String ano, String cor) {
+	public Carro(String placa, String modelo, String anoModelo, String ano, String cor, List<Placa> placas) {
 		super();
 		this.placa = placa;
 		this.modelo = modelo;
 		this.ano = ano;
 		this.anoModelo = anoModelo;
 		this.cor = cor;
+		this.placas = placas;
 
 	}
 
@@ -59,6 +62,13 @@ public class Carro {
 
 	public void setCor(String cor) {
 		this.cor = cor;
+	}
+
+	public List<Placa> getPlacas() {
+		return placas;
+	}
+	public void setPlacas(List<Placa> placas) {
+		this.placas = placas;
 	}
 
 }

@@ -1,6 +1,7 @@
 package br.com.vagotche.vagotcheapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -27,6 +28,9 @@ import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickListener {
@@ -42,8 +46,8 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
     String parametros = "";
 
     Placa placa = new Placa();
+
     String[] cidades = {"Porto Alegre"};
-    String[] parquimetros = {"R. Cel. Genuíno"};
 
     ArrayAdapter <String> adapter;
 
@@ -65,24 +69,20 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
 
         cdUsuario = getIntent().getIntExtra("id_usuario", 0);
 
-        //Teste
-        url = "http://fabrica.govbrsul.com.br/vagotche/index.php/MeusVeiculos/VerificarVeiculos";
-        parametros = "cdUsuario=" + cdUsuario;
-        new SolicitaDados().execute(url);
 
-
-        //alert(getIntent().getStringExtra("saldoZA"));
         //Saldo
-        seuSaldo = (TextView) findViewById(R.id.viewSaldoCreditosZA);
-        seuSaldo.setText(getIntent().getStringExtra("saldoZA"));
-        btnVoltar = (ImageView) findViewById(R.id.imvVoltarZonaAzul);
-        btnVoltar.setOnClickListener(this);
+//        seuSaldo = (TextView) findViewById(R.id.viewSaldoCreditosZA);
+//        seuSaldo.setText(getIntent().getStringExtra("saldoZA"));
+//        btnVoltar = (ImageView) findViewById(R.id.imvVoltarZonaAzul);
+//        btnVoltar.setOnClickListener(this);
 
-        // Spinner Placas
-        spinnerPlaca = (Spinner) findViewById(R.id.spinnerPlaca);
-        //adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, placa.getPlacas());
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerPlaca.setAdapter(adapter);
+//        String[] dadosPlacas = getIntent().getStringExtra("ArrayPlacas").split(",");
+//        List<String> stringListPlacas = new ArrayList<String>(Arrays.asList(dadosPlacas));
+//        //Spinner Placas
+////        spinnerPlaca = (Spinner) findViewById(R.id.spinnerPlaca);
+////        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, stringListPlacas);
+////        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+////        spinnerPlaca.setAdapter(adapter);
 
         //Spinner Cidade
         spinnerCidade = (Spinner) findViewById(R.id.spinnerCidade);
@@ -90,9 +90,12 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCidade.setAdapter(adapter);
 
+        //alert(getIntent().getStringExtra("ArrayParquimetros"));
+        String[] dadosParquimetros = getIntent().getStringExtra("ArrayParquimetros").split(",");
+        List<String> stringListParquimetros = new ArrayList<String>(Arrays.asList(dadosParquimetros));
         //Spinner Parquimetro
         spinnerParquimetro = (Spinner) findViewById(R.id.spinnerParquimetro);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, parquimetros);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, stringListParquimetros);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerParquimetro.setAdapter(adapter);
 
@@ -121,27 +124,51 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-    private Placa degenerateJSON(String data){
-
-        try{
-            JSONObject jo = new JSONObject(data);
-            JSONArray ja;
-
-            ja = jo.getJSONArray("placas");
-            for(int i = 0, tam = ja.length(); i < tam; i++){
-
-                Placa p = new Placa();
-                placa.getPlacas().add(p);
-            }
-
-            // APRESENTAÇÃO
-            Log.i("Script", "Placa: "+placa.getPlacas());
-
-        }
-        catch(JSONException e){ e.printStackTrace(); }
-
-        return(placa);
-    }
+//    private Carro degenerateJSON(String data){
+//
+//        Carro carro = new Carro();
+//        placasArray = new ArrayList<String>();
+//
+//        try{
+//            JSONObject jo = new JSONObject(data);
+//            JSONArray ja;
+//
+//            carro.setPlaca(jo.getString("plate"));
+//            placasArray.add(jo.getString("dsPlaca"));
+//
+//            jo.put("placa", carro.getPlaca());
+//
+////            ja = jo.getJSONArray("placas");
+////            for(int i = 0, tam = ja.length(); i < tam; i++){
+////
+////                Placa p = new Placa();
+////                p.setPlaca(ja.getJSONObject(i).getString("placa"));
+////
+////                carro.getPlacas().add(p);
+////            }
+//
+//            // APRESENTAÇÃO
+//            Log.i("Script", "Placa: "+carro.getPlaca());
+//            for(int i = 0, tam = carro.getPlacas().size(); i < tam; i++){
+//                Log.i("Script", "Motor: "+carro.getPlacas().get(i));
+//            }
+//
+//            alert(carro.toString());
+//
+//            // Spinner Placas
+//            spinnerPlaca = (Spinner) findViewById(R.id.spinnerPlaca);
+//            adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, placasArray);
+//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//            spinnerPlaca.setAdapter(adapter);
+//
+//            // APRESENTAÇÃO
+//            Log.i("Script", "Placa: "+carro.getPlacas());
+//
+//        }
+//        catch(JSONException e){ e.printStackTrace(); }
+//
+//        return(carro);
+//    }
 
     private void UtilizarCredito() {
 
@@ -152,7 +179,6 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
         if (networkInfo != null && networkInfo.isConnected()){
 
             url = "http://fabrica.govbrsul.com.br/vagotche/index.php/Creditos/ComprarCreditos";
-
             parametros = "saldo=" + valor + "&cdUsuario=" + cdUsuario;
 
             new SolicitaDados().execute(url);
@@ -172,7 +198,9 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
         @Override
         protected void onPostExecute(String resultado) {
 
-            degenerateJSON(resultado);
+            //degenerateJSON(resultado);
+
+            //alert(resultado);
 
             if (resultado.contains("credito_adquirido")) {
                 alert("Créditos Adquiridos...");
