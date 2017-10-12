@@ -12,6 +12,7 @@ public class Placa {
     public Placa() {
         super();
     }
+
     public Placa(String placas) {
         super();
         this.placas = placas;
@@ -20,7 +21,6 @@ public class Placa {
     public String getPlaca() {
         return placas;
     }
-    public void setPlaca(String placas) {
-        this.placas = placas;
-    }
+
+    public void setPlaca(String placas) {this.placas = placas;}
 }

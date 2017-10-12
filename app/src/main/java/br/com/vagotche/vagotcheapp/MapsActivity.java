@@ -30,6 +30,12 @@ package br.com.vagotche.vagotcheapp;
         import com.google.android.gms.maps.model.Marker;
         import com.google.android.gms.maps.model.MarkerOptions;
 
+        import org.json.JSONArray;
+        import org.json.JSONException;
+        import org.json.JSONObject;
+
+        import java.util.ArrayList;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
@@ -41,10 +47,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Marker mCurrLocationMarker;
     LocationRequest mLocationRequest;
 
+    private void alert(String s){
+        Toast.makeText(this,s,Toast.LENGTH_LONG).show();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        addParquimetrosArray();
 
         //Teste Spinner
         Spinner spinner = (Spinner) findViewById(R.id.spinner1);
@@ -229,18 +241,64 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    //Parquímetros Reais
-    public void addParquimetrosArray() {
-        //Parquimetro Av. Osvaldo Aranha, n° 374
-        LatLng latLng = new LatLng(-30.035315, -51.226739);
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
-        markerOptions.title("Parquímetro - Av. Osvaldo Aranha, n° 374");
-        markerOptions.snippet("Vagas ocupadas 4/13");
-        //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(R.mipmap.parquimetro_40x40));
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-        mMap.addMarker(markerOptions);
-    }
+        //Parquímetros Reais
+        public void addParquimetrosArray() {
+
+            alert(getIntent().getStringExtra("parquimetrosArray"));
+
+            ArrayList<String> parquimetrosArray = new ArrayList<String>();
+
+            try{
+                JSONArray ja = new JSONArray(getIntent().getStringExtra("parquimetrosArray"));
+
+            for(int i=0; i < ja.length(); i++) {
+                JSONObject jo = ja.getJSONObject(i);
+
+                //String cdParquimetro = jo.getString("cdParquimetro");
+                String cdEndereco  = jo.getString("cdEndereco");
+                String nmVagasNormais  = jo.getString("nmVagasNormais");
+                String nmVagasDeficiente  = jo.getString("nmVagasDeficiente");
+                String nmVagasIdosos  = jo.getString("nmVagasIdosos");
+                String Latitude  = jo.getString("Latitude");
+                String Longitude  = jo.getString("Longitude");
+
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.title(cdEndereco);
+                LatLng latLng = new LatLng(Double.parseDouble(Latitude), Double.parseDouble(Longitude));
+                markerOptions.position(latLng);
+                markerOptions.snippet("Vagas normais ocupadas 0/" + nmVagasNormais);
+                markerOptions.snippet("Vagas deficientes ocupadas 0/" + nmVagasDeficiente);
+                markerOptions.snippet("Vagas idosos ocupadas 0/" + nmVagasIdosos);
+                //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(R.mipmap.parquimetro_40x40));
+                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                mMap.addMarker(markerOptions);
+
+            }
+
+            }
+
+            catch(JSONException e){ e.printStackTrace(); }
+
+//        for(int i=0; i < parquimetros.size(); i++) {
+//
+//            //alert(parquimetros.get(parquimetros.size() -1 ));
+//
+//            while (i == i) {
+//
+//                //alert(parquimetros.get(x));
+//                MarkerOptions markerOptions = new MarkerOptions();
+//                markerOptions.title(parquimetros.get(i));
+//                LatLng latLng = new LatLng(Double.parseDouble(parquimetros.get(i).replace(",",".")), Double.parseDouble(parquimetros.get(i).replace(",",".")));
+//                markerOptions.position(latLng);
+//                markerOptions.snippet("Vagas normais ocupadas 0/" + parquimetros.get(i));
+//                markerOptions.snippet("Vagas deficientes ocupadas 0/" + parquimetros.get(i));
+//                markerOptions.snippet("Vagas idosos ocupadas 0/" + parquimetros.get(i));
+//                //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(R.mipmap.parquimetro_40x40));
+//                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+//                mMap.addMarker(markerOptions);
+//                }
+//            }
+        }
 
     //TESTES PARQUIMETRO
     public void addParquimetroCelGenuino() {

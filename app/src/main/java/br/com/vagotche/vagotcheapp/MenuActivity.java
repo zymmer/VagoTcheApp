@@ -12,6 +12,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.telephony.SmsManager;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -22,8 +24,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +35,10 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -47,9 +55,7 @@ public class MenuActivity extends AppCompatActivity
     private ShareDialog shareDialog;
     private Button logout;
     MenuItem nav_meusdados, nav_contato, nav_movimentacoes, nav_info, itemwww;
-
-
-    Intent it = new Intent(MenuActivity.this, ZonaAzulActivity.class);
+    Intent zonaAzul, Maps;
 
     //alerta
     private void alert(String s){
@@ -118,6 +124,7 @@ public class MenuActivity extends AppCompatActivity
         gmb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Maps = new Intent(MenuActivity.this, MapsActivity.class);
                 VerificaParquimetrosToMaps();
             }
         });
@@ -149,12 +156,12 @@ public class MenuActivity extends AppCompatActivity
         zab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                zonaAzul = new Intent(MenuActivity.this, ZonaAzulActivity.class);
+                zonaAzul.putExtra("id_usuario", cdUsuario);
                 auxiliar = "zonaazul";
                 VerificaCreditos();
                 VerificaPlacas();
                 VerificaParquimetros();
-                it.putExtra("id_usuario", cdUsuario);
-                startActivity(it);
             }
         });
 
@@ -225,6 +232,84 @@ public class MenuActivity extends AppCompatActivity
         }
     }
 
+    private void degenerateJSONPlacas(String data){
+
+        ArrayList<String> placasArray = new ArrayList<String>();
+
+        try{
+            JSONArray ja = new JSONArray(data);
+
+            for(int i=0; i < ja.length(); i++) {
+                JSONObject jo = ja.getJSONObject(i);
+                String placa  = jo.getString("dsPlaca");
+                placasArray.add(placa);
+            }
+
+            zonaAzul.putStringArrayListExtra("placasArray", placasArray);
+
+        }
+        catch(JSONException e){ e.printStackTrace(); }
+
+    }
+
+    private void degenerateJSONParquimetros(String data){
+
+        ArrayList<String> parquimetrosArray = new ArrayList<String>();
+
+        try{
+            JSONArray ja = new JSONArray(data);
+
+            for(int i=0; i < ja.length(); i++) {
+                JSONObject jo = ja.getJSONObject(i);
+                String parquimetro  = jo.getString("cdEndereco");
+                parquimetrosArray.add(parquimetro);
+            }
+
+            zonaAzul.putStringArrayListExtra("parquimetrosArray", parquimetrosArray);
+            startActivity(zonaAzul);
+
+        }
+        catch(JSONException e){ e.printStackTrace(); }
+
+    }
+
+    private void degenerateJSONParquimetrosToMaps(String data){
+
+        //ArrayList<String> parquimetrosArray = new ArrayList<String>();
+
+        try{
+            JSONArray ja = new JSONArray(data);
+
+//            for(int i=0; i < ja.length(); i++) {
+//                JSONObject jo = ja.getJSONObject(i);
+//
+//                //String cdParquimetro = jo.getString("cdParquimetro");
+//                String cdEndereco  = jo.getString("cdEndereco");
+//                String nmVagasNormais  = jo.getString("nmVagasNormais");
+//                String nmVagasDeficiente  = jo.getString("nmVagasDeficiente");
+//                String nmVagasIdosos  = jo.getString("nmVagasIdosos");
+//                String Latitude  = jo.getString("Latitude");
+//                String Longitude  = jo.getString("Longitude");
+//
+//                //parquimetrosArray.add(cdParquimetro);
+//                parquimetrosArray.add(cdEndereco);
+//                parquimetrosArray.add(nmVagasNormais);
+//                parquimetrosArray.add(nmVagasDeficiente);
+//                parquimetrosArray.add(nmVagasIdosos);
+//                parquimetrosArray.add(Latitude);
+//                parquimetrosArray.add(Longitude);
+//
+//            }
+
+            //Maps.putStringArrayListExtra("parquimetrosArray", parquimetrosArray);
+            Maps.putExtra("parquimetrosArray", ja.toString());
+            startActivity(Maps);
+
+        }
+         catch(JSONException e){ e.printStackTrace(); }
+
+    }
+
     // Verifica configurações de alerta do usuário
     private void VerificaConfs() {
 
@@ -254,7 +339,6 @@ public class MenuActivity extends AppCompatActivity
         if (networkInfo != null && networkInfo.isConnected()) {
 
             url = "http://fabrica.govbrsul.com.br/vagotche/index.php/Creditos/VerificarCreditos";
-
             parametros = "cdUsuario=" + cdUsuario;
 
             new SolicitaDados().execute(url);
@@ -272,17 +356,16 @@ public class MenuActivity extends AppCompatActivity
 
         if (networkInfo != null && networkInfo.isConnected()) {
 
-            url = "http://fabrica.govbrsul.com.br/vagotche/index.php/ZonaAzul/VerificarCarros";
-
+            url = "http://fabrica.govbrsul.com.br/vagotche/index.php/ZonaAzul/VerificarPlacas";
             parametros = "cdUsuario=" + cdUsuario;
+            new SolicitaDadosPlaca().execute(url);
 
-            new SolicitaDados().execute(url);
         } else {
             alert("Nenhuma conexão de rede foi detectada");
         }
     }
 
-    // Verifica placas do usuário
+    // Verifica parquimetros disponiveis no mapa
     private void VerificaParquimetrosToMaps() {
 
         ConnectivityManager connMgr = (ConnectivityManager)
@@ -295,13 +378,13 @@ public class MenuActivity extends AppCompatActivity
 
             //parametros = "cdUsuario=" + cdUsuario;
 
-            new SolicitaDados().execute(url);
+            new SolicitaDadosParquimetroToMaps().execute(url);
         } else {
             alert("Nenhuma conexão de rede foi detectada");
         }
     }
 
-    // Verifica placas do usuário
+    // Verifica parquimetros
     private void VerificaParquimetros() {
 
         ConnectivityManager connMgr = (ConnectivityManager)
@@ -311,10 +394,8 @@ public class MenuActivity extends AppCompatActivity
         if (networkInfo != null && networkInfo.isConnected()) {
 
             url = "http://fabrica.govbrsul.com.br/vagotche/index.php/ZonaAzul/VerificarParquimetros";
+            new SolicitaDadosParquimetro().execute(url);
 
-            //parametros = "cdUsuario=" + cdUsuario;
-
-            new SolicitaDados().execute(url);
         } else {
             alert("Nenhuma conexão de rede foi detectada");
         }
@@ -378,37 +459,63 @@ public class MenuActivity extends AppCompatActivity
                     it.putExtra("id_usuario", cdUsuario);
                     startActivity(it);
                 } else if (auxiliar.contains("zonaazul")) {
-                    //Intent it = new Intent(MenuActivity.this, ZonaAzulActivity.class);
-                    it.putExtra("saldoZA", dadosSaldo[1]);
-                    //it.putExtra("id_usuario", cdUsuario);
-                    //startActivity(it);
+
+                    zonaAzul.putExtra("saldoZA", dadosSaldo[1]);
+
                 };
 
             }
 
-            //VerificaPlacas
-            if (resultado.contains("verifica_placas_ok")) {
-                //Intent it = new Intent(MenuActivity.this, ZonaAzulActivity.class);
-                it.putExtra("ArrayPlacas", resultado);
-                //it.putExtra("id_usuario", cdUsuario);
-                //startActivity(it);
-            }
+        }
+    }
 
-            //VerificaParquimetros
-            if (resultado.contains("verifica_parquimetros_ok")) {
-                //Intent it = new Intent(MenuActivity.this, ZonaAzulActivity.class);
-                it.putExtra("ArrayParquimetros", resultado);
-                //it.putExtra("id_usuario", cdUsuario);
-                //startActivity(it);
-            }
+    private class SolicitaDadosPlaca extends AsyncTask<String, Void, String> {
 
-            //VerificaParquimetros
-            if (resultado.contains("maps_verifica_parquimetros_ok")) {
-                Intent it = new Intent(MenuActivity.this, MapsActivity.class);
-                it.putExtra("ArrayParquimetros", resultado);
-                it.putExtra("id_usuario", cdUsuario);
-                startActivity(it);
-            }
+        @Override
+        protected String doInBackground(String... urls) {
+
+            return ConexaoApp.postDados(urls[0], parametros);
+
+        }
+
+        @Override
+        protected void onPostExecute(String resultado) {
+
+            degenerateJSONPlacas(resultado);
+
+        }
+    }
+
+    private class SolicitaDadosParquimetro extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... urls) {
+
+            return ConexaoApp.postDados(urls[0], parametros);
+
+        }
+
+        @Override
+        protected void onPostExecute(String resultado) {
+
+            degenerateJSONParquimetros(resultado);
+
+        }
+    }
+
+    private class SolicitaDadosParquimetroToMaps extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... urls) {
+
+            return ConexaoApp.postDados(urls[0], parametros);
+
+        }
+
+        @Override
+        protected void onPostExecute(String resultado) {
+
+            degenerateJSONParquimetrosToMaps(resultado);
 
         }
     }

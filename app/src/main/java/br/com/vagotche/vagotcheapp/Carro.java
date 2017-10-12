@@ -67,8 +67,7 @@ public class Carro {
 	public List<Placa> getPlacas() {
 		return placas;
 	}
-	public void setPlacas(List<Placa> placas) {
-		this.placas = placas;
-	}
+
+	public void setPlacas(List<Placa> placas) {this.placas = placas;}
 
 }
