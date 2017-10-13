@@ -90,13 +90,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //Parquimetros Reais
         addParquimetrosArray();
 
-        //Testes Parquimetros
-
-//        addParquimetroCelGenuino();
-//        addParquimetroCelFernandoMachado();
-//        addParquimetroMalFloriadoPeixoto();
-
-
         //Initialize Google Play Services
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this,
@@ -249,16 +242,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             for(int i = 0; i < ja.length(); i++) {
                 JSONObject jo = ja.getJSONObject(i);
 
-//                alert(jo.toString());
-//
-//                //String cdParquimetro = jo.getString("cdParquimetro");
-//                alert(jo.getString("cdEndereco"));
-//                alert(jo.getString("nmVagasNormais"));
-//                alert(jo.getString("nmVagasDeficiente"));
-//                alert(jo.getString("nmVagasIdosos"));
-//                alert(jo.getString("Latitude"));
-//                alert(jo.getString("Longitude"));
-
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.title(jo.getString("cdEndereco"));
                 LatLng latLng = new LatLng(Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")));
@@ -276,43 +259,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             catch(JSONException e){ e.printStackTrace(); }
         }
-
-    //TESTES PARQUIMETRO
-    public void addParquimetroCelGenuino() {
-        //Parquimetro Rua. Cel. Genuíno
-        LatLng latLng = new LatLng(-30.035315, -51.226739);
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
-        markerOptions.title("Parquímetro - Rua. Cel. Genuíno");
-        markerOptions.snippet("Vagas ocupadas 4/20");
-        //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(R.mipmap.parquimetro_40x40));
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-        mMap.addMarker(markerOptions);
-    }
-
-    public void addParquimetroCelFernandoMachado() {
-        //Parquimetro Fernando Machado
-        LatLng latLng = new LatLng(-30.034922, -51.226855);
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
-        markerOptions.title("Parquímetro - Rua. Cel. Fernando Machado");
-        markerOptions.snippet("Vagas ocupadas 10/10");
-        //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(R.mipmap.parquimetro_40x40));
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-        mMap.addMarker(markerOptions);
-    }
-
-    public void addParquimetroMalFloriadoPeixoto() {
-        //Parquimetro Fernando Machado
-        LatLng latLng = new LatLng(-30.035166, -51.227233);
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
-        markerOptions.title("Parquímetro - Rua. Mal. Floriano Peixoto");
-        markerOptions.snippet("Vagas ocupadas 8/10");
-        //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(R.mipmap.parquimetro_40x40));
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
-        mMap.addMarker(markerOptions);
-    }
-
 
 }
