@@ -56,8 +56,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        addParquimetrosArray();
-
         //Teste Spinner
         Spinner spinner = (Spinner) findViewById(R.id.spinner1);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MapsActivity.this,
@@ -94,9 +92,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //Testes Parquimetros
 
-        addParquimetroCelGenuino();
-        addParquimetroCelFernandoMachado();
-        addParquimetroMalFloriadoPeixoto();
+//        addParquimetroCelGenuino();
+//        addParquimetroCelFernandoMachado();
+//        addParquimetroMalFloriadoPeixoto();
 
 
         //Initialize Google Play Services
@@ -236,7 +234,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 return;
             }
 
-            // other 'case' lines to check for other permissions this app might request.
+            // other 'case' lines to check for other permissions this app might request./
             // You can add here other case statements according to your requirement.
         }
     }
@@ -244,60 +242,39 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //Parquímetros Reais
         public void addParquimetrosArray() {
 
-            alert(getIntent().getStringExtra("parquimetrosArray"));
-
-            ArrayList<String> parquimetrosArray = new ArrayList<String>();
-
             try{
                 JSONArray ja = new JSONArray(getIntent().getStringExtra("parquimetrosArray"));
 
-            for(int i=0; i < ja.length(); i++) {
+                //for(int i=0; i < ja.length(); i++) {
+            for(int i = 0; i < ja.length(); i++) {
                 JSONObject jo = ja.getJSONObject(i);
 
-                //String cdParquimetro = jo.getString("cdParquimetro");
-                String cdEndereco  = jo.getString("cdEndereco");
-                String nmVagasNormais  = jo.getString("nmVagasNormais");
-                String nmVagasDeficiente  = jo.getString("nmVagasDeficiente");
-                String nmVagasIdosos  = jo.getString("nmVagasIdosos");
-                String Latitude  = jo.getString("Latitude");
-                String Longitude  = jo.getString("Longitude");
+//                alert(jo.toString());
+//
+//                //String cdParquimetro = jo.getString("cdParquimetro");
+//                alert(jo.getString("cdEndereco"));
+//                alert(jo.getString("nmVagasNormais"));
+//                alert(jo.getString("nmVagasDeficiente"));
+//                alert(jo.getString("nmVagasIdosos"));
+//                alert(jo.getString("Latitude"));
+//                alert(jo.getString("Longitude"));
 
                 MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.title(cdEndereco);
-                LatLng latLng = new LatLng(Double.parseDouble(Latitude), Double.parseDouble(Longitude));
+                markerOptions.title(jo.getString("cdEndereco"));
+                LatLng latLng = new LatLng(Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")));
                 markerOptions.position(latLng);
-                markerOptions.snippet("Vagas normais ocupadas 0/" + nmVagasNormais);
-                markerOptions.snippet("Vagas deficientes ocupadas 0/" + nmVagasDeficiente);
-                markerOptions.snippet("Vagas idosos ocupadas 0/" + nmVagasIdosos);
+                markerOptions.snippet(  "Vagas normais ocupadas 0/" + jo.getString("nmVagasNormais") +
+                                        "Vagas deficientes ocupadas 0/" + jo.getString("nmVagasDeficiente") +
+                                        "Vagas idosos ocupadas 0/" + jo.getString("nmVagasIdosos"));
                 //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(R.mipmap.parquimetro_40x40));
                 markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                 mMap.addMarker(markerOptions);
 
-            }
+                }
 
             }
 
             catch(JSONException e){ e.printStackTrace(); }
-
-//        for(int i=0; i < parquimetros.size(); i++) {
-//
-//            //alert(parquimetros.get(parquimetros.size() -1 ));
-//
-//            while (i == i) {
-//
-//                //alert(parquimetros.get(x));
-//                MarkerOptions markerOptions = new MarkerOptions();
-//                markerOptions.title(parquimetros.get(i));
-//                LatLng latLng = new LatLng(Double.parseDouble(parquimetros.get(i).replace(",",".")), Double.parseDouble(parquimetros.get(i).replace(",",".")));
-//                markerOptions.position(latLng);
-//                markerOptions.snippet("Vagas normais ocupadas 0/" + parquimetros.get(i));
-//                markerOptions.snippet("Vagas deficientes ocupadas 0/" + parquimetros.get(i));
-//                markerOptions.snippet("Vagas idosos ocupadas 0/" + parquimetros.get(i));
-//                //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(R.mipmap.parquimetro_40x40));
-//                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-//                mMap.addMarker(markerOptions);
-//                }
-//            }
         }
 
     //TESTES PARQUIMETRO
