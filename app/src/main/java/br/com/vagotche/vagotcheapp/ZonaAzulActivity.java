@@ -2,6 +2,7 @@ package br.com.vagotche.vagotcheapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -39,7 +40,7 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
     int cdUsuario;
     TextView seuSaldo, txvTempo30, txvTempo1, txvTempo130, txvTempo2;
     Spinner spinnerPlaca, spinnerCidade, spinnerParquimetro;
-    Double valor = 0.00;
+    int valor = 0;
     Button btnUtilizarCred;
     ImageView btnVoltar;
     String url = "";
@@ -75,15 +76,6 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
         btnVoltar = (ImageView) findViewById(R.id.imvVoltarZonaAzul);
         btnVoltar.setOnClickListener(this);
 
-//        url = "http://fabrica.govbrsul.com.br/vagotche/index.php/ZonaAzul/VerificarPlacas";
-//        parametros = "cdUsuario=" + cdUsuario;
-//        new SolicitaDadosPlaca().execute(url);
-
-//        url = "http://fabrica.govbrsul.com.br/vagotche/index.php/ZonaAzul/VerificarParquimetros";
-//        //parametros = "cdUsuario=" + cdUsuario;
-//        new SolicitaDadosParquimetro().execute(url);
-
-
         // Spinner Placas
         spinnerPlaca = (Spinner) findViewById(R.id.spinnerPlaca);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getIntent().getStringArrayListExtra("placasArray"));
@@ -102,22 +94,20 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCidade.setAdapter(adapter);
 
-        //spinnerPlaca.getSelectedItem(getIntent().getStringExtra("placa"));
-//        spinnerCidade = (Spinner) findViewById(R.id.spinnerCidade);
-//        spinnerParquimetro = (Spinner) findViewById(R.id.spinnerParquimetro);
-//        txvTempo30 = (TextView) findViewById(R.id.txvTempo30);
-//        txvTempo1 = (TextView) findViewById(R.id.txvTempo1);
-//        txvTempo130 = (TextView) findViewById(R.id.txvTempo130);
-//        txvTempo2 = (TextView) findViewById(R.id.txvTempo2);
+
+        txvTempo30 = (TextView) findViewById(R.id.txvTempo30);
+        txvTempo1 = (TextView) findViewById(R.id.txvTempo1);
+        txvTempo130 = (TextView) findViewById(R.id.txvTempo130);
+        txvTempo2 = (TextView) findViewById(R.id.txvTempo2);
 //
 //        btnUtilizarCred = (Button) findViewById(R.id.btnUtilizarCred);
 //        btnVoltar = (ImageView) findViewById(R.id.imvVoltarZonaAzul);
 //
-//        // Button listeners
-//        txvTempo30.setOnClickListener(this);
-//        txvTempo1.setOnClickListener(this);
-//        txvTempo130.setOnClickListener(this);
-//        txvTempo2.setOnClickListener(this);
+        // Button listeners
+        txvTempo30.setOnClickListener(this);
+        txvTempo1.setOnClickListener(this);
+        txvTempo130.setOnClickListener(this);
+        txvTempo2.setOnClickListener(this);
           //spinnerPlaca.setOnClickListener(this);
 //        spinnerCidade.setOnClickListener(this);
 //        spinnerParquimetro.setOnClickListener(this);
@@ -125,56 +115,6 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
 //        btnVoltar.setOnClickListener(this);
 
     }
-
-//    private void degenerateJSONPlacas(String data){
-//
-//        ArrayList<String> placasArray = new ArrayList<String>();
-//
-//        try{
-//            JSONArray ja = new JSONArray(data);
-//
-//            for(int i=0; i < ja.length(); i++) {
-//                JSONObject jo = ja.getJSONObject(i);
-//                String placa  = jo.getString("dsPlaca");
-//                placasArray.add(placa);
-//            }
-//
-//            // Spinner Placas
-//            spinnerPlaca = (Spinner) findViewById(R.id.spinnerPlaca);
-//            adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, placasArray);
-//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//            spinnerPlaca.setAdapter(adapter);
-//
-//
-//        }
-//        catch(JSONException e){ e.printStackTrace(); }
-//
-//    }
-//
-//    private void degenerateJSONParquimetros(String data){
-//
-//        ArrayList<String> parquimetrosArray = new ArrayList<String>();
-//
-//        try{
-//            JSONArray ja = new JSONArray(data);
-//
-//            for(int i=0; i < ja.length(); i++) {
-//                JSONObject jo = ja.getJSONObject(i);
-//                String parquimetro  = jo.getString("cdEndereco");
-//                parquimetrosArray.add(parquimetro);
-//            }
-//
-//            //Spinner Parquimetro
-//            spinnerParquimetro = (Spinner) findViewById(R.id.spinnerParquimetro);
-//            adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, parquimetrosArray);
-//            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//            spinnerParquimetro.setAdapter(adapter);
-//
-//
-//        }
-//        catch(JSONException e){ e.printStackTrace(); }
-//
-//    }
 
     private void UtilizarCredito() {
 
@@ -187,93 +127,83 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
             url = "http://fabrica.govbrsul.com.br/vagotche/index.php/Creditos/ComprarCreditos";
             parametros = "saldo=" + valor + "&cdUsuario=" + cdUsuario;
 
-            //new SolicitaDados().execute(url);
+            new SolicitaDados().execute(url);
         }
 
     }
 
-//    private class SolicitaDadosPlaca extends AsyncTask<String, Void, String> {
-//
-//        @Override
-//        protected String doInBackground(String... urls) {
-//
-//            return ConexaoApp.postDados(urls[0], parametros);
-//
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String resultado) {
-//
-//                degenerateJSONPlacas(resultado);
-//
-//            if (resultado.contains("credito_adquirido")) {
-//                alert("Créditos Adquiridos...");
-//
-//                TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-//                //String number = tm.getLine1Number();
-//                //alert("numero: " +number);
-//                SmsManager smsManager = SmsManager.getDefault();
-//                smsManager.sendTextMessage("51997152881", null, "Você utilizou R$"+ valor +" reais do credVAGO", null, null);
-//
-//                finish();
-//            }
-//
-//        }
-//    }
+    private class SolicitaDados extends AsyncTask<String, Void, String> {
 
-//    private class SolicitaDadosParquimetro extends AsyncTask<String, Void, String> {
-//
-//        @Override
-//        protected String doInBackground(String... urls) {
-//
-//            return ConexaoApp.postDados(urls[0], parametros);
-//
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String resultado) {
-//
-//                degenerateJSONParquimetros(resultado);
-//
-//            if (resultado.contains("credito_adquirido")) {
-//                alert("Créditos Adquiridos...");
-//
-//                TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-//                //String number = tm.getLine1Number();
-//                //alert("numero: " +number);
-//                SmsManager smsManager = SmsManager.getDefault();
-//                smsManager.sendTextMessage("51997152881", null, "Você utilizou R$"+ valor +" reais do credVAGO", null, null);
-//
-//                finish();
-//            }
-//
-//        }
-//    }
+        @Override
+        protected String doInBackground(String... urls) {
+
+            return ConexaoApp.postDados(urls[0], parametros);
+
+        }
+
+        @Override
+        protected void onPostExecute(String resultado) {
+
+            if (resultado.contains("credito_adquirido")) {
+                alert("Créditos Adquiridos...");
+
+                TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+                //String number = tm.getLine1Number();
+                //alert("numero: " +number);
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage("51997152881", null, "Você utilizou R$"+ valor +" reais do credVAGO para utilização do parquímetro "
+                        + spinnerParquimetro + " Sua vaga está disponível até às " + valor , null, null);
+
+                finish();
+            }
+
+        }
+    }
 
     @Override
     public void onClick(View v) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) v).isChecked();
+
+        // Check which textview was clicked
         switch (v.getId()) {
             case R.id.txvTempo30:
-                //valor = valor + 5;
+                txvTempo30.setBackgroundColor(Color.DKGRAY);
+                txvTempo1.setBackgroundColor(0x00000000);
+                txvTempo130.setBackgroundColor(0x00000000);
+                txvTempo2.setBackgroundColor(0x00000000);
+                valor = 30;
                 //valor.setText(df2.format(valor));
                 break;
             case R.id.txvTempo1:
-                //valor = valor + 10;
+                txvTempo1.setBackgroundColor(Color.DKGRAY);
+                txvTempo30.setBackgroundColor(0x00000000);
+                txvTempo130.setBackgroundColor(0x00000000);
+                txvTempo2.setBackgroundColor(0x00000000);
+                valor = 60;
                 //valor.setText(df2.format(valor));
                 break;
             case R.id.txvTempo130:
-                //valor = valor + 15;
+                txvTempo130.setBackgroundColor(Color.DKGRAY);
+                txvTempo30.setBackgroundColor(0x00000000);
+                txvTempo1.setBackgroundColor(0x00000000);
+                txvTempo2.setBackgroundColor(0x00000000);
+                valor = 90;
                 //valor.setText(df2.format(valor));
                 break;
             case R.id.txvTempo2:
-                //valor = 0.00;
+                txvTempo2.setBackgroundColor(Color.DKGRAY);
+                txvTempo30.setBackgroundColor(0x00000000);
+                txvTempo1.setBackgroundColor(0x00000000);
+                txvTempo130.setBackgroundColor(0x00000000);
+                valor = 120;
                 //valor.setText(df2.format(valor));
                 break;
             case R.id.imvVoltarZonaAzul:
                 finish();
                 break;
             case R.id.btnUtilizarCred:
-                if (valor >= 5){
+                if (valor >= 30){
                     UtilizarCredito();
                 } else {
                     alert("Você deve informar um valor");

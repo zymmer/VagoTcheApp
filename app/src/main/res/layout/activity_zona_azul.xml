@@ -132,13 +132,14 @@
 
     </LinearLayout>
 
-    <RadioGroup
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:background="@drawable/modelo_edit_blue">
 
-        <RadioButton
+        <TextView
             android:id="@+id/txvTempo30"
             android:clickable="true"
             android:text="R$ 0,50"
@@ -146,10 +147,9 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             android:textStyle="bold"
             android:gravity="center"
-            android:background="@drawable/circle"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:onClick="onCheckboxClicked"
+            android:onClick="onClick"
             />
 
         <TextView
@@ -160,7 +160,7 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             android:textStyle="bold"
             android:gravity="center"
-            android:background="@drawable/circle"
+
             android:layout_width="60dp"
             android:layout_height="60dp"
             />
@@ -173,7 +173,7 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             android:textStyle="bold"
             android:gravity="center"
-            android:background="@drawable/circle"
+
             android:layout_width="60dp"
             android:layout_height="60dp"
             />
@@ -186,12 +186,12 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             android:textStyle="bold"
             android:gravity="center"
-            android:background="@drawable/circle"
+
             android:layout_width="60dp"
             android:layout_height="60dp"
             />
 
-    </RadioGroup>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
