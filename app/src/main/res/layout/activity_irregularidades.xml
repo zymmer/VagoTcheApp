@@ -29,14 +29,14 @@
         android:textAlignment="gravity"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
         android:textColor="@color/colorWhite"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        />
 
     <ExpandableListView
         android:id="@+id/expandableListView"
-        android:background="@drawable/modelo_edit"
         android:layout_width="wrap_content"
         android:layout_height="324dp"
-        android:ems="20"
+        android:ems="50"
         android:inputType="textMultiLine" />
 
     <Button
