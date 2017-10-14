@@ -36,11 +36,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="70dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@drawable/modelo_edit_blue">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
             android:textColor="@color/colorWhite"
             android:textStyle="bold"
             android:text="@string/Saldo" />
@@ -130,13 +132,13 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <RadioGroup
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center">
 
-        <TextView
+        <RadioButton
             android:id="@+id/txvTempo30"
             android:clickable="true"
             android:text="R$ 0,50"
@@ -147,6 +149,7 @@
             android:background="@drawable/circle"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:onClick="onCheckboxClicked"
             />
 
         <TextView
@@ -188,7 +191,7 @@
             android:layout_height="60dp"
             />
 
-    </LinearLayout>
+    </RadioGroup>
 
     <LinearLayout
         android:layout_width="wrap_content"
