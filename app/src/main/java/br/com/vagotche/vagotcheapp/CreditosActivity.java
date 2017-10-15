@@ -20,6 +20,9 @@ import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class CreditosActivity extends AppCompatActivity implements View.OnClickListener {
@@ -36,6 +39,13 @@ public class CreditosActivity extends AppCompatActivity implements View.OnClickL
     private void alert(String s){
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
     }
+
+    Date data = new Date();
+
+    //Formato Data completa
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+    //Formato Hora
+    SimpleDateFormat dateFormat_hora = new SimpleDateFormat("HH:mm:ss");
 
     //Formato de moeda
     DecimalFormatSymbols dfs = new DecimalFormatSymbols (new Locale("pt", "BR"));
@@ -102,14 +112,22 @@ public class CreditosActivity extends AppCompatActivity implements View.OnClickL
         @Override
         protected void onPostExecute(String resultado) {
 
+            //Data Atual do Celular
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(data);
+            Date data_atual = cal.getTime();
+
+            String data_completa = dateFormat.format(data_atual);
+            String hora_atual = dateFormat_hora.format(data_atual);
+
             if (resultado.contains("credito_adquirido")) {
                 alert("Créditos Adquiridos...");
 
-                TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+                //TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
                 //String number = tm.getLine1Number();
                 //alert("numero: " +number);
                 SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage("51997152881", null, "Você adquiriu R$"+ saldo +" reais de crédito para o seu credVAGO", null, null);
+                smsManager.sendTextMessage("51997152881", null, "VagoTchê: Adquirido R$"+ df2.format(saldo) +" para o credVAGO." + " Data: " + data_completa, null, null);
 
                 finish();
             }

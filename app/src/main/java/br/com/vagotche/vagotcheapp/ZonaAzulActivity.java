@@ -29,8 +29,11 @@ import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -40,7 +43,8 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
     int cdUsuario;
     TextView seuSaldo, txvTempo30, txvTempo1, txvTempo130, txvTempo2;
     Spinner spinnerPlaca, spinnerCidade, spinnerParquimetro;
-    int valor = 0;
+    Double valor = 0.00;
+    int tempo = 0;
     Button btnUtilizarCred;
     ImageView btnVoltar;
     String url = "";
@@ -55,6 +59,13 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
     private void alert(String s){
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
     }
+
+    Date data = new Date();
+
+    //Formato Data completa
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+    //Formato Hora
+    SimpleDateFormat dateFormat_hora = new SimpleDateFormat("HH:mm:ss");
 
     //Formato de moeda
     DecimalFormatSymbols dfs = new DecimalFormatSymbols (new Locale("pt", "BR"));
@@ -73,8 +84,6 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
         //Saldo
         seuSaldo = (TextView) findViewById(R.id.viewSaldoCreditosZA);
         seuSaldo.setText(getIntent().getStringExtra("saldoZA"));
-        btnVoltar = (ImageView) findViewById(R.id.imvVoltarZonaAzul);
-        btnVoltar.setOnClickListener(this);
 
         // Spinner Placas
         spinnerPlaca = (Spinner) findViewById(R.id.spinnerPlaca);
@@ -94,25 +103,21 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCidade.setAdapter(adapter);
 
-
+        //Views
         txvTempo30 = (TextView) findViewById(R.id.txvTempo30);
         txvTempo1 = (TextView) findViewById(R.id.txvTempo1);
         txvTempo130 = (TextView) findViewById(R.id.txvTempo130);
         txvTempo2 = (TextView) findViewById(R.id.txvTempo2);
-//
-//        btnUtilizarCred = (Button) findViewById(R.id.btnUtilizarCred);
-//        btnVoltar = (ImageView) findViewById(R.id.imvVoltarZonaAzul);
-//
+        btnUtilizarCred = (Button) findViewById(R.id.btnUtilizarCred);
+        btnVoltar = (ImageView) findViewById(R.id.imvVoltarZonaAzul);
+
         // Button listeners
         txvTempo30.setOnClickListener(this);
         txvTempo1.setOnClickListener(this);
         txvTempo130.setOnClickListener(this);
         txvTempo2.setOnClickListener(this);
-          //spinnerPlaca.setOnClickListener(this);
-//        spinnerCidade.setOnClickListener(this);
-//        spinnerParquimetro.setOnClickListener(this);
-//        btnUtilizarCred.setOnClickListener(this);
-//        btnVoltar.setOnClickListener(this);
+        btnUtilizarCred.setOnClickListener(this);
+        btnVoltar.setOnClickListener(this);
 
     }
 
@@ -122,10 +127,18 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
                 getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
+        String placa = spinnerPlaca.getSelectedItem().toString();
+        String cidade = spinnerCidade.getSelectedItem().toString();
+        String parquimetro = spinnerParquimetro.getSelectedItem().toString();
+
+//        alert("cdUsuario= " + cdUsuario + " &placa= " + placa + " &cidade= " + cidade +
+//                " &parquimetro=" + parquimetro + " &valorUtilizado= " + valor);
+
         if (networkInfo != null && networkInfo.isConnected()){
 
-            url = "http://fabrica.govbrsul.com.br/vagotche/index.php/Creditos/ComprarCreditos";
-            parametros = "saldo=" + valor + "&cdUsuario=" + cdUsuario;
+            url = "http://fabrica.govbrsul.com.br/vagotche/index.php/ZonaAzul/PagarZonaAzul";
+            parametros = "cdUsuario=" + cdUsuario + "&placa=" + placa + "&cidade=" + cidade +
+                    "&parquimetro=" + parquimetro + "&valorUtilizado=" + valor;
 
             new SolicitaDados().execute(url);
         }
@@ -144,17 +157,33 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
         @Override
         protected void onPostExecute(String resultado) {
 
-            if (resultado.contains("credito_adquirido")) {
-                alert("Créditos Adquiridos...");
+            alert(parametros);
+            alert(resultado);
 
-                TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+            //Data Atual do Celular
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(data);
+
+            Date data_atual = cal.getTime();
+            String data_completa = dateFormat.format(data_atual);
+            cal.add(Calendar.MINUTE, tempo);
+            Date data_atual_somado = cal.getTime();
+            String hora_atual = dateFormat_hora.format(data_atual_somado);
+
+            if (resultado.contains("Pagamento_efetuado")) {
+                alert("Reserva efetuada para utilização do parquímetro " + spinnerParquimetro.getSelectedItem().toString()+
+                                " Sua vaga estará disponível até às " + hora_atual);
+
+                //TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
                 //String number = tm.getLine1Number();
                 //alert("numero: " +number);
                 SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage("51997152881", null, "Você utilizou R$"+ valor +" reais do credVAGO para utilização do parquímetro "
-                        + spinnerParquimetro + " Sua vaga está disponível até às " + valor , null, null);
+                smsManager.sendTextMessage("51997152881", null, "VagoTchê: Utilizado R$"+ df2.format(valor) +" do credVAGO." + " Data: " + data_completa, null, null);
 
                 finish();
+
+            } else if (resultado.contains("Crédito_insuficiente")) {
+                alert("Você não possui crédito suficiente para reservar esta vaga");
             }
 
         }
@@ -163,7 +192,7 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         // Is the view now checked?
-        boolean checked = ((CheckBox) v).isChecked();
+        //boolean checked = ((CheckBox) v).isChecked();
 
         // Check which textview was clicked
         switch (v.getId()) {
@@ -172,7 +201,9 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
                 txvTempo1.setBackgroundColor(0x00000000);
                 txvTempo130.setBackgroundColor(0x00000000);
                 txvTempo2.setBackgroundColor(0x00000000);
-                valor = 30;
+                valor = 0.50;
+                tempo = 30;
+                //alert("Valor: " +valor+ " Tempo: "+tempo);
                 //valor.setText(df2.format(valor));
                 break;
             case R.id.txvTempo1:
@@ -180,7 +211,9 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
                 txvTempo30.setBackgroundColor(0x00000000);
                 txvTempo130.setBackgroundColor(0x00000000);
                 txvTempo2.setBackgroundColor(0x00000000);
-                valor = 60;
+                valor = 1.00;
+                tempo = 60;
+                //alert("Valor: " +valor+ " Tempo: "+tempo);
                 //valor.setText(df2.format(valor));
                 break;
             case R.id.txvTempo130:
@@ -188,7 +221,9 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
                 txvTempo30.setBackgroundColor(0x00000000);
                 txvTempo1.setBackgroundColor(0x00000000);
                 txvTempo2.setBackgroundColor(0x00000000);
-                valor = 90;
+                valor = 1.50;
+                tempo = 90;
+                //alert("Valor: " +valor+ " Tempo: "+tempo);
                 //valor.setText(df2.format(valor));
                 break;
             case R.id.txvTempo2:
@@ -196,14 +231,16 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
                 txvTempo30.setBackgroundColor(0x00000000);
                 txvTempo1.setBackgroundColor(0x00000000);
                 txvTempo130.setBackgroundColor(0x00000000);
-                valor = 120;
+                valor = 2.00;
+                tempo = 120;
+                //alert("Valor: " +valor+ " Tempo: "+tempo);
                 //valor.setText(df2.format(valor));
                 break;
             case R.id.imvVoltarZonaAzul:
                 finish();
                 break;
             case R.id.btnUtilizarCred:
-                if (valor >= 30){
+                if (valor >= 0.50){
                     UtilizarCredito();
                 } else {
                     alert("Você deve informar um valor");

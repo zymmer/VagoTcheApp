@@ -160,7 +160,6 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             android:textStyle="bold"
             android:gravity="center"
-
             android:layout_width="60dp"
             android:layout_height="60dp"
             />
@@ -173,7 +172,6 @@
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
             android:textStyle="bold"
             android:gravity="center"
-
             android:layout_width="60dp"
             android:layout_height="60dp"
             />
