@@ -63,7 +63,7 @@ public class CreditosActivity extends AppCompatActivity implements View.OnClickL
 
         //Saldo
         seuSaldo = (TextView) findViewById(R.id.viewSaldoCreditos);
-        seuSaldo.setText(getIntent().getStringExtra("saldo"));
+        seuSaldo.setText("R$" + getIntent().getStringExtra("saldo"));
 
         // Get IDs
         creditos5 = (TextView) findViewById(R.id.creditos5);

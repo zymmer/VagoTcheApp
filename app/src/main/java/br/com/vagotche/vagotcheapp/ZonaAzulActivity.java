@@ -47,9 +47,7 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
     int tempo = 0;
     Button btnUtilizarCred;
     ImageView btnVoltar;
-    String url = "";
-    String parametros = "";
-    String flag = "";
+    String url = "", parametros = "", saldoExtra;
     Placa placa = new Placa();
 
     String[] cidades = {"Porto Alegre"};
@@ -83,7 +81,8 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
 
         //Saldo
         seuSaldo = (TextView) findViewById(R.id.viewSaldoCreditosZA);
-        seuSaldo.setText(getIntent().getStringExtra("saldoZA"));
+        seuSaldo.setText("R$" + getIntent().getStringExtra("saldoZA"));
+        saldoExtra = getIntent().getStringExtra("saldoZA");
 
         // Spinner Placas
         spinnerPlaca = (Spinner) findViewById(R.id.spinnerPlaca);
@@ -127,21 +126,25 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
                 getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-        String placa = spinnerPlaca.getSelectedItem().toString();
-        String cidade = spinnerCidade.getSelectedItem().toString();
-        String parquimetro = spinnerParquimetro.getSelectedItem().toString();
+        saldoExtra = saldoExtra.replace("R$", "");
+        saldoExtra = saldoExtra.replace(",", ".");
 
-//        alert("cdUsuario= " + cdUsuario + " &placa= " + placa + " &cidade= " + cidade +
-//                " &parquimetro=" + parquimetro + " &valorUtilizado= " + valor);
+        if (Double.parseDouble(saldoExtra) < valor) {
 
-        if (networkInfo != null && networkInfo.isConnected()){
+            alert("Saldo indisponível");
 
-            url = "http://fabrica.govbrsul.com.br/vagotche/index.php/ZonaAzul/PagarZonaAzul";
-            parametros = "cdUsuario=" + cdUsuario + "&placa=" + placa + "&cidade=" + cidade +
-                    "&parquimetro=" + parquimetro + "&valorUtilizado=" + valor;
+        } else if (networkInfo != null && networkInfo.isConnected()) {
 
-            new SolicitaDados().execute(url);
-        }
+            String placa = spinnerPlaca.getSelectedItem().toString();
+            String cidade = spinnerCidade.getSelectedItem().toString();
+            String parquimetro = spinnerParquimetro.getSelectedItem().toString();
+
+                url = "http://fabrica.govbrsul.com.br/vagotche/index.php/ZonaAzul/PagarZonaAzul";
+                parametros = "cdUsuario=" + cdUsuario + "&placa=" + placa + "&cidade=" + cidade +
+                        "&parquimetro=" + parquimetro + "&valorUtilizado=" + valor;
+
+                new SolicitaDados().execute(url);
+            }
 
     }
 

@@ -47,6 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
+        android:background="@drawable/modelo_edit_blue"
         android:orientation="horizontal">
 
         <TextView
@@ -54,6 +55,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorWhite"
             android:textStyle="bold"
+            android:paddingLeft="10dp"
             android:text="@string/Saldo" />
 
         <TextView
@@ -65,7 +67,7 @@
             android:layout_height="40dp"
             android:padding="5dp"
             android:paddingLeft="10dp"
-            android:hint=" R$ 0"/>
+            android:hint=" R$0,00"/>
 
     </LinearLayout>
 
@@ -86,7 +88,7 @@
         android:layout_width="100dp"
         android:layout_height="50dp"
         android:padding="5dp"
-        android:hint=" R$ 0"/>
+        android:hint=" R$0,00"/>
 
     <Button
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"

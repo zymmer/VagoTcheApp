@@ -41,7 +41,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.InputStream;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class MenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -61,6 +64,13 @@ public class MenuActivity extends AppCompatActivity
     private void alert(String s){
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
     }
+
+    //Formato de moeda
+    DecimalFormatSymbols dfs = new DecimalFormatSymbols (new Locale("pt", "BR"));
+    // Formato com sinal de menos -5.000,00
+    //DecimalFormat df1 = new DecimalFormat ("#,##0.00", dfs);
+    // Formato com parêntese (5.000,00)
+    DecimalFormat df2 = new DecimalFormat ("#,##0.00;(#,##0.00)", dfs);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -280,27 +290,6 @@ public class MenuActivity extends AppCompatActivity
         try{
             JSONArray ja = new JSONArray(data);
 
-//            for(int i=0; i < ja.length(); i++) {
-//                JSONObject jo = ja.getJSONObject(i);
-//
-//                //String cdParquimetro = jo.getString("cdParquimetro");
-//                String cdEndereco  = jo.getString("cdEndereco");
-//                String nmVagasNormais  = jo.getString("nmVagasNormais");
-//                String nmVagasDeficiente  = jo.getString("nmVagasDeficiente");
-//                String nmVagasIdosos  = jo.getString("nmVagasIdosos");
-//                String Latitude  = jo.getString("Latitude");
-//                String Longitude  = jo.getString("Longitude");
-//
-//                //parquimetrosArray.add(cdParquimetro);
-//                parquimetrosArray.add(cdEndereco);
-//                parquimetrosArray.add(nmVagasNormais);
-//                parquimetrosArray.add(nmVagasDeficiente);
-//                parquimetrosArray.add(nmVagasIdosos);
-//                parquimetrosArray.add(Latitude);
-//                parquimetrosArray.add(Longitude);
-//
-//            }
-
             //Maps.putStringArrayListExtra("parquimetrosArray", parquimetrosArray);
             Maps.putExtra("parquimetrosArray", ja.toString());
             startActivity(Maps);
@@ -455,12 +444,12 @@ public class MenuActivity extends AppCompatActivity
 
                 if(auxiliar.contains("credito")) {
                     Intent it = new Intent(MenuActivity.this, CreditosActivity.class);
-                    it.putExtra("saldo", dadosSaldo[1]);
+                    it.putExtra("saldo", df2.format(Double.parseDouble(dadosSaldo[1])));
                     it.putExtra("id_usuario", cdUsuario);
                     startActivity(it);
                 } else if (auxiliar.contains("zonaazul")) {
 
-                    zonaAzul.putExtra("saldoZA", dadosSaldo[1]);
+                    zonaAzul.putExtra("saldoZA", df2.format(Double.parseDouble(dadosSaldo[1])));
 
                 };
 
@@ -560,16 +549,16 @@ public class MenuActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_meusdados) {
-            Intent it = new Intent(MenuActivity.this, MeusDadosActivity.class);
+            Intent it = new Intent(this, MeusDadosActivity.class);
             startActivity(it);
         } else if (id == R.id.nav_contato) {
-            Intent it = new Intent(MenuActivity.this, ContatoActivity.class);
+            Intent it = new Intent(this, ContatoActivity.class);
             startActivity(it);
         } else if (id == R.id.nav_movimentacoes) {
-            Intent it = new Intent(MenuActivity.this, MovimentacoesActivity.class);
+            Intent it = new Intent(this, MovimentacoesActivity.class);
             startActivity(it);
         } else if (id == R.id.nav_info) {
-            Intent it = new Intent(MenuActivity.this, InfoActivity.class);
+            Intent it = new Intent(this, InfoActivity.class);
             startActivity(it);
         } else if (id == R.id.itemwww) {
             Uri uri = Uri.parse("http://www.vagotche.com.br");
