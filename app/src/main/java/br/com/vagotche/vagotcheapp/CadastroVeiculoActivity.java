@@ -26,6 +26,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CadastroVeiculoActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -117,11 +119,19 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
 
             String placa = editplaca.getText().toString();
 
+            Pattern pattern = Pattern.compile("[a-zA-Z]{3,3}\\d{4,4}");
+            Matcher matcher = pattern.matcher(placa);
+
+            if(matcher.find() ){
+
             url = "http://fabrica.govbrsul.com.br/vagotche/index.php/VerificaPlacaSinesp/VerificaPlacaSinesp";
-
             parametros = "placa=" + placa;
-
             new SolicitaDados().execute(url);
+
+            }else {
+                alert("Placa incorreta");
+            }
+
         } else {
             alert("Nenhuma conexão de rede foi detectada");
         }
@@ -137,17 +147,21 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
 
             String marcaModelo = txtmarca.getText().toString();
             String placa = editplaca.getText().toString();
-            String ano = txtano.getText().toString();
 
-            if(marcaModelo.isEmpty() || placa.isEmpty() || ano.isEmpty()){
-                alert("Nenhum campo pode estar vazio");
-            }else {
+            //Pattern pattern = Pattern.compile("[A-Z]{3}-[0-9]{4}");
+            Pattern pattern = Pattern.compile("[a-zA-Z]{3,3}\\d{4,4}");
+            Matcher matcher = pattern.matcher(placa);
+
+            if(matcher.find() ){
+
                 url = "http://fabrica.govbrsul.com.br/vagotche/index.php/CadastroVeiculo/CadastrarVeiculo";
-
                 parametros = "marcaModelo=" + marcaModelo + "&placa=" + placa + "&anoFabricacao=" + carro.getAno() +
                         "&anoModelo=" + carro.getAnoModelo() + "&cdUsuario=" + cdUsuario;
 
                 new SolicitaDados().execute(url);
+
+            }else {
+                alert("Placa incorreta");
             }
 
         } else {

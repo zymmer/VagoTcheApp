@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:padding="10dip">
+
+    <ImageView
+        android:id="@+id/imgThumb"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        android:background="@drawable/cast_ic_expanded_controller_closed_caption" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dip"
+        android:layout_marginTop="2dip"
+        android:layout_toRightOf="@+id/imgThumb"
+        android:padding="3dip"
+        android:text="CoderzHeaven"
+        android:textColor="@android:color/holo_orange_dark"
+        android:textStyle="bold" />
+
+</RelativeLayout>

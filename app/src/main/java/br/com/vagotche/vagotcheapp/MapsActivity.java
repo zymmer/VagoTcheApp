@@ -4,15 +4,12 @@ package br.com.vagotche.vagotcheapp;
         import android.content.pm.PackageManager;
         import android.location.Location;
         import android.os.Build;
-        import android.support.design.widget.NavigationView;
         import android.support.v4.app.ActivityCompat;
         import android.support.v4.app.FragmentActivity;
         import android.os.Bundle;
         import android.support.v4.content.ContextCompat;
-        import android.support.v4.widget.DrawerLayout;
-        import android.support.v7.app.ActionBarDrawerToggle;
-        import android.support.v7.widget.Toolbar;
-        import android.widget.ArrayAdapter;
+        import android.view.View;
+        import android.widget.AdapterView;
         import android.widget.Spinner;
         import android.widget.Toast;
 
@@ -46,6 +43,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Location mLastLocation;
     Marker mCurrLocationMarker;
     LocationRequest mLocationRequest;
+    Spinner mySpinner;
 
     private void alert(String s){
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
@@ -57,11 +55,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
 
         //Teste Spinner
-        Spinner spinner = (Spinner) findViewById(R.id.spinner1);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MapsActivity.this,
-                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.names));
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-        spinner.setAdapter(arrayAdapter);
+        mySpinner = (Spinner) findViewById(R.id.spinner1);
+        mySpinner.setAdapter(new MyAdapterFiltroVagas(this, R.layout.rowfiltrovagas, getAllList()));
+//        Spinner spinner = (Spinner) findViewById(R.id.spinner1);
+//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MapsActivity.this,
+//                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.names));
+//        arrayAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+//        spinner.setAdapter(arrayAdapter);
 
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -71,6 +71,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
     }
 
     /**
@@ -87,8 +89,40 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
-        //Parquimetros Reais
+        //Parquimetros
         addParquimetrosArray();
+
+        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+
+                switch (position) {
+                    case 0: //Comuns
+                        alert("Spinner item 1!" + parentView.getSelectedItem().toString());
+                        mMap.clear();
+                        addParquimetrosArray();
+                        break;
+                    case 1: //Idosos
+                        alert("Spinner item 2!" + parentView.getSelectedItem().toString());
+                        mMap.clear();
+                        addParquimetrosIdososArray();
+                        break;
+                    case 2: //DF
+                        alert("Spinner item 3!" + parentView.getSelectedItem().toString());
+                        mMap.clear();
+                        addParquimetrosDFArray();
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+                addParquimetrosArray();
+            }
+
+        });
+
 
         //Initialize Google Play Services
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -232,7 +266,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-        //Parquímetros Reais
+        //Parquímetros
         public void addParquimetrosArray() {
 
             try{
@@ -246,9 +280,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 markerOptions.title(jo.getString("cdEndereco"));
                 LatLng latLng = new LatLng(Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")));
                 markerOptions.position(latLng);
-                markerOptions.snippet(  "Vagas normais ocupadas 0/" + jo.getString("nmVagasNormais") +
-                                        "Vagas deficientes ocupadas 0/" + jo.getString("nmVagasDeficiente") +
-                                        "Vagas idosos ocupadas 0/" + jo.getString("nmVagasIdosos"));
+                markerOptions.snippet(  "Vagas Comuns ocupadas 0/" + jo.getString("nmVagasNormais") + "\n" +
+                                        "Vagas DF ocupadas 0/" + jo.getString("nmVagasDeficiente") +"\n" +
+                                        "Vagas Idosos ocupadas 0/" + jo.getString("nmVagasIdosos"));
                 //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(R.mipmap.parquimetro_40x40));
                 markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                 mMap.addMarker(markerOptions);
@@ -259,5 +293,94 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             catch(JSONException e){ e.printStackTrace(); }
         }
+
+    //Parquímetros Idosos
+    public void addParquimetrosIdososArray() {
+
+        try{
+            JSONArray ja = new JSONArray(getIntent().getStringExtra("parquimetrosIdososArray"));
+
+            //for(int i=0; i < ja.length(); i++) {
+            for(int i = 0; i < ja.length(); i++) {
+                JSONObject jo = ja.getJSONObject(i);
+
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.title(jo.getString("cdEndereco"));
+                LatLng latLng = new LatLng(Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")));
+                markerOptions.position(latLng);
+                markerOptions.snippet(  "Vagas normais ocupadas 0/" + jo.getString("nmVagasNormais") + "\n" +
+                        "Vagas deficientes ocupadas 0/" + jo.getString("nmVagasDeficiente") +"\n" +
+                        "Vagas idosos ocupadas 0/" + jo.getString("nmVagasIdosos"));
+                //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(R.mipmap.parquimetro_40x40));
+                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                mMap.addMarker(markerOptions);
+
+            }
+
+        }
+
+        catch(JSONException e){ e.printStackTrace(); }
+    }
+
+    //Parquímetros Idosos
+    public void addParquimetrosDFArray() {
+
+        try{
+            JSONArray ja = new JSONArray(getIntent().getStringExtra("parquimetrosDFArray"));
+
+            //for(int i=0; i < ja.length(); i++) {
+            for(int i = 0; i < ja.length(); i++) {
+                JSONObject jo = ja.getJSONObject(i);
+
+                MarkerOptions markerOptions = new MarkerOptions();
+                markerOptions.title(jo.getString("cdEndereco"));
+                LatLng latLng = new LatLng(Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")));
+                markerOptions.position(latLng);
+                markerOptions.snippet(  "Vagas normais ocupadas 0/" + jo.getString("nmVagasNormais") + "\n" +
+                        "Vagas deficientes ocupadas 0/" + jo.getString("nmVagasDeficiente") +"\n" +
+                        "Vagas idosos ocupadas 0/" + jo.getString("nmVagasIdosos"));
+                //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(R.mipmap.parquimetro_40x40));
+                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                mMap.addMarker(markerOptions);
+
+            }
+
+        }
+
+        catch(JSONException e){ e.printStackTrace(); }
+    }
+
+    public ArrayList<ListItemFiltroVagas> getAllList() {
+
+        ArrayList<ListItemFiltroVagas> allList = new ArrayList<ListItemFiltroVagas>();
+
+        ListItemFiltroVagas item = new ListItemFiltroVagas();
+        item.setData("Vagas Comuns", R.mipmap.parquimetro_40x40);
+        allList.add(item);
+
+        item = new ListItemFiltroVagas();
+        item.setData("Vagas Idosos", R.mipmap.idoso16);
+        allList.add(item);
+
+        item = new ListItemFiltroVagas();
+        item.setData("Vaga D.Físicos", R.mipmap.transport);
+        allList.add(item);
+
+//        item = new ListItemFiltroVagas();
+//        item.setData("Sony", "Japan", R.drawable.logo_vagotche);
+//        allList.add(item);
+//
+//        item = new ListItemFiltroVagas();
+//        item.setData("HTC", "Taiwan", R.drawable.logo_vagotche);
+//        allList.add(item);
+//
+//        for (int i = 0; i < 10000; i++) {
+//            item = new ListItemFiltroVagas();
+//            item.setData("Google " + i, "USA " + i, R.drawable.logo_vagotche);
+//            allList.add(item);
+//        }
+
+        return allList;
+    }
 
 }

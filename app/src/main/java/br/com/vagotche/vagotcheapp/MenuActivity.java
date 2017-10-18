@@ -136,6 +136,8 @@ public class MenuActivity extends AppCompatActivity
             public void onClick(View view) {
                 Maps = new Intent(MenuActivity.this, MapsActivity.class);
                 VerificaParquimetrosToMaps();
+                VerificaParquimetrosIdososToMaps();
+                VerificaParquimetrosDFToMaps();
             }
         });
 
@@ -171,7 +173,7 @@ public class MenuActivity extends AppCompatActivity
                 auxiliar = "zonaazul";
                 VerificaCreditos();
                 VerificaPlacas();
-                VerificaParquimetros();
+                VerificaParquimetrosZonaAzul();
             }
         });
 
@@ -285,17 +287,40 @@ public class MenuActivity extends AppCompatActivity
 
     private void degenerateJSONParquimetrosToMaps(String data){
 
+        try{
+            JSONArray ja = new JSONArray(data);
+            Maps.putExtra("parquimetrosArray", ja.toString());
+
+        }
+         catch(JSONException e){ e.printStackTrace(); }
+
+    }
+
+    private void degenerateJSONParquimetrosIdososToMaps(String data){
+
+        //ArrayList<String> parquimetrosArray = new ArrayList<String>();
+
+        try{
+            JSONArray ja = new JSONArray(data);
+            Maps.putExtra("parquimetrosIdososArray", ja.toString());
+
+        }
+        catch(JSONException e){ e.printStackTrace(); }
+
+    }
+
+    private void degenerateJSONParquimetrosDFToMaps(String data){
+
         //ArrayList<String> parquimetrosArray = new ArrayList<String>();
 
         try{
             JSONArray ja = new JSONArray(data);
 
-            //Maps.putStringArrayListExtra("parquimetrosArray", parquimetrosArray);
-            Maps.putExtra("parquimetrosArray", ja.toString());
+            Maps.putExtra("parquimetrosDFArray", ja.toString());
             startActivity(Maps);
 
         }
-         catch(JSONException e){ e.printStackTrace(); }
+        catch(JSONException e){ e.printStackTrace(); }
 
     }
 
@@ -354,6 +379,23 @@ public class MenuActivity extends AppCompatActivity
         }
     }
 
+    // Verifica parquimetros
+    private void VerificaParquimetrosZonaAzul() {
+
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+        if (networkInfo != null && networkInfo.isConnected()) {
+
+            url = "http://fabrica.govbrsul.com.br/vagotche/index.php/ZonaAzul/VerificarParquimetros";
+            new SolicitaDadosParquimetros().execute(url);
+
+        } else {
+            alert("Nenhuma conexão de rede foi detectada");
+        }
+    }
+
     // Verifica parquimetros disponiveis no mapa
     private void VerificaParquimetrosToMaps() {
 
@@ -364,17 +406,15 @@ public class MenuActivity extends AppCompatActivity
         if (networkInfo != null && networkInfo.isConnected()) {
 
             url = "http://fabrica.govbrsul.com.br/vagotche/index.php/Maps/VerificarParquimetros";
+            new SolicitaDadosParquimetrosToMaps().execute(url);
 
-            //parametros = "cdUsuario=" + cdUsuario;
-
-            new SolicitaDadosParquimetroToMaps().execute(url);
         } else {
             alert("Nenhuma conexão de rede foi detectada");
         }
     }
 
-    // Verifica parquimetros
-    private void VerificaParquimetros() {
+    // Verifica parquimetros Idosos
+    private void VerificaParquimetrosIdososToMaps() {
 
         ConnectivityManager connMgr = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -382,14 +422,30 @@ public class MenuActivity extends AppCompatActivity
 
         if (networkInfo != null && networkInfo.isConnected()) {
 
-            url = "http://fabrica.govbrsul.com.br/vagotche/index.php/ZonaAzul/VerificarParquimetros";
-            new SolicitaDadosParquimetro().execute(url);
+            url = "http://fabrica.govbrsul.com.br/vagotche/index.php/Maps/VerificarParquimetrosIdosos";
+            new SolicitaDadosParquimetrosIdososToMaps().execute(url);
 
         } else {
             alert("Nenhuma conexão de rede foi detectada");
         }
     }
 
+    // Verifica parquimetros DF
+    private void VerificaParquimetrosDFToMaps() {
+
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+        if (networkInfo != null && networkInfo.isConnected()) {
+
+            url = "http://fabrica.govbrsul.com.br/vagotche/index.php/Maps/VerificarParquimetrosDF";
+            new SolicitaDadosParquimetrosDFToMaps().execute(url);
+
+        } else {
+            alert("Nenhuma conexão de rede foi detectada");
+        }
+    }
 
     private class SolicitaDados extends AsyncTask<String, Void, String> {
 
@@ -475,7 +531,7 @@ public class MenuActivity extends AppCompatActivity
         }
     }
 
-    private class SolicitaDadosParquimetro extends AsyncTask<String, Void, String> {
+    private class SolicitaDadosParquimetros extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... urls) {
@@ -492,7 +548,7 @@ public class MenuActivity extends AppCompatActivity
         }
     }
 
-    private class SolicitaDadosParquimetroToMaps extends AsyncTask<String, Void, String> {
+    private class SolicitaDadosParquimetrosToMaps extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... urls) {
@@ -505,6 +561,40 @@ public class MenuActivity extends AppCompatActivity
         protected void onPostExecute(String resultado) {
 
             degenerateJSONParquimetrosToMaps(resultado);
+
+        }
+    }
+
+    private class SolicitaDadosParquimetrosIdososToMaps extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... urls) {
+
+            return ConexaoApp.postDados(urls[0], parametros);
+
+        }
+
+        @Override
+        protected void onPostExecute(String resultado) {
+
+            degenerateJSONParquimetrosIdososToMaps(resultado);
+
+        }
+    }
+
+    private class SolicitaDadosParquimetrosDFToMaps extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... urls) {
+
+            return ConexaoApp.postDados(urls[0], parametros);
+
+        }
+
+        @Override
+        protected void onPostExecute(String resultado) {
+
+            degenerateJSONParquimetrosDFToMaps(resultado);
 
         }
     }

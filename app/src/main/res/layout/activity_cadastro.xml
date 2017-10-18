@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
-        android:background="@color/colorCinzaTransparente">
+        android:background="@color/colorCinzaTransparente50">
 
         <LinearLayout
             android:layout_width="300dp"
