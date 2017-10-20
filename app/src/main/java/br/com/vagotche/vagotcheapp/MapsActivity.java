@@ -10,6 +10,7 @@ package br.com.vagotche.vagotcheapp;
         import android.support.v4.content.ContextCompat;
         import android.view.View;
         import android.widget.AdapterView;
+        import android.widget.ArrayAdapter;
         import android.widget.Spinner;
         import android.widget.Toast;
 
@@ -31,7 +32,9 @@ package br.com.vagotche.vagotcheapp;
         import org.json.JSONException;
         import org.json.JSONObject;
 
+        import java.text.DecimalFormat;
         import java.util.ArrayList;
+        import java.util.Arrays;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -43,7 +46,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Location mLastLocation;
     Marker mCurrLocationMarker;
     LocationRequest mLocationRequest;
-    Spinner mySpinner;
+    Spinner mySpinner, spinner2;
+    JSONArray ja;
+    ArrayAdapter <String> adapter;
 
     private void alert(String s){
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
@@ -57,11 +62,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //Teste Spinner
         mySpinner = (Spinner) findViewById(R.id.spinner1);
         mySpinner.setAdapter(new MyAdapterFiltroVagas(this, R.layout.rowfiltrovagas, getAllList()));
-//        Spinner spinner = (Spinner) findViewById(R.id.spinner1);
-//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MapsActivity.this,
-//                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.names));
-//        arrayAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-//        spinner.setAdapter(arrayAdapter);
+
+        spinner2 = (Spinner) findViewById(R.id.spinner2);
 
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -88,27 +90,36 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-
-        //Parquimetros
-        addParquimetrosArray();
+        //Desligar Toolbar
+        mMap.getUiSettings().setMapToolbarEnabled(false);
+        //Desligar Compasso
+        mMap.getUiSettings().setCompassEnabled(false);
+//
+//        //Parquimetros
+//        addParquimetrosArray();
 
         mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
 
                 switch (position) {
-                    case 0: //Comuns
-                        alert("Spinner item 1!" + parentView.getSelectedItem().toString());
+                    case 0: //Modo Localizar
+                        //alert("Spinner item 1!" + parentView.getSelectedItem().toString());
+                        mMap.clear();
+                        onLocationChanged(mLastLocation);
+                        break;
+                    case 1: //Comuns
+                        //alert("Spinner item 2!" + parentView.getSelectedItem().toString());
                         mMap.clear();
                         addParquimetrosArray();
                         break;
-                    case 1: //Idosos
-                        alert("Spinner item 2!" + parentView.getSelectedItem().toString());
+                    case 2: //Idosos
+                        //alert("Spinner item 3!" + parentView.getSelectedItem().toString());
                         mMap.clear();
                         addParquimetrosIdososArray();
                         break;
-                    case 2: //DF
-                        alert("Spinner item 3!" + parentView.getSelectedItem().toString());
+                    case 3: //DF
+                        //alert("Spinner item 4!" + parentView.getSelectedItem().toString());
                         mMap.clear();
                         addParquimetrosDFArray();
                         break;
@@ -118,11 +129,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 // your code here
-                addParquimetrosArray();
+                //addParquimetrosArray();
             }
 
         });
-
 
         //Initialize Google Play Services
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -192,6 +202,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         }
+
+        //calcParquimetrosMaisProximos();
+        calcParquimetrosMaisProximos();
+
 
     }
 
@@ -270,7 +284,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         public void addParquimetrosArray() {
 
             try{
-                JSONArray ja = new JSONArray(getIntent().getStringExtra("parquimetrosArray"));
+                ja = new JSONArray(getIntent().getStringExtra("parquimetrosArray"));
 
                 //for(int i=0; i < ja.length(); i++) {
             for(int i = 0; i < ja.length(); i++) {
@@ -298,7 +312,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void addParquimetrosIdososArray() {
 
         try{
-            JSONArray ja = new JSONArray(getIntent().getStringExtra("parquimetrosIdososArray"));
+            ja = new JSONArray(getIntent().getStringExtra("parquimetrosIdososArray"));
 
             //for(int i=0; i < ja.length(); i++) {
             for(int i = 0; i < ja.length(); i++) {
@@ -326,7 +340,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void addParquimetrosDFArray() {
 
         try{
-            JSONArray ja = new JSONArray(getIntent().getStringExtra("parquimetrosDFArray"));
+            ja = new JSONArray(getIntent().getStringExtra("parquimetrosDFArray"));
 
             //for(int i=0; i < ja.length(); i++) {
             for(int i = 0; i < ja.length(); i++) {
@@ -350,11 +364,96 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         catch(JSONException e){ e.printStackTrace(); }
     }
 
+
+    //Parquímetros mais proximos
+
+    public void calcParquimetrosMaisProximos() {
+
+        try {
+
+            ArrayList<ListItemFiltroVagas> parquimetrosArray = new ArrayList<ListItemFiltroVagas>();
+            ja = new JSONArray(getIntent().getStringExtra("parquimetrosArray"));
+
+            for (int i = 0; i < ja.length(); i++) {
+                JSONObject jo = ja.getJSONObject(i);
+
+                //LatLng latLng = new LatLng(Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")));
+
+                float results[] = new float[10];
+
+                Location.distanceBetween(mLastLocation.getLatitude(), mLastLocation.getLongitude(),
+                        Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")), results);
+
+                int radius = 1600;// radius of earth in Km
+
+                if (results[0] < radius) {
+
+                alert("Parquímetro = " + jo.getString("cdEndereco") + "Distance = " +results[0]);
+
+
+                    //for (int x = 0; x < results.length; x++) {
+
+                        MarkerOptions markerOptions = new MarkerOptions();
+                        markerOptions.title(jo.getString("cdEndereco"));
+                        LatLng latLng = new LatLng(Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")));
+                        markerOptions.position(latLng);
+                        markerOptions.snippet("Vagas normais ocupadas 0/" + jo.getString("nmVagasNormais")); //+ "\n" +
+//                            "Vagas deficientes ocupadas 0/" + jo.getString("nmVagasDeficiente") +"\n" +
+//                            "Vagas idosos ocupadas 0/" + jo.getString("nmVagasIdosos"));
+                        //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(R.mipmap.parquimetro_40x40));
+                        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                        mMap.addMarker(markerOptions);
+
+
+                    ListItemFiltroVagas item = new ListItemFiltroVagas();
+                    item = new ListItemFiltroVagas();
+                    String parquimetro  = jo.getString("cdEndereco");
+                    item.setData(parquimetro, R.mipmap.vehicle);
+                    parquimetrosArray.add(item);
+
+                    //}
+
+//                    for (int x = 0; x < 10; x++) {
+//                        System.out.println("Digite o numero:");
+//                        int num = entrada.nextInt();
+//                        array[i] =num;
+//                    }
+
+                    Arrays.sort(results);
+                    //Parquimetro mais proximo
+                    float maisProximo=results[0];
+
+                    alert("Mais proximo: "+ maisProximo);
+
+//                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MapsActivity.this,
+//                            R.layout.rowfiltrovagas, parquimetrosArray);
+//                    mySpinner.setAdapter(arrayAdapter);
+
+                    //spinner2.setAdapter(new MyAdapterFiltroVagas(this, R.layout.rowfiltrovagas, parquimetrosArray));
+
+                }
+
+                spinner2.setAdapter(new MyAdapterFiltroVagas(this, R.layout.rowfiltrovagas, parquimetrosArray));
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
     public ArrayList<ListItemFiltroVagas> getAllList() {
 
         ArrayList<ListItemFiltroVagas> allList = new ArrayList<ListItemFiltroVagas>();
 
         ListItemFiltroVagas item = new ListItemFiltroVagas();
+
+        item = new ListItemFiltroVagas();
+        item.setData("Modo Localizar", R.mipmap.vehicle);
+        allList.add(item);
+
+        item = new ListItemFiltroVagas();
         item.setData("Vagas Comuns", R.mipmap.parquimetro_40x40);
         allList.add(item);
 
@@ -365,10 +464,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         item = new ListItemFiltroVagas();
         item.setData("Vaga D.Físicos", R.mipmap.transport);
         allList.add(item);
-
-//        item = new ListItemFiltroVagas();
-//        item.setData("Sony", "Japan", R.drawable.logo_vagotche);
-//        allList.add(item);
 //
 //        item = new ListItemFiltroVagas();
 //        item.setData("HTC", "Taiwan", R.drawable.logo_vagotche);

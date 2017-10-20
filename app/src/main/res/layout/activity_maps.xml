@@ -24,4 +24,13 @@
         android:layout_height="50dp"
         android:layout_weight="1"/>
 
+    <Spinner
+        android:popupBackground="@color/colorCinzaTransparente80"
+        android:backgroundTint="@color/colorPrimaryDark"
+        android:id="@+id/spinner2"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom|right"
+        android:layout_weight="1"/>
+
 </FrameLayout>
