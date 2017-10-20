@@ -191,7 +191,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
         markerOptions.title("Posição Atual");
-        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.mipmap.transportnew));
         mCurrLocationMarker = mMap.addMarker(markerOptions);
 
         //move map camera
@@ -392,23 +392,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
                     //for (int x = 0; x < results.length; x++) {
+                    LatLng latLng = new LatLng(Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")));
+                    Marker parquimetro = mMap.addMarker(new MarkerOptions()
+                            .position(latLng)
+                            .title(jo.getString("cdEndereco"))
+                            .snippet("Vagas normais ocupadas 0/" + jo.getString("nmVagasNormais"))
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
 
-                        MarkerOptions markerOptions = new MarkerOptions();
-                        markerOptions.title(jo.getString("cdEndereco"));
-                        LatLng latLng = new LatLng(Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")));
-                        markerOptions.position(latLng);
-                        markerOptions.snippet("Vagas normais ocupadas 0/" + jo.getString("nmVagasNormais")); //+ "\n" +
-//                            "Vagas deficientes ocupadas 0/" + jo.getString("nmVagasDeficiente") +"\n" +
-//                            "Vagas idosos ocupadas 0/" + jo.getString("nmVagasIdosos"));
-                        //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(R.mipmap.parquimetro_40x40));
-                        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-                        mMap.addMarker(markerOptions);
+//                        MarkerOptions markerOptions = new MarkerOptions();
+//                        markerOptions.title(jo.getString("cdEndereco"));
+//                        LatLng latLng = new LatLng(Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")));
+//                        markerOptions.position(latLng);
+//                        markerOptions.snippet("Vagas normais ocupadas 0/" + jo.getString("nmVagasNormais")); //+ "\n" +
+////                            "Vagas deficientes ocupadas 0/" + jo.getString("nmVagasDeficiente") +"\n" +
+////                            "Vagas idosos ocupadas 0/" + jo.getString("nmVagasIdosos"));
+//                        //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(R.mipmap.parquimetro_40x40));
+//                        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+//                        mMap.addMarker(markerOptions);
+                    parquimetro.showInfoWindow();
 
 
                     ListItemFiltroVagas item = new ListItemFiltroVagas();
                     item = new ListItemFiltroVagas();
-                    String parquimetro  = jo.getString("cdEndereco");
-                    item.setData(parquimetro, R.mipmap.vehicle);
+                    String parq  = jo.getString("cdEndereco");
+                    item.setData(parq, R.mipmap.vehicle);
                     parquimetrosArray.add(item);
 
                     //}
