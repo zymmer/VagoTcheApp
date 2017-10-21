@@ -410,9 +410,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             ArrayList<ListItemFiltroVagas> parquimetrosArray = new ArrayList<ListItemFiltroVagas>();
             ja = new JSONArray(getIntent().getStringExtra("parquimetrosArray"));
             float results[] = new float[10];
-            double vagasOcupadas = 5;
-            double menos50Perc = 0.49;
-            double mais50Perc = 0.50;
+            int vagasOcupadas = 5;
+            double menos30Perc = 0.29;
+            double memos50Perc = 0.49;
+            double menos80Perc = 0.79;
+            double CemPerc = 1.00;
             int indiceCount = 0;
 
 
@@ -440,7 +442,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     Marker parquimetro = mMap.addMarker(new MarkerOptions()
                             .position(latLng)
                             .title(jo.getString("cdEndereco"))
-                            .snippet("Vagas comuns ocupadas " +vagasOcupadas + "/" + jo.getString("nmVagasNormais")));
+                            .snippet("Vagas comuns ocupadas " + vagasOcupadas + "/" + jo.getString("nmVagasNormais")));
 
                     if(Integer.valueOf(jo.getString("nmVagasNormais")) != 0) {
                         alert("Calc: " + vagasOcupadas / Double.parseDouble(jo.getString("nmVagasNormais")));
@@ -449,9 +451,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     if(Double.parseDouble(jo.getString("nmVagasNormais")) == 0) {
                         parquimetro.setSnippet("Parquímetro em Manutenção");
                         parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
-                    } else if((vagasOcupadas / Double.parseDouble(jo.getString("nmVagasNormais"))) <= menos50Perc){
+                    } else if((vagasOcupadas / Double.parseDouble(jo.getString("nmVagasNormais"))) <= menos30Perc){
+                        parquimetro.setSnippet("Vagas comuns ocupadas " + vagasOcupadas + "/" + jo.getString("nmVagasNormais") + " - Menos de 30% ocupado");
                         parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-                    } else if((vagasOcupadas / Double.parseDouble(jo.getString("nmVagasNormais"))) >= mais50Perc){
+                    } else if((vagasOcupadas / Double.parseDouble(jo.getString("nmVagasNormais"))) <= memos50Perc ){
+                        parquimetro.setSnippet("Vagas comuns ocupadas " + vagasOcupadas + "/" + jo.getString("nmVagasNormais") + " - Menos de 50% ocupado");
+                        parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+                    } else if((vagasOcupadas / Double.parseDouble(jo.getString("nmVagasNormais"))) <= menos80Perc){
+                        parquimetro.setSnippet("Vagas comuns ocupadas " + vagasOcupadas + "/" + jo.getString("nmVagasNormais") + " - Menos de 80% ocupado");
+                        parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+                    } else if((vagasOcupadas / Double.parseDouble(jo.getString("nmVagasNormais"))) == CemPerc){
+                        parquimetro.setSnippet("Vagas comuns ocupadas " + vagasOcupadas + "/" + jo.getString("nmVagasNormais") + " - 100% ocupado");
                         parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                     }
 
