@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import java.util.regex.Pattern;
+
 public class CadastroActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText editNome, editCPF2, editEmail1, editPassword2, editPassword3;
@@ -74,10 +76,13 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
                 b2 = false;
             }
 
+            Pattern password = Pattern.compile("((\\\\d)*([a-z])*([A-Z])*([@#$%])*){6,32}");
 
         if(nome.isEmpty() || cpf.isEmpty() || email.isEmpty() || senha.isEmpty()){
             alert("Nenhum campo pode estar vazio");
-        }else {
+        } else if (!password.matcher(senha).matches()){
+            alert("A senha deve conter entre 6~32 caracteres que podem ser a-z, A-Z, especiais ou numéricos.");
+        } else {
             url = "http://fabrica.govbrsul.com.br/vagotche/index.php/Cadastro/CadastrarLogin";
 
             parametros = "nome=" + nome + "&cpf=" + cpf + "&email=" + email + "&senha=" + senha + "&idoso=" + b1 + "&df=" + b2;

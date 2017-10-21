@@ -134,6 +134,42 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         });
 
+//        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+//
+//                switch (position) {
+//                    case 0: //Modo Localizar
+//                        //alert("Spinner item 1!" + parentView.getSelectedItem().toString());
+//                        mMap.clear();
+//                        onLocationChanged(mLastLocation);
+//                        break;
+//                    case 1: //Comuns
+//                        //alert("Spinner item 2!" + parentView.getSelectedItem().toString());
+//                        mMap.clear();
+//                        addParquimetrosArray();
+//                        break;
+//                    case 2: //Idosos
+//                        //alert("Spinner item 3!" + parentView.getSelectedItem().toString());
+//                        mMap.clear();
+//                        addParquimetrosIdososArray();
+//                        break;
+//                    case 3: //DF
+//                        //alert("Spinner item 4!" + parentView.getSelectedItem().toString());
+//                        mMap.clear();
+//                        addParquimetrosDFArray();
+//                        break;
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parentView) {
+//                // your code here
+//                //addParquimetrosArray();
+//            }
+//
+//        });
+
         //Initialize Google Play Services
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this,
@@ -379,7 +415,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 //LatLng latLng = new LatLng(Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")));
 
-                float results[] = new float[10];
+                float results[] = new float[4];
 
                 Location.distanceBetween(mLastLocation.getLatitude(), mLastLocation.getLongitude(),
                         Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")), results);
@@ -388,8 +424,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 if (results[0] < radius) {
 
-                alert("Parquímetro = " + jo.getString("cdEndereco") + "Distance = " +results[0]);
-
+                //alert("Parquímetro = " + jo.getString("cdEndereco") + "Distance = " +results[0]);
 
                     //for (int x = 0; x < results.length; x++) {
                     LatLng latLng = new LatLng(Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")));
@@ -411,7 +446,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //                        mMap.addMarker(markerOptions);
                     parquimetro.showInfoWindow();
 
-
                     ListItemFiltroVagas item = new ListItemFiltroVagas();
                     item = new ListItemFiltroVagas();
                     String parq  = jo.getString("cdEndereco");
@@ -430,13 +464,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     //Parquimetro mais proximo
                     float maisProximo=results[0];
 
-                    alert("Mais proximo: "+ maisProximo);
-
-//                    ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(MapsActivity.this,
-//                            R.layout.rowfiltrovagas, parquimetrosArray);
-//                    mySpinner.setAdapter(arrayAdapter);
-
-                    //spinner2.setAdapter(new MyAdapterFiltroVagas(this, R.layout.rowfiltrovagas, parquimetrosArray));
+                    //alert("Mais proximo: "+ maisProximo + "Parquimetro: " +jo.getString("cdEndereco"));
 
                 }
 
