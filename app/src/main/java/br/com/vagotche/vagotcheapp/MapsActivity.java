@@ -50,6 +50,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     JSONArray ja;
     ArrayAdapter <String> adapter;
 
+    String tipoArray, snippet, tipoVaga;
+
     private void alert(String s){
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
     }
@@ -75,6 +77,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
 
+        //Inicializa com parametros de vagas comuns
+        tipoArray = "parquimetrosArray";
+        snippet = "Vagas comuns ocupadas ";
+        tipoVaga = "nmVagasNormais";
+
+
     }
 
     /**
@@ -94,9 +102,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.getUiSettings().setMapToolbarEnabled(false);
         //Desligar Compasso
         mMap.getUiSettings().setCompassEnabled(false);
-//
-//        //Parquimetros
-//        addParquimetrosArray();
+
 
         mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -106,22 +112,38 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     case 0: //Modo Localizar
                         //alert("Spinner item 1!" + parentView.getSelectedItem().toString());
                         mMap.clear();
-                        onLocationChanged(mLastLocation);
+                        tipoArray = "parquimetrosArray";
+                        snippet = "Vagas comuns ocupadas ";
+                        tipoVaga = "nmVagasNormais";
+                        //onLocationChanged(mLastLocation);
+                        calcParquimetrosMaisProximos();
                         break;
                     case 1: //Comuns
                         //alert("Spinner item 2!" + parentView.getSelectedItem().toString());
                         mMap.clear();
-                        addParquimetrosArray();
+                        tipoArray = "parquimetrosArray";
+                        snippet = "Vagas comuns ocupadas ";
+                        tipoVaga = "nmVagasNormais";
+                        //addParquimetrosIdososArray();
+                        calcParquimetrosMaisProximos();
                         break;
                     case 2: //Idosos
                         //alert("Spinner item 3!" + parentView.getSelectedItem().toString());
                         mMap.clear();
-                        addParquimetrosIdososArray();
+                        tipoArray = "parquimetrosIdososArray";
+                        snippet = "Vagas idosos ocupadas ";
+                        tipoVaga = "nmVagasIdosos";
+                        //addParquimetrosIdososArray();
+                        calcParquimetrosMaisProximos();
                         break;
                     case 3: //DF
                         //alert("Spinner item 4!" + parentView.getSelectedItem().toString());
                         mMap.clear();
-                        addParquimetrosDFArray();
+                        tipoArray = "parquimetrosDFArray";
+                        snippet = "Vagas DF ocupadas ";
+                        tipoVaga = "nmVagasDF";
+                        //addParquimetrosIdososArray();
+                        calcParquimetrosMaisProximos();
                         break;
                 }
             }
@@ -129,7 +151,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 // your code here
-                //addParquimetrosArray();
+                tipoArray = "parquimetrosArray";
+                snippet = "Vagas comuns ocupadas ";
+                tipoVaga = "nmVagasNormais";
             }
 
         });
@@ -408,14 +432,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         try {
 
             ArrayList<ListItemFiltroVagas> parquimetrosArray = new ArrayList<ListItemFiltroVagas>();
-            ja = new JSONArray(getIntent().getStringExtra("parquimetrosArray"));
+            ja = new JSONArray(getIntent().getStringExtra(tipoArray));
             float results[] = new float[10];
             int vagasOcupadas = 5;
+            //Porcentagens de ocupacao
             double menos30Perc = 0.29;
             double memos50Perc = 0.49;
             double menos80Perc = 0.79;
             double CemPerc = 1.00;
-            int indiceCount = 0;
+            //
+            int indiceCount = 0; //Flag para pegar o parquimetro mais proximo
 
 
             for (int i = 0; i < ja.length(); i++) {
@@ -431,37 +457,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     Arrays.sort(results);
                     int indice = indiceCount;
 
-//                    alert("Contador: " + i);
-//                    alert("Indice: " + indice);
-//
-//                    //Parquimetro mais proximo
-//                    float maisProximo=results[0];
-//                    alert("Mais proximo: "+ results[0] + " Parquimetro: " +jo.getString("cdEndereco"));
-
                     LatLng latLng = new LatLng(Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")));
                     Marker parquimetro = mMap.addMarker(new MarkerOptions()
                             .position(latLng)
                             .title(jo.getString("cdEndereco"))
-                            .snippet("Vagas comuns ocupadas " + vagasOcupadas + "/" + jo.getString("nmVagasNormais")));
+                            .snippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga)));
 
-                    if(Integer.valueOf(jo.getString("nmVagasNormais")) != 0) {
-                        alert("Calc: " + vagasOcupadas / Double.parseDouble(jo.getString("nmVagasNormais")));
+                    if(Integer.valueOf(jo.getString(tipoVaga)) != 0) {
+                        alert("Calc: " + vagasOcupadas / Double.parseDouble(jo.getString(tipoVaga)));
                     }
 
-                    if(Double.parseDouble(jo.getString("nmVagasNormais")) == 0) {
+                    if(Double.parseDouble(jo.getString(tipoVaga)) == 0) {
                         parquimetro.setSnippet("Parquímetro em Manutenção");
                         parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
-                    } else if((vagasOcupadas / Double.parseDouble(jo.getString("nmVagasNormais"))) <= menos30Perc){
-                        parquimetro.setSnippet("Vagas comuns ocupadas " + vagasOcupadas + "/" + jo.getString("nmVagasNormais") + " - Menos de 30% ocupado");
+                    } else if((vagasOcupadas / Double.parseDouble(jo.getString(tipoVaga))) <= menos30Perc){
+                        parquimetro.setSnippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga) + " - Menos de 30% ocupado");
                         parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-                    } else if((vagasOcupadas / Double.parseDouble(jo.getString("nmVagasNormais"))) <= memos50Perc ){
-                        parquimetro.setSnippet("Vagas comuns ocupadas " + vagasOcupadas + "/" + jo.getString("nmVagasNormais") + " - Menos de 50% ocupado");
+                    } else if((vagasOcupadas / Double.parseDouble(jo.getString(tipoVaga))) <= memos50Perc ){
+                        parquimetro.setSnippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga) + " - Menos de 50% ocupado");
                         parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
-                    } else if((vagasOcupadas / Double.parseDouble(jo.getString("nmVagasNormais"))) <= menos80Perc){
-                        parquimetro.setSnippet("Vagas comuns ocupadas " + vagasOcupadas + "/" + jo.getString("nmVagasNormais") + " - Menos de 80% ocupado");
+                    } else if((vagasOcupadas / Double.parseDouble(jo.getString(tipoVaga))) <= menos80Perc){
+                        parquimetro.setSnippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga) + " - Menos de 80% ocupado");
                         parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
-                    } else if((vagasOcupadas / Double.parseDouble(jo.getString("nmVagasNormais"))) == CemPerc){
-                        parquimetro.setSnippet("Vagas comuns ocupadas " + vagasOcupadas + "/" + jo.getString("nmVagasNormais") + " - 100% ocupado");
+                    } else if((vagasOcupadas / Double.parseDouble(jo.getString(tipoVaga))) == CemPerc){
+                        parquimetro.setSnippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga) + " - 100% ocupado");
                         parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                     }
 
