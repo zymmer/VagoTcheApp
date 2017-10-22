@@ -19,7 +19,7 @@
         android:textColor="@color/colorWhite"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         android:textStyle="bold"
-        android:text="VagoTchê"
+        android:text="  VagoTchê"
         android:gravity="center"/>
 
     <TextView

@@ -292,7 +292,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //teste
             //editCPF1.setText(resultado);
 
-
             if (resultado.contains("login_ok")) {
 
                 alert("Login realizado com sucesso");

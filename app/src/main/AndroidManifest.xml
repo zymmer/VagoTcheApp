@@ -143,12 +143,8 @@
         <activity android:name=".MovimentacoesActivity"/>
 
         <!-- Bluetooth -->
-        <activity android:name=".DeviceScanActivity"/>
-        <activity android:name=".DeviceControlActivity"/>
-        <activity android:name=".SensorActivity"/>
 
         <!-- SERVICES -->
-        <service android:name=".BluetoothLeService" android:enabled="true"/>
 
     </application>
 
