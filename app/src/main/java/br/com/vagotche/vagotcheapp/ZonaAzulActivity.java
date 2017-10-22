@@ -129,15 +129,22 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
         saldoExtra = saldoExtra.replace("R$", "");
         saldoExtra = saldoExtra.replace(",", ".");
 
-        if (Double.parseDouble(saldoExtra) < valor) {
-
-            alert("Saldo indisponível");
-
-        } else if (networkInfo != null && networkInfo.isConnected()) {
+        if (networkInfo != null && networkInfo.isConnected()) {
 
             String placa = spinnerPlaca.getSelectedItem().toString();
             String cidade = spinnerCidade.getSelectedItem().toString();
             String parquimetro = spinnerParquimetro.getSelectedItem().toString();
+
+
+            if (spinnerPlaca.getSelectedItem() == null) {
+
+                alert("Nenhum veículo registrado foi encontrado");
+
+            } else if (Double.parseDouble(saldoExtra) < valor) {
+
+                alert("Saldo indisponível");
+                
+            } else {
 
                 url = "http://fabrica.govbrsul.com.br/vagotche/index.php/ZonaAzul/PagarZonaAzul";
                 parametros = "cdUsuario=" + cdUsuario + "&placa=" + placa + "&cidade=" + cidade +
@@ -146,6 +153,9 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
                 new SolicitaDados().execute(url);
             }
 
+        } else {
+            alert("Nenhuma conexão foi detectada");
+        }
     }
 
     private class SolicitaDados extends AsyncTask<String, Void, String> {
