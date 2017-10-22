@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -21,6 +22,7 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -49,8 +51,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Spinner mySpinner, spinner2;
     JSONArray ja;
     ArrayAdapter <String> adapter;
-
     String tipoArray, snippet, tipoVaga;
+    TextView nomeParquimetro, quatidadeVagas, porcentagemOcupacao;
 
     private void alert(String s){
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
@@ -65,7 +67,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mySpinner = (Spinner) findViewById(R.id.spinner1);
         mySpinner.setAdapter(new MyAdapterFiltroVagas(this, R.layout.rowfiltrovagas, getAllList()));
 
-        spinner2 = (Spinner) findViewById(R.id.spinner2);
+        //spinner2 = (Spinner) findViewById(R.id.spinner2);
 
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -82,10 +84,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         snippet = "Vagas comuns ocupadas ";
         tipoVaga = "nmVagasNormais";
 
-
+        nomeParquimetro = (TextView) findViewById(R.id.txtNomeParquimetro);
+        quatidadeVagas = (TextView) findViewById(R.id.txtQuatidadeVagas);
+        porcentagemOcupacao = (TextView) findViewById(R.id.txtPorcentagemOcupacao);
     }
 
-    /**
+    /**GoogleMapOptions options = new GoogleMapOptions().liteMode(true);
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
      * This is where we can add markers or lines, add listeners or move the camera. In this case,
@@ -96,6 +100,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        //GoogleMapOptions options = new GoogleMapOptions().liteMode(true);
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         //Desligar Toolbar
@@ -463,9 +468,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             .title(jo.getString("cdEndereco"))
                             .snippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga)));
 
-                    if(Integer.valueOf(jo.getString(tipoVaga)) != 0) {
-                        alert("Calc: " + vagasOcupadas / Double.parseDouble(jo.getString(tipoVaga)));
-                    }
+//                    if(Integer.valueOf(jo.getString(tipoVaga)) != 0) {
+//                        alert("Calc: " + vagasOcupadas / Double.parseDouble(jo.getString(tipoVaga)));
+//                    }
 
                     if(Double.parseDouble(jo.getString(tipoVaga)) == 0) {
                         parquimetro.setSnippet("Parquímetro em Manutenção");
@@ -485,6 +490,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     }
 
                     if(indice == 0) {
+                        nomeParquimetro.setText(parquimetro.getTitle());
+                        quatidadeVagas.setText(parquimetro.getSnippet());
+                        porcentagemOcupacao.setText("");
                         parquimetro.showInfoWindow();
                         indiceCount = indiceCount + 1;
                     }
@@ -498,7 +506,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 }
 
-                spinner2.setAdapter(new MyAdapterFiltroVagas(this, R.layout.rowfiltrovagas, parquimetrosArray));
+                //spinner2.setAdapter(new MyAdapterFiltroVagas(this, R.layout.rowfiltrovagas, parquimetrosArray));
 
             }
 
