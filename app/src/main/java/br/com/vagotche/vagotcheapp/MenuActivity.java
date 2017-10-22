@@ -78,6 +78,7 @@ public class MenuActivity extends AppCompatActivity
         setContentView(R.layout.activity_menu);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         //Pega ID do Usuario em memoria
         cdUsuario = getIntent().getIntExtra("id_usuario", 0);
@@ -613,7 +614,7 @@ public class MenuActivity extends AppCompatActivity
         txtEmail.setText(emailUsuario);
 
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu, menu);
+        //getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
