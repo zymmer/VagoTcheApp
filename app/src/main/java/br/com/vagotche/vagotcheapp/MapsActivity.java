@@ -256,7 +256,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
         markerOptions.title("Posição Atual");
-        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.mipmap.transportnew));
+        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.mipmap.car32));
         mCurrLocationMarker = mMap.addMarker(markerOptions);
 
         //move map camera
@@ -534,11 +534,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         allList.add(item);
 
         item = new ListItemFiltroVagas();
-        item.setData("Vagas Idosos", R.mipmap.idoso16);
+        item.setData("Vagas Idosos", R.mipmap.idoso_40x40);
         allList.add(item);
 
         item = new ListItemFiltroVagas();
-        item.setData("Vagas D.Físicos", R.mipmap.transport);
+        item.setData("Vagas D.Físicos", R.mipmap.cadeirante_40x40);
         allList.add(item);
 //
 //        item = new ListItemFiltroVagas();
