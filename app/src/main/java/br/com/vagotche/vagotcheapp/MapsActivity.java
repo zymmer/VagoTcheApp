@@ -2,6 +2,7 @@ package br.com.vagotche.vagotcheapp;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
@@ -432,7 +433,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     //Parquímetros mais proximos
-
     public void calcParquimetrosMaisProximos() {
 
         try {
@@ -446,83 +446,93 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             double memos50Perc = 0.49;
             double menos80Perc = 0.79;
             double CemPerc = 1.00;
-            //
+            //end
             int indiceCount = 0; //Flag para pegar o parquimetro mais proximo
             String ocupacao = "";
 
 
-            for (int i = 0; i < ja.length(); i++) {
-                JSONObject jo = ja.getJSONObject(i);
+            //if (ja != null || ja.length() != 0) {
 
-                Location.distanceBetween(mLastLocation.getLatitude(), mLastLocation.getLongitude(),
-                        Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")), results);
+                for (int i = 0; i < ja.length(); i++) {
+                    JSONObject jo = ja.getJSONObject(i);
 
-                float radius = 2000;// Medida em metros
+                    Location.distanceBetween(mLastLocation.getLatitude(), mLastLocation.getLongitude(),
+                            Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")), results);
 
-                if (results[0] < radius) {
+                    float radius = 2000;// Medida em metros
 
-                    Arrays.sort(results);
-                    int indice = indiceCount;
+                    if (results[0] < radius) {
 
-                    LatLng latLng = new LatLng(Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")));
-                    Marker parquimetro = mMap.addMarker(new MarkerOptions()
-                            .position(latLng)
-                            .title(jo.getString("cdEndereco"))
-                            .snippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga)));
+                        Arrays.sort(results);
+                        int indice = indiceCount;
 
-//                    if(Integer.valueOf(jo.getString(tipoVaga)) != 0) {
-//                        alert("Calc: " + vagasOcupadas / Double.parseDouble(jo.getString(tipoVaga)));
-//                    }
+                        LatLng latLng = new LatLng(Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")));
+                        Marker parquimetro = mMap.addMarker(new MarkerOptions()
+                                .position(latLng)
+                                .title(jo.getString("cdEndereco"))
+                                .snippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga)));
 
-                    if(Double.parseDouble(jo.getString(tipoVaga)) == 0) {
-                        parquimetro.setSnippet("Parquímetro em Manutenção");
-                        parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
-                    } else if((vagasOcupadas / Double.parseDouble(jo.getString(tipoVaga))) <= menos30Perc){
-                        ocupacao = "Menos de 30% ocupado";
-                        parquimetro.setSnippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga) + " - " + ocupacao);
-                        parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-                    } else if((vagasOcupadas / Double.parseDouble(jo.getString(tipoVaga))) <= memos50Perc ){
-                        ocupacao = "Menos de 50% ocupado";
-                        parquimetro.setSnippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga) + " - " + ocupacao);
-                        parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
-                    } else if((vagasOcupadas / Double.parseDouble(jo.getString(tipoVaga))) <= menos80Perc){
-                        ocupacao = "Menos de 80% ocupado";
-                        parquimetro.setSnippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga) + " - " + ocupacao);
-                        parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
-                    } else if((vagasOcupadas / Double.parseDouble(jo.getString(tipoVaga))) == CemPerc){
-                        ocupacao = "100% ocupado";
-                        parquimetro.setSnippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga) + " - " + ocupacao);
-                        parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+
+                        if (Double.parseDouble(jo.getString(tipoVaga)) == 0) {
+                            parquimetro.setSnippet("Parquímetro em Manutenção");
+                            parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                        } else if ((vagasOcupadas / Double.parseDouble(jo.getString(tipoVaga))) <= menos30Perc) {
+                            porcentagemOcupacao.setTextColor(Color.GREEN);
+                            quatidadeVagasDisponiveis.setTextColor(Color.GREEN);
+                            ocupacao = "Menos de 30% ocupado";
+                            parquimetro.setSnippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga) + " - " + ocupacao);
+                            parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                        } else if ((vagasOcupadas / Double.parseDouble(jo.getString(tipoVaga))) <= memos50Perc) {
+                            porcentagemOcupacao.setTextColor(Color.YELLOW);
+                            quatidadeVagasDisponiveis.setTextColor(Color.YELLOW);
+                            ocupacao = "Menos de 50% ocupado";
+                            parquimetro.setSnippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga) + " - " + ocupacao);
+                            parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+                        } else if ((vagasOcupadas / Double.parseDouble(jo.getString(tipoVaga))) <= menos80Perc) {
+                            porcentagemOcupacao.setTextColor(Color.parseColor("#F06D2F"));
+                            quatidadeVagasDisponiveis.setTextColor(Color.parseColor("#F06D2F"));
+                            ocupacao = "Menos de 80% ocupado";
+                            parquimetro.setSnippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga) + " - " + ocupacao);
+                            parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+                        } else if ((vagasOcupadas / Double.parseDouble(jo.getString(tipoVaga))) == CemPerc) {
+                            porcentagemOcupacao.setTextColor(Color.RED);
+                            quatidadeVagasDisponiveis.setTextColor(Color.RED);
+                            ocupacao = "100% ocupado";
+                            parquimetro.setSnippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga) + " - " + ocupacao);
+                            parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                        }
+
+                        if (indice == 0) {
+                            porcentagemOcupacao.getTextColors();
+                            quatidadeVagasDisponiveis.getTextColors();
+                            nomeParquimetro.setText(parquimetro.getTitle());
+                            quatidadeVagas.setText(jo.getString(tipoVaga));
+                            quatidadeVagasDisponiveis.setText(Integer.toString(vagasOcupadas));
+                            porcentagemOcupacao.setText(ocupacao);
+                            parquimetro.showInfoWindow();
+                            indiceCount = indiceCount + 1;
+                        }
+
+                        ListItemFiltroVagas item;
+                        item = new ListItemFiltroVagas();
+                        String parq = jo.getString("cdEndereco");
+                        item.setData(parq, R.mipmap.vehicle);
+                        parquimetrosArray.add(item);
+
+
+                    } else if (results[0] > radius && indiceCount == 0) {
+                        nomeParquimetro.setTextColor(Color.RED);
+                        nomeParquimetro.setText("Não há parquímetros próximo num raio de 2km");
+                        quatidadeVagas.setText("");
+                        quatidadeVagasDisponiveis.setText("");
+                        porcentagemOcupacao.setText("");
                     }
-
-                    if(indice == 0) {
-                        nomeParquimetro.setText(parquimetro.getTitle());
-                        quatidadeVagas.setText(jo.getString(tipoVaga));
-                        quatidadeVagasDisponiveis.setText(Integer.toString(vagasOcupadas));
-                        porcentagemOcupacao.setText(ocupacao);
-                        parquimetro.showInfoWindow();
-                        indiceCount = indiceCount + 1;
-                    }
-
-                    ListItemFiltroVagas item;
-                    item = new ListItemFiltroVagas();
-                    String parq  = jo.getString("cdEndereco");
-                    item.setData(parq, R.mipmap.vehicle);
-                    parquimetrosArray.add(item);
-
 
                 }
 
-                //spinner2.setAdapter(new MyAdapterFiltroVagas(this, R.layout.rowfiltrovagas, parquimetrosArray));
-
+            } catch(JSONException e){
+                e.printStackTrace();
             }
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
     }
 
 
