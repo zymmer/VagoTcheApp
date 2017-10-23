@@ -52,7 +52,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     JSONArray ja;
     ArrayAdapter <String> adapter;
     String tipoArray, snippet, tipoVaga;
-    TextView nomeParquimetro, quatidadeVagas, porcentagemOcupacao;
+    TextView nomeParquimetro, quatidadeVagas, quatidadeVagasDisponiveis, porcentagemOcupacao;
 
     private void alert(String s){
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
@@ -85,7 +85,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         tipoVaga = "nmVagasNormais";
 
         nomeParquimetro = (TextView) findViewById(R.id.txtNomeParquimetro);
-        quatidadeVagas = (TextView) findViewById(R.id.txtQuatidadeVagas);
+        quatidadeVagas = (TextView) findViewById(R.id.txtQuatidadeVagasTotais);
+        quatidadeVagasDisponiveis = (TextView) findViewById(R.id.txtQuatidadeVagasDisponiveis);
         porcentagemOcupacao = (TextView) findViewById(R.id.txtPorcentagemOcupacao);
     }
 
@@ -447,6 +448,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             double CemPerc = 1.00;
             //
             int indiceCount = 0; //Flag para pegar o parquimetro mais proximo
+            String ocupacao = "";
 
 
             for (int i = 0; i < ja.length(); i++) {
@@ -476,23 +478,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         parquimetro.setSnippet("Parquímetro em Manutenção");
                         parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
                     } else if((vagasOcupadas / Double.parseDouble(jo.getString(tipoVaga))) <= menos30Perc){
-                        parquimetro.setSnippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga) + " - Menos de 30% ocupado");
+                        ocupacao = "Menos de 30% ocupado";
+                        parquimetro.setSnippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga) + " - " + ocupacao);
                         parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                     } else if((vagasOcupadas / Double.parseDouble(jo.getString(tipoVaga))) <= memos50Perc ){
-                        parquimetro.setSnippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga) + " - Menos de 50% ocupado");
+                        ocupacao = "Menos de 50% ocupado";
+                        parquimetro.setSnippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga) + " - " + ocupacao);
                         parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
                     } else if((vagasOcupadas / Double.parseDouble(jo.getString(tipoVaga))) <= menos80Perc){
-                        parquimetro.setSnippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga) + " - Menos de 80% ocupado");
+                        ocupacao = "Menos de 80% ocupado";
+                        parquimetro.setSnippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga) + " - " + ocupacao);
                         parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
                     } else if((vagasOcupadas / Double.parseDouble(jo.getString(tipoVaga))) == CemPerc){
-                        parquimetro.setSnippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga) + " - 100% ocupado");
+                        ocupacao = "100% ocupado";
+                        parquimetro.setSnippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga) + " - " + ocupacao);
                         parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                     }
 
                     if(indice == 0) {
                         nomeParquimetro.setText(parquimetro.getTitle());
-                        quatidadeVagas.setText(parquimetro.getSnippet());
-                        porcentagemOcupacao.setText("");
+                        quatidadeVagas.setText(jo.getString(tipoVaga));
+                        quatidadeVagasDisponiveis.setText(Integer.toString(vagasOcupadas));
+                        porcentagemOcupacao.setText(ocupacao);
                         parquimetro.showInfoWindow();
                         indiceCount = indiceCount + 1;
                     }

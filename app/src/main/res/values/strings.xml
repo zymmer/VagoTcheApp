@@ -76,6 +76,10 @@
         <item>Idoso</item>
     </string-array>
 
+    <string name="VagasTotaisMaps">Total de Vagas</string>
+    <string name="VagasDisponíveisMaps">Vagas Disponíveis</string>
+
+
     <!-- Bluetooth -->
 
         <string name="ble_not_supported">BLE is not supported</string>
