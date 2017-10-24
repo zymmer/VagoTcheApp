@@ -263,7 +263,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             if(cpf.isEmpty() || senha.isEmpty()){
                 alert("Nenhum campo pode estar vazio");
-            }else {
+            } else {
                 url = "http://fabrica.govbrsul.com.br/vagotche/index.php/Login/ValidarLogin";
 
                 parametros = "cpf=" + cpf + "&senha=" + senha;

@@ -46,9 +46,9 @@ dependencies {
     //
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:multidex:1.0.1'
-    compile files('libs/gson-2.6.2.jar')
-    compile files('libs/KGJsonConverter.jar')
-    compile files('libs/GenAsync.jar')
+//    compile files('libs/gson-2.6.2.jar')
+//    compile files('libs/KGJsonConverter.jar')
+//    compile files('libs/GenAsync.jar')
 }
 
 
