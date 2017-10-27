@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.com.vagotche.vagotcheapp"
-    android:versionCode="1"
-    android:versionName="1.0">
-
+    android:versionCode="2"
+    android:versionName="2.0">
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality. 
     -->
-
-    <uses-sdk android:minSdkVersion="21"
-        android:targetSdkVersion="25"/>
+    <uses-sdk
+        android:minSdkVersion="21"
+        android:targetSdkVersion="25" />
 
     <!-- Permissions -->
     <permission
@@ -20,18 +19,20 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <!--<uses-permission android:name="android.permission.GET_ACCOUNTS" />-->
+    <!-- <uses-permission android:name="android.permission.GET_ACCOUNTS" /> -->
     <uses-permission android:name="br.com.vagotche.vagotcheapp.permission.MAPS_RECEIVE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="com.android.vending.BILLING" />
 
-    <!--<uses-permission android:name="android.permission.BLUETOOTH" />-->
-    <!--<uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />-->
-    <!--<permission android:name="android.permission.BLUETOOTH"-->
-                <!--android:label="BLUETOOTH" />-->
-    <!--<permission android:name="android.permission.BLUETOOTH_ADMIN" />-->
-    <!--<uses-permission android:name="android.permission.SEND_SMS" />-->
-    <!--<uses-permission android:name="android.permission.READ_PHONE_STATE"/>-->
-    <!--<uses-permission android:name="android.permission.READ_PHONE_NUMBERS"/>-->
+    <!-- <uses-permission android:name="android.permission.BLUETOOTH" /> -->
+    <!-- <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" /> -->
+    <!-- <permission android:name="android.permission.BLUETOOTH" -->
+    <!-- android:label="BLUETOOTH" /> -->
+    <!-- <permission android:name="android.permission.BLUETOOTH_ADMIN" /> -->
+    <!-- <uses-permission android:name="android.permission.SEND_SMS" /> -->
+    <!-- <uses-permission android:name="android.permission.READ_PHONE_STATE"/> -->
+    <!-- <uses-permission android:name="android.permission.READ_PHONE_NUMBERS"/> -->
+
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -41,15 +42,16 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
 
-    <!--&lt;!&ndash; BLE-capable devices only &ndash;&gt;-->
-    <!--<uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>-->
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--<uses-permission android:name="android.permission.READ_PHONE_STATE" />-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- &lt;!&ndash; BLE-capable devices only &ndash;&gt; -->
+    <!-- <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/> -->
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/parquimetro_40x40"
         android:label="@string/app_name"
@@ -62,89 +64,98 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version"/>
+            android:value="@integer/google_play_services_version" />
 
         <!-- ACTIVITYS -->
 
+
         <!-- Splash screen -->
-        <activity android:name=".SplashScreen"
+        <activity
+            android:name=".SplashScreen"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <!-- Facebook -->
-        <activity android:name="com.facebook.FacebookActivity"
+        <activity
+            android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
-        <activity android:name="com.facebook.CustomTabActivity"
+        <activity
+            android:name="com.facebook.CustomTabActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
 
         <!-- Activity Principal -->
-        <activity android:name=".MainActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"/>
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden" />
 
         <!-- Menu -->
-        <activity android:name=".MenuActivity"
+        <activity
+            android:name=".MenuActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <!-- Maps -->
-        <activity android:name=".MapsActivity"/>
+        <activity android:name=".MapsActivity" />
 
         <!-- Cadastro -->
-        <activity android:name=".CadastroActivity"/>
+        <activity android:name=".CadastroActivity" />
 
         <!-- CadastroVeiculo -->
-        <activity android:name=".CadastroVeiculoActivity"/>
+        <activity android:name=".CadastroVeiculoActivity" />
 
         <!-- ConexaoApp -->
-        <activity android:name=".ConexaoApp"/>
+        <activity android:name=".ConexaoApp" />
 
         <!-- ConfiguracaoAlertasActivity -->
-        <activity android:name=".ConfiguracaoAlertasActivity"/>
+        <activity android:name=".ConfiguracaoAlertasActivity" />
 
         <!-- CreditosActivity -->
-        <activity android:name=".CreditosActivity"/>
+        <activity android:name=".CreditosActivity" />
 
         <!-- ZonaAzulActivity -->
-        <activity android:name=".ZonaAzulActivity"/>
+        <activity android:name=".ZonaAzulActivity" />
 
         <!-- Irregularidadesctivity -->
-        <activity android:name=".IrregularidadesActivity"/>
+        <activity android:name=".IrregularidadesActivity" />
 
         <!-- MeusVeiculosActivity -->
-        <activity android:name=".MeusVeiculosActivity"/>
+        <activity android:name=".MeusVeiculosActivity" />
 
         <!-- MeusDadosActivity -->
-        <activity android:name=".MeusDadosActivity"/>
+        <activity android:name=".MeusDadosActivity" />
 
         <!-- ContatoActivity -->
-        <activity android:name=".ContatoActivity"/>
+        <activity android:name=".ContatoActivity" />
 
         <!-- InfoActivity -->
-        <activity android:name=".InfoActivity"/>
+        <activity android:name=".InfoActivity" />
 
         <!-- MovimentacoesActivity -->
-        <activity android:name=".MovimentacoesActivity"/>
+        <activity android:name=".MovimentacoesActivity" />
 
         <!-- Bluetooth -->
 
         <!-- SERVICES -->
-        <provider android:authorities="com.facebook.app.FacebookContentProvider1234"
+        <provider
             android:name="com.facebook.FacebookContentProvider"
+            android:authorities="com.facebook.app.FacebookContentProvider1234"
             android:exported="true" />
 
     </application>
