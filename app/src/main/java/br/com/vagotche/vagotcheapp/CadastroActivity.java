@@ -57,7 +57,7 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
             getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-        Pattern password = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\\\S+$).{6,32}$");
+        //Pattern password = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\\\S+$).{6,32}$");
 
         if (networkInfo != null && networkInfo.isConnected()){
 
@@ -80,7 +80,8 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
 
         if(nome.isEmpty() || cpf.isEmpty() || email.isEmpty() || senha.isEmpty()){
             alert("Nenhum campo pode estar vazio");
-        } else if (password.matcher(senha).matches()){
+        } else if (0 == 0) {
+                //(password.matcher(senha).matches()){
 
             url = "http://fabrica.govbrsul.com.br/vagotche/index.php/Cadastro/CadastrarLogin";
 
