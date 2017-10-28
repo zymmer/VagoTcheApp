@@ -115,8 +115,11 @@ public class CreditosActivity extends AppCompatActivity
     // SKUs for our products: the premium upgrade (non-consumable) and gas (consumable)
     static final String SKU_PREMIUM = "premium";
     static final String credito5 = "credito5";
-    static final String credito10 = "credito15";
+    static final String credito10 = "credito10";
     static final String credito15 = "credito15";
+    static final String credito20 = "credito20";
+    static final String credito40 = "credito40";
+    static final String credito60 = "credito60";
 
     // SKU for our subscription (infinite gas)
     static final String SKU_INFINITE_GAS_MONTHLY = "infinite_gas_monthly";
