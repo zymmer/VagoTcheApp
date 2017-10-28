@@ -41,7 +41,14 @@
         android:gravity="center"/>
 
     <LinearLayout
-        android:layout_marginTop="100dp"
+        android:layout_marginBottom="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -80,7 +87,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="200dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -123,7 +129,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="250dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -163,7 +168,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="350dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -205,10 +209,12 @@
 
     </LinearLayout>
 
+    </LinearLayout>
+
     <LinearLayout
-        android:layout_marginTop="450dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_marginTop="400dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center">
 
@@ -225,8 +231,10 @@
             />
 
         <TextView
-            android:layout_height="50dp"
-            android:layout_width="50dp"
+            android:textColor=""
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:layout_width="80dp"
             android:text="Em Manutenção"/>
 
     </LinearLayout>
@@ -244,9 +252,11 @@
             />
 
         <TextView
-            android:layout_height="50dp"
-            android:layout_width="50dp"
-            android:text="Em Manutenção"/>
+            android:textColor=""
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:layout_width="80dp"
+            android:text="Menos de 30% ocupado"/>
 
     </LinearLayout>
 
@@ -263,9 +273,11 @@
             />
 
         <TextView
-            android:layout_height="50dp"
-            android:layout_width="50dp"
-            android:text="Em Manutenção"/>
+            android:textColor=""
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:layout_width="80dp"
+            android:text="Menos de 50% ocupado"/>
 
     </LinearLayout>
 
@@ -282,9 +294,11 @@
             />
 
         <TextView
-            android:layout_height="50dp"
-            android:layout_width="50dp"
-            android:text="Em Manutenção"/>
+            android:textColor=""
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:layout_width="80dp"
+            android:text="Menos de 80% ocupado"/>
 
     </LinearLayout>
 
@@ -301,9 +315,11 @@
             />
 
         <TextView
-            android:layout_height="50dp"
-            android:layout_width="50dp"
-            android:text="Em Manutenção"/>
+            android:textColor=""
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:layout_width="80dp"
+            android:text="100% ocupado"/>
 
     </LinearLayout>
 
