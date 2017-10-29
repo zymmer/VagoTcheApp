@@ -113,7 +113,7 @@ public class CreditosActivity extends AppCompatActivity
     String mSelectedSubscriptionPeriod = "";
 
     // SKUs for our products: the premium upgrade (non-consumable) and gas (consumable)
-    static final String SKU_PREMIUM = "premium";
+    //static final String SKU_PREMIUM = "premium";
     static final String credito5 = "credito5";
     static final String credito10 = "credito10";
     static final String credito15 = "credito15";
@@ -122,8 +122,8 @@ public class CreditosActivity extends AppCompatActivity
     static final String credito60 = "credito60";
 
     // SKU for our subscription (infinite gas)
-    static final String SKU_INFINITE_GAS_MONTHLY = "infinite_gas_monthly";
-    static final String SKU_INFINITE_GAS_YEARLY = "infinite_gas_yearly";
+    //static final String SKU_INFINITE_GAS_MONTHLY = "infinite_gas_monthly";
+    //static final String SKU_INFINITE_GAS_YEARLY = "infinite_gas_yearly";
 
     // (arbitrary) request code for the purchase flow
     static final int RC_REQUEST = 10001;
@@ -133,10 +133,10 @@ public class CreditosActivity extends AppCompatActivity
 //                 R.drawable.gas3, R.drawable.gas4 };
 
     // How many units (1/4 tank is our unit) fill in the tank.
-    static final int TANK_MAX = 4;
+    //static final int TANK_MAX = 4;
 
     // Current amount of gas in tank, in units
-    int mTank;
+    //int mTank;
 
     // The helper object
     IabHelper mHelper;
@@ -150,7 +150,7 @@ public class CreditosActivity extends AppCompatActivity
         setContentView(R.layout.activity_creditos);
 
         // load game data
-        loadData();
+        //loadData();
 
         cdUsuario = getIntent().getIntExtra("id_usuario", 0);
 
@@ -307,32 +307,32 @@ public class CreditosActivity extends AppCompatActivity
              * verifyDeveloperPayload().
              */
 
-            // Do we have the premium upgrade?
-            Purchase premiumPurchase = inventory.getPurchase(SKU_PREMIUM);
-            mIsPremium = (premiumPurchase != null && verifyDeveloperPayload(premiumPurchase));
-            Log.d(TAG, "User is " + (mIsPremium ? "PREMIUM" : "NOT PREMIUM"));
+//            // Do we have the premium upgrade?
+//            Purchase premiumPurchase = inventory.getPurchase(SKU_PREMIUM);
+//            mIsPremium = (premiumPurchase != null && verifyDeveloperPayload(premiumPurchase));
+//            Log.d(TAG, "User is " + (mIsPremium ? "PREMIUM" : "NOT PREMIUM"));
 
-            // First find out which subscription is auto renewing
-            Purchase gasMonthly = inventory.getPurchase(SKU_INFINITE_GAS_MONTHLY);
-            Purchase gasYearly = inventory.getPurchase(SKU_INFINITE_GAS_YEARLY);
-            if (gasMonthly != null && gasMonthly.isAutoRenewing()) {
-                mInfiniteGasSku = SKU_INFINITE_GAS_MONTHLY;
-                mAutoRenewEnabled = true;
-            } else if (gasYearly != null && gasYearly.isAutoRenewing()) {
-                mInfiniteGasSku = SKU_INFINITE_GAS_YEARLY;
-                mAutoRenewEnabled = true;
-            } else {
-                mInfiniteGasSku = "";
-                mAutoRenewEnabled = false;
-            }
+//            // First find out which subscription is auto renewing
+//            Purchase gasMonthly = inventory.getPurchase(SKU_INFINITE_GAS_MONTHLY);
+//            Purchase gasYearly = inventory.getPurchase(SKU_INFINITE_GAS_YEARLY);
+//            if (gasMonthly != null && gasMonthly.isAutoRenewing()) {
+//                mInfiniteGasSku = SKU_INFINITE_GAS_MONTHLY;
+//                mAutoRenewEnabled = true;
+//            } else if (gasYearly != null && gasYearly.isAutoRenewing()) {
+//                mInfiniteGasSku = SKU_INFINITE_GAS_YEARLY;
+//                mAutoRenewEnabled = true;
+//            } else {
+//                mInfiniteGasSku = "";
+//                mAutoRenewEnabled = false;
+//            }
 
-            // The user is subscribed if either subscription exists, even if neither is auto
-            // renewing
-            mSubscribedToInfiniteGas = (gasMonthly != null && verifyDeveloperPayload(gasMonthly))
-                    || (gasYearly != null && verifyDeveloperPayload(gasYearly));
-            Log.d(TAG, "User " + (mSubscribedToInfiniteGas ? "HAS" : "DOES NOT HAVE")
-                    + " infinite gas subscription.");
-            if (mSubscribedToInfiniteGas) mTank = TANK_MAX;
+//            // The user is subscribed if either subscription exists, even if neither is auto
+//            // renewing
+//            mSubscribedToInfiniteGas = (gasMonthly != null && verifyDeveloperPayload(gasMonthly))
+//                    || (gasYearly != null && verifyDeveloperPayload(gasYearly));
+//            Log.d(TAG, "User " + (mSubscribedToInfiniteGas ? "HAS" : "DOES NOT HAVE")
+//                    + " infinite gas subscription.");
+//            if (mSubscribedToInfiniteGas) mTank = TANK_MAX;
 
             // Check for gas delivery -- if we own gas, we should fill up the tank immediately
             Purchase gasPurchase = inventory.getPurchase(credito5);
@@ -372,10 +372,10 @@ public class CreditosActivity extends AppCompatActivity
             return;
         }
 
-        if (mTank >= TANK_MAX) {
-            complain("Your tank is full. Drive around a bit!");
-            return;
-        }
+//        if (mTank >= TANK_MAX) {
+//            complain("Your tank is full. Drive around a bit!");
+//            return;
+//        }
 
         // launch the gas purchase UI flow.
         // We will be notified of completion via mPurchaseFinishedListener
@@ -439,24 +439,24 @@ public class CreditosActivity extends AppCompatActivity
 
     }
 
-    // User clicked the "Upgrade to Premium" button.
-    public void onUpgradeAppButtonClicked(View arg0) {
-        Log.d(TAG, "Upgrade button clicked; launching purchase flow for upgrade.");
-        //setWaitScreen(true);
-
-        /* TODO: for security, generate your payload here for verification. See the comments on
-         *        verifyDeveloperPayload() for more info. Since this is a SAMPLE, we just use
-         *        an empty string, but on a production app you should carefully generate this. */
-        String payload = "";
-
-        try {
-            mHelper.launchPurchaseFlow(this, SKU_PREMIUM, RC_REQUEST,
-                    mPurchaseFinishedListener, payload);
-        } catch (IabHelper.IabAsyncInProgressException e) {
-            complain("Error launching purchase flow. Another async operation in progress.");
-            //setWaitScreen(false);
-        }
-    }
+//    // User clicked the "Upgrade to Premium" button.
+//    public void onUpgradeAppButtonClicked(View arg0) {
+//        Log.d(TAG, "Upgrade button clicked; launching purchase flow for upgrade.");
+//        //setWaitScreen(true);
+//
+//        /* TODO: for security, generate your payload here for verification. See the comments on
+//         *        verifyDeveloperPayload() for more info. Since this is a SAMPLE, we just use
+//         *        an empty string, but on a production app you should carefully generate this. */
+//        String payload = "";
+//
+//        try {
+//            mHelper.launchPurchaseFlow(this, SKU_PREMIUM, RC_REQUEST,
+//                    mPurchaseFinishedListener, payload);
+//        } catch (IabHelper.IabAsyncInProgressException e) {
+//            complain("Error launching purchase flow. Another async operation in progress.");
+//            //setWaitScreen(false);
+//        }
+//    }
 
     public void onClick(View v) {
         switch (v.getId()) {
@@ -734,13 +734,15 @@ public class CreditosActivity extends AppCompatActivity
             // We know this is the "gas" sku because it's the only one we consume,
             // so we don't check which sku was consumed. If you have more than one
             // sku, you probably should check...
-            if (result.isSuccess()) {
+            if (purchase.getSku().equals(credito5) && result.isSuccess()) {
                 // successfully consumed, so we apply the effects of the item in our
                 // game world's logic, which in our case means filling the gas tank a bit
                 Log.d(TAG, "Consumption successful. Provisioning.");
-                mTank = mTank == TANK_MAX ? TANK_MAX : mTank + 1;
-                saveData();
-                alert("You filled 1/4 tank. Your tank is now " + String.valueOf(mTank) + "/4 full!");
+                saldo = saldo + 5;
+                valor.setText(df2.format(saldo));
+                //mTank = mTank == TANK_MAX ? TANK_MAX : mTank + 1;
+                //saveData();
+                alert("Credito adquirido: " + purchase + "Result: " +result);
             }
             else {
                 complain("Error while consuming: " + result);
@@ -751,18 +753,18 @@ public class CreditosActivity extends AppCompatActivity
         }
     };
 
-    // Drive button clicked. Burn gas!
-    public void onDriveButtonClicked(View arg0) {
-        Log.d(TAG, "Drive button clicked.");
-        if (!mSubscribedToInfiniteGas && mTank <= 0) alert("Oh, no! You are out of gas! Try buying some!");
-        else {
-            if (!mSubscribedToInfiniteGas) --mTank;
-            saveData();
-            alert("Vroooom, you drove a few miles.");
-            //updateUi();
-            Log.d(TAG, "Vrooom. Tank is now " + mTank);
-        }
-    }
+//    // Drive button clicked. Burn gas!
+//    public void onDriveButtonClicked(View arg0) {
+//        Log.d(TAG, "Drive button clicked.");
+//        if (!mSubscribedToInfiniteGas && mTank <= 0) alert("Oh, no! You are out of gas! Try buying some!");
+//        else {
+//            if (!mSubscribedToInfiniteGas) --mTank;
+//            saveData();
+//            alert("Vroooom, you drove a few miles.");
+//            //updateUi();
+//            Log.d(TAG, "Vrooom. Tank is now " + mTank);
+//        }
+//    }
 
     // We're being destroyed. It's important to dispose of the helper here!
     @Override
@@ -828,25 +830,25 @@ public class CreditosActivity extends AppCompatActivity
         bld.create().show();
     }
 
-    void saveData() {
+//    void saveData() {
+//
+//        /*
+//         * WARNING: on a real application, we recommend you save data in a secure way to
+//         * prevent tampering. For simplicity in this sample, we simply store the data using a
+//         * SharedPreferences.
+//         */
+//
+//        SharedPreferences.Editor spe = getPreferences(MODE_PRIVATE).edit();
+//        spe.putInt("tank", mTank);
+//        spe.apply();
+//        Log.d(TAG, "Saved data: tank = " + String.valueOf(mTank));
+//    }
 
-        /*
-         * WARNING: on a real application, we recommend you save data in a secure way to
-         * prevent tampering. For simplicity in this sample, we simply store the data using a
-         * SharedPreferences.
-         */
-
-        SharedPreferences.Editor spe = getPreferences(MODE_PRIVATE).edit();
-        spe.putInt("tank", mTank);
-        spe.apply();
-        Log.d(TAG, "Saved data: tank = " + String.valueOf(mTank));
-    }
-
-    void loadData() {
-        SharedPreferences sp = getPreferences(MODE_PRIVATE);
-        mTank = sp.getInt("tank", 2);
-        Log.d(TAG, "Loaded data: tank = " + String.valueOf(mTank));
-    }
+//    void loadData() {
+//        SharedPreferences sp = getPreferences(MODE_PRIVATE);
+//        mTank = sp.getInt("tank", 2);
+//        Log.d(TAG, "Loaded data: tank = " + String.valueOf(mTank));
+//    }
 
 
 }
