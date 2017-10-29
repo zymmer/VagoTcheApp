@@ -408,7 +408,32 @@ public class CreditosActivity extends AppCompatActivity
                 complain("Error launching purchase flow. Another async operation in progress.");
                 //setWaitScreen(false);
             }
+        } else if (view.getId() == R.id.creditos20) {
+            try {
+                mHelper.launchPurchaseFlow(this, credito20, RC_REQUEST,
+                        mPurchaseFinishedListener, payload);
+            } catch (IabHelper.IabAsyncInProgressException e) {
+                complain("Error launching purchase flow. Another async operation in progress.");
+                //setWaitScreen(false);
+            }
+        } else if (view.getId() == R.id.creditos40) {
+            try {
+                mHelper.launchPurchaseFlow(this, credito40, RC_REQUEST,
+                        mPurchaseFinishedListener, payload);
+            } catch (IabHelper.IabAsyncInProgressException e) {
+                complain("Error launching purchase flow. Another async operation in progress.");
+                //setWaitScreen(false);
+            }
+        } else if (view.getId() == R.id.creditos60) {
+            try {
+                mHelper.launchPurchaseFlow(this, credito60, RC_REQUEST,
+                        mPurchaseFinishedListener, payload);
+            } catch (IabHelper.IabAsyncInProgressException e) {
+                complain("Error launching purchase flow. Another async operation in progress.");
+                //setWaitScreen(false);
+            }
         }
+
     }
 
     // User clicked the "Upgrade to Premium" button.
@@ -624,6 +649,42 @@ public class CreditosActivity extends AppCompatActivity
                     mHelper.consumeAsync(purchase, mConsumeFinishedListener);
                 } catch (IabHelper.IabAsyncInProgressException e) {
                     complain("Error consuming credito15. Another async operation in progress.");
+                    //setWaitScreen(false);
+                    return;
+                }
+            }
+
+            if (purchase.getSku().equals(credito20)) {
+                // bought 1/4 tank of gas. So consume it.
+                Log.d(TAG, "Purchase is credito20. Starting credito20 consumption.");
+                try {
+                    mHelper.consumeAsync(purchase, mConsumeFinishedListener);
+                } catch (IabHelper.IabAsyncInProgressException e) {
+                    complain("Error consuming credito20. Another async operation in progress.");
+                    //setWaitScreen(false);
+                    return;
+                }
+            }
+
+            if (purchase.getSku().equals(credito40)) {
+                // bought 1/4 tank of gas. So consume it.
+                Log.d(TAG, "Purchase is credito40. Starting credito40 consumption.");
+                try {
+                    mHelper.consumeAsync(purchase, mConsumeFinishedListener);
+                } catch (IabHelper.IabAsyncInProgressException e) {
+                    complain("Error consuming credito40. Another async operation in progress.");
+                    //setWaitScreen(false);
+                    return;
+                }
+            }
+
+            if (purchase.getSku().equals(credito60)) {
+                // bought 1/4 tank of gas. So consume it.
+                Log.d(TAG, "Purchase is credito60. Starting credito60 consumption.");
+                try {
+                    mHelper.consumeAsync(purchase, mConsumeFinishedListener);
+                } catch (IabHelper.IabAsyncInProgressException e) {
+                    complain("Error consuming credito60. Another async operation in progress.");
                     //setWaitScreen(false);
                     return;
                 }

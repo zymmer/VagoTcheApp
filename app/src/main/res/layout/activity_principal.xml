@@ -223,7 +223,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical"
-     android:textColor=""   android:gravity="center">
+        android:gravity="center">
 
         <android.support.v7.widget.AppCompatImageView
             android:src="@mipmap/mapmarkerblue"
@@ -232,7 +232,8 @@
             />
 
         <TextView
-            android:textColor=""
+            android:textColor="#ffffff"
+            android:textStyle="bold"
             android:gravity="center"
             android:layout_height="match_parent"
             android:layout_width="80dp"
@@ -253,7 +254,8 @@
             />
 
         <TextView
-            android:textColor=""
+            android:textColor="#ffffff"
+            android:textStyle="bold"
             android:gravity="center"
             android:layout_height="match_parent"
             android:layout_width="80dp"
@@ -274,7 +276,8 @@
             />
 
         <TextView
-            android:textColor=""
+            android:textColor="#ffffff"
+            android:textStyle="bold"
             android:gravity="center"
             android:layout_height="match_parent"
             android:layout_width="80dp"
@@ -295,7 +298,8 @@
             />
 
         <TextView
-            android:textColor=""
+            android:textColor="#ffffff"
+            android:textStyle="bold"
             android:gravity="center"
             android:layout_height="match_parent"
             android:layout_width="80dp"
@@ -316,7 +320,8 @@
             />
 
         <TextView
-            android:textColor=""
+            android:textColor="#ffffff"
+            android:textStyle="bold"
             android:gravity="center"
             android:layout_height="match_parent"
             android:layout_width="80dp"
