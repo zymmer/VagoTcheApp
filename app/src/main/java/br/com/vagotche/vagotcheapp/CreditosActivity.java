@@ -233,57 +233,57 @@ public class CreditosActivity extends AppCompatActivity
         });
     }
 
-//    private void ComprarCredito() {
-//
-//        ConnectivityManager connMgr = (ConnectivityManager)
-//                getSystemService(Context.CONNECTIVITY_SERVICE);
-//        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-//
-//        if (networkInfo != null && networkInfo.isConnected()){
-//
-//            url = "http://fabrica.govbrsul.com.br/vagotche/index.php/Creditos/ComprarCreditos";
-//
-//            parametros = "saldo=" + saldo + "&cdUsuario=" + cdUsuario;
-//
-//            new SolicitaDados().execute(url);
-//        }
-//
-//    }
+    private void ComprarCredito() {
 
-//    private class SolicitaDados extends AsyncTask<String, Void, String> {
-//
-//        @Override
-//        protected String doInBackground(String... urls) {
-//
-//            return ConexaoApp.postDados(urls[0], parametros);
-//
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String resultado) {
-//
-//            //Data Atual do Celular
-//            Calendar cal = Calendar.getInstance();
-//            cal.setTime(data);
-//            Date data_atual = cal.getTime();
-//
-//            String data_completa = dateFormat.format(data_atual);
-//            String hora_atual = dateFormat_hora.format(data_atual);
-//
-//            if (resultado.contains("credito_adquirido")) {
-//                alert("Créditos Adquiridos...");
-//
-//                //TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-//                //String number = tm.getLine1Number();
-//                //alert("numero: " +number);
-//                //SmsManager smsManager = SmsManager.getDefault();
-//                //smsManager.sendTextMessage("51997152881", null, "VagoTchê: Adquirido R$"+ df2.format(saldo) +" para o credVAGO." + " Data: " + data_completa, null, null);
-//
-//                finish();
-//            }
-//
-//        }
-//    }
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+        if (networkInfo != null && networkInfo.isConnected()){
+
+            url = "http://fabrica.govbrsul.com.br/vagotche/index.php/Creditos/ComprarCreditos";
+
+            parametros = "saldo=" + saldo + "&cdUsuario=" + cdUsuario;
+
+            new SolicitaDados().execute(url);
+        }
+
+    }
+
+    private class SolicitaDados extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... urls) {
+
+            return ConexaoApp.postDados(urls[0], parametros);
+
+        }
+
+        @Override
+        protected void onPostExecute(String resultado) {
+
+            //Data Atual do Celular
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(data);
+            Date data_atual = cal.getTime();
+
+            String data_completa = dateFormat.format(data_atual);
+            String hora_atual = dateFormat_hora.format(data_atual);
+
+            if (resultado.contains("credito_adquirido")) {
+                alert("Créditos Adquiridos...");
+
+                //TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+                //String number = tm.getLine1Number();
+                //alert("numero: " +number);
+                //SmsManager smsManager = SmsManager.getDefault();
+                //smsManager.sendTextMessage("51997152881", null, "VagoTchê: Adquirido R$"+ df2.format(saldo) +" para o credVAGO." + " Data: " + data_completa, null, null);
+
+                finish();
+            }
+
+        }
+    }
 
     // Listener that's called when we finish querying the items and subscriptions we own
     IabHelper.QueryInventoryFinishedListener mGotInventoryListener = new IabHelper.QueryInventoryFinishedListener() {
@@ -740,6 +740,7 @@ public class CreditosActivity extends AppCompatActivity
                 Log.d(TAG, "Consumption successful. Provisioning.");
                 saldo = saldo + 5;
                 valor.setText(df2.format(saldo));
+                ComprarCredito();
                 //mTank = mTank == TANK_MAX ? TANK_MAX : mTank + 1;
                 //saveData();
                 alert("Credito adquirido: " + purchase + "Result: " +result);
