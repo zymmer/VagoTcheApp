@@ -135,7 +135,6 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
             String cidade = spinnerCidade.getSelectedItem().toString();
             String parquimetro = spinnerParquimetro.getSelectedItem().toString();
 
-
             if (spinnerPlaca.getSelectedItem() == "") {
 
                 alert("Nenhum veículo registrado foi encontrado");

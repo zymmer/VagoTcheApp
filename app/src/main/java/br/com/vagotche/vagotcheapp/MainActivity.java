@@ -44,6 +44,9 @@ import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 
 import java.util.Arrays;
+import java.util.regex.Pattern;
+
+import br.com.vagotche.vagotcheapp.Validações.ValidaCPF;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener,GoogleApiClient.OnConnectionFailedListener {
 
@@ -256,14 +259,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
+        Pattern passwordPat = Pattern.compile("(?=^.{6,32}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$");
+
         if (networkInfo != null && networkInfo.isConnected()){
 
             String cpf = editCPF1.getText().toString();
             String senha = editPassword1.getText().toString();
 
-            if(cpf.isEmpty() || senha.isEmpty()){
-                alert("Nenhum campo pode estar vazio");
-            } else {
+        if(cpf.isEmpty() || senha.isEmpty()){
+            alert("Nenhum campo pode estar vazio");
+
+        } else if (!passwordPat.matcher(senha).matches()){
+            alert("A senha deve conter entre 6~32 caracteres e ao menos um caracter especial ou numérico.");
+
+        } else if (!ValidaCPF.isCPF(cpf) == true) {
+            alert("O CPF digitado está incorreto");
+
+        } else {
                 url = "http://fabrica.govbrsul.com.br/vagotche/index.php/Login/ValidarLogin";
 
                 parametros = "cpf=" + cpf + "&senha=" + senha;

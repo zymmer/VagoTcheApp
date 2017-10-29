@@ -15,6 +15,7 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import java.util.regex.Pattern;
+import br.com.vagotche.vagotcheapp.Validações.ValidaCPF;
 
 public class CadastroActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -57,7 +58,8 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
             getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
-        //Pattern password = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\\\S+$).{6,32}$");
+        Pattern passwordPat = Pattern.compile("(?=^.{6,32}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$");
+        Pattern emailPat = Pattern.compile("[a-zA-Z0-9._-]+@[a-z]+.[a-z]+");
 
         if (networkInfo != null && networkInfo.isConnected()){
 
@@ -80,8 +82,17 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
 
         if(nome.isEmpty() || cpf.isEmpty() || email.isEmpty() || senha.isEmpty()){
             alert("Nenhum campo pode estar vazio");
-        } else if (0 == 0) {
-                //(password.matcher(senha).matches()){
+
+        } else if (!ValidaCPF.isCPF(cpf) == true) {
+            alert("O CPF digitado está incorreto");
+
+        } else if (!emailPat.matcher(email).matches()) {
+            alert("O e-mail digitado está incorreto");
+
+        } else if (!passwordPat.matcher(senha).matches()){
+            alert("A senha deve conter entre 6~32 caracteres e ao menos um caracter maiúsculo, especial ou numérico.");
+
+        } else {
 
             url = "http://fabrica.govbrsul.com.br/vagotche/index.php/Cadastro/CadastrarLogin";
 
@@ -89,9 +100,7 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
 
             new SolicitaDados().execute(url);
 
-        } else {
-            alert("A senha deve conter entre 6~32 caracteres que podem ser a-z, A-Z, especiais ou numéricos.");
-        }
+            }
 
         } else {
             alert("Nenhuma conexão foi detectada");

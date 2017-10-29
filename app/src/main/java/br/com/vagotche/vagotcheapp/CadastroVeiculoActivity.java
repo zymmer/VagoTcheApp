@@ -111,21 +111,20 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
                 getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
 
+        Pattern placaPat = Pattern.compile("[a-zA-Z]{3,3}\\d{4,4}");
+
         if (networkInfo != null && networkInfo.isConnected()) {
 
             String placa = editplaca.getText().toString();
 
-            Pattern pattern = Pattern.compile("[a-zA-Z]{3,3}\\d{4,4}");
-            Matcher matcher = pattern.matcher(placa);
-
-            if(matcher.find() ){
+            if(placaPat.matcher(placa).matches()){
 
             url = "http://fabrica.govbrsul.com.br/vagotche/index.php/VerificaPlacaSinesp/VerificaPlacaSinesp";
             parametros = "placa=" + placa;
             new SolicitaDados().execute(url);
 
-            }else {
-                alert("Placa incorreta");
+            }   else {
+                alert("Placa incorreta. Ex.: ABC1234");
             }
 
         } else {

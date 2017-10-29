@@ -66,7 +66,7 @@ public class CreditosActivity extends AppCompatActivity
 
     //Variaveis
     int cdUsuario;
-    TextView seuSaldo, valor, cred5, cred10, cred15;
+    TextView seuSaldo, valor, cred5, cred10, cred15, cred20, cred40, cred60;
     Double saldo = 0.00;
     Button btnComprar, btnLimparCred;
     ImageView btnVoltar;
@@ -162,9 +162,12 @@ public class CreditosActivity extends AppCompatActivity
         cred5 = (TextView) findViewById(R.id.creditos5);
         cred10 = (TextView) findViewById(R.id.creditos10);
         cred15 = (TextView) findViewById(R.id.creditos15);
+        cred20 = (TextView) findViewById(R.id.creditos20);
+        cred40 = (TextView) findViewById(R.id.creditos40);
+        cred60 = (TextView) findViewById(R.id.creditos60);
 //        valor = (TextView) findViewById(R.id.CampoValor);
 //        btnComprar = (Button) findViewById(R.id.btnComprarCred);
-//        btnVoltar = (ImageView) findViewById(R.id.imvVoltarCredito);
+        btnVoltar = (ImageView) findViewById(R.id.imvVoltarCredito);
 //        btnLimparCred = (Button) findViewById(R.id.btnLimparCred);
 //        // Button listeners
 //        creditos5.setOnClickListener(this);
@@ -360,7 +363,7 @@ public class CreditosActivity extends AppCompatActivity
         }
     }
 
-    // User clicked the "Buy Gas" button
+    // User clicked the "Buy Credito" button
     public void onBuyCreditoButtonClicked(View view) {
         Log.d(TAG, "Buy gas button clicked.");
 
@@ -452,6 +455,14 @@ public class CreditosActivity extends AppCompatActivity
         } catch (IabHelper.IabAsyncInProgressException e) {
             complain("Error launching purchase flow. Another async operation in progress.");
             //setWaitScreen(false);
+        }
+    }
+
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.imvVoltarCredito:
+                finish();
+                break;
         }
     }
 
