@@ -17,38 +17,46 @@
     <!--<include layout="@layout/content_menu"-->
         <!--android:id="@+id/include" />-->
 
-    <TextView
-        android:drawableLeft="@mipmap/parquimetro_40x40"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="120dp"
-        android:textAlignment="center"
-        android:textColor="@color/colorWhite"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-        android:textStyle="bold"
-        android:text="VagoTchê"
-        android:gravity="center"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
-        android:textAlignment="center"
-        android:textColor="@color/colorWhite"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-        android:textStyle="bold"
-        android:text="Localização de Vagas Urbanas"
-        android:gravity="center"/>
 
     <LinearLayout
-        android:layout_marginBottom="100dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_gravity="center"
         android:gravity="center">
 
     <LinearLayout
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:drawableLeft="@mipmap/parquimetro_40x40"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            android:text="VagoTchê"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+            android:textStyle="bold"
+            android:text="Localização de Vagas Urbanas"
+            android:gravity="center"/>
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -210,10 +218,8 @@
 
     </LinearLayout>
 
-    </LinearLayout>
-
     <LinearLayout
-        android:layout_marginTop="400dp"
+        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -331,5 +337,6 @@
 
     </LinearLayout>
 
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>
