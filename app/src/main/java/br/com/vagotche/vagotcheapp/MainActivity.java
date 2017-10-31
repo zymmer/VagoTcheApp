@@ -42,6 +42,7 @@ import com.google.android.gms.common.api.Status;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.Arrays;
 import java.util.regex.Pattern;
@@ -269,8 +270,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(cpf.isEmpty() || senha.isEmpty()){
             alert("Nenhum campo pode estar vazio");
 
-        } else if (!passwordPat.matcher(senha).matches()){
-            alert("A senha deve conter entre 6~32 caracteres e ao menos um caracter especial ou numérico.");
+//        } else if (!passwordPat.matcher(senha).matches()){
+//            alert("A senha deve conter entre 6~32 caracteres e ao menos um caracter especial ou numérico.");
 
         } else if (!ValidaCPF.isCPF(cpf) == true) {
             alert("O CPF digitado está incorreto");
@@ -318,6 +319,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 it.putExtra("id_usuario", cdUsuario);
                 it.putExtra("nome_usuario", dados[2]);
                 it.putExtra("email_usuario", dados[3]);
+                it.putExtra("Token", FirebaseInstanceId.getInstance().getToken());
                 startActivity(it);
             } else if (resultado.contains("cpf_invalido")){
                 alert("CPF inválido");

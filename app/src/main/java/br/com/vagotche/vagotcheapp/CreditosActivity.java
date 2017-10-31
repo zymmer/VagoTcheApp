@@ -1,15 +1,20 @@
 package br.com.vagotche.vagotcheapp;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Telephony;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
@@ -47,6 +52,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.google.firebase.messaging.RemoteMessage;
+
 import br.com.vagotche.vagotcheapp.util.IabBroadcastReceiver;
 import br.com.vagotche.vagotcheapp.util.IabHelper;
 import br.com.vagotche.vagotcheapp.util.IabResult;
@@ -54,7 +61,7 @@ import br.com.vagotche.vagotcheapp.util.Inventory;
 import br.com.vagotche.vagotcheapp.util.Purchase;
 
 public class CreditosActivity extends AppCompatActivity
-        implements IabBroadcastReceiver.IabBroadcastListener,OnClickListener
+        implements IabBroadcastReceiver.IabBroadcastListener
 {
 
     //private IabHelper mHelper;
@@ -148,9 +155,6 @@ public class CreditosActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_creditos);
-
-        // load game data
-        //loadData();
 
         cdUsuario = getIntent().getIntExtra("id_usuario", 0);
 
@@ -365,7 +369,7 @@ public class CreditosActivity extends AppCompatActivity
 
     // User clicked the "Buy Credito" button
     public void onBuyCreditoButtonClicked(View view) {
-        Log.d(TAG, "Buy gas button clicked.");
+        Log.d(TAG, "Buy credito button clicked.");
 
         if (mSubscribedToInfiniteGas) {
             complain("No need! You're subscribed to infinite gas. Isn't that awesome?");
@@ -380,7 +384,7 @@ public class CreditosActivity extends AppCompatActivity
         // launch the gas purchase UI flow.
         // We will be notified of completion via mPurchaseFinishedListener
         //setWaitScreen(true);
-        Log.d(TAG, "Launching purchase flow for gas.");
+        Log.d(TAG, "Launching purchase flow for credito.");
 
         /* TODO: for security, generate your payload here for verification. See the comments on
          *        verifyDeveloperPayload() for more info. Since this is a SAMPLE, we just use
@@ -392,7 +396,7 @@ public class CreditosActivity extends AppCompatActivity
                 mHelper.launchPurchaseFlow(this, credito5, RC_REQUEST,
                         mPurchaseFinishedListener, payload);
             } catch (IabHelper.IabAsyncInProgressException e) {
-                complain("Error launching purchase flow. Another async operation in progress.");
+                complain("Erro ao iniciar o fluxo de compras para o credito 5. Outra operação assíncrona em andamento.");
                 //setWaitScreen(false);
             }
         } else if (view.getId() == R.id.creditos10) {
@@ -515,51 +519,78 @@ public class CreditosActivity extends AppCompatActivity
 //             dialog.show();
 //         }
 
-    @Override
-    public void onClick(DialogInterface dialog, int id) {
-        if (id == 0 /* First choice item */) {
-            mSelectedSubscriptionPeriod = mFirstChoiceSku;
-        } else if (id == 1 /* Second choice item */) {
-            mSelectedSubscriptionPeriod = mSecondChoiceSku;
-        } else if (id == DialogInterface.BUTTON_POSITIVE /* continue button */) {
-            /* TODO: for security, generate your payload here for verification. See the comments on
-             *        verifyDeveloperPayload() for more info. Since this is a SAMPLE, we just use
-             *        an empty string, but on a production app you should carefully generate
-             *        this. */
-            String payload = "";
 
-            if (TextUtils.isEmpty(mSelectedSubscriptionPeriod)) {
-                // The user has not changed from the default selection
-                mSelectedSubscriptionPeriod = mFirstChoiceSku;
-            }
+//    public void onMessageReceived(RemoteMessage remoteMessage) {
+//
+//        showNotification(remoteMessage.getData().get("message"));
+//    }
 
-            List<String> oldSkus = null;
-            if (!TextUtils.isEmpty(mInfiniteGasSku)
-                    && !mInfiniteGasSku.equals(mSelectedSubscriptionPeriod)) {
-                // The user currently has a valid subscription, any purchase action is going to
-                // replace that subscription
-                oldSkus = new ArrayList<String>();
-                oldSkus.add(mInfiniteGasSku);
-            }
+    private void showNotification(String title, String message) {
 
-            //setWaitScreen(true);
-            Log.d(TAG, "Launching purchase flow for gas subscription.");
-            try {
-                mHelper.launchPurchaseFlow(this, mSelectedSubscriptionPeriod, IabHelper.ITEM_TYPE_SUBS,
-                        oldSkus, RC_REQUEST, mPurchaseFinishedListener, payload);
-            } catch (IabHelper.IabAsyncInProgressException e) {
-                complain("Error launching purchase flow. Another async operation in progress.");
-                //setWaitScreen(false);
-            }
-            // Reset the dialog options
-            mSelectedSubscriptionPeriod = "";
-            mFirstChoiceSku = "";
-            mSecondChoiceSku = "";
-        } else if (id != DialogInterface.BUTTON_NEGATIVE) {
-            // There are only four buttons, this should not happen
-            Log.e(TAG, "Unknown button clicked in subscription dialog: " + id);
-        }
+//        Intent i = new Intent(this, MainActivity.class);
+//        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        //PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+                .setAutoCancel(true)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setSmallIcon(R.drawable.cast_ic_stop_circle_filled_white);
+            Bitmap bm = BitmapFactory.decodeResource(getResources(), R.mipmap.vagotcheestacionamento40x40px);
+            builder.setLargeIcon(bm);
+                //.setContentIntent(pendingIntent);
+
+        NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+        manager.notify(0, builder.build());
     }
+
+//    @Override
+//    public void onClick(DialogInterface dialog, int id) {
+//        if (id == 0 /* First choice item */) {
+//            mSelectedSubscriptionPeriod = mFirstChoiceSku;
+//        } else if (id == 1 /* Second choice item */) {
+//            mSelectedSubscriptionPeriod = mSecondChoiceSku;
+//        } else if (id == DialogInterface.BUTTON_POSITIVE /* continue button */) {
+//            /* TODO: for security, generate your payload here for verification. See the comments on
+//             *        verifyDeveloperPayload() for more info. Since this is a SAMPLE, we just use
+//             *        an empty string, but on a production app you should carefully generate
+//             *        this. */
+//            String payload = "";
+//
+//            if (TextUtils.isEmpty(mSelectedSubscriptionPeriod)) {
+//                // The user has not changed from the default selection
+//                mSelectedSubscriptionPeriod = mFirstChoiceSku;
+//            }
+//
+//            List<String> oldSkus = null;
+//            if (!TextUtils.isEmpty(mInfiniteGasSku)
+//                    && !mInfiniteGasSku.equals(mSelectedSubscriptionPeriod)) {
+//                // The user currently has a valid subscription, any purchase action is going to
+//                // replace that subscription
+//                oldSkus = new ArrayList<String>();
+//                oldSkus.add(mInfiniteGasSku);
+//            }
+//
+//            //setWaitScreen(true);
+//            Log.d(TAG, "Launching purchase flow for gas subscription.");
+//            try {
+//                mHelper.launchPurchaseFlow(this, mSelectedSubscriptionPeriod, IabHelper.ITEM_TYPE_SUBS,
+//                        oldSkus, RC_REQUEST, mPurchaseFinishedListener, payload);
+//            } catch (IabHelper.IabAsyncInProgressException e) {
+//                complain("Error launching purchase flow. Another async operation in progress.");
+//                //setWaitScreen(false);
+//            }
+//            // Reset the dialog options
+//            mSelectedSubscriptionPeriod = "";
+//            mFirstChoiceSku = "";
+//            mSecondChoiceSku = "";
+//        } else if (id != DialogInterface.BUTTON_NEGATIVE) {
+//            // There are only four buttons, this should not happen
+//            Log.e(TAG, "Unknown button clicked in subscription dialog: " + id);
+//        }
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -743,7 +774,7 @@ public class CreditosActivity extends AppCompatActivity
                 ComprarCredito();
                 //mTank = mTank == TANK_MAX ? TANK_MAX : mTank + 1;
                 //saveData();
-                alert("Credito adquirido: " + purchase + "Result: " +result);
+                alert("Crédito adquirido: " + purchase + "Result: " +result);
             }
             else {
                 complain("Error while consuming: " + result);

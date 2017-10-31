@@ -22,28 +22,17 @@
             android:orientation="vertical">
 
     <TextView
-        android:drawableLeft="@mipmap/parquimetro_40x40"
+        android:drawableLeft="@mipmap/vagotcheestacionamento320x180px"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         android:textStyle="bold"
-        android:text="VagoTchê"
-        android:gravity="center"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textColor="@color/colorWhite"
-        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-        android:textStyle="bold"
-        android:text="Localização de Vagas Urbanas"
         android:gravity="center"/>
 
     <EditText
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:padding="10dp"
         style="@style/StyledTilEditText"
         android:id="@+id/editCPF1"

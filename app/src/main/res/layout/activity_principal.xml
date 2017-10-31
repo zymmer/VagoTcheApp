@@ -33,24 +33,13 @@
         android:gravity="center">
 
         <TextView
-            android:drawableLeft="@mipmap/parquimetro_40x40"
+            android:drawableLeft="@mipmap/vagotcheestacionamento180x120px"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textAlignment="center"
             android:textColor="@color/colorWhite"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:textStyle="bold"
-            android:text="VagoTchê"
-            android:gravity="center"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textAlignment="center"
-            android:textColor="@color/colorWhite"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-            android:textStyle="bold"
-            android:text="Localização de Vagas Urbanas"
             android:gravity="center"/>
 
         </LinearLayout>
@@ -264,7 +253,7 @@
             android:textStyle="bold"
             android:gravity="center"
             android:layout_height="match_parent"
-            android:layout_width="80dp"
+            android:layout_width="70dp"
             android:text="Menos de 30% ocupado"/>
 
     </LinearLayout>
@@ -286,7 +275,7 @@
             android:textStyle="bold"
             android:gravity="center"
             android:layout_height="match_parent"
-            android:layout_width="80dp"
+            android:layout_width="70dp"
             android:text="Menos de 50% ocupado"/>
 
     </LinearLayout>
@@ -308,7 +297,7 @@
             android:textStyle="bold"
             android:gravity="center"
             android:layout_height="match_parent"
-            android:layout_width="80dp"
+            android:layout_width="70dp"
             android:text="Menos de 80% ocupado"/>
 
     </LinearLayout>
@@ -330,7 +319,7 @@
             android:textStyle="bold"
             android:gravity="center"
             android:layout_height="match_parent"
-            android:layout_width="80dp"
+            android:layout_width="70dp"
             android:text="100% ocupado"/>
 
     </LinearLayout>

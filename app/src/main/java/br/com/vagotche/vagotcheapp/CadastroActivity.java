@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.Toast;
 
 import java.util.regex.Pattern;
@@ -95,9 +94,7 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
         } else {
 
             url = "http://fabrica.govbrsul.com.br/vagotche/index.php/Cadastro/CadastrarLogin";
-
             parametros = "nome=" + nome + "&cpf=" + cpf + "&email=" + email + "&senha=" + senha + "&idoso=" + b1 + "&df=" + b2;
-
             new SolicitaDados().execute(url);
 
             }
@@ -170,6 +167,14 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.btnRegistrar:
                 registrar();
+
+//                String token = FirebaseInstanceId.getInstance().getToken();
+//                registerToken(token);
+
+                //FirebaseMessaging.getInstance().subscribeToTopic("test");
+                //alert("Token: " + FirebaseInstanceId.getInstance().getToken());
+
+
                 break;
         }
     }

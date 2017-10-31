@@ -1,7 +1,6 @@
 {
   "project_info": {
     "project_number": "448809906574",
-    "firebase_url": "https://vagotche-1295.firebaseio.com",
     "project_id": "vagotche-1295"
   },
   "client": [
@@ -14,25 +13,21 @@
       },
       "oauth_client": [
         {
-          "client_id": "448809906574-pi3r4lc0di4l45gjniksc4ml4tsn13il.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "448809906574-d5vsv4l73bne94l8v5fbsc19cok53rhn.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
           "client_id": "448809906574-jupknsj38vgpamsop1q2shhnj1ff2eth.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "br.com.vagotche.vagotcheapp",
             "certificate_hash": "ef2a55b13af2c26b57fb4022ae318afe7b9a9814"
           }
+        },
+        {
+          "client_id": "448809906574-rbsu2bcdl4rrmqt9v1lq5429dbukvp84.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDvgrHneT_vpZjmMaEzE94x8wYQ4lRWJSU"
+          "current_key": "AIzaSyB6ynaT_kB1JmNyNGB7RdGrumx0bhj7gEY"
         }
       ],
       "services": {
@@ -40,16 +35,11 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "448809906574-pi3r4lc0di4l45gjniksc4ml4tsn13il.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "status": 1,
+          "other_platform_oauth_client": []
         },
         "ads_service": {
-          "status": 2
+          "status": 1
         }
       }
     }

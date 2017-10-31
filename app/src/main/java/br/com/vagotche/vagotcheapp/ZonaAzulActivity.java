@@ -1,12 +1,16 @@
 package br.com.vagotche.vagotcheapp;
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
@@ -135,7 +139,7 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
             String cidade = spinnerCidade.getSelectedItem().toString();
             String parquimetro = spinnerParquimetro.getSelectedItem().toString();
 
-            if (spinnerPlaca.getSelectedItem() == "") {
+            if (spinnerPlaca.getSelectedItem() == "" || spinnerPlaca.getSelectedItem() == null) {
 
                 alert("Nenhum veículo registrado foi encontrado");
 
@@ -183,14 +187,18 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
             String hora_atual = dateFormat_hora.format(data_atual_somado);
 
             if (resultado.contains("Pagamento_efetuado")) {
-                alert("Reserva efetuada para utilização do parquímetro " + spinnerParquimetro.getSelectedItem().toString()+
-                                " Sua vaga estará disponível até às " + hora_atual);
+                alert("Reserva efetuada");
+//                        "" +
+//                        "para utilização do parquímetro " + spinnerParquimetro.getSelectedItem().toString()+
+//                                " Sua vaga estará disponível até às " + hora_atual);
 
+                showNotification("Reserva","Reserva efetuada para utilização do parquímetro " + spinnerParquimetro.getSelectedItem().toString()+
+                        " Sua vaga estará disponível até às " + hora_atual);
                 //TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
                 //String number = tm.getLine1Number();
                 //alert("numero: " +number);
-                SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage("51997152881", null, "VagoTchê: Utilizado R$"+ df2.format(valor) +" do credVAGO." + " Data: " + data_completa, null, null);
+                //SmsManager smsManager = SmsManager.getDefault();
+                //smsManager.sendTextMessage("51997152881", null, "VagoTchê: Utilizado R$"+ df2.format(valor) +" do credVAGO." + " Data: " + data_completa, null, null);
 
                 finish();
 
@@ -199,6 +207,27 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
             }
 
         }
+    }
+
+    private void showNotification(String title, String message) {
+
+//        Intent i = new Intent(this, MainActivity.class);
+//        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        //PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+                .setAutoCancel(true)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setSmallIcon(R.drawable.cast_ic_stop_circle_filled_white);
+        Bitmap bm = BitmapFactory.decodeResource(getResources(), R.mipmap.vagotcheestacionamento40x40px);
+        builder.setLargeIcon(bm);
+        //.setContentIntent(pendingIntent);
+
+        NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+        manager.notify(0, builder.build());
     }
 
     @Override

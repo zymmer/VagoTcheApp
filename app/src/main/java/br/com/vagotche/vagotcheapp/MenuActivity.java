@@ -1,20 +1,13 @@
 package br.com.vagotche.vagotcheapp;
 
-import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.telephony.SmsManager;
-import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -24,27 +17,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.FacebookSdk;
-import com.facebook.login.LoginManager;
-import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Locale;
+
+import br.com.vagotche.vagotcheapp.FirebaseInstanceIDService;
 
 public class MenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -52,7 +41,7 @@ public class MenuActivity extends AppCompatActivity
     //Variaveis
     int cdUsuario;
     TextView txtNome, txtEmail;
-    String nomeUsuario, emailUsuario, auxiliar;
+    String nomeUsuario, emailUsuario, auxiliar, token;
     String url = "";
     String parametros = "";
     private ShareDialog shareDialog;
@@ -82,6 +71,11 @@ public class MenuActivity extends AppCompatActivity
 
         //Pega ID do Usuario em memoria
         cdUsuario = getIntent().getIntExtra("id_usuario", 0);
+        token = getIntent().getStringExtra("Token");
+
+        registerToken();
+        //String token = FirebaseInstanceId.getInstance().getToken();
+        //FirebaseInstanceIDService.registerToken(FirebaseInstanceId.getInstance().getToken());
 
 //        //FB
 //        FacebookSdk.sdkInitialize(this);
@@ -208,6 +202,31 @@ public class MenuActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
+    }
+
+
+//    public void onTokenRefresh() {
+//
+//        String token = FirebaseInstanceId.getInstance().getToken();
+//        //int cdUsuario = 0;
+//        registerToken(token);
+//    }
+
+    public void registerToken() {
+
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+        if (networkInfo != null && networkInfo.isConnected()) {
+
+            url = "http://fabrica.govbrsul.com.br/vagotche/index.php/PushNotification/Register";
+            parametros = "token=" + token + "&cdUsuario=" + cdUsuario;
+
+            new SolicitaDados().execute(url);
+        } else {
+            alert("Nenhuma conexão de rede foi detectada");
+        }
     }
 
 //    public class DownloadImage extends AsyncTask<String, Void, Bitmap>{
@@ -503,6 +522,7 @@ public class MenuActivity extends AppCompatActivity
                     Intent it = new Intent(MenuActivity.this, CreditosActivity.class);
                     it.putExtra("saldo", df2.format(Double.parseDouble(dadosSaldo[1])));
                     it.putExtra("id_usuario", cdUsuario);
+                    it.putExtra("token", token);
                     startActivity(it);
                 } else if (auxiliar.contains("zonaazul")) {
 
