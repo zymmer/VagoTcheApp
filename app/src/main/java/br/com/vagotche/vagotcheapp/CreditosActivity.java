@@ -169,7 +169,7 @@ public class CreditosActivity extends AppCompatActivity
         cred20 = (TextView) findViewById(R.id.creditos20);
         cred40 = (TextView) findViewById(R.id.creditos40);
         cred60 = (TextView) findViewById(R.id.creditos60);
-//        valor = (TextView) findViewById(R.id.CampoValor);
+        //valor = (TextView) findViewById(R.id.viewSaldoCreditos);
 //        btnComprar = (Button) findViewById(R.id.btnComprarCred);
         btnVoltar = (ImageView) findViewById(R.id.imvVoltarCredito);
 //        btnLimparCred = (Button) findViewById(R.id.btnLimparCred);
@@ -178,7 +178,7 @@ public class CreditosActivity extends AppCompatActivity
 //        creditos10.setOnClickListener(this);
 //        creditos15.setOnClickListener(this);
 //        btnComprar.setOnClickListener(this);
-//        btnVoltar.setOnClickListener(this);
+        //btnVoltar.setOnClickListener((View.OnClickListener) this);
 //        btnLimparCred.setOnClickListener(this);
 
         String base64EncodedPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiI/sOn+Gs8sr/zhQn0zR0J7HsQJ8Fnrrvu4lRXwT5vsq7Zhnv6gg7/kr0TZznQrs45SQOyRriUW4VIZ6h4vbNbbvq/CxeTE27zPBXHemaoHMP7hEbmLe8J5HWnvxuPhxMF4iXfz0+z777h7wh8phgITMaYi6Ek7jeCY5QeSJ1qEjUP9jzLsNgPBb4sahb5N52xiIfTFnUe6rziLG4pdZqK2vzk7pFYt5XErf+wikPtkFl4NaNdki8qnb3xoE9YYmn1MzhwKjc1h2luRNRTDfVrj/Zj6neXtzuzE7TI2AHgwFMU+rc9U/41/J/Jc8pjKXNSFWy4Pji3TmxTJBU3H14wIDAQAB";
@@ -275,15 +275,15 @@ public class CreditosActivity extends AppCompatActivity
             String hora_atual = dateFormat_hora.format(data_atual);
 
             if (resultado.contains("credito_adquirido")) {
-                alert("Créditos Adquiridos...");
+                //alert("Créditos Adquiridos...");
 
-                //TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+                showNotification("vagoCRED","Adquirido 5 reais de crédito." + "Data: " + data_completa + "Hora: " +hora_atual);
+                //TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);i
                 //String number = tm.getLine1Number();
                 //alert("numero: " +number);
                 //SmsManager smsManager = SmsManager.getDefault();
                 //smsManager.sendTextMessage("51997152881", null, "VagoTchê: Adquirido R$"+ df2.format(saldo) +" para o credVAGO." + " Data: " + data_completa, null, null);
 
-                finish();
             }
 
         }
@@ -770,11 +770,12 @@ public class CreditosActivity extends AppCompatActivity
                 // game world's logic, which in our case means filling the gas tank a bit
                 Log.d(TAG, "Consumption successful. Provisioning.");
                 saldo = saldo + 5;
-                valor.setText(df2.format(saldo));
+                seuSaldo.setText(df2.format(saldo));
+                //alert("Saldo: " +saldo + "Id: " +cdUsuario);
                 ComprarCredito();
                 //mTank = mTank == TANK_MAX ? TANK_MAX : mTank + 1;
                 //saveData();
-                alert("Crédito adquirido: " + purchase + "Result: " +result);
+                //alert("Crédito adquirido: " + purchase + "Result: " +result);
             }
             else {
                 complain("Error while consuming: " + result);
