@@ -74,6 +74,7 @@ public class CreditosActivity extends AppCompatActivity
     //Variaveis
     int cdUsuario;
     TextView seuSaldo, valor, cred5, cred10, cred15, cred20, cred40, cred60;
+    Double saldoVar = 0.00;
     Double saldo = 0.00;
     Button btnComprar, btnLimparCred;
     ImageView btnVoltar;
@@ -277,7 +278,8 @@ public class CreditosActivity extends AppCompatActivity
             if (resultado.contains("credito_adquirido")) {
                 //alert("Créditos Adquiridos...");
 
-                showNotification("vagoCRED","Adquirido 5 reais de crédito." + "Data: " + data_completa + "Hora: " +hora_atual);
+                showNotification("vagoCRED","Adquirido R$"+ saldoVar +" reais de crédito." +
+                        "\n" + "Data: " + data_completa + "Hora: " +hora_atual);
                 //TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);i
                 //String number = tm.getLine1Number();
                 //alert("numero: " +number);
@@ -648,7 +650,7 @@ public class CreditosActivity extends AppCompatActivity
             if (mHelper == null) return;
 
             if (result.isFailure()) {
-                complain("Error purchasing: " + result);
+                //complain("Error purchasing: " + result);
                 //setWaitScreen(false);
                 return;
             }
@@ -658,7 +660,7 @@ public class CreditosActivity extends AppCompatActivity
                 return;
             }
 
-            Log.d(TAG, "Purchase successful.");
+            Log.d(TAG, "Compra efetuada com sucesso.");
 
             if (purchase.getSku().equals(credito5)) {
                 // bought 1/4 tank of gas. So consume it.
@@ -670,9 +672,7 @@ public class CreditosActivity extends AppCompatActivity
                     //setWaitScreen(false);
                     return;
                 }
-            }
-
-            if (purchase.getSku().equals(credito10)) {
+            } else if (purchase.getSku().equals(credito10)) {
                 // bought 1/4 tank of gas. So consume it.
                 Log.d(TAG, "Purchase is credito10. Starting credito10 consumption.");
                 try {
@@ -682,9 +682,7 @@ public class CreditosActivity extends AppCompatActivity
                     //setWaitScreen(false);
                     return;
                 }
-            }
-
-            if (purchase.getSku().equals(credito15)) {
+            } else if (purchase.getSku().equals(credito15)) {
                 // bought 1/4 tank of gas. So consume it.
                 Log.d(TAG, "Purchase is credito15. Starting credito15 consumption.");
                 try {
@@ -694,9 +692,7 @@ public class CreditosActivity extends AppCompatActivity
                     //setWaitScreen(false);
                     return;
                 }
-            }
-
-            if (purchase.getSku().equals(credito20)) {
+            } else if (purchase.getSku().equals(credito20)) {
                 // bought 1/4 tank of gas. So consume it.
                 Log.d(TAG, "Purchase is credito20. Starting credito20 consumption.");
                 try {
@@ -706,9 +702,7 @@ public class CreditosActivity extends AppCompatActivity
                     //setWaitScreen(false);
                     return;
                 }
-            }
-
-            if (purchase.getSku().equals(credito40)) {
+            } else if (purchase.getSku().equals(credito40)) {
                 // bought 1/4 tank of gas. So consume it.
                 Log.d(TAG, "Purchase is credito40. Starting credito40 consumption.");
                 try {
@@ -718,9 +712,7 @@ public class CreditosActivity extends AppCompatActivity
                     //setWaitScreen(false);
                     return;
                 }
-            }
-
-            if (purchase.getSku().equals(credito60)) {
+            } else if (purchase.getSku().equals(credito60)) {
                 // bought 1/4 tank of gas. So consume it.
                 Log.d(TAG, "Purchase is credito60. Starting credito60 consumption.");
                 try {
@@ -768,9 +760,70 @@ public class CreditosActivity extends AppCompatActivity
             if (purchase.getSku().equals(credito5) && result.isSuccess()) {
                 // successfully consumed, so we apply the effects of the item in our
                 // game world's logic, which in our case means filling the gas tank a bit
-                Log.d(TAG, "Consumption successful. Provisioning.");
-                saldo = saldo + 5;
-                seuSaldo.setText(df2.format(saldo));
+                Log.d(TAG, "Compra efetuada com sucesso. Provisionando.");
+                saldoVar = 5.00;
+                saldo = Double.parseDouble(seuSaldo.getText().toString()) + saldoVar;
+                seuSaldo.setText("R$" + saldo);
+                //alert("Saldo: " +saldo + "Id: " +cdUsuario);
+                ComprarCredito();
+                //mTank = mTank == TANK_MAX ? TANK_MAX : mTank + 1;
+                //saveData();
+                //alert("Crédito adquirido: " + purchase + "Result: " +result);
+            } else if (purchase.getSku().equals(credito10) && result.isSuccess()) {
+                // successfully consumed, so we apply the effects of the item in our
+                // game world's logic, which in our case means filling the gas tank a bit
+                Log.d(TAG, "Compra efetuada com sucesso. Provisionando.");
+                saldoVar = 10.0;
+                saldo = saldo + saldoVar;
+                valor.setText(df2.format(saldo));
+                //alert("Saldo: " +saldo + "Id: " +cdUsuario);
+                ComprarCredito();
+                //mTank = mTank == TANK_MAX ? TANK_MAX : mTank + 1;
+                //saveData();
+                //alert("Crédito adquirido: " + purchase + "Result: " +result);
+            } else if (purchase.getSku().equals(credito15) && result.isSuccess()) {
+                // successfully consumed, so we apply the effects of the item in our
+                // game world's logic, which in our case means filling the gas tank a bit
+                Log.d(TAG, "Compra efetuada com sucesso. Provisionando.");
+                saldoVar = 15.0;
+                saldo = saldo + saldoVar;
+                valor.setText(df2.format(saldo));
+                //alert("Saldo: " +saldo + "Id: " +cdUsuario);
+                ComprarCredito();
+                //mTank = mTank == TANK_MAX ? TANK_MAX : mTank + 1;
+                //saveData();
+                //alert("Crédito adquirido: " + purchase + "Result: " +result);
+            } else if (purchase.getSku().equals(credito20) && result.isSuccess()) {
+                // successfully consumed, so we apply the effects of the item in our
+                // game world's logic, which in our case means filling the gas tank a bit
+                Log.d(TAG, "Compra efetuada com sucesso. Provisionando.");
+                saldoVar = 20.0;
+                saldo = saldo + saldoVar;
+                valor.setText(df2.format(saldo));
+                //alert("Saldo: " +saldo + "Id: " +cdUsuario);
+                ComprarCredito();
+                //mTank = mTank == TANK_MAX ? TANK_MAX : mTank + 1;
+                //saveData();
+                //alert("Crédito adquirido: " + purchase + "Result: " +result);
+            } else if (purchase.getSku().equals(credito40) && result.isSuccess()) {
+                // successfully consumed, so we apply the effects of the item in our
+                // game world's logic, which in our case means filling the gas tank a bit
+                Log.d(TAG, "Compra efetuada com sucesso. Provisionando.");
+                saldoVar = 40.0;
+                saldo = saldo + saldoVar;
+                valor.setText(df2.format(saldo));
+                //alert("Saldo: " +saldo + "Id: " +cdUsuario);
+                ComprarCredito();
+                //mTank = mTank == TANK_MAX ? TANK_MAX : mTank + 1;
+                //saveData();
+                //alert("Crédito adquirido: " + purchase + "Result: " +result);
+            } else if (purchase.getSku().equals(credito60) && result.isSuccess()) {
+                // successfully consumed, so we apply the effects of the item in our
+                // game world's logic, which in our case means filling the gas tank a bit
+                Log.d(TAG, "Compra efetuada com sucesso. Provisionando.");
+                saldoVar = 60.0;
+                saldo = saldo + saldoVar;
+                valor.setText(df2.format(saldo));
                 //alert("Saldo: " +saldo + "Id: " +cdUsuario);
                 ComprarCredito();
                 //mTank = mTank == TANK_MAX ? TANK_MAX : mTank + 1;
@@ -851,8 +904,9 @@ public class CreditosActivity extends AppCompatActivity
 //         }
 
     void complain(String message) {
-        Log.e(TAG, "**** TrivialDrive Error: " + message);
-        alert("Error: " + message);
+        Log.e(TAG, "**** Vago Tchê Error: " + message);
+        alert("Cancelamento: " + message);
+        //alert("Error: " + message);
     }
 
     void alert(String message) {

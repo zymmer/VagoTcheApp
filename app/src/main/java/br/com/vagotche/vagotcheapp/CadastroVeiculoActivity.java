@@ -1,5 +1,6 @@
 package br.com.vagotche.vagotcheapp;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -38,6 +39,9 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
     String parametros = "";
 
     Carro carro = new Carro();
+
+    // Debug tag, for logging
+    static final String TAG = "VagoTchê";
 
     //Alerta
     private void alert(String s){
@@ -230,17 +234,40 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnLocalizarVeic:
+                ProgressDialog progressDialog = ProgressDialog.show(CadastroVeiculoActivity.this, "",
+                        "Procurando veículo. Por favor aguarde...", true);
+                progressDialog.getProgress();
                 localizarVeiculo();
+                progressDialog.dismiss(); // for close the dialog bar.
                 break;
             case R.id.btnCancelarVeic:
                 finish();
                 break;
             case R.id.btnRegistrarVeic:
+
+                complain("Confirmar registro de veículo");
+
+                //if(complain(pre);)
+
                 registrarVeiculo();
                 break;
             case R.id.btnAlterarVeic:
                 verificarMeusVeiculos();
         }
+    }
+
+    void complain(String message) {
+        Log.e(TAG, "**** Vago Tchê Error: " + message);
+        alertDialog("Registro: " + message);
+        //alert("Error: " + message);
+    }
+
+    void alertDialog(String message) {
+        AlertDialog.Builder bld = new AlertDialog.Builder(this);
+        bld.setMessage(message);
+        bld.setNeutralButton("OK", null);
+        Log.d(TAG, "Showing alert dialog: " + message);
+        bld.create().show();
     }
 
     @Override

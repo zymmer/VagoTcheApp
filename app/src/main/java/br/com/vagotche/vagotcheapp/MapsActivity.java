@@ -1,6 +1,7 @@
 package br.com.vagotche.vagotcheapp;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
@@ -12,6 +13,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +46,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener{
 
+    //Variaveis
+    int cdUsuario;
     private GoogleMap mMap;
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
@@ -52,8 +56,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Spinner mySpinner, spinner2;
     JSONArray ja;
     ArrayAdapter <String> adapter;
-    String tipoArray, snippet, tipoVaga;
+    String tipoArray, snippet, tipoVaga, parquimetro;
     TextView nomeParquimetro, quatidadeVagas, quatidadeVagasDisponiveis, porcentagemOcupacao;
+    Button btnReservar;
 
     private void alert(String s){
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
@@ -68,8 +73,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mySpinner = (Spinner) findViewById(R.id.spinner1);
         mySpinner.setAdapter(new MyAdapterFiltroVagas(this, R.layout.rowfiltrovagas, getAllList()));
 
-        //spinner2 = (Spinner) findViewById(R.id.spinner2);
-
+        cdUsuario = getIntent().getIntExtra("id_usuario", 0);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
@@ -89,6 +93,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         quatidadeVagas = (TextView) findViewById(R.id.txtQuatidadeVagasTotais);
         quatidadeVagasDisponiveis = (TextView) findViewById(R.id.txtQuatidadeVagasDisponiveis);
         porcentagemOcupacao = (TextView) findViewById(R.id.txtPorcentagemOcupacao);
+        btnReservar = (Button) findViewById(R.id.btnReservar);
     }
 
     /**GoogleMapOptions options = new GoogleMapOptions().liteMode(true);
@@ -503,14 +508,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         }
 
                         if (indice == 0) {
-                            porcentagemOcupacao.getTextColors();
-                            quatidadeVagasDisponiveis.getTextColors();
+                            porcentagemOcupacao.getCurrentTextColor();
+                            quatidadeVagasDisponiveis.getCurrentTextColor();
+                            nomeParquimetro.setTextColor(Color.WHITE);
                             nomeParquimetro.setText(parquimetro.getTitle());
                             quatidadeVagas.setText(jo.getString(tipoVaga));
                             quatidadeVagasDisponiveis.setText(Integer.toString(vagasOcupadas));
                             porcentagemOcupacao.setText(ocupacao);
                             parquimetro.showInfoWindow();
                             indiceCount = indiceCount + 1;
+
+                            if (Integer.parseInt(quatidadeVagasDisponiveis.getText().toString()) >= 1){
+                                btnReservar.setVisibility(View.VISIBLE);
+                            } else {
+                                btnReservar.setVisibility(View.INVISIBLE);
+                            }
+
                         }
 
                         ListItemFiltroVagas item;
@@ -526,6 +539,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         quatidadeVagas.setText("");
                         quatidadeVagasDisponiveis.setText("");
                         porcentagemOcupacao.setText("");
+                        btnReservar.setVisibility(View.INVISIBLE);
                     }
 
                 }
@@ -533,6 +547,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             } catch(JSONException e){
                 e.printStackTrace();
             }
+    }
+
+    public void reservarVaga(View view) {
+
+        alert("OK");
+
+        Intent it = new Intent(this, ZonaAzulActivity.class);
+        it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        it.putExtra("id_usuario", cdUsuario);
+        it.putExtra("parquimetro", nomeParquimetro);
+        startActivity(it);
+
+//        if (view.getId() == R.id.btnReservar) {
+//            try {
+//                mHelper.launchPurchaseFlow(this, credito5, RC_REQUEST,
+//                        mPurchaseFinishedListener, payload);
+//            } catch (IabHelper.IabAsyncInProgressException e) {
+//                complain("Erro ao iniciar o fluxo de compras para o credito 5. Outra operação assíncrona em andamento.");
+//                //setWaitScreen(false);
+//            }
+
     }
 
 
