@@ -1,5 +1,6 @@
 package br.com.vagotche.vagotcheapp;
 
+import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
@@ -45,7 +46,7 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
 
     //Variaveis
     int cdUsuario;
-    TextView seuSaldo, txvTempo30, txvTempo1, txvTempo130, txvTempo2;
+    TextView seuSaldo, txvTempo30, txvTempo1, txvTempo130, txvTempo2, parquimetro;
     Spinner spinnerPlaca, spinnerCidade, spinnerParquimetro;
     Double valor = 0.00;
     int tempo = 0;
@@ -76,6 +77,9 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
     // Formato com parêntese (5.000,00)
     DecimalFormat df2 = new DecimalFormat ("#,##0.00;(#,##0.00)", dfs);
 
+    // Debug tag, for logging
+    static final String TAG = "VagoTchê";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,11 +98,14 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerPlaca.setAdapter(adapter);
 
-        //Spinner Parquimetro
-        spinnerParquimetro = (Spinner) findViewById(R.id.spinnerParquimetro);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getIntent().getStringArrayListExtra("parquimetrosArray"));
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerParquimetro.setAdapter(adapter);
+//        //Spinner Parquimetro
+//        spinnerParquimetro = (Spinner) findViewById(R.id.spinnerParquimetro);
+//        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getIntent().getStringArrayListExtra("parquimetrosArray"));
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinnerParquimetro.setAdapter(adapter);
+        //Saldo
+        parquimetro = (TextView) findViewById(R.id.spinnerParquimetro);
+        parquimetro.setText(getIntent().getStringExtra("parquimetro"));
 
         //Spinner Cidade
         spinnerCidade = (Spinner) findViewById(R.id.spinnerCidade);
@@ -137,21 +144,21 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
 
             String placa = spinnerPlaca.getSelectedItem().toString();
             String cidade = spinnerCidade.getSelectedItem().toString();
-            String parquimetro = spinnerParquimetro.getSelectedItem().toString();
+            //String parquimetro = spinnerParquimetro.getSelectedItem().toString();
 
             if (spinnerPlaca.getSelectedItem() == "" || spinnerPlaca.getSelectedItem() == null) {
 
-                alert("Nenhum veículo registrado foi encontrado");
+                complain("Nenhum veículo registrado foi encontrado");
 
             } else if (Double.parseDouble(saldoExtra) < valor) {
 
-                alert("Saldo indisponível");
+                complain("Saldo indisponível");
                 
             } else {
 
                 url = "http://fabrica.govbrsul.com.br/vagotche/index.php/ZonaAzul/PagarZonaAzul";
                 parametros = "cdUsuario=" + cdUsuario + "&placa=" + placa + "&cidade=" + cidade +
-                        "&parquimetro=" + parquimetro + "&valorUtilizado=" + valor;
+                        "&parquimetro=" + parquimetro.getText().toString() + "&valorUtilizado=" + valor;
 
                 new SolicitaDados().execute(url);
             }
@@ -173,8 +180,8 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
         @Override
         protected void onPostExecute(String resultado) {
 
-            alert(parametros);
-            alert(resultado);
+//            alert(parametros);
+//            alert(resultado);
 
             //Data Atual do Celular
             Calendar cal = Calendar.getInstance();
@@ -187,12 +194,12 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
             String hora_atual = dateFormat_hora.format(data_atual_somado);
 
             if (resultado.contains("Pagamento_efetuado")) {
-                alert("Reserva efetuada");
+                complain("Reserva efetuada com sucesso...");
 //                        "" +
 //                        "para utilização do parquímetro " + spinnerParquimetro.getSelectedItem().toString()+
 //                                " Sua vaga estará disponível até às " + hora_atual);
 
-                showNotification("Reserva","Reserva efetuada para utilização do parquímetro " + spinnerParquimetro.getSelectedItem().toString()+
+                showNotification("Reserva","Reserva efetuada para utilização do parquímetro " + parquimetro.getText().toString()+
                         " Sua vaga estará disponível até às " + hora_atual);
                 //TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
                 //String number = tm.getLine1Number();
@@ -284,10 +291,24 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
                 if (valor >= 0.50){
                     UtilizarCredito();
                 } else {
-                    alert("Você deve informar um valor");
+                    complain("Você deve informar um valor/tempo.");
                 }
                 break;
         }
+    }
+
+    void complain(String message) {
+        Log.e(TAG, "**** Vago Tchê Error: " + message);
+        alertDialog(message);
+        //alert("Error: " + message);
+    }
+
+    void alertDialog(String message) {
+        AlertDialog.Builder bld = new AlertDialog.Builder(this);
+        bld.setMessage(message);
+        bld.setNeutralButton("OK", null);
+        Log.d(TAG, "Showing alert dialog: " + message);
+        bld.create().show();
     }
 
 

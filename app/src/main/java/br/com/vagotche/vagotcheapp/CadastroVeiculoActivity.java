@@ -37,7 +37,7 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
     List listAno = new Veiculos().ano;
     String url = "";
     String parametros = "";
-
+    ProgressDialog progressDialog;
     Carro carro = new Carro();
 
     // Debug tag, for logging
@@ -123,12 +123,15 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
 
             if(placaPat.matcher(placa).matches()){
 
+                progressDialog = ProgressDialog.show(CadastroVeiculoActivity.this, "Procurando Veículo",
+                        "Carregando...");
+
             url = "http://fabrica.govbrsul.com.br/vagotche/index.php/VerificaPlacaSinesp/VerificaPlacaSinesp";
             parametros = "placa=" + placa;
             new SolicitaDados().execute(url);
 
             }   else {
-                alert("Placa incorreta. Ex.: ABC1234");
+                complain("Placa incorreta. Ex.: ABC1234");
             }
 
         } else {
@@ -199,17 +202,22 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
         @Override
         protected void onPostExecute(String resultado) {
 
+            progressDialog.dismiss(); // for close the dialog bar.
+
             degenerateJSON(resultado);
 
             if (resultado.contains("veiculo_registrado")) {
-                alert("Veículo registrado com sucesso...");
+
+                complain("Veículo registrado com sucesso.");
 
                 finish();
             } else if (resultado.contains("placa_ja_cadastrada")) {
-                alert("A placa informada já está cadastrada");
+
+                complain("Este veículo já está cadastrado no sistema.");
 
             } else if (resultado.contains("error_system")) {
-                alert("Ocorreu um erro");
+
+                complain("Ocorreu um erro desconhecido. Por favor informe o suporte do sistema.");
             }
 
             String[] dados = resultado.split(",");
@@ -234,21 +242,12 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnLocalizarVeic:
-                ProgressDialog progressDialog = ProgressDialog.show(CadastroVeiculoActivity.this, "",
-                        "Procurando veículo. Por favor aguarde...", true);
-                progressDialog.getProgress();
                 localizarVeiculo();
-                progressDialog.dismiss(); // for close the dialog bar.
                 break;
             case R.id.btnCancelarVeic:
                 finish();
                 break;
             case R.id.btnRegistrarVeic:
-
-                complain("Confirmar registro de veículo");
-
-                //if(complain(pre);)
-
                 registrarVeiculo();
                 break;
             case R.id.btnAlterarVeic:
@@ -258,7 +257,7 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
 
     void complain(String message) {
         Log.e(TAG, "**** Vago Tchê Error: " + message);
-        alertDialog("Registro: " + message);
+        alertDialog(message);
         //alert("Error: " + message);
     }
 
@@ -270,11 +269,11 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
         bld.create().show();
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        finish();
-    }
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//        finish();
+//    }
 
 
 }

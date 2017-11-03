@@ -41,13 +41,14 @@ public class MenuActivity extends AppCompatActivity
     //Variaveis
     int cdUsuario;
     TextView txtNome, txtEmail;
-    String nomeUsuario, emailUsuario, auxiliar, token;
+    String nomeUsuario, emailUsuario, auxiliar, token, parquimetro;
     String url = "";
     String parametros = "";
     private ShareDialog shareDialog;
     private Button logout;
     MenuItem nav_meusdados, nav_contato, nav_movimentacoes, nav_info, itemwww;
     Intent zonaAzul, Maps;
+    FloatingActionButton zab;
 
     //alerta
     private void alert(String s){
@@ -74,6 +75,16 @@ public class MenuActivity extends AppCompatActivity
         token = getIntent().getStringExtra("Token");
 
         registerToken();
+
+
+        //Test Habilitar Bottao de Zona Azul
+//        if(getIntent().getStringExtra("parquimetro") == null || getIntent().getStringExtra("parquimetro").equals("")){
+//            zab.setVisibility(View.GONE);
+//        } else {
+//            zab.setVisibility(View.VISIBLE);
+//        }
+
+
         //String token = FirebaseInstanceId.getInstance().getToken();
         //FirebaseInstanceIDService.registerToken(FirebaseInstanceId.getInstance().getToken());
 
@@ -116,7 +127,7 @@ public class MenuActivity extends AppCompatActivity
         FloatingActionButton cb = (FloatingActionButton) findViewById(R.id.CreditosBtn);
         FloatingActionButton cvb = (FloatingActionButton) findViewById(R.id.CadastroVeiculoBtn);
         FloatingActionButton cab = (FloatingActionButton) findViewById(R.id.ConfiguracaoAlertasBtn);
-        FloatingActionButton zab = (FloatingActionButton) findViewById(R.id.ZonaAzulBtn);
+        zab = (FloatingActionButton) findViewById(R.id.ZonaAzulBtn);
         FloatingActionButton Irrb = (FloatingActionButton) findViewById(R.id.IrregularidadesBtn);
         nav_meusdados = (MenuItem)findViewById(R.id.nav_meusdados);
         nav_contato = (MenuItem)findViewById(R.id.nav_contato);
@@ -133,6 +144,7 @@ public class MenuActivity extends AppCompatActivity
                 VerificaParquimetrosToMaps();
                 VerificaParquimetrosIdososToMaps();
                 VerificaParquimetrosDFToMaps();
+                Maps.putExtra("id_usuario", cdUsuario);
             }
         });
 
@@ -165,6 +177,7 @@ public class MenuActivity extends AppCompatActivity
             public void onClick(View view) {
                 zonaAzul = new Intent(MenuActivity.this, ZonaAzulActivity.class);
                 zonaAzul.putExtra("id_usuario", cdUsuario);
+                zonaAzul.putExtra("parquimetro", getIntent().getStringExtra("parquimetro"));
                 auxiliar = "zonaazul";
                 VerificaCreditos();
                 VerificaPlacas();

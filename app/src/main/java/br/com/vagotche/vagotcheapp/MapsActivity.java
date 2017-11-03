@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -44,7 +45,8 @@ import java.util.Arrays;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        LocationListener{
+        LocationListener,
+        View.OnClickListener{
 
     //Variaveis
     int cdUsuario;
@@ -94,6 +96,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         quatidadeVagasDisponiveis = (TextView) findViewById(R.id.txtQuatidadeVagasDisponiveis);
         porcentagemOcupacao = (TextView) findViewById(R.id.txtPorcentagemOcupacao);
         btnReservar = (Button) findViewById(R.id.btnReservar);
+
+        // Button listeners
+        btnReservar.setOnClickListener(this);
     }
 
     /**GoogleMapOptions options = new GoogleMapOptions().liteMode(true);
@@ -549,25 +554,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
     }
 
-    public void reservarVaga(View view) {
+    @Override
+    public void onClick(View v) {
+        // Is the view now checked?
+        //boolean checked = ((CheckBox) v).isChecked();
 
-        alert("OK");
-
-        Intent it = new Intent(this, ZonaAzulActivity.class);
-        it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        it.putExtra("id_usuario", cdUsuario);
-        it.putExtra("parquimetro", nomeParquimetro);
-        startActivity(it);
-
-//        if (view.getId() == R.id.btnReservar) {
-//            try {
-//                mHelper.launchPurchaseFlow(this, credito5, RC_REQUEST,
-//                        mPurchaseFinishedListener, payload);
-//            } catch (IabHelper.IabAsyncInProgressException e) {
-//                complain("Erro ao iniciar o fluxo de compras para o credito 5. Outra operação assíncrona em andamento.");
-//                //setWaitScreen(false);
-//            }
-
+        switch (v.getId()) {
+            case R.id.btnReservar:
+                Intent it = new Intent(MapsActivity.this, MenuActivity.class);
+                it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                it.putExtra("id_usuario", cdUsuario);
+                it.putExtra("parquimetro", nomeParquimetro.getText());
+                startActivity(it);
+                break;
+        }
     }
 
 

@@ -40,10 +40,10 @@
 
         <Button
             android:text="Reservar"
+            android:clickable="true"
             android:textColor="@color/colorWhite"
             android:id="@+id/btnReservar"
             android:background="@drawable/txt_view_border_maps"
-            android:onClick="reservarVaga"
             android:drawableTop="@mipmap/parquimetro_40x40"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
