@@ -72,18 +72,18 @@ public class MenuActivity extends AppCompatActivity
 
         //Pega ID do Usuario em memoria
         cdUsuario = getIntent().getIntExtra("id_usuario", 0);
+        //Pega o token do firebase de usuário único
         token = getIntent().getStringExtra("Token");
-
+        //Registra um token do firebase caso o usuário esteja logando pela primeira vez no sistema
         registerToken();
 
 
-        //Test Habilitar Bottao de Zona Azul
+//        //Test Habilitar Bottao de Zona Azul
 //        if(getIntent().getStringExtra("parquimetro") == null || getIntent().getStringExtra("parquimetro").equals("")){
 //            zab.setVisibility(View.GONE);
 //        } else {
 //            zab.setVisibility(View.VISIBLE);
 //        }
-
 
         //String token = FirebaseInstanceId.getInstance().getToken();
         //FirebaseInstanceIDService.registerToken(FirebaseInstanceId.getInstance().getToken());

@@ -5,6 +5,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#3F51B5</color>
     <color name="colorPretoTransparente">#66000000</color>
+    <color name="colorVerdeTransparente">#6600FF00</color>
+    <color name="colorVermelhoTransparente">#66CC0000</color>
     <color name="colorCinzaTransparente50">#50696969</color>
     <color name="colorCinzaTransparente80">#80696969</color>
 

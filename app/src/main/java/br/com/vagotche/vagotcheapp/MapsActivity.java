@@ -1,15 +1,18 @@
 package br.com.vagotche.vagotcheapp;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -65,6 +68,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void alert(String s){
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
     }
+
+    static final String TAG = "VagoTchê";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -263,11 +268,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mCurrLocationMarker.remove();
         }
 
+        //Testes
+        location.setLatitude(-30.034647);
+        location.setLongitude(-51.217658);
+
         //Place current location marker
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
-        markerOptions.title("Posição Atual");
+        markerOptions.title("Você");
         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.mipmap.car32));
         mCurrLocationMarker = mMap.addMarker(markerOptions);
 
@@ -448,8 +457,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         try {
 
             ArrayList<ListItemFiltroVagas> parquimetrosArray = new ArrayList<ListItemFiltroVagas>();
+            ArrayList<ListParquimetrosMaisProximos> parquimetrosMaisProximosArray = new ArrayList<ListParquimetrosMaisProximos>();
+
             ja = new JSONArray(getIntent().getStringExtra(tipoArray));
             float results[] = new float[10];
+            float resultsMaisProximos[] = new float[10];
             int vagasOcupadas = 5;
             //Porcentagens de ocupacao
             double menos30Perc = 0.29;
@@ -467,14 +479,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     JSONObject jo = ja.getJSONObject(i);
 
                     Location.distanceBetween(mLastLocation.getLatitude(), mLastLocation.getLongitude(),
-                            Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")), results);
+                            Float.parseFloat(jo.getString("Latitude")), Float.parseFloat(jo.getString("Longitude")), results);
 
-                    float radius = 2000;// Medida em metros
+                    float radius = 500;// Medida em metros
 
                     if (results[0] < radius) {
 
-                        Arrays.sort(results);
+                        //Adiciona parquimetros mais proximos no Array
+                        resultsMaisProximos[i] = results[0];
+//                        ListParquimetrosMaisProximos item;
+//                        item = new ListParquimetrosMaisProximos();
+//                        String parq = jo.getString("cdEndereco");
+//                        item.setData(parq, resultsMaisProximos[0]);
+//                        parquimetrosMaisProximosArray.add(item);
+
+                        //complain("Results: " + resultsMaisProximos[0] + " Parquimetro: " + jo.getString("cdEndereco"));
+
+                        //Arrays.sort(results);
                         int indice = indiceCount;
+                        //complain("Results: " + results[0] + "Parquimetro: " + jo.getString("cdEndereco"));
 
                         LatLng latLng = new LatLng(Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")));
                         Marker parquimetro = mMap.addMarker(new MarkerOptions()
@@ -524,18 +547,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             indiceCount = indiceCount + 1;
 
                             if (Integer.parseInt(quatidadeVagasDisponiveis.getText().toString()) >= 1){
-                                btnReservar.setVisibility(View.VISIBLE);
+                                btnReservar.setBackgroundResource(R.drawable.txt_view_border_maps_green);
+                                //btnReservar.setVisibility(View.VISIBLE);
                             } else {
-                                btnReservar.setVisibility(View.INVISIBLE);
+                                btnReservar.setBackgroundResource(R.drawable.txt_view_border_maps_red);
+                                //btnReservar.setVisibility(View.INVISIBLE);
                             }
 
                         }
 
-                        ListItemFiltroVagas item;
-                        item = new ListItemFiltroVagas();
-                        String parq = jo.getString("cdEndereco");
-                        item.setData(parq, R.mipmap.vehicle);
-                        parquimetrosArray.add(item);
+                        ListItemFiltroVagas item2;
+                        item2 = new ListItemFiltroVagas();
+                        String parq2 = jo.getString("cdEndereco");
+                        item2.setData(parq2, R.mipmap.vehicle);
+                        parquimetrosArray.add(item2);
 
 
                     } else if (results[0] > radius && indiceCount == 0) {
@@ -544,10 +569,39 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         quatidadeVagas.setText("");
                         quatidadeVagasDisponiveis.setText("");
                         porcentagemOcupacao.setText("");
-                        btnReservar.setVisibility(View.INVISIBLE);
+                        //btnReservar.setVisibility(View.INVISIBLE);
                     }
 
                 }
+
+            Arrays.sort(resultsMaisProximos);
+            float value = 0;
+            // usamos maior como 0 pois se tiver algum numero maior, ele é o maior.
+
+            complain("Result " + resultsMaisProximos[5]);
+            //complain(parquimetrosMaisProximosArray.toArray().toString());
+
+//            for ( int i = 1 ; i < resultsMaisProximos.length; i++)
+//            {
+//
+//                //resultsMaisProximos[i]=resultsMaisProximos[0];
+//                //complain("Park: " + resultsMaisProximos[i]);
+//                // Aqui voce faze o seguinte
+//
+//                if (resultsMaisProximos[i] >= value)
+//                {
+//                    value = resultsMaisProximos[i];
+//                    complain("Maior: " + value);
+//                }
+//
+//                if (resultsMaisProximos[i] <= value)
+//                {
+//                    value = resultsMaisProximos[i];
+//                    complain("Menor: " + value);
+//                }
+//
+//            }
+
 
             } catch(JSONException e){
                 e.printStackTrace();
@@ -570,6 +624,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    void complain(String message) {
+        Log.e(TAG, "**** Vago Tchê Error: " + message);
+        alertDialog(message);
+        //alert("Error: " + message);
+    }
+
+    void alertDialog(String message) {
+        AlertDialog.Builder bld = new AlertDialog.Builder(this);
+        bld.setMessage(message);
+        bld.setNeutralButton("OK", null);
+        Log.d(TAG, "Showing alert dialog: " + message);
+        bld.create().show();
+    }
 
     public ArrayList<ListItemFiltroVagas> getAllList() {
 

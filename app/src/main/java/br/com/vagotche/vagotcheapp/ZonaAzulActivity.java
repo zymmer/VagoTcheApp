@@ -104,7 +104,7 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
 //        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 //        spinnerParquimetro.setAdapter(adapter);
         //Saldo
-        parquimetro = (TextView) findViewById(R.id.spinnerParquimetro);
+        parquimetro = (TextView) findViewById(R.id.txtParquimetro);
         parquimetro.setText(getIntent().getStringExtra("parquimetro"));
 
         //Spinner Cidade
@@ -140,6 +140,8 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
         saldoExtra = saldoExtra.replace("R$", "");
         saldoExtra = saldoExtra.replace(",", ".");
 
+        alert("|" + parquimetro.getText() +"|");
+
         if (networkInfo != null && networkInfo.isConnected()) {
 
             String placa = spinnerPlaca.getSelectedItem().toString();
@@ -156,9 +158,12 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
                 
             } else {
 
+                //.toString().replaceAll("\\s+$", "")
+                String park = "Av. Osvaldo Aranha, n 374";
+
                 url = "http://fabrica.govbrsul.com.br/vagotche/index.php/ZonaAzul/PagarZonaAzul";
                 parametros = "cdUsuario=" + cdUsuario + "&placa=" + placa + "&cidade=" + cidade +
-                        "&parquimetro=" + parquimetro.getText().toString() + "&valorUtilizado=" + valor;
+                        "&parquimetro=" + park + "&valorUtilizado=" + valor;
 
                 new SolicitaDados().execute(url);
             }
@@ -174,6 +179,8 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
         protected String doInBackground(String... urls) {
 
             return ConexaoApp.postDados(urls[0], parametros);
+            //            alert(parametros);
+//            alert(resultado);
 
         }
 
@@ -181,7 +188,7 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
         protected void onPostExecute(String resultado) {
 
 //            alert(parametros);
-//            alert(resultado);
+            //alert(resultado);
 
             //Data Atual do Celular
             Calendar cal = Calendar.getInstance();
@@ -194,19 +201,19 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
             String hora_atual = dateFormat_hora.format(data_atual_somado);
 
             if (resultado.contains("Pagamento_efetuado")) {
-                complain("Reserva efetuada com sucesso...");
 //                        "" +
 //                        "para utilização do parquímetro " + spinnerParquimetro.getSelectedItem().toString()+
 //                                " Sua vaga estará disponível até às " + hora_atual);
 
-                showNotification("Reserva","Reserva efetuada para utilização do parquímetro " + parquimetro.getText().toString()+
-                        " Sua vaga estará disponível até às " + hora_atual);
+                showNotification("Confirmação de Reserva","Reserva efetuada para utilização do parquímetro (" + parquimetro.getText().toString()+
+                        "). Sua vaga estará disponível até às " + hora_atual + ".");
                 //TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
                 //String number = tm.getLine1Number();
                 //alert("numero: " +number);
                 //SmsManager smsManager = SmsManager.getDefault();
                 //smsManager.sendTextMessage("51997152881", null, "VagoTchê: Utilizado R$"+ df2.format(valor) +" do credVAGO." + " Data: " + data_completa, null, null);
 
+                complain("Reserva efetuada com sucesso...");
                 finish();
 
             } else if (resultado.contains("Crédito_insuficiente")) {
@@ -226,6 +233,7 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
                 .setAutoCancel(true)
                 .setContentTitle(title)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
                 .setContentText(message)
                 .setSmallIcon(R.drawable.cast_ic_stop_circle_filled_white);
         Bitmap bm = BitmapFactory.decodeResource(getResources(), R.mipmap.vagotcheestacionamento40x40px);
