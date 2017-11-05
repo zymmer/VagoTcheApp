@@ -5,15 +5,46 @@ package br.com.vagotche.vagotcheapp;
  */
 
 public class ListParquimetrosMaisProximos {
-    String name;
-    Float latLong;
+    String name, tipoVaga, ocupacao, latitude, longitude;
+    Float latLong, tipoIcon;
 
-    public void setData(String name, Float latLong) {
+
+    public void setData(String name, Float latLong, String tipoVaga, String ocupacao, String latitude, String longitude, Float tipoIcon) {
         this.name = name;
         this.latLong = latLong;
+        this.tipoVaga = tipoVaga;
+        this.ocupacao = ocupacao;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.tipoIcon = tipoIcon;
+    }
+
+    public String getNomeParquimetro() {
+        return name;
     }
 
     public Float getLatLong() {
         return latLong;
     }
+
+    public String getTipoVaga() {
+        return tipoVaga;
+    }
+
+    public String getOcupacao() {
+        return ocupacao;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public Float getTipoIcon() {
+        return tipoIcon;
+    }
+
 }
