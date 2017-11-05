@@ -21,7 +21,8 @@
         android:layout_toRightOf="@+id/imgThumb"
         android:padding="3dip"
         android:text="CoderzHeaven"
-        android:textColor="@android:color/holo_orange_dark"
+        android:textColor="@android:color/white"
         android:textStyle="bold" />
+
 
 </RelativeLayout>
