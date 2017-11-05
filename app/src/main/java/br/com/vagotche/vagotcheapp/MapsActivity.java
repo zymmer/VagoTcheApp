@@ -67,6 +67,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     String tipoArray, snippet, tipoVaga, parquimetro;
     TextView nomeParquimetro, quatidadeVagas, quatidadeVagasDisponiveis, porcentagemOcupacao;
     Button btnReservar;
+    Boolean flagResevar;
 
     private void alert(String s){
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
@@ -576,6 +577,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         quatidadeVagasDisponiveis.setText("");
                         porcentagemOcupacao.setText("");
                         btnReservar.setBackgroundResource(R.drawable.txt_view_border_maps_red);
+                        flagResevar = false;
                         //btnReservar.setVisibility(View.INVISIBLE);
                     }
 
@@ -622,12 +624,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                             if (Integer.parseInt(quatidadeVagasDisponiveis.getText().toString()) >= 1){
                                 btnReservar.setBackgroundResource(R.drawable.txt_view_border_maps_green);
-                                //btnReservar.setVisibility(View.VISIBLE);
+                                flagResevar = true;
                             } else {
                                 btnReservar.setBackgroundResource(R.drawable.txt_view_border_maps_red);
-                                //btnReservar.setVisibility(View.INVISIBLE);
+                                flagResevar = false;
                             }
-                
+
 
             }
 
@@ -643,11 +645,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         switch (v.getId()) {
             case R.id.btnReservar:
-                Intent it = new Intent(MapsActivity.this, MenuActivity.class);
-                it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                it.putExtra("id_usuario", cdUsuario);
-                it.putExtra("parquimetro", nomeParquimetro.getText());
-                startActivity(it);
+                if (flagResevar) {
+                    Intent it = new Intent(MapsActivity.this, MenuActivity.class);
+                    it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    it.putExtra("id_usuario", cdUsuario);
+                    it.putExtra("parquimetro", nomeParquimetro.getText());
+                    startActivity(it);
+                } else {
+                    complain("Impossível reservar esta vaga.");
+                }
                 break;
         }
     }
