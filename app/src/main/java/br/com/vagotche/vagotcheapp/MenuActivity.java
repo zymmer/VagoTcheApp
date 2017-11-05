@@ -1,5 +1,6 @@
 package br.com.vagotche.vagotcheapp;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -8,6 +9,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -61,6 +63,8 @@ public class MenuActivity extends AppCompatActivity
     //DecimalFormat df1 = new DecimalFormat ("#,##0.00", dfs);
     // Formato com parêntese (5.000,00)
     DecimalFormat df2 = new DecimalFormat ("#,##0.00;(#,##0.00)", dfs);
+
+    static final String TAG = "VagoTchê";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,13 +179,18 @@ public class MenuActivity extends AppCompatActivity
         zab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                zonaAzul = new Intent(MenuActivity.this, ZonaAzulActivity.class);
-                zonaAzul.putExtra("id_usuario", cdUsuario);
-                zonaAzul.putExtra("parquimetro", getIntent().getStringExtra("parquimetro"));
-                auxiliar = "zonaazul";
-                VerificaCreditos();
-                VerificaPlacas();
-                VerificaParquimetrosZonaAzul();
+                if (getIntent().getStringExtra("parquimetro") != null) {
+                    zonaAzul = new Intent(MenuActivity.this, ZonaAzulActivity.class);
+                    zonaAzul.putExtra("id_usuario", cdUsuario);
+                    zonaAzul.putExtra("parquimetro", getIntent().getStringExtra("parquimetro"));
+                    auxiliar = "zonaazul";
+                    VerificaCreditos();
+                    VerificaPlacas();
+                    VerificaParquimetrosZonaAzul();
+                } else {
+                    complain("Você precisa primeiro localizar uma vaga.");
+                }
+
             }
         });
 
@@ -665,6 +674,20 @@ public class MenuActivity extends AppCompatActivity
 //
 //        return super.onOptionsItemSelected(item);
 //    }
+
+    void complain(String message) {
+        Log.e(TAG, "**** Vago Tchê Error: " + message);
+        alertDialog(message);
+        //alert("Error: " + message);
+    }
+
+    void alertDialog(String message) {
+        AlertDialog.Builder bld = new AlertDialog.Builder(this);
+        bld.setMessage(message);
+        bld.setNeutralButton("OK", null);
+        Log.d(TAG, "Showing alert dialog: " + message);
+        bld.create().show();
+    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
