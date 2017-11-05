@@ -49,7 +49,7 @@
     <!-- Alertas -->
 
     <string name="Titulo">Configuração de Alertas</string>
-    <string name="Subtitulo">Envio de mensagem via SMS</string>
+    <string name="Subtitulo">Envio de notificação pelo celular</string>
     <string name="Aviso1">Permitir envio de mensagens quando houver um deslocamento indevido do meu veículo na vaga</string>
     <string name="Aviso2">Permitir envio de mensagens ao comprar créditos</string>
     <string name="Aviso3">Permitir envio de mensagens ao utilizar meus créditos</string>
