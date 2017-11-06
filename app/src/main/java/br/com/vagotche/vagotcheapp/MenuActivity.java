@@ -8,7 +8,9 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -20,6 +22,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +54,9 @@ public class MenuActivity extends AppCompatActivity
     MenuItem nav_meusdados, nav_contato, nav_movimentacoes, nav_info, itemwww;
     Intent zonaAzul, Maps;
     FloatingActionButton zab;
+    private Chronometer chronometer;
+    private long milliseconds;
+    private long millisecondsStop;
 
     //alerta
     private void alert(String s){
@@ -81,6 +87,18 @@ public class MenuActivity extends AppCompatActivity
         //Registra um token do firebase caso o usuário esteja logando pela primeira vez no sistema
         registerToken();
 
+        chronometer = (Chronometer) findViewById(R.id.chronometer);
+        chronometer.setText(DateFormat.format("kk:mm:ss", 0));
+        chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener(){
+            @Override
+            public void onChronometerTick(Chronometer chronometer) {
+                long aux = SystemClock.elapsedRealtime() - chronometer.getBase();
+                chronometer.setText(DateFormat.format("kk:mm:ss", aux));
+            }
+        });
+
+        milliseconds = 0;
+        millisecondsStop = 0;
 
 //        //Test Habilitar Bottao de Zona Azul
 //        if(getIntent().getStringExtra("parquimetro") == null || getIntent().getStringExtra("parquimetro").equals("")){
@@ -224,6 +242,19 @@ public class MenuActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
+    }
+
+    public void startChronometer(){
+        millisecondsStop = millisecondsStop > 0 ? System.currentTimeMillis() - millisecondsStop : 0;
+        chronometer.setBase(SystemClock.elapsedRealtime() - (milliseconds + millisecondsStop));
+        chronometer.start();
+        millisecondsStop = 0;
+    }
+
+    public void pauseChronometer(View view){
+        millisecondsStop = System.currentTimeMillis();
+        milliseconds = SystemClock.elapsedRealtime() - chronometer.getBase();
+        chronometer.stop();
     }
 
 

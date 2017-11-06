@@ -213,7 +213,9 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
                 //SmsManager smsManager = SmsManager.getDefault();
                 //smsManager.sendTextMessage("51997152881", null, "VagoTchê: Utilizado R$"+ df2.format(valor) +" do credVAGO." + " Data: " + data_completa, null, null);
 
-                complain("Reserva efetuada com sucesso...");
+                //complain("Reserva efetuada com sucesso...");
+                MenuActivity menuActivity = new MenuActivity();
+                menuActivity.startChronometer();
                 finish();
 
             } else if (resultado.contains("Crédito_insuficiente")) {
