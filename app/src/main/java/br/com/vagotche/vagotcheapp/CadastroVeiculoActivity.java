@@ -123,8 +123,8 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
 
             if(placaPat.matcher(placa).matches()){
 
-                progressDialog = ProgressDialog.show(CadastroVeiculoActivity.this, "Procurando Veículo",
-                        "Carregando...");
+                progressDialog = ProgressDialog.show(CadastroVeiculoActivity.this, "Por favor aguarde",
+                        "Procurando Veículo...");
 
             url = "http://fabrica.govbrsul.com.br/vagotche/index.php/VerificaPlacaSinesp/VerificaPlacaSinesp";
             parametros = "placa=" + placa;
