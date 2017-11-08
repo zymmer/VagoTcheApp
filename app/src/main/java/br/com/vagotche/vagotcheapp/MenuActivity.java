@@ -206,7 +206,7 @@ public class MenuActivity extends AppCompatActivity
                     VerificaPlacas();
                     VerificaParquimetrosZonaAzul();
                 } else {
-                    complain("Você precisa primeiro localizar uma vaga.");
+                    complain("Você precisa primeiro localizar e reservar uma vaga.");
                 }
 
             }

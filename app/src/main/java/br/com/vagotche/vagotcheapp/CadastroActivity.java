@@ -1,5 +1,6 @@
 package br.com.vagotche.vagotcheapp;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -7,6 +8,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -24,6 +26,8 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
     Boolean b1, b2;
     String url = "";
     String parametros = "";
+
+    static final String TAG = "VagoTchê";
 
     private void alert(String s){
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
@@ -89,7 +93,10 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
             alert("O e-mail digitado está incorreto");
 
         } else if (!passwordPat.matcher(senha).matches()){
-            alert("A senha deve conter entre 6~32 caracteres e ao menos um caracter maiúsculo, especial ou numérico.");
+            alert(  "* A senha deve conter entre 6 à 32 caracteres\n" +
+                    "* 1 caractere maiúsculo \n" +
+                    "* 1 caractere especial\n" +
+                    "* 1 caractere numérico.");
 
         } else {
 
@@ -126,13 +133,13 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
                 it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(it);
             } else if (resultado.contains("cpf_ja_cadastrado")) {
-                alert("CPF já está cadastrado");
+                complain("Este CPF já está cadastrado");
 
             } else if (resultado.contains("email_ja_cadastrado")) {
-                alert("Endereço de e-mail já está cadastrado");
+                complain("Endereço de e-mail já está cadastrado");
 
             } else if (resultado.contains("error_system")) {
-                alert("Ocorreu um erro");
+                complain("Ocorreu um erro. Por favor informar ao administrador do sistema.");
             }
 
         }
@@ -157,6 +164,20 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
                     b2 = false;
                 break;
         }
+    }
+
+    void complain(String message) {
+        Log.e(TAG, "**** Vago Tchê Error: " + message);
+        alertDialog(message);
+        //alert("Error: " + message);
+    }
+
+    void alertDialog(String message) {
+        AlertDialog.Builder bld = new AlertDialog.Builder(this);
+        bld.setMessage(message);
+        bld.setNeutralButton("OK", null);
+        Log.d(TAG, "Showing alert dialog: " + message);
+        bld.create().show();
     }
 
     @Override

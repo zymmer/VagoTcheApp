@@ -1,5 +1,6 @@
 package br.com.vagotche.vagotcheapp;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -270,11 +271,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(cpf.isEmpty() || senha.isEmpty()){
             alert("Nenhum campo pode estar vazio");
 
-//        } else if (!passwordPat.matcher(senha).matches()){
-//            alert("A senha deve conter entre 6~32 caracteres e ao menos um caracter especial ou numérico.");
-
         } else if (!ValidaCPF.isCPF(cpf) == true) {
             alert("O CPF digitado está incorreto");
+
+        }  else if (!passwordPat.matcher(senha).matches()){
+            alert(  "* A senha deve conter entre 6 à 32 caracteres\n" +
+                    "* 1 caractere maiúsculo \n" +
+                    "* 1 caractere especial\n" +
+                    "* 1 caractere numérico.");
 
         } else {
                 url = "http://fabrica.govbrsul.com.br/vagotche/index.php/Login/ValidarLogin";
@@ -322,10 +326,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 it.putExtra("Token", FirebaseInstanceId.getInstance().getToken());
                 startActivity(it);
             } else if (resultado.contains("cpf_invalido")){
-                alert("CPF inválido");
+                complain("CPF inválido");
 
             } else if (resultado.contains("cpf_nao_cadastrado_ou_senha_invalida")){
-                alert("CPF não cadastrado ou senha incorreta");
+                complain("CPF não cadastrado ou senha incorreta");
 
             }
 
@@ -411,6 +415,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             findViewById(R.id.ggLogin).setVisibility(View.VISIBLE);
             //findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
         }
+    }
+
+    void complain(String message) {
+        Log.e(TAG, "**** Vago Tchê Error: " + message);
+        alertDialog(message);
+        //alert("Error: " + message);
+    }
+
+    void alertDialog(String message) {
+        AlertDialog.Builder bld = new AlertDialog.Builder(this);
+        bld.setMessage(message);
+        bld.setNeutralButton("OK", null);
+        Log.d(TAG, "Showing alert dialog: " + message);
+        bld.create().show();
     }
 
     @Override
