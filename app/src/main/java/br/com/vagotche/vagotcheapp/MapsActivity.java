@@ -36,6 +36,7 @@ import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -108,7 +109,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        initPubNub();
+        //initPubNub();
 
 //        mSharedPrefs = getSharedPreferences(DATASTREAM_PREFS, MODE_PRIVATE);
 //        if (!mSharedPrefs.contains(DATASTREAM_UUID)) {
@@ -147,68 +148,68 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         btnReservar.setOnClickListener(this);
     }
 
-    private final void initPubNub() {
-        PNConfiguration config = new PNConfiguration();
+//    private final void initPubNub() {
+//        PNConfiguration config = new PNConfiguration();
+//
+//        config.setPublishKey(PUBLISH_KEY);
+//        config.setSubscribeKey(SUBSCRIBE_KEY);
+//        config.setSecure(true);
+//
+//        this.mPubNub = new PubNub(config);
+//
+//        this.mPubNub.addListener(new SubscribeCallback() {
+//
+//            @Override
+//            public void status(PubNub pubnub, PNStatus status) {
+//                // no status handler for simplicity
+//            }
+//
+//            @Override
+//            public void message(PubNub pubnub, PNMessageResult message) {
+//                try {
+//                    Log.v(TAG, JsonUtil.asJson(message));
+//
+//                    Map<String, String> map = JsonUtil.convert(message.getMessage(), LinkedHashMap.class);
+//                    String lat = map.get("lat");
+//                    String lng = map.get("lng");
+//
+//                    updateLocation(new LatLng(Double.parseDouble(lat), Double.parseDouble(lng)));
+//                } catch (Exception e) {
+//                    throw new RuntimeException();
+//                }
+//            }
+//
+//            @Override
+//            public void presence(PubNub pubnub, PNPresenceEventResult presence) {
+//                // no presence handler for simplicity
+//            }
+//        });
+//
+//        this.mPubNub.subscribe().channels(Arrays.asList(CHANNEL_NAME)).execute();
+//    }
 
-        config.setPublishKey(PUBLISH_KEY);
-        config.setSubscribeKey(SUBSCRIBE_KEY);
-        config.setSecure(true);
-
-        this.mPubNub = new PubNub(config);
-
-        this.mPubNub.addListener(new SubscribeCallback() {
-
-            @Override
-            public void status(PubNub pubnub, PNStatus status) {
-                // no status handler for simplicity
-            }
-
-            @Override
-            public void message(PubNub pubnub, PNMessageResult message) {
-                try {
-                    Log.v(TAG, JsonUtil.asJson(message));
-
-                    Map<String, String> map = JsonUtil.convert(message.getMessage(), LinkedHashMap.class);
-                    String lat = map.get("lat");
-                    String lng = map.get("lng");
-
-                    updateLocation(new LatLng(Double.parseDouble(lat), Double.parseDouble(lng)));
-                } catch (Exception e) {
-                    throw new RuntimeException();
-                }
-            }
-
-            @Override
-            public void presence(PubNub pubnub, PNPresenceEventResult presence) {
-                // no presence handler for simplicity
-            }
-        });
-
-        this.mPubNub.subscribe().channels(Arrays.asList(CHANNEL_NAME)).execute();
-    }
-
-    private void updateLocation(final LatLng location) {
-        this.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mPoints.add(location);
-
-                if (MapsActivity.this.mCurrLocationMarker != null) {
-                    MapsActivity.this.mCurrLocationMarker.setPosition(location);
-                } else {
-                    MapsActivity.this.mCurrLocationMarker = mMap.addMarker(new MarkerOptions().position(location));
-                }
-
-                if (MapsActivity.this.mPolyline != null) {
-                    MapsActivity.this.mPolyline.setPoints(mPoints);
-                } else {
-                    MapsActivity.this.mPolyline = mMap.addPolyline(new PolylineOptions().color(Color.BLUE).addAll(mPoints));
-                }
-
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
-            }
-        });
-    }
+//    private void updateLocation(final LatLng location) {
+//        this.runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                mPoints.add(location);
+//
+//                if (MapsActivity.this.mCurrLocationMarker != null) {
+//                    MapsActivity.this.mCurrLocationMarker.setPosition(location);
+//                } else {
+//                    MapsActivity.this.mCurrLocationMarker = mMap.addMarker(new MarkerOptions().position(location));
+//                }
+//
+//                if (MapsActivity.this.mPolyline != null) {
+//                    MapsActivity.this.mPolyline.setPoints(mPoints);
+//                } else {
+//                    MapsActivity.this.mPolyline = mMap.addPolyline(new PolylineOptions().color(Color.BLUE).addAll(mPoints));
+//                }
+//
+//                mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
+//            }
+//        });
+//    }
 
     /**GoogleMapOptions options = new GoogleMapOptions().liteMode(true);
      * Manipulates the map once available.
@@ -376,7 +377,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //move map camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(17));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(17), 2000, null);
+
+        // Construct a CameraPosition focusing on Mountain View and animate the camera to that position.
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(latLng)             // Sets the center of the map to Mountain View
+                .zoom(17)                   // Sets the zoom
+                .bearing(90)                // Sets the orientation of the camera to east
+                .tilt(30)                   // Sets the tilt of the camera to 30 degrees
+                .build();                   // Creates a CameraPosition from the builder
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
         //stop location updates
         if (mGoogleApiClient != null) {
@@ -565,80 +575,80 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             //if (ja != null || ja.length() != 0) {
 
-                for (int i = 0; i < ja.length(); i++) {
-                    JSONObject jo = ja.getJSONObject(i);
+            for (int i = 0; i < ja.length(); i++) {
+                JSONObject jo = ja.getJSONObject(i);
 
-                    Location.distanceBetween(mLastLocation.getLatitude(), mLastLocation.getLongitude(),
-                            Float.parseFloat(jo.getString("Latitude")), Float.parseFloat(jo.getString("Longitude")), results);
+                Location.distanceBetween(mLastLocation.getLatitude(), mLastLocation.getLongitude(),
+                        Float.parseFloat(jo.getString("Latitude")), Float.parseFloat(jo.getString("Longitude")), results);
 
-                    float radius = 2000;// Medida em metros
+                float radius = 2000;// Medida em metros
 
-                    if (results[0] < radius) {
+                if (results[0] < radius) {
 
-                        indiceCount++;
+                    indiceCount++;
 
-                        LatLng latLng = new LatLng(Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")));
-                        Marker parquimetro = mMap.addMarker(new MarkerOptions()
-                                .position(latLng)
-                                .title(jo.getString("cdEndereco"))
-                                .snippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga)));
+                    LatLng latLng = new LatLng(Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")));
+                    Marker parquimetro = mMap.addMarker(new MarkerOptions()
+                            .position(latLng)
+                            .title(jo.getString("cdEndereco"))
+                            .snippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga)));
 
 
-                        float tipoIcon = 0;
-                        int colorText = 0;
+                    float tipoIcon = 0;
+                    int colorText = 0;
 
-                        if (vagasOcupadas > Integer.parseInt(jo.getString(tipoVaga))){
-                            vagasOcupadas = 1;
-                        }
+                    if (vagasOcupadas > Integer.parseInt(jo.getString(tipoVaga))){
+                        vagasOcupadas = 1;
+                    }
 
-                        if (Double.parseDouble(jo.getString(tipoVaga)) == 0) {
-                            ocupacao = "Parquímetro em Manutenção";
-                            parquimetro.setSnippet("Parquímetro em Manutenção");
-                            parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
-                            tipoIcon = 210.0F;
-                            colorText = 0xFF00FFFF;
-                        } else if ((vagasOcupadas / Double.parseDouble(jo.getString(tipoVaga))) <= menos30Perc) {
-                            porcentagemOcupacao.setTextColor(Color.GREEN);
-                            quatidadeVagasDisponiveis.setTextColor(Color.GREEN);
-                            ocupacao = "Menos de 30% ocupado";
-                            parquimetro.setSnippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga) + " - " + ocupacao);
-                            parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-                            tipoIcon = 120.0F;
-                            colorText = 0xFF00FF00;
-                        } else if ((vagasOcupadas / Double.parseDouble(jo.getString(tipoVaga))) <= memos50Perc) {
-                            porcentagemOcupacao.setTextColor(Color.YELLOW);
-                            quatidadeVagasDisponiveis.setTextColor(Color.YELLOW);
-                            ocupacao = "Menos de 50% ocupado";
-                            parquimetro.setSnippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga) + " - " + ocupacao);
-                            parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
-                            tipoIcon = 60.0F;
-                            colorText = 0xFFFFFF00;
-                        } else if ((vagasOcupadas / Double.parseDouble(jo.getString(tipoVaga))) <= menos80Perc) {
-                            porcentagemOcupacao.setTextColor(Color.parseColor("#F06D2F"));
-                            quatidadeVagasDisponiveis.setTextColor(Color.parseColor("#F06D2F"));
-                            ocupacao = "Menos de 80% ocupado";
-                            parquimetro.setSnippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga) + " - " + ocupacao);
-                            parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
-                            tipoIcon = 30.0F;
-                            //colorText = '#F06D2F';
-                        } else if ((vagasOcupadas / Double.parseDouble(jo.getString(tipoVaga))) == CemPerc) {
-                            porcentagemOcupacao.setTextColor(Color.RED);
-                            quatidadeVagasDisponiveis.setTextColor(Color.RED);
-                            ocupacao = "100% ocupado";
-                            parquimetro.setSnippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga) + " - " + ocupacao);
-                            parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-                            tipoIcon = 0.0F;
-                            colorText = 0xFFFF0000;
-                        }
+                    if (Double.parseDouble(jo.getString(tipoVaga)) == 0) {
+                        ocupacao = "Parquímetro em Manutenção";
+                        parquimetro.setSnippet("Parquímetro em Manutenção");
+                        parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                        tipoIcon = 210.0F;
+                        colorText = 0xFF00FFFF;
+                    } else if ((vagasOcupadas / Double.parseDouble(jo.getString(tipoVaga))) <= menos30Perc) {
+                        porcentagemOcupacao.setTextColor(Color.GREEN);
+                        quatidadeVagasDisponiveis.setTextColor(Color.GREEN);
+                        ocupacao = "Menos de 30% ocupado";
+                        parquimetro.setSnippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga) + " - " + ocupacao);
+                        parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                        tipoIcon = 120.0F;
+                        colorText = 0xFF00FF00;
+                    } else if ((vagasOcupadas / Double.parseDouble(jo.getString(tipoVaga))) <= memos50Perc) {
+                        porcentagemOcupacao.setTextColor(Color.YELLOW);
+                        quatidadeVagasDisponiveis.setTextColor(Color.YELLOW);
+                        ocupacao = "Menos de 50% ocupado";
+                        parquimetro.setSnippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga) + " - " + ocupacao);
+                        parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW));
+                        tipoIcon = 60.0F;
+                        colorText = 0xFFFFFF00;
+                    } else if ((vagasOcupadas / Double.parseDouble(jo.getString(tipoVaga))) <= menos80Perc) {
+                        porcentagemOcupacao.setTextColor(Color.parseColor("#F06D2F"));
+                        quatidadeVagasDisponiveis.setTextColor(Color.parseColor("#F06D2F"));
+                        ocupacao = "Menos de 80% ocupado";
+                        parquimetro.setSnippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga) + " - " + ocupacao);
+                        parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+                        tipoIcon = 30.0F;
+                        //colorText = '#F06D2F';
+                    } else if ((vagasOcupadas / Double.parseDouble(jo.getString(tipoVaga))) == CemPerc) {
+                        porcentagemOcupacao.setTextColor(Color.RED);
+                        quatidadeVagasDisponiveis.setTextColor(Color.RED);
+                        ocupacao = "100% ocupado";
+                        parquimetro.setSnippet(snippet + vagasOcupadas + "/" + jo.getString(tipoVaga) + " - " + ocupacao);
+                        parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                        tipoIcon = 0.0F;
+                        colorText = 0xFFFF0000;
+                    }
 
-                        //Adiciona parquimetros mais proximos no Array
-                        resultsMaisProximos[indiceCount] = results[0];
-                        ListParquimetrosMaisProximos item;
-                        item = new ListParquimetrosMaisProximos();
-                        String parq = jo.getString("cdEndereco");
-                        item.setData(parq, resultsMaisProximos[indiceCount], jo.getString(tipoVaga), ocupacao, jo.getString("Latitude"),
-                                jo.getString("Longitude"), tipoIcon, colorText);
-                        parquimetrosMaisProximosArray.add(item);
+                    //Adiciona parquimetros mais proximos no Array
+                    resultsMaisProximos[indiceCount] = results[0];
+                    ListParquimetrosMaisProximos item;
+                    item = new ListParquimetrosMaisProximos();
+                    String parq = jo.getString("cdEndereco");
+                    item.setData(parq, resultsMaisProximos[indiceCount], jo.getString(tipoVaga), ocupacao, jo.getString("Latitude"),
+                            jo.getString("Longitude"), tipoIcon, colorText);
+                    parquimetrosMaisProximosArray.add(item);
 
 
 //                        if (indice == 0) {
@@ -662,25 +672,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //
 //                        }
 
-                        ListItemFiltroVagas item2;
-                        item2 = new ListItemFiltroVagas();
-                        String parq2 = jo.getString("cdEndereco");
-                        item2.setData(parq2, R.mipmap.vehicle);
-                        parquimetrosArray.add(item2);
+                    ListItemFiltroVagas item2;
+                    item2 = new ListItemFiltroVagas();
+                    String parq2 = jo.getString("cdEndereco");
+                    item2.setData(parq2, R.mipmap.vehicle);
+                    parquimetrosArray.add(item2);
 
 
-                    } else if (results[0] > radius && indiceCount == 0) {
-                        nomeParquimetro.setTextColor(Color.RED);
-                        nomeParquimetro.setText("Não há parquímetros próximo num raio de 2km");
-                        quatidadeVagas.setText("");
-                        quatidadeVagasDisponiveis.setText("");
-                        porcentagemOcupacao.setText("");
-                        btnReservar.setBackgroundResource(R.drawable.txt_view_border_maps_red);
-                        flagResevar = false;
-                        //btnReservar.setVisibility(View.INVISIBLE);
-                    }
-
+                } else if (results[0] > radius && indiceCount == 0) {
+                    nomeParquimetro.setTextColor(Color.RED);
+                    nomeParquimetro.setText("Não há parquímetros próximo num raio de 2km");
+                    quatidadeVagas.setText("");
+                    quatidadeVagasDisponiveis.setText("");
+                    porcentagemOcupacao.setText("");
+                    btnReservar.setBackgroundResource(R.drawable.txt_view_border_maps_red);
+                    flagResevar = false;
+                    //btnReservar.setVisibility(View.INVISIBLE);
                 }
+
+            }
 
             //Arrays.sort(resultsMaisProximos);
 
@@ -695,7 +705,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             if (indiceCount > 0) {
 
                 LatLng latLng = new LatLng(Double.parseDouble(parquimetrosMaisProximosArray.get(0).getLatitude()),
-                                            Double.parseDouble(parquimetrosMaisProximosArray.get(0).getLongitude()));
+                        Double.parseDouble(parquimetrosMaisProximosArray.get(0).getLongitude()));
                 Marker parquimetro = mMap.addMarker(new MarkerOptions()
                         .position(latLng)
                         .title(parquimetrosMaisProximosArray.get(0).getNomeParquimetro())
@@ -707,36 +717,36 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     porcentagemOcupacao.setTextColor(Color.parseColor("#F06D2F"));
                     quatidadeVagasDisponiveis.setTextColor(Color.parseColor("#F06D2F"));
                 } else
-                            porcentagemOcupacao.setTextColor(parquimetrosMaisProximosArray.get(0).getColorText());
-                            quatidadeVagasDisponiveis.setTextColor(parquimetrosMaisProximosArray.get(0).getColorText());
-                            nomeParquimetro.setTextColor(Color.WHITE);
-                            nomeParquimetro.setText(parquimetrosMaisProximosArray.get(0).getNomeParquimetro());
-                            quatidadeVagas.setText(parquimetrosMaisProximosArray.get(0).getTipoVaga());
+                    porcentagemOcupacao.setTextColor(parquimetrosMaisProximosArray.get(0).getColorText());
+                quatidadeVagasDisponiveis.setTextColor(parquimetrosMaisProximosArray.get(0).getColorText());
+                nomeParquimetro.setTextColor(Color.WHITE);
+                nomeParquimetro.setText(parquimetrosMaisProximosArray.get(0).getNomeParquimetro());
+                quatidadeVagas.setText(parquimetrosMaisProximosArray.get(0).getTipoVaga());
 
-                            if (parquimetrosMaisProximosArray.get(0).getTipoVaga().equals("0")){
-                                quatidadeVagasDisponiveis.setText(Integer.toString(0));
-                            } else {
-                                quatidadeVagasDisponiveis.setText(Integer.toString(vagasOcupadas));
-                            }
+                if (parquimetrosMaisProximosArray.get(0).getTipoVaga().equals("0")){
+                    quatidadeVagasDisponiveis.setText(Integer.toString(0));
+                } else {
+                    quatidadeVagasDisponiveis.setText(Integer.toString(vagasOcupadas));
+                }
 
-                            porcentagemOcupacao.setText(parquimetrosMaisProximosArray.get(0).getOcupacao());
-                            parquimetro.showInfoWindow();
-                            parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(parquimetrosMaisProximosArray.get(0).getTipoIcon()));
+                porcentagemOcupacao.setText(parquimetrosMaisProximosArray.get(0).getOcupacao());
+                parquimetro.showInfoWindow();
+                parquimetro.setIcon(BitmapDescriptorFactory.defaultMarker(parquimetrosMaisProximosArray.get(0).getTipoIcon()));
 
-                            if (Integer.parseInt(quatidadeVagasDisponiveis.getText().toString()) >= 1){
-                                btnReservar.setBackgroundResource(R.drawable.txt_view_border_maps_green);
-                                flagResevar = true;
-                            } else {
-                                btnReservar.setBackgroundResource(R.drawable.txt_view_border_maps_red);
-                                flagResevar = false;
-                            }
+                if (Integer.parseInt(quatidadeVagasDisponiveis.getText().toString()) >= 1){
+                    btnReservar.setBackgroundResource(R.drawable.txt_view_border_maps_green);
+                    flagResevar = true;
+                } else {
+                    btnReservar.setBackgroundResource(R.drawable.txt_view_border_maps_red);
+                    flagResevar = false;
+                }
 
 
             }
 
-            } catch(JSONException e){
-                e.printStackTrace();
-            }
+        } catch(JSONException e){
+            e.printStackTrace();
+        }
     }
 
     @Override
