@@ -84,19 +84,19 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
             }
 
         if(nome.isEmpty() || cpf.isEmpty() || email.isEmpty() || senha.isEmpty()){
-            alert("Nenhum campo pode estar vazio");
+            complain("Nenhum campo pode estar vazio");
 
         } else if (!ValidaCPF.isCPF(cpf) == true) {
-            alert("O CPF digitado está incorreto");
+            complain("O CPF digitado está incorreto");
 
         } else if (!emailPat.matcher(email).matches()) {
-            alert("O e-mail digitado está incorreto");
+            complain("O e-mail digitado está incorreto");
 
         } else if (!passwordPat.matcher(senha).matches()){
-            alert(  "* A senha deve conter entre 6 à 32 caracteres\n" +
-                    "* 1 caractere maiúsculo \n" +
-                    "* 1 caractere especial\n" +
-                    "* 1 caractere numérico.");
+            complain(   "* A senha deve conter entre 6 à 32 caracteres;\n" +
+                        "* Um caractere maiúsculo; \n" +
+                        "* Um caractere especial;\n" +
+                        "* Um caractere numérico.");
 
         } else {
 
@@ -107,7 +107,7 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
             }
 
         } else {
-            alert("Nenhuma conexão foi detectada");
+            complain("Sem conexão com a Internet. O Wi-Fi ou os dados da rede celular devem estar ativos. Tente novamente.");
         }
     }
 
@@ -139,7 +139,7 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
                 complain("Endereço de e-mail já está cadastrado");
 
             } else if (resultado.contains("error_system")) {
-                complain("Ocorreu um erro. Por favor informar ao administrador do sistema.");
+                complain("Ocorreu um erro. Por favor informe ao administrador do sistema.");
             }
 
         }

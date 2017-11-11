@@ -1,6 +1,7 @@
 package br.com.vagotche.vagotcheapp;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -62,6 +63,10 @@ public class MenuActivity extends AppCompatActivity
     private void alert(String s){
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
     }
+
+    //Barra de Progresso
+    private ProgressDialog mProgressBar;
+    int progress;
 
     //Formato de moeda
     DecimalFormatSymbols dfs = new DecimalFormatSymbols (new Locale("pt", "BR"));
@@ -162,6 +167,19 @@ public class MenuActivity extends AppCompatActivity
         gmb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                mProgressBar = new ProgressDialog(MenuActivity.this);
+                mProgressBar.setCancelable(false);
+                mProgressBar.setTitle("Processo de Atualização");
+                mProgressBar.setMessage("Iniciando...");
+                mProgressBar.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                mProgressBar.setMax(100);
+                mProgressBar.setProgress(0);
+                mProgressBar.show();
+
+                ProcessData p = new ProcessData();
+                p.execute(7);
+
                 Maps = new Intent(MenuActivity.this, MapsActivity.class);
                 VerificaParquimetrosToMaps();
                 VerificaParquimetrosIdososToMaps();
@@ -242,6 +260,55 @@ public class MenuActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
+    }
+
+    public class ProcessData extends AsyncTask<Integer, String, String> {
+
+        @Override
+        protected String doInBackground(Integer... integers) {
+
+            progress = 0;
+            int total = integers[0];
+
+            while (progress <= total) {
+
+                try {
+
+                    Thread.sleep(2000); // 2 segundos
+
+                } catch (InterruptedException e) {
+
+                }
+
+                String m = progress % 2 == 0 ? "Carregando mapas..." +"0.0."+ progress : "Carregando parquímetros..." +"0.0."+ progress;
+
+                // exibimos o progresso
+                this.publishProgress(String.valueOf(progress), String.valueOf(total), m);
+
+                progress++;
+            }
+
+            return "DONE";
+        }
+
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
+
+            Float progress = Float.valueOf(values[0]);
+            Float total = Float.valueOf(values[1]);
+
+            String message = values[2];
+
+            mProgressBar.setProgress((int) ((progress / total) * 100));
+            mProgressBar.setMessage(message);
+
+            // se os valores são iguais, termianos nosso processamento
+            if (values[0].equals(values[1])) {
+                // removemos a dialog
+                mProgressBar.cancel();
+            }
+        }
     }
 
     public void startChronometer(){
@@ -388,10 +455,8 @@ public class MenuActivity extends AppCompatActivity
 
         try{
             JSONArray ja = new JSONArray(data);
-
             Maps.putExtra("parquimetrosDFArray", ja.toString());
             startActivity(Maps);
-
         }
         catch(JSONException e){ e.printStackTrace(); }
 
@@ -412,7 +477,7 @@ public class MenuActivity extends AppCompatActivity
 
             new SolicitaDados().execute(url);
         } else {
-            alert("Nenhuma conexão de rede foi detectada");
+            complain("Sem conexão com a Internet. O Wi-Fi ou os dados da rede celular devem estar ativos. Tente novamente.");
         }
     }
 
@@ -430,7 +495,7 @@ public class MenuActivity extends AppCompatActivity
 
             new SolicitaDados().execute(url);
         } else {
-            alert("Nenhuma conexão de rede foi detectada");
+            complain("Sem conexão com a Internet. O Wi-Fi ou os dados da rede celular devem estar ativos. Tente novamente.");
         }
     }
 
@@ -448,7 +513,7 @@ public class MenuActivity extends AppCompatActivity
             new SolicitaDadosPlaca().execute(url);
 
         } else {
-            alert("Nenhuma conexão de rede foi detectada");
+            complain("Sem conexão com a Internet. O Wi-Fi ou os dados da rede celular devem estar ativos. Tente novamente.");
         }
     }
 
@@ -465,7 +530,7 @@ public class MenuActivity extends AppCompatActivity
             new SolicitaDadosParquimetros().execute(url);
 
         } else {
-            alert("Nenhuma conexão de rede foi detectada");
+            complain("Sem conexão com a Internet. O Wi-Fi ou os dados da rede celular devem estar ativos. Tente novamente.");
         }
     }
 
@@ -478,11 +543,12 @@ public class MenuActivity extends AppCompatActivity
 
         if (networkInfo != null && networkInfo.isConnected()) {
 
+
             url = "http://fabrica.govbrsul.com.br/vagotche/index.php/Maps/VerificarParquimetros";
             new SolicitaDadosParquimetrosToMaps().execute(url);
 
         } else {
-            alert("Nenhuma conexão de rede foi detectada");
+            complain("Sem conexão com a Internet. O Wi-Fi ou os dados da rede celular devem estar ativos. Tente novamente.");
         }
     }
 
@@ -499,7 +565,7 @@ public class MenuActivity extends AppCompatActivity
             new SolicitaDadosParquimetrosIdososToMaps().execute(url);
 
         } else {
-            alert("Nenhuma conexão de rede foi detectada");
+            complain("Sem conexão com a Internet. O Wi-Fi ou os dados da rede celular devem estar ativos. Tente novamente.");
         }
     }
 
@@ -516,7 +582,7 @@ public class MenuActivity extends AppCompatActivity
             new SolicitaDadosParquimetrosDFToMaps().execute(url);
 
         } else {
-            alert("Nenhuma conexão de rede foi detectada");
+            complain("Sem conexão com a Internet. O Wi-Fi ou os dados da rede celular devem estar ativos. Tente novamente.");
         }
     }
 
@@ -728,6 +794,10 @@ public class MenuActivity extends AppCompatActivity
 
         if (id == R.id.nav_meusdados) {
             Intent it = new Intent(this, MeusDadosActivity.class);
+
+            it.putExtra("nome_usuario", getIntent().getExtras().getString("nome_usuario"));
+            it.putExtra("email_usuario", getIntent().getExtras().getString("email_usuario"));
+
             startActivity(it);
         } else if (id == R.id.nav_contato) {
             Intent it = new Intent(this, ContatoActivity.class);

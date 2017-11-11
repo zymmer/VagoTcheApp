@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -21,6 +22,8 @@ public class MeusDadosActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
     MenuItem nav_menu, nav_contato, nav_movimentacoes, nav_info, itemwww;
+    TextView txtNome, txtEmail;
+    String nomeUsuario, emailUsuario;
 
     private void alert(String s){
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
@@ -47,6 +50,16 @@ public class MeusDadosActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_meusdados);
         navigationView.setNavigationItemSelectedListener(this);
+
+        //NavHeader
+        txtNome = (TextView) findViewById(R.id.txtNome);
+        txtEmail = (TextView) findViewById(R.id.txtEmail3);
+
+        nomeUsuario = getIntent().getExtras().getString("nome_usuario");
+        emailUsuario = getIntent().getExtras().getString("email_usuario");
+
+        txtNome.setText(nomeUsuario);
+        txtEmail.setText(emailUsuario);
 
     }
 
@@ -76,7 +89,7 @@ public class MeusDadosActivity extends AppCompatActivity
             Intent it = new Intent(MeusDadosActivity.this, MovimentacoesActivity.class);
             startActivity(it);
         } else if (id == R.id.nav_info) {
-            Intent it = new Intent(MeusDadosActivity.this, MeusDadosActivity.class);
+            Intent it = new Intent(MeusDadosActivity.this, InfoActivity.class);
             startActivity(it);
         } else if (id == R.id.itemwww) {
             Uri uri = Uri.parse("http://www.vagotche.com.br");

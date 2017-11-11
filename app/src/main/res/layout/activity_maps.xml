@@ -78,7 +78,7 @@
         android:textColor="@android:color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtQuatidadeVagasTotais"
+        android:id="@+id/txtQuantidadeVagasTotais"
         />
 
     </LinearLayout>
@@ -104,7 +104,7 @@
             android:textColor="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/txtQuatidadeVagasDisponiveis"
+            android:id="@+id/txtQuantidadeVagasDisponiveis"
             />
 
         </LinearLayout>

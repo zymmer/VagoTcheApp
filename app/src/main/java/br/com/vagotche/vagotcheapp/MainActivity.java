@@ -269,16 +269,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String senha = editPassword1.getText().toString();
 
         if(cpf.isEmpty() || senha.isEmpty()){
-            alert("Nenhum campo pode estar vazio");
+            complain("Nenhum campo pode estar vazio");
 
         } else if (!ValidaCPF.isCPF(cpf) == true) {
-            alert("O CPF digitado está incorreto");
+            complain("O CPF digitado está incorreto");
 
         }  else if (!passwordPat.matcher(senha).matches()){
-            alert(  "* A senha deve conter entre 6 à 32 caracteres\n" +
-                    "* 1 caractere maiúsculo \n" +
-                    "* 1 caractere especial\n" +
-                    "* 1 caractere numérico.");
+            complain(  "* A senha deve conter entre 6 à 32 caracteres;\n" +
+                    "* Um caractere maiúsculo;\n" +
+                    "* Um caractere especial;\n" +
+                    "* Um caractere numérico.");
 
         } else {
                 url = "http://fabrica.govbrsul.com.br/vagotche/index.php/Login/ValidarLogin";
@@ -289,7 +289,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
         } else {
-            alert("Nenhuma conexão de rede foi detectada");
+            complain("Sem conexão com a Internet. O Wi-Fi ou os dados da rede celular devem estar ativos. Tente novamente.");
         }
 
     }

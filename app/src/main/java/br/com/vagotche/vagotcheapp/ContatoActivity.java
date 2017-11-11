@@ -76,7 +76,7 @@ public class ContatoActivity extends AppCompatActivity
             Intent it = new Intent(ContatoActivity.this, MovimentacoesActivity.class);
             startActivity(it);
         } else if (id == R.id.nav_info) {
-            Intent it = new Intent(ContatoActivity.this, ContatoActivity.class);
+            Intent it = new Intent(ContatoActivity.this, InfoActivity.class);
             startActivity(it);
         } else if (id == R.id.itemwww) {
             Uri uri = Uri.parse("http://www.vagotche.com.br");

@@ -7,13 +7,14 @@ package br.com.vagotche.vagotcheapp;
 public class ListParquimetrosMaisProximos {
     String name, tipoVaga, ocupacao, latitude, longitude;
     Float latLong, tipoIcon;
-    int colorText;
+    int colorText, quatidadeVagasOcupadas;
 
 
-    public void setData(String name, Float latLong, String tipoVaga, String ocupacao, String latitude, String longitude, Float tipoIcon, int colorText) {
+    public void setData(String name, Float latLong, String tipoVaga, int quatidadeVagasOcupadas, String ocupacao, String latitude, String longitude, Float tipoIcon, int colorText) {
         this.name = name;
         this.latLong = latLong;
         this.tipoVaga = tipoVaga;
+        this.quatidadeVagasOcupadas = quatidadeVagasOcupadas;
         this.ocupacao = ocupacao;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -31,6 +32,10 @@ public class ListParquimetrosMaisProximos {
 
     public String getTipoVaga() {
         return tipoVaga;
+    }
+
+    public String getQuatidadeVagasOcupadas() {
+        return String.valueOf(quatidadeVagasOcupadas);
     }
 
     public String getOcupacao() {
