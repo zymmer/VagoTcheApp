@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.hardware.Camera;
 import android.location.Location;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
@@ -17,6 +18,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Menu;
+import android.view.Surface;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -228,7 +230,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //Desligar Toolbar
         mMap.getUiSettings().setMapToolbarEnabled(false);
         //Desligar Compasso
-        mMap.getUiSettings().setCompassEnabled(false);
+        mMap.getUiSettings().setCompassEnabled(true);
+        //Desligar Gestures
+        //mMap.getUiSettings().isRotateGesturesEnabled(false);
 
 
         mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -340,9 +344,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onConnected(Bundle bundle) {
 
         mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(1000);
-        mLocationRequest.setFastestInterval(1000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+        mLocationRequest.setInterval(200);
+        mLocationRequest.setFastestInterval(200);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -365,8 +369,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         //Testes
-//        location.setLatitude(-30.038590);
-//        location.setLongitude(-51.229572);
+        location.setLatitude(-30.038590);
+        location.setLongitude(-51.229572);
 
         //Place current location marker
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
@@ -376,8 +380,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mCurrLocationMarker = mMap.addMarker(markerOptions);
 
         //move map camera
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(17), 2000, null);
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        //mMap.animateCamera(CameraUpdateFactory.zoomTo(17), 2000, null);
+
+        //updateCameraBearing(googleMap, location.getBearing());
 
         // Construct a CameraPosition focusing on Mountain View and animate the camera to that position.
         CameraPosition cameraPosition = new CameraPosition.Builder()
@@ -560,8 +566,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             final ArrayList<ListParquimetrosMaisProximos> parquimetrosMaisProximosArray = new ArrayList<ListParquimetrosMaisProximos>();
 
             ja = new JSONArray(getIntent().getStringExtra(tipoArray));
-            float results[] = new float[10];
-            float resultsMaisProximos[] = new float[10];
+            float results[] = new float[100];
+            float resultsMaisProximos[] = new float[100];
             int vagasOcupadas = 5;
             //Porcentagens de ocupacao
             double menos30Perc = 0.29;
@@ -597,7 +603,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     float tipoIcon = 0;
                     int colorText = 0;
 
-                    if (vagasOcupadas > Integer.parseInt(jo.getString(tipoVaga))){
+                    if (vagasOcupadas > Integer.parseInt(jo.getString(tipoVaga)) &&
+                            Integer.parseInt(jo.getString(tipoVaga)) > 0){
                         vagasOcupadas = 1;
                     }
 
