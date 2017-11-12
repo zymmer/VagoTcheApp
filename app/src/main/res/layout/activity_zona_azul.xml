@@ -100,14 +100,24 @@
         android:textStyle="bold"
         android:text="@string/Cidade" />
 
-    <Spinner
-        android:id="@+id/spinnerCidade"
-        style="@style/spinner_style"
-        android:backgroundTint="#FFFFFF"
-        android:textStyle="bold"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </Spinner>
+        <TextView
+            android:id="@+id/txtCidade"
+            style="@style/spinner_style"
+            android:backgroundTint="#FFFFFF"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </TextView>
+
+    <!--<Spinner-->
+        <!--android:id="@+id/spinnerCidade"-->
+        <!--style="@style/spinner_style"-->
+        <!--android:backgroundTint="#FFFFFF"-->
+        <!--android:textStyle="bold"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+    <!--</Spinner>-->
 
     <TextView
         android:id="@+id/viewParquimetro"
@@ -124,6 +134,7 @@
         style="@style/spinner_style"
         android:backgroundTint="#FFFFFF"
         android:textStyle="bold"
+        android:textAlignment="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </TextView>

@@ -46,7 +46,7 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
 
     //Variaveis
     int cdUsuario;
-    TextView seuSaldo, txvTempo30, txvTempo1, txvTempo130, txvTempo2, parquimetro;
+    TextView seuSaldo, txvTempo30, txvTempo1, txvTempo130, txvTempo2, parquimetro, cidade;
     Spinner spinnerPlaca, spinnerCidade, spinnerParquimetro;
     Double valor = 0.00;
     int tempo = 0;
@@ -107,11 +107,14 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
         parquimetro = (TextView) findViewById(R.id.txtParquimetro);
         parquimetro.setText(getIntent().getStringExtra("parquimetro"));
 
-        //Spinner Cidade
-        spinnerCidade = (Spinner) findViewById(R.id.spinnerCidade);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, cidades);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerCidade.setAdapter(adapter);
+//        //Spinner Cidade
+//        spinnerCidade = (Spinner) findViewById(R.id.spinnerCidade);
+//        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, cidades);
+//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinnerCidade.setAdapter(adapter);
+        cidade = (TextView) findViewById(R.id.txtCidade);
+        cidade.setText("Porto Alegre");
+
 
         //Views
         txvTempo30 = (TextView) findViewById(R.id.txvTempo30);
@@ -140,12 +143,12 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
         saldoExtra = saldoExtra.replace("R$", "");
         saldoExtra = saldoExtra.replace(",", ".");
 
-        alert("|" + parquimetro.getText() +"|");
+        //alert("|" + parquimetro.getText() +"|");
 
         if (networkInfo != null && networkInfo.isConnected()) {
 
-            String placa = spinnerPlaca.getSelectedItem().toString();
-            String cidade = spinnerCidade.getSelectedItem().toString();
+            //String placa = spinnerPlaca.getSelectedItem().toString();
+            //String cidade = spinnerCidade.getSelectedItem().toString();
             //String parquimetro = spinnerParquimetro.getSelectedItem().toString();
 
             if (spinnerPlaca.getSelectedItem() == "" || spinnerPlaca.getSelectedItem() == null) {
@@ -162,7 +165,7 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
                 String park = "Av. Osvaldo Aranha, n 374";
 
                 url = "http://fabrica.govbrsul.com.br/vagotche/index.php/ZonaAzul/PagarZonaAzul";
-                parametros = "cdUsuario=" + cdUsuario + "&placa=" + placa + "&cidade=" + cidade +
+                parametros = "cdUsuario=" + cdUsuario + "&placa=" + spinnerPlaca.getSelectedItem().toString() + "&cidade=" + cidade.getText() +
                         "&parquimetro=" + park + "&valorUtilizado=" + valor;
 
                 new SolicitaDados().execute(url);

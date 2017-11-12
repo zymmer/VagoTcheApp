@@ -163,7 +163,7 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
                 new SolicitaDados().execute(url);
 
             }else {
-                alert("Placa incorreta");
+                complain("Placa incorreta");
             }
 
         } else {
@@ -189,7 +189,6 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
         }
     }
 
-
     private class SolicitaDados extends AsyncTask<String, Void, String> {
 
         @Override
@@ -208,9 +207,9 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
 
             if (resultado.contains("veiculo_registrado")) {
 
-                complain("Veículo registrado com sucesso.");
+                alert("Veículo registrado com sucesso.");
 
-                finish();
+                //finish();
             } else if (resultado.contains("placa_ja_cadastrada")) {
 
                 complain("Este veículo já está cadastrado no sistema.");

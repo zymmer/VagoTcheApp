@@ -111,6 +111,7 @@
         <!-- Menu -->
         <activity
             android:name=".MenuActivity"
+            android:configChanges="orientation"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <!-- Maps -->

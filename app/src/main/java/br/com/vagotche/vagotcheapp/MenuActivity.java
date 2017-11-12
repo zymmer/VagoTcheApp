@@ -306,7 +306,7 @@ public class MenuActivity extends AppCompatActivity
             // se os valores são iguais, termianos nosso processamento
             if (values[0].equals(values[1])) {
                 // removemos a dialog
-                mProgressBar.cancel();
+                mProgressBar.dismiss();
             }
         }
     }

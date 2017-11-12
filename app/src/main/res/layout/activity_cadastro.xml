@@ -17,19 +17,21 @@
         android:background="@color/colorCinzaTransparente50">
 
         <LinearLayout
+            android:gravity="center"
+            android:background="@drawable/background2"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
         <TextView
-            android:layout_marginTop="2dp"
-            android:drawableStart="@mipmap/transportnew"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:background="#66000000"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:textAlignment="center"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
             android:textStyle="bold"
-            android:text=" Cadastro ao Sistema"
+            android:textColor="@color/colorWhite"
+            android:text=" Cadastro"
             android:gravity="center"/>
 
 
