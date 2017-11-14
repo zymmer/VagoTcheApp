@@ -99,6 +99,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Boolean flagResevar;
 
     MarkerOptions markerOptions = new MarkerOptions();
+    LatLng latLng;
 
     private void alert(String s){
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
@@ -366,6 +367,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mLastLocation = location;
         if (mCurrLocationMarker != null) {
             mCurrLocationMarker.remove();
+
+            //Place current location marker
+            latLng = new LatLng(location.getLatitude(), location.getLongitude());
         }
 
         //Testes
@@ -373,7 +377,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //location.setLongitude(-51.227797);
 
         //Place current location marker
-        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        latLng = new LatLng(location.getLatitude(), location.getLongitude());
         markerOptions.position(latLng);
         markerOptions.title("Você");
         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.mipmap.car32));

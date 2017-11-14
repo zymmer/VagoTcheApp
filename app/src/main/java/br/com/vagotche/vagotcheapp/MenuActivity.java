@@ -9,6 +9,7 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.text.format.DateFormat;
@@ -180,11 +181,23 @@ public class MenuActivity extends AppCompatActivity
                 ProcessData p = new ProcessData();
                 p.execute(7);
 
-                Maps = new Intent(MenuActivity.this, MapsActivity.class);
-                VerificaParquimetrosToMaps();
-                VerificaParquimetrosIdososToMaps();
-                VerificaParquimetrosDFToMaps();
-                Maps.putExtra("id_usuario", cdUsuario);
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Maps = new Intent(MenuActivity.this, MapsActivity.class);
+                        VerificaParquimetrosToMaps();
+                        VerificaParquimetrosIdososToMaps();
+                        VerificaParquimetrosDFToMaps();
+                        Maps.putExtra("id_usuario", cdUsuario);
+                    }
+                }, 5000);
+
+//                Maps = new Intent(MenuActivity.this, MapsActivity.class);
+//                VerificaParquimetrosToMaps();
+//                VerificaParquimetrosIdososToMaps();
+//                VerificaParquimetrosDFToMaps();
+//                Maps.putExtra("id_usuario", cdUsuario);
             }
         });
 
@@ -456,7 +469,7 @@ public class MenuActivity extends AppCompatActivity
         try{
             JSONArray ja = new JSONArray(data);
             Maps.putExtra("parquimetrosDFArray", ja.toString());
-            startActivity(Maps);
+            startActivityForResult(Maps,0);
         }
         catch(JSONException e){ e.printStackTrace(); }
 
