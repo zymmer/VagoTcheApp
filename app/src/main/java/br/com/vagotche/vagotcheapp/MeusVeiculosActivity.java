@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,11 +47,10 @@ public class MeusVeiculosActivity extends AppCompatActivity implements View.OnCl
         btnVoltar = (ImageView) findViewById(R.id.imvVoltarMeusVeiculos);
         btnVoltar.setOnClickListener(this);
 
-
         //ExpandableList
         buildList();
 
-        ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
+        ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.expandableListViewMeusVeiculos);
         expandableListView.setAdapter(new ExpandableAdapter(MeusVeiculosActivity.this, listGroup, listData) {
         });
 
@@ -76,7 +77,7 @@ public class MeusVeiculosActivity extends AppCompatActivity implements View.OnCl
             }
         });
 
-        //expandableListView.setGroupIndicator(getResources().getDrawable(R.drawable.ic_plusone_medium_off_client));
+        expandableListView.setGroupIndicator(getResources().getDrawable(R.mipmap.vehicle));
 
     }
 
@@ -84,26 +85,46 @@ public class MeusVeiculosActivity extends AppCompatActivity implements View.OnCl
         listGroup = new ArrayList<String>();
         listData = new HashMap<String, List<String>>();
 
-        //GROUP
-            listGroup.add("Grupo 1");
-            listGroup.add("Grupo 2");
-            listGroup.add("Grupo 3");
-            listGroup.add("Grupo 4");
+        getIntent().getStringArrayListExtra("veiculosArray");
 
-        //CHILDREM
-        List<String> auxList = new ArrayList<String>();
-        auxList.add("Item 1");
-        auxList.add("Item 2");
-        auxList.add("Item 3");
-        auxList.add("Item 4");
-        listData.put(listGroup.get(0), auxList);
+        int x = 0;
 
-        auxList = new ArrayList<String>();
-        auxList.add("Item 5");
-        auxList.add("Item 6");
-        auxList.add("Item 7");
-        auxList.add("Item 8");
-        listData.put(listGroup.get(1), auxList);
+        for(int i=0; i < getIntent().getStringArrayListExtra("veiculosArray").size(); i = i + 4) {
+
+            //GROUP
+            listGroup.add(getIntent().getStringArrayListExtra("veiculosArray").get(i));
+
+            //CHILDREM
+            List<String> auxList = new ArrayList<String>();
+            auxList.add("Placa: " + getIntent().getStringArrayListExtra("veiculosArray").get(i+1));
+            auxList.add("Ano-Fabricação: " + getIntent().getStringArrayListExtra("veiculosArray").get(i+2));
+            auxList.add("Ano-Modelo: " + getIntent().getStringArrayListExtra("veiculosArray").get(i+3));
+
+            listData.put(listGroup.get(x), auxList);
+            x = x + 1;
+
+        }
+
+//        //GROUP
+//            listGroup.add(getIntent().getStringArrayListExtra("veiculosArray").get(0));
+//            listGroup.add("Grupo 2");
+//            listGroup.add("Grupo 3");
+//            listGroup.add("Grupo 4");
+//
+//        //CHILDREM
+//        List<String> auxList = new ArrayList<String>();
+//        auxList.add("Item 1");
+//        auxList.add("Item 2");
+//        auxList.add("Item 3");
+//        auxList.add("Item 4");
+//        listData.put(listGroup.get(0), auxList);
+//
+//        auxList = new ArrayList<String>();
+//        auxList.add("Item 5");
+//        auxList.add("Item 6");
+//        auxList.add("Item 7");
+//        auxList.add("Item 8");
+//        listData.put(listGroup.get(1), auxList);
 
     }
 

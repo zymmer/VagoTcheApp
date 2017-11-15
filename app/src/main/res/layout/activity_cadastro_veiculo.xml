@@ -30,19 +30,18 @@
         android:orientation="horizontal"
         android:gravity="center">
 
-    <EditText
-        android:gravity="center"
-        android:textStyle="bold"
-        android:layout_weight="1"
-        android:background="@drawable/modelo_edit"
-        android:padding="10dp"
-        android:layout_marginTop="5dp"
-        android:id="@+id/editPlaca"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:hint="Placa"
-        />
+        <EditText
+            android:id="@+id/editPlaca"
+            android:layout_width="181dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/modelo_edit"
+            android:gravity="center"
+            android:hint="Placa"
+            android:padding="10dp"
+            android:textAlignment="center"
+            android:textStyle="bold" />
 
     <Button
         android:layout_marginLeft="10dp"

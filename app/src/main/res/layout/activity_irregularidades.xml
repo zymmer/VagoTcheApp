@@ -33,8 +33,9 @@
         />
 
     <ExpandableListView
+        android:background="@drawable/modelo_edit"
         android:layout_marginTop="20dp"
-        android:id="@+id/expandableListView"
+        android:id="@+id/expandableListViewIrregularidades"
         android:layout_width="match_parent"
         android:layout_height="324dp"
         android:layout_gravity="center"

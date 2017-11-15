@@ -128,14 +128,14 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
 
             url = "http://fabrica.govbrsul.com.br/vagotche/index.php/VerificaPlacaSinesp/VerificaPlacaSinesp";
             parametros = "placa=" + placa;
-            new SolicitaDados().execute(url);
+            new SolicitaDadosVeiculo().execute(url);
 
             }   else {
                 complain("Placa incorreta. Ex.: ABC1234");
             }
 
         } else {
-            alert("Nenhuma conexão de rede foi detectada");
+            complain("Sem conexão com a Internet. O Wi-Fi ou os dados da rede celular devem estar ativos. Tente novamente.");
         }
     }
 
@@ -160,14 +160,14 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
                 parametros = "marcaModelo=" + marcaModelo + "&placa=" + placa + "&anoFabricacao=" + carro.getAno() +
                         "&anoModelo=" + carro.getAnoModelo() + "&cdUsuario=" + cdUsuario;
 
-                new SolicitaDados().execute(url);
+                new SolicitaDadosVeiculo().execute(url);
 
             }else {
                 complain("Placa incorreta");
             }
 
         } else {
-            alert("Nenhuma conexão foi detectada");
+            complain("Sem conexão com a Internet. O Wi-Fi ou os dados da rede celular devem estar ativos. Tente novamente.");
         }
     }
 
@@ -185,11 +185,11 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
 
             new SolicitaDados().execute(url);
         } else {
-            alert("Nenhuma conexão de rede foi detectada");
+            complain("Sem conexão com a Internet. O Wi-Fi ou os dados da rede celular devem estar ativos. Tente novamente.");
         }
     }
 
-    private class SolicitaDados extends AsyncTask<String, Void, String> {
+    private class SolicitaDadosVeiculo extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... urls) {
@@ -205,7 +205,13 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
 
             degenerateJSON(resultado);
 
-            if (resultado.contains("veiculo_registrado")) {
+            if (resultado.contains("data_not_found")) {
+
+                alert("Veículo não localizado.");
+
+                //finish();
+
+            } else if (resultado.contains("veiculo_registrado")) {
 
                 alert("Veículo registrado com sucesso.");
 
@@ -219,22 +225,69 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
                 complain("Ocorreu um erro desconhecido. Por favor informe o suporte do sistema.");
             }
 
-            String[] dados = resultado.split(",");
 
-            if (resultado.contains("verifica_meusveiculos_ok")){
-                Intent it = new Intent(CadastroVeiculoActivity.this, MeusVeiculosActivity.class);
-                it.putExtra("id_usuario", cdUsuario);
-                it.putExtra("marcaModelo", dados[1]);
-                it.putExtra("placa", dados[2]);
-                it.putExtra("ano", dados[3]);
-                startActivity(it);
-            } else if (resultado.contains("nao_ha_veiculo_cadastrado")){
-                Intent it = new Intent(CadastroVeiculoActivity.this, MeusVeiculosActivity.class);
-                startActivity(it);
-            }
+        }
+    }
+
+    private class SolicitaDados extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... urls) {
+
+            return ConexaoApp.postDados(urls[0], parametros);
+
+        }
+
+        @Override
+        protected void onPostExecute(String resultado) {
+
+            degenerateJSONVeiculos(resultado);
+
+//            String[] dados = resultado.split(",");
+//
+//            if (resultado.contains("verifica_meusveiculos_ok")){
+//                Intent it = new Intent(CadastroVeiculoActivity.this, MeusVeiculosActivity.class);
+//                it.putExtra("id_usuario", cdUsuario);
+//                it.putExtra("marcaModelo", dados[1]);
+//                it.putExtra("placa", dados[2]);
+//                it.putExtra("ano", dados[3]);
+//                startActivity(it);
+//            } else if (resultado.contains("nao_ha_veiculo_cadastrado")){
+//                Intent it = new Intent(CadastroVeiculoActivity.this, MeusVeiculosActivity.class);
+//                startActivity(it);
+//            }
 
 
         }
+    }
+
+    private void degenerateJSONVeiculos(String data){
+
+        ArrayList<String> veiculosArray = new ArrayList<String>();
+
+        try{
+            JSONArray ja = new JSONArray(data);
+
+            for(int i=0; i < ja.length(); i++) {
+                JSONObject jo = ja.getJSONObject(i);
+                String MarcaModelo = jo.getString("dsMarcaModelo");
+                veiculosArray.add(MarcaModelo);
+                String placa  = jo.getString("dsPlaca");
+                veiculosArray.add(placa);
+                String AnoFabricacao = jo.getString("dsAnoFabricacao");
+                veiculosArray.add(AnoFabricacao);
+                String AnoModelo = jo.getString("dsAnoModelo");
+                veiculosArray.add(AnoModelo);
+            }
+
+            Intent it = new Intent(CadastroVeiculoActivity.this, MeusVeiculosActivity.class);
+            it.putExtra("id_usuario", cdUsuario);
+            it.putStringArrayListExtra("veiculosArray", veiculosArray);
+            startActivity(it);
+
+        }
+        catch(JSONException e){ e.printStackTrace(); }
+
     }
 
     @Override

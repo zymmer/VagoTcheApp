@@ -114,6 +114,12 @@
 
         </LinearLayout>
 
+            <!--<android.lib.recaptcha.ReCaptcha-->
+                <!--android:id="@+id/recaptcha"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:scaleType="centerInside" />-->
+
     <LinearLayout
         android:padding="20dp"
         android:orientation="horizontal"

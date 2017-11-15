@@ -48,14 +48,13 @@
 
     <ExpandableListView
         android:background="@drawable/modelo_edit"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:orientation="vertical"
-        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:id="@+id/expandableListViewMeusVeiculos"
+        android:layout_width="320dp"
+        android:layout_height="320dp"
         android:layout_gravity="center"
-        android:weightSum="1">
+        android:ems="50"
+        android:inputType="textMultiLine" />
 
-
-    </ExpandableListView>
 
 </android.support.design.widget.CoordinatorLayout>

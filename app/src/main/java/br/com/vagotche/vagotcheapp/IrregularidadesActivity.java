@@ -37,7 +37,7 @@ public class IrregularidadesActivity extends AppCompatActivity implements View.O
         //ExpandableList
         buildList();
 
-        ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
+        ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.expandableListViewIrregularidades);
         expandableListView.setAdapter(new ExpandableAdapter(IrregularidadesActivity.this, listGroup, listData) {
         });
 

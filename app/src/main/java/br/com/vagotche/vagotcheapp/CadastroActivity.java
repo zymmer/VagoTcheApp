@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,14 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.CommonStatusCodes;
+import com.google.android.gms.safetynet.SafetyNet;
+import com.google.android.gms.safetynet.SafetyNetApi;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+
+import java.util.concurrent.Executor;
 import java.util.regex.Pattern;
 import br.com.vagotche.vagotcheapp.Validações.ValidaCPF;
 
@@ -166,6 +175,41 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    public void captcha() {
+        SafetyNet.getClient(this).verifyWithRecaptcha("6LcyszgUAAAAAFXPdrcR3s_69_f-oe_7IwQE3vQP")
+                .addOnSuccessListener((Executor) this,
+                        new OnSuccessListener<SafetyNetApi.RecaptchaTokenResponse>() {
+                            @Override
+                            public void onSuccess(SafetyNetApi.RecaptchaTokenResponse response) {
+                                // Indicates communication with reCAPTCHA service was
+                                // successful.
+                                String userResponseToken = response.getTokenResult();
+                                if (!userResponseToken.isEmpty()) {
+                                    // Validate the user response token using the
+                                    // reCAPTCHA siteverify API.
+                                }
+                            }
+                        })
+                .addOnFailureListener((Executor) this, new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        if (e instanceof ApiException) {
+                            // An error occurred when communicating with the
+                            // reCAPTCHA service. Refer to the status code to
+                            // handle the error appropriately.
+                            ApiException apiException = (ApiException) e;
+                            int statusCode = apiException.getStatusCode();
+                            Log.d(TAG, "Error: " + CommonStatusCodes
+                                    .getStatusCodeString(statusCode));
+                        } else {
+                            // A different, unknown type of error occurred.
+                            Log.d(TAG, "Error: " + e.getMessage());
+                        }
+                    }
+                });
+    }
+
+
     void complain(String message) {
         Log.e(TAG, "**** Vago Tchê Error: " + message);
         alertDialog(message);
@@ -188,6 +232,7 @@ public class CadastroActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.btnRegistrar:
                 registrar();
+                //captcha();
 
 //                String token = FirebaseInstanceId.getInstance().getToken();
 //                registerToken(token);

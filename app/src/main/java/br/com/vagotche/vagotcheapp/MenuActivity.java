@@ -807,23 +807,34 @@ public class MenuActivity extends AppCompatActivity
 
         if (id == R.id.nav_meusdados) {
             Intent it = new Intent(this, MeusDadosActivity.class);
-
+            it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             it.putExtra("nome_usuario", getIntent().getExtras().getString("nome_usuario"));
             it.putExtra("email_usuario", getIntent().getExtras().getString("email_usuario"));
-
             startActivity(it);
         } else if (id == R.id.nav_contato) {
             Intent it = new Intent(this, ContatoActivity.class);
+            it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            it.putExtra("nome_usuario", getIntent().getExtras().getString("nome_usuario"));
+            it.putExtra("email_usuario", getIntent().getExtras().getString("email_usuario"));
             startActivity(it);
         } else if (id == R.id.nav_movimentacoes) {
             Intent it = new Intent(this, MovimentacoesActivity.class);
+            it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            it.putExtra("nome_usuario", getIntent().getExtras().getString("nome_usuario"));
+            it.putExtra("email_usuario", getIntent().getExtras().getString("email_usuario"));
             startActivity(it);
         } else if (id == R.id.nav_info) {
             Intent it = new Intent(this, InfoActivity.class);
+            it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            it.putExtra("nome_usuario", getIntent().getExtras().getString("nome_usuario"));
+            it.putExtra("email_usuario", getIntent().getExtras().getString("email_usuario"));
             startActivity(it);
         } else if (id == R.id.itemwww) {
             Uri uri = Uri.parse("http://www.vagotche.com.br");
             Intent it = new Intent(Intent.ACTION_VIEW, uri);
+            it.putExtra("nome_usuario", getIntent().getExtras().getString("nome_usuario"));
+            it.putExtra("email_usuario", getIntent().getExtras().getString("email_usuario"));
+            it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(it);
             //} else if (id == R.id.nav_send) {
 

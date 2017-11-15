@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -35,6 +36,7 @@ public class MeusDadosActivity extends AppCompatActivity
         setContentView(R.layout.activity_menu_meusdados);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_meusdados);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         nav_menu = (MenuItem) findViewById(R.id.nav_menu);
         nav_contato = (MenuItem) findViewById(R.id.nav_contato);
@@ -51,16 +53,6 @@ public class MeusDadosActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view_meusdados);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //NavHeader
-        txtNome = (TextView) findViewById(R.id.txtNome);
-        txtEmail = (TextView) findViewById(R.id.txtEmail3);
-
-        nomeUsuario = getIntent().getExtras().getString("nome_usuario");
-        emailUsuario = getIntent().getExtras().getString("email_usuario");
-
-        txtNome.setText(nomeUsuario);
-        txtEmail.setText(emailUsuario);
-
     }
 
     @Override
@@ -73,6 +65,24 @@ public class MeusDadosActivity extends AppCompatActivity
         }
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        //NavHeader
+        txtNome = (TextView) findViewById(R.id.txtNome);
+        txtEmail = (TextView) findViewById(R.id.txtEmail3);
+
+        nomeUsuario = getIntent().getExtras().getString("nome_usuario");
+        emailUsuario = getIntent().getExtras().getString("email_usuario");
+
+        txtNome.setText(nomeUsuario);
+        txtEmail.setText(emailUsuario);
+
+        // Inflate the menu; this adds items to the action bar if it is present.
+        //getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -81,19 +91,34 @@ public class MeusDadosActivity extends AppCompatActivity
 
         if (id == R.id.nav_menu) {
             Intent it = new Intent(MeusDadosActivity.this, MenuActivity.class);
+            it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            it.putExtra("nome_usuario", getIntent().getExtras().getString("nome_usuario"));
+            it.putExtra("email_usuario", getIntent().getExtras().getString("email_usuario"));
             startActivity(it);
         } else if (id == R.id.nav_contato) {
             Intent it = new Intent(MeusDadosActivity.this, ContatoActivity.class);
+            it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            it.putExtra("nome_usuario", getIntent().getExtras().getString("nome_usuario"));
+            it.putExtra("email_usuario", getIntent().getExtras().getString("email_usuario"));
             startActivity(it);
         } else if (id == R.id.nav_movimentacoes) {
             Intent it = new Intent(MeusDadosActivity.this, MovimentacoesActivity.class);
+            it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            it.putExtra("nome_usuario", getIntent().getExtras().getString("nome_usuario"));
+            it.putExtra("email_usuario", getIntent().getExtras().getString("email_usuario"));
             startActivity(it);
         } else if (id == R.id.nav_info) {
             Intent it = new Intent(MeusDadosActivity.this, InfoActivity.class);
+            it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            it.putExtra("nome_usuario", getIntent().getExtras().getString("nome_usuario"));
+            it.putExtra("email_usuario", getIntent().getExtras().getString("email_usuario"));
             startActivity(it);
         } else if (id == R.id.itemwww) {
             Uri uri = Uri.parse("http://www.vagotche.com.br");
             Intent it = new Intent(Intent.ACTION_VIEW, uri);
+            it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            it.putExtra("nome_usuario", getIntent().getExtras().getString("nome_usuario"));
+            it.putExtra("email_usuario", getIntent().getExtras().getString("email_usuario"));
             startActivity(it);
             //} else if (id == R.id.nav_send) {
 

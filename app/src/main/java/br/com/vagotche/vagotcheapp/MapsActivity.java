@@ -479,86 +479,86 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    //Parquímetros
-    public void addParquimetrosArray() {
-
-        try{
-            ja = new JSONArray(getIntent().getStringExtra("parquimetrosArray"));
-
-            for(int i = 0; i < ja.length(); i++) {
-                JSONObject jo = ja.getJSONObject(i);
-
-                MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.title(jo.getString("cdEndereco"));
-                LatLng latLng = new LatLng(Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")));
-                markerOptions.position(latLng);
-                markerOptions.snippet(  "Vagas Comuns ocupadas 0/" + jo.getString("nmVagasNormais") + "\n" +
-                        "Vagas DF ocupadas 0/" + jo.getString("nmVagasDeficiente") +"\n" +
-                        "Vagas Idosos ocupadas 0/" + jo.getString("nmVagasIdosos"));
-                //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(R.mipmap.parquimetro_40x40));
-                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-                mMap.addMarker(markerOptions);
-
-            }
-
-        }
-
-        catch(JSONException e){ e.printStackTrace(); }
-    }
-
-    //Parquímetros Idosos
-    public void addParquimetrosIdososArray() {
-
-        try{
-            ja = new JSONArray(getIntent().getStringExtra("parquimetrosIdososArray"));
-
-            for(int i = 0; i < ja.length(); i++) {
-                JSONObject jo = ja.getJSONObject(i);
-
-                MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.title(jo.getString("cdEndereco"));
-                LatLng latLng = new LatLng(Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")));
-                markerOptions.position(latLng);
-                markerOptions.snippet(  "Vagas comuns ocupadas 0/" + jo.getString("nmVagasNormais") + "\n" +
-                        "Vagas deficientes ocupadas 0/" + jo.getString("nmVagasDeficiente") +"\n" +
-                        "Vagas idosos ocupadas 0/" + jo.getString("nmVagasIdosos"));
-                //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(R.mipmap.parquimetro_40x40));
-                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-                mMap.addMarker(markerOptions);
-
-            }
-
-        }
-
-        catch(JSONException e){ e.printStackTrace(); }
-    }
-
-    //Parquímetros Idosos
-    public void addParquimetrosDFArray() {
-
-        try{
-            ja = new JSONArray(getIntent().getStringExtra("parquimetrosDFArray"));
-
-            for(int i = 0; i < ja.length(); i++) {
-                JSONObject jo = ja.getJSONObject(i);
-
-                MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions.title(jo.getString("cdEndereco"));
-                LatLng latLng = new LatLng(Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")));
-                markerOptions.position(latLng);
-                markerOptions.snippet(  "Vagas comuns ocupadas 0/" + jo.getString("nmVagasNormais") + "\n" +
-                        "Vagas deficientes ocupadas 0/" + jo.getString("nmVagasDeficiente") +"\n" +
-                        "Vagas idosos ocupadas 0/" + jo.getString("nmVagasIdosos"));
-                //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(R.mipmap.parquimetro_40x40));
-                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-                mMap.addMarker(markerOptions);
-
-            }
-
-        }
-
-        catch(JSONException e){ e.printStackTrace(); }
-    }
+//    //Parquímetros
+//    public void addParquimetrosArray() {
+//
+//        try{
+//            ja = new JSONArray(getIntent().getStringExtra("parquimetrosArray"));
+//
+//            for(int i = 0; i < ja.length(); i++) {
+//                JSONObject jo = ja.getJSONObject(i);
+//
+//                MarkerOptions markerOptions = new MarkerOptions();
+//                markerOptions.title(jo.getString("cdEndereco"));
+//                LatLng latLng = new LatLng(Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")));
+//                markerOptions.position(latLng);
+//                markerOptions.snippet(  "Vagas Comuns ocupadas 0/" + jo.getString("nmVagasNormais") + "\n" +
+//                        "Vagas DF ocupadas 0/" + jo.getString("nmVagasDeficiente") +"\n" +
+//                        "Vagas Idosos ocupadas 0/" + jo.getString("nmVagasIdosos"));
+//                //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(R.mipmap.parquimetro_40x40));
+//                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+//                mMap.addMarker(markerOptions);
+//
+//            }
+//
+//        }
+//
+//        catch(JSONException e){ e.printStackTrace(); }
+//    }
+//
+//    //Parquímetros Idosos
+//    public void addParquimetrosIdososArray() {
+//
+//        try{
+//            ja = new JSONArray(getIntent().getStringExtra("parquimetrosIdososArray"));
+//
+//            for(int i = 0; i < ja.length(); i++) {
+//                JSONObject jo = ja.getJSONObject(i);
+//
+//                MarkerOptions markerOptions = new MarkerOptions();
+//                markerOptions.title(jo.getString("cdEndereco"));
+//                LatLng latLng = new LatLng(Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")));
+//                markerOptions.position(latLng);
+//                markerOptions.snippet(  "Vagas comuns ocupadas 0/" + jo.getString("nmVagasNormais") + "\n" +
+//                        "Vagas deficientes ocupadas 0/" + jo.getString("nmVagasDeficiente") +"\n" +
+//                        "Vagas idosos ocupadas 0/" + jo.getString("nmVagasIdosos"));
+//                //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(R.mipmap.parquimetro_40x40));
+//                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+//                mMap.addMarker(markerOptions);
+//
+//            }
+//
+//        }
+//
+//        catch(JSONException e){ e.printStackTrace(); }
+//    }
+//
+//    //Parquímetros Idosos
+//    public void addParquimetrosDFArray() {
+//
+//        try{
+//            ja = new JSONArray(getIntent().getStringExtra("parquimetrosDFArray"));
+//
+//            for(int i = 0; i < ja.length(); i++) {
+//                JSONObject jo = ja.getJSONObject(i);
+//
+//                MarkerOptions markerOptions = new MarkerOptions();
+//                markerOptions.title(jo.getString("cdEndereco"));
+//                LatLng latLng = new LatLng(Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")));
+//                markerOptions.position(latLng);
+//                markerOptions.snippet(  "Vagas comuns ocupadas 0/" + jo.getString("nmVagasNormais") + "\n" +
+//                        "Vagas deficientes ocupadas 0/" + jo.getString("nmVagasDeficiente") +"\n" +
+//                        "Vagas idosos ocupadas 0/" + jo.getString("nmVagasIdosos"));
+//                //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(R.mipmap.parquimetro_40x40));
+//                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+//                mMap.addMarker(markerOptions);
+//
+//            }
+//
+//        }
+//
+//        catch(JSONException e){ e.printStackTrace(); }
+//    }
 
 
     //Parquímetros mais proximos
