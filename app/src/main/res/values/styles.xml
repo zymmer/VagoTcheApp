@@ -45,6 +45,7 @@
         <item name="android:paddingRight">20dp</item>
         <item name="android:paddingTop">5dp</item>
         <item name="android:paddingBottom">5dp</item>
+        <item name="android:gravity">center</item>
         <item name="android:popupBackground">#CCFFFFFF</item>
     </style>
 

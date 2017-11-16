@@ -94,8 +94,8 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
 
         // Spinner Placas
         spinnerPlaca = (Spinner) findViewById(R.id.spinnerPlaca);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getIntent().getStringArrayListExtra("placasArray"));
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter = new ArrayAdapter<String>(this, R.layout.spinner_center_item, getIntent().getStringArrayListExtra("placasArray"));
+        adapter.setDropDownViewResource(R.layout.spinner_center_item);
         spinnerPlaca.setAdapter(adapter);
 
 //        //Spinner Parquimetro
@@ -217,8 +217,8 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
                 //smsManager.sendTextMessage("51997152881", null, "VagoTchê: Utilizado R$"+ df2.format(valor) +" do credVAGO." + " Data: " + data_completa, null, null);
 
                 //complain("Reserva efetuada com sucesso...");
-                MenuActivity menuActivity = new MenuActivity();
-                menuActivity.startChronometer();
+                //MenuActivity menuActivity = new MenuActivity();
+                //menuActivity.startChronometer();
                 finish();
 
             } else if (resultado.contains("Crédito_insuficiente")) {
