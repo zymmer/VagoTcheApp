@@ -12,15 +12,14 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <TextView
-        android:drawableLeft="@mipmap/vagotcheestacionamento40x40px"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="52dp"
+        android:drawableLeft="@mipmap/vagotcheestacionamento180x120px01"
+        android:gravity="center"
         android:textAlignment="center"
-        android:textColor="@color/colorWhite"
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-        android:textStyle="bold"
-        android:text="  VagoTchê"
-        android:gravity="center"/>
+        android:textColor="@color/colorWhite"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/txtNome"

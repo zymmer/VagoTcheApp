@@ -170,7 +170,6 @@ public class CreditosActivity extends AppCompatActivity
         //Saldo
         seuSaldo = (TextView) findViewById(R.id.viewSaldoCreditos);
         seuSaldo.setText("R$" + getIntent().getStringExtra("saldo"));
-        
 
         // Get IDs
         cred5 = (TextView) findViewById(R.id.creditos5);
@@ -287,8 +286,9 @@ public class CreditosActivity extends AppCompatActivity
             if (resultado.contains("credito_adquirido")) {
                 //alert("Créditos Adquiridos...");
 
-                showNotification("vagoCRED","Adquirido R$"+ saldoVar +" reais de crédito." +
+                showNotification("vagoCRED","Adquirido R$"+ df2.format(saldoVar) +" reais de crédito." +
                         "\n" + "Data: " + data_completa + "Hora: " +hora_atual);
+
                 //TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);i
                 //String number = tm.getLine1Number();
                 //alert("numero: " +number);
@@ -546,6 +546,7 @@ public class CreditosActivity extends AppCompatActivity
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
                 .setAutoCancel(true)
                 .setContentTitle(title)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
                 .setContentText(message)
                 .setSmallIcon(R.drawable.cast_ic_stop_circle_filled_white);
             Bitmap bm = BitmapFactory.decodeResource(getResources(), R.mipmap.vagotcheestacionamento40x40px);
@@ -773,6 +774,7 @@ public class CreditosActivity extends AppCompatActivity
 
                 String valor = seuSaldo.getText().toString().replace("R$", "").replace(",", ".");
 
+                saldoVar = credVago5;
                 saldo = Double.parseDouble(valor) + credVago5;
                 seuSaldo.setText("R$" + saldo.toString());
                 //alert("Saldo: " +saldo + "Id: " +cdUsuario);
@@ -787,6 +789,7 @@ public class CreditosActivity extends AppCompatActivity
 
                 String valor = seuSaldo.getText().toString().replace("R$", "").replace(",", ".");
 
+                saldoVar = credVago10;
                 saldo = Double.parseDouble(valor) + credVago10;
                 seuSaldo.setText("R$" + saldo.toString());
                 //alert("Saldo: " +saldo + "Id: " +cdUsuario);
@@ -801,6 +804,7 @@ public class CreditosActivity extends AppCompatActivity
 
                 String valor = seuSaldo.getText().toString().replace("R$", "").replace(",", ".");
 
+                saldoVar = credVago15;
                 saldo = Double.parseDouble(valor) + credVago15;
                 seuSaldo.setText("R$" + saldo.toString());
                 //alert("Saldo: " +saldo + "Id: " +cdUsuario);
@@ -815,6 +819,7 @@ public class CreditosActivity extends AppCompatActivity
 
                 String valor = seuSaldo.getText().toString().replace("R$", "").replace(",", ".");
 
+                saldoVar = credVago20;
                 saldo = Double.parseDouble(valor) + credVago20;
                 seuSaldo.setText("R$" + saldo.toString());
                 //alert("Saldo: " +saldo + "Id: " +cdUsuario);
@@ -829,6 +834,7 @@ public class CreditosActivity extends AppCompatActivity
 
                 String valor = seuSaldo.getText().toString().replace("R$", "").replace(",", ".");
 
+                saldoVar = credVago40;
                 saldo = Double.parseDouble(valor) + credVago40;
                 seuSaldo.setText("R$" + saldo.toString());
                 //alert("Saldo: " +saldo + "Id: " +cdUsuario);
@@ -843,6 +849,7 @@ public class CreditosActivity extends AppCompatActivity
 
                 String valor = seuSaldo.getText().toString().replace("R$", "").replace(",", ".");
 
+                saldoVar = credVago60;
                 saldo = Double.parseDouble(valor) + credVago60;
                 seuSaldo.setText("R$" + saldo.toString());
                 //alert("Saldo: " +saldo + "Id: " +cdUsuario);

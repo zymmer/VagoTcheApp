@@ -12,7 +12,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:drawableLeft="@mipmap/vagotcheestacionamento320x180px"
+            android:drawableLeft="@mipmap/vagotcheestacionamento512x512px01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"

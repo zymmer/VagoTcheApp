@@ -93,18 +93,19 @@ public class MenuActivity extends AppCompatActivity
         //Registra um token do firebase caso o usuário esteja logando pela primeira vez no sistema
         registerToken();
 
-        chronometer = (Chronometer) findViewById(R.id.chronometer);
-        chronometer.setText(DateFormat.format("kk:mm:ss", 0));
-        chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener(){
-            @Override
-            public void onChronometerTick(Chronometer chronometer) {
-                long aux = SystemClock.elapsedRealtime() - chronometer.getBase();
-                chronometer.setText(DateFormat.format("kk:mm:ss", aux));
-            }
-        });
-
-        milliseconds = 0;
-        millisecondsStop = 0;
+        //Cronometro
+//        chronometer = (Chronometer) findViewById(R.id.chronometer);
+//        chronometer.setText(DateFormat.format("kk:mm:ss", 0));
+//        chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener(){
+//            @Override
+//            public void onChronometerTick(Chronometer chronometer) {
+//                long aux = SystemClock.elapsedRealtime() - chronometer.getBase();
+//                chronometer.setText(DateFormat.format("kk:mm:ss", aux));
+//            }
+//        });
+//
+//        milliseconds = 0;
+//        millisecondsStop = 0;
 
 //        //Test Habilitar Bottao de Zona Azul
 //        if(getIntent().getStringExtra("parquimetro") == null || getIntent().getStringExtra("parquimetro").equals("")){
