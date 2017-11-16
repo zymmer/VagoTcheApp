@@ -323,6 +323,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 it.putExtra("id_usuario", cdUsuario);
                 it.putExtra("nome_usuario", dados[2]);
                 it.putExtra("email_usuario", dados[3]);
+                it.putExtra("cpf", dados[4]);
+                it.putExtra("df", dados[5]);
+                it.putExtra("idoso", dados[6]);
+                it.putExtra("data", dados[7]);
                 it.putExtra("Token", FirebaseInstanceId.getInstance().getToken());
                 startActivity(it);
             } else if (resultado.contains("cpf_invalido")){

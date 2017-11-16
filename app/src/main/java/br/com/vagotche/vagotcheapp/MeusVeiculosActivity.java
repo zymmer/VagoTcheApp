@@ -51,14 +51,14 @@ public class MeusVeiculosActivity extends AppCompatActivity implements View.OnCl
         buildList();
 
         ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.expandableListViewMeusVeiculos);
-        expandableListView.setAdapter(new ExpandableAdapter(MeusVeiculosActivity.this, listGroup, listData) {
+        expandableListView.setAdapter(new ExpandableAdapterWithButtons(MeusVeiculosActivity.this, listGroup, listData) {
         });
 
         expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 
-                alert("Group: " +groupPosition+ " Item: "+childPosition);
+                //alert("Group: " +groupPosition+ " Item: "+childPosition);
                 return false;
             }
         });
@@ -66,18 +66,18 @@ public class MeusVeiculosActivity extends AppCompatActivity implements View.OnCl
         expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
             public void onGroupExpand(int groupPosition) {
-                alert("Group(Expand): " +groupPosition);
+                //alert("Group(Expand): " +groupPosition);
             }
         });
 
         expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
             @Override
             public void onGroupCollapse(int groupPosition) {
-                alert("Group(Collapse): " +groupPosition);
+                //alert("Group(Collapse): " +groupPosition);
             }
         });
 
-        expandableListView.setGroupIndicator(getResources().getDrawable(R.mipmap.vehicle));
+        expandableListView.setGroupIndicator(getResources().getDrawable(R.drawable.icon_group));
 
     }
 
@@ -104,27 +104,6 @@ public class MeusVeiculosActivity extends AppCompatActivity implements View.OnCl
             x = x + 1;
 
         }
-
-//        //GROUP
-//            listGroup.add(getIntent().getStringArrayListExtra("veiculosArray").get(0));
-//            listGroup.add("Grupo 2");
-//            listGroup.add("Grupo 3");
-//            listGroup.add("Grupo 4");
-//
-//        //CHILDREM
-//        List<String> auxList = new ArrayList<String>();
-//        auxList.add("Item 1");
-//        auxList.add("Item 2");
-//        auxList.add("Item 3");
-//        auxList.add("Item 4");
-//        listData.put(listGroup.get(0), auxList);
-//
-//        auxList = new ArrayList<String>();
-//        auxList.add("Item 5");
-//        auxList.add("Item 6");
-//        auxList.add("Item 7");
-//        auxList.add("Item 8");
-//        listData.put(listGroup.get(1), auxList);
 
     }
 

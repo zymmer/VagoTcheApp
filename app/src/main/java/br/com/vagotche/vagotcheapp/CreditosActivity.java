@@ -81,6 +81,14 @@ public class CreditosActivity extends AppCompatActivity
     String url = "";
     String parametros = "";
 
+    //Valores dos Creditos
+    Double credVago5 = 5.00;
+    Double credVago10 = 10.00;
+    Double credVago15 = 15.00;
+    Double credVago20 = 20.00;
+    Double credVago40 = 40.00;
+    Double credVago60 = 60.00;
+
 //    private void alert(String s){
 //        Toast.makeText(this,s,Toast.LENGTH_LONG).show();
 //    }
@@ -162,6 +170,7 @@ public class CreditosActivity extends AppCompatActivity
         //Saldo
         seuSaldo = (TextView) findViewById(R.id.viewSaldoCreditos);
         seuSaldo.setText("R$" + getIntent().getStringExtra("saldo"));
+        
 
         // Get IDs
         cred5 = (TextView) findViewById(R.id.creditos5);
@@ -761,9 +770,11 @@ public class CreditosActivity extends AppCompatActivity
                 // successfully consumed, so we apply the effects of the item in our
                 // game world's logic, which in our case means filling the gas tank a bit
                 Log.d(TAG, "Compra efetuada com sucesso. Provisionando.");
-                saldoVar = 5.00;
-                saldo = Double.parseDouble(seuSaldo.getText().toString()) + saldoVar;
-                seuSaldo.setText("R$" + saldo);
+
+                String valor = seuSaldo.getText().toString().replace("R$", "").replace(",", ".");
+
+                saldo = Double.parseDouble(valor) + credVago5;
+                seuSaldo.setText("R$" + saldo.toString());
                 //alert("Saldo: " +saldo + "Id: " +cdUsuario);
                 ComprarCredito();
                 //mTank = mTank == TANK_MAX ? TANK_MAX : mTank + 1;
@@ -773,9 +784,11 @@ public class CreditosActivity extends AppCompatActivity
                 // successfully consumed, so we apply the effects of the item in our
                 // game world's logic, which in our case means filling the gas tank a bit
                 Log.d(TAG, "Compra efetuada com sucesso. Provisionando.");
-                saldoVar = 10.0;
-                saldo = saldo + saldoVar;
-                valor.setText(df2.format(saldo));
+
+                String valor = seuSaldo.getText().toString().replace("R$", "").replace(",", ".");
+
+                saldo = Double.parseDouble(valor) + credVago10;
+                seuSaldo.setText("R$" + saldo.toString());
                 //alert("Saldo: " +saldo + "Id: " +cdUsuario);
                 ComprarCredito();
                 //mTank = mTank == TANK_MAX ? TANK_MAX : mTank + 1;
@@ -785,9 +798,11 @@ public class CreditosActivity extends AppCompatActivity
                 // successfully consumed, so we apply the effects of the item in our
                 // game world's logic, which in our case means filling the gas tank a bit
                 Log.d(TAG, "Compra efetuada com sucesso. Provisionando.");
-                saldoVar = 15.0;
-                saldo = saldo + saldoVar;
-                valor.setText(df2.format(saldo));
+
+                String valor = seuSaldo.getText().toString().replace("R$", "").replace(",", ".");
+
+                saldo = Double.parseDouble(valor) + credVago15;
+                seuSaldo.setText("R$" + saldo.toString());
                 //alert("Saldo: " +saldo + "Id: " +cdUsuario);
                 ComprarCredito();
                 //mTank = mTank == TANK_MAX ? TANK_MAX : mTank + 1;
@@ -797,9 +812,11 @@ public class CreditosActivity extends AppCompatActivity
                 // successfully consumed, so we apply the effects of the item in our
                 // game world's logic, which in our case means filling the gas tank a bit
                 Log.d(TAG, "Compra efetuada com sucesso. Provisionando.");
-                saldoVar = 20.0;
-                saldo = saldo + saldoVar;
-                valor.setText(df2.format(saldo));
+
+                String valor = seuSaldo.getText().toString().replace("R$", "").replace(",", ".");
+
+                saldo = Double.parseDouble(valor) + credVago20;
+                seuSaldo.setText("R$" + saldo.toString());
                 //alert("Saldo: " +saldo + "Id: " +cdUsuario);
                 ComprarCredito();
                 //mTank = mTank == TANK_MAX ? TANK_MAX : mTank + 1;
@@ -809,9 +826,11 @@ public class CreditosActivity extends AppCompatActivity
                 // successfully consumed, so we apply the effects of the item in our
                 // game world's logic, which in our case means filling the gas tank a bit
                 Log.d(TAG, "Compra efetuada com sucesso. Provisionando.");
-                saldoVar = 40.0;
-                saldo = saldo + saldoVar;
-                valor.setText(df2.format(saldo));
+
+                String valor = seuSaldo.getText().toString().replace("R$", "").replace(",", ".");
+
+                saldo = Double.parseDouble(valor) + credVago40;
+                seuSaldo.setText("R$" + saldo.toString());
                 //alert("Saldo: " +saldo + "Id: " +cdUsuario);
                 ComprarCredito();
                 //mTank = mTank == TANK_MAX ? TANK_MAX : mTank + 1;
@@ -821,9 +840,11 @@ public class CreditosActivity extends AppCompatActivity
                 // successfully consumed, so we apply the effects of the item in our
                 // game world's logic, which in our case means filling the gas tank a bit
                 Log.d(TAG, "Compra efetuada com sucesso. Provisionando.");
-                saldoVar = 60.0;
-                saldo = saldo + saldoVar;
-                valor.setText(df2.format(saldo));
+
+                String valor = seuSaldo.getText().toString().replace("R$", "").replace(",", ".");
+
+                saldo = Double.parseDouble(valor) + credVago60;
+                seuSaldo.setText("R$" + saldo.toString());
                 //alert("Saldo: " +saldo + "Id: " +cdUsuario);
                 ComprarCredito();
                 //mTank = mTank == TANK_MAX ? TANK_MAX : mTank + 1;

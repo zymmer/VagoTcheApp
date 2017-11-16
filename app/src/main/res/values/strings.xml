@@ -27,6 +27,12 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
 
+    <!-- Meus Dados -->
+    <string name="MeuNome">Nome</string>
+    <string name="MeuCPF">CPF</string>
+    <string name="MeuEmail">Email</string>
+    <string name="DataCriacao">Registrado no Sistema</string>
+
     <!-- Creditos -->
     <string name="title_activity_creditos">VagoCred</string>
     <string name="CredVago">Selecione o valor do crédito a ser adquirido para o seu credVAGO</string>

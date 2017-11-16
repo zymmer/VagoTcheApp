@@ -22,6 +22,8 @@ import android.widget.Toast;
 public class InfoActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
+    //Variaveis
+    int cdUsuario;
     MenuItem nav_menu, nav_meusdados, nav_contato, nav_movimentacoes, itemwww;
     TextView txtNome, txtEmail;
     String nomeUsuario, emailUsuario;
@@ -37,6 +39,9 @@ public class InfoActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_info);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        //Pega ID do Usuario em memoria
+        cdUsuario = getIntent().getIntExtra("id_usuario", 0);
 
         nav_menu = (MenuItem) findViewById(R.id.nav_menu);
         nav_meusdados = (MenuItem) findViewById(R.id.nav_meusdados);
@@ -98,8 +103,13 @@ public class InfoActivity extends AppCompatActivity
         } else if (id == R.id.nav_meusdados) {
             Intent it = new Intent(InfoActivity.this, MeusDadosActivity.class);
             it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            it.putExtra("id_usuario", cdUsuario);
             it.putExtra("nome_usuario", getIntent().getExtras().getString("nome_usuario"));
             it.putExtra("email_usuario", getIntent().getExtras().getString("email_usuario"));
+            it.putExtra("cpf", getIntent().getExtras().getString("cpf"));
+            it.putExtra("df", getIntent().getExtras().getString("df"));
+            it.putExtra("idoso", getIntent().getExtras().getString("idoso"));
+            it.putExtra("data", getIntent().getExtras().getString("data"));
             startActivity(it);
         } else if (id == R.id.nav_contato) {
             Intent it = new Intent(InfoActivity.this, ContatoActivity.class);

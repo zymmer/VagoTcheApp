@@ -12,6 +12,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,9 +22,15 @@ import android.widget.Toast;
  */
 
 public class MeusDadosActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener{
+        implements NavigationView.OnNavigationItemSelectedListener,
+        View.OnClickListener{
 
     MenuItem nav_menu, nav_contato, nav_movimentacoes, nav_info, itemwww;
+    EditText nome, email;
+    TextView editCPF2, txtData;
+    Button btnSalvar,btnCancelar;
+
+    //Nav
     TextView txtNome, txtEmail;
     String nomeUsuario, emailUsuario;
 
@@ -44,6 +52,26 @@ public class MeusDadosActivity extends AppCompatActivity
         nav_info = (MenuItem) findViewById(R.id.nav_info);
         itemwww = (MenuItem) findViewById(R.id.itemwww);
 
+        nome = (EditText)findViewById(R.id.editNome);
+        editCPF2 = (TextView) findViewById(R.id.editCPF2);
+        email = (EditText) findViewById(R.id.editEmail1);
+        txtData = (TextView) findViewById(R.id.txtData);
+
+        nome.setText(getIntent().getExtras().getString("nome_usuario"));
+        editCPF2.setText(getIntent().getExtras().getString("cpf"));
+        email.setText(getIntent().getExtras().getString("email_usuario"));
+        txtData.setText(getIntent().getExtras().getString("data"));
+
+        //Buttons
+        btnCancelar = (Button) findViewById(R.id.btnCancelarMeusDados);
+
+        //Button listeners
+        btnCancelar.setOnClickListener(this);
+//        it.putExtra("df", getIntent().getExtras().getString("df"));
+//        it.putExtra("idoso", getIntent().getExtras().getString("idoso"));
+
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout_meusdados);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -62,6 +90,18 @@ public class MeusDadosActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnLocalizarVeic:
+                //localizarVeiculo();
+                break;
+            case R.id.btnCancelarMeusDados:
+                finish();
+                break;
         }
     }
 

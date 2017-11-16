@@ -304,6 +304,7 @@ public class CadastroVeiculoActivity extends AppCompatActivity implements View.O
                 break;
             case R.id.btnAlterarVeic:
                 verificarMeusVeiculos();
+                break;
         }
     }
 

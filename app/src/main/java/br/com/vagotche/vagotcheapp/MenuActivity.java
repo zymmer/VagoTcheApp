@@ -397,6 +397,28 @@ public class MenuActivity extends AppCompatActivity
         }
     }
 
+    private void degenerateJSONMovimentacoes(String data){
+
+        ArrayList<String> movimentacoesArray = new ArrayList<String>();
+
+        try{
+            JSONArray ja = new JSONArray(data);
+
+            for(int i=0; i < ja.length(); i++) {
+                JSONObject jo = ja.getJSONObject(i);
+                String cidade  = jo.getString("cidade");
+                movimentacoesArray.add(cidade);
+                String estado  = jo.getString("estado");
+                movimentacoesArray.add(estado);
+            }
+
+            zonaAzul.putStringArrayListExtra("movimentacoesArray", movimentacoesArray);
+
+        }
+        catch(JSONException e){ e.printStackTrace(); }
+
+    }
+
     private void degenerateJSONPlacas(String data){
 
         ArrayList<String> placasArray = new ArrayList<String>();
@@ -473,6 +495,25 @@ public class MenuActivity extends AppCompatActivity
         }
         catch(JSONException e){ e.printStackTrace(); }
 
+    }
+
+    // Verifica movimentações do usuário
+    private void VerificaMovimentacoes() {
+
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+        if (networkInfo != null && networkInfo.isConnected()) {
+
+            url = "http://fabrica.govbrsul.com.br/vagotche/index.php/Movimentacoes/VerificarMovimentacoes";
+
+            parametros = "cdUsuario=" + cdUsuario;
+
+            new SolicitaDadosMovimentacoes().execute(url);
+        } else {
+            complain("Sem conexão com a Internet. O Wi-Fi ou os dados da rede celular devem estar ativos. Tente novamente.");
+        }
     }
 
     // Verifica configurações de alerta do usuário
@@ -667,6 +708,23 @@ public class MenuActivity extends AppCompatActivity
         }
     }
 
+    private class SolicitaDadosMovimentacoes extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... urls) {
+
+            return ConexaoApp.postDados(urls[0], parametros);
+
+        }
+
+        @Override
+        protected void onPostExecute(String resultado) {
+
+            degenerateJSONMovimentacoes(resultado);
+
+        }
+    }
+
     private class SolicitaDadosPlaca extends AsyncTask<String, Void, String> {
 
         @Override
@@ -808,8 +866,13 @@ public class MenuActivity extends AppCompatActivity
         if (id == R.id.nav_meusdados) {
             Intent it = new Intent(this, MeusDadosActivity.class);
             it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            it.putExtra("id_usuario", cdUsuario);
             it.putExtra("nome_usuario", getIntent().getExtras().getString("nome_usuario"));
             it.putExtra("email_usuario", getIntent().getExtras().getString("email_usuario"));
+            it.putExtra("cpf", getIntent().getExtras().getString("cpf"));
+            it.putExtra("df", getIntent().getExtras().getString("df"));
+            it.putExtra("idoso", getIntent().getExtras().getString("idoso"));
+            it.putExtra("data", getIntent().getExtras().getString("data"));
             startActivity(it);
         } else if (id == R.id.nav_contato) {
             Intent it = new Intent(this, ContatoActivity.class);
