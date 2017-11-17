@@ -93,7 +93,7 @@ public class MenuActivity extends AppCompatActivity
         //Registra um token do firebase caso o usuário esteja logando pela primeira vez no sistema
         registerToken();
 
-        //Cronometro
+//        //Cronometro
 //        chronometer = (Chronometer) findViewById(R.id.chronometer);
 //        chronometer.setText(DateFormat.format("kk:mm:ss", 0));
 //        chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener(){

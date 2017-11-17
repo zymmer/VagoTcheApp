@@ -161,12 +161,12 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
                 
             } else {
 
-                //.toString().replaceAll("\\s+$", "")
-                String park = "Av. Osvaldo Aranha, n 374";
+                String parquimetro_filtrado = parquimetro.getText().toString().replaceAll("^\\s+", "");
+                //String park = "Av. Osvaldo Aranha, n 374";
 
                 url = "http://fabrica.govbrsul.com.br/vagotche/index.php/ZonaAzul/PagarZonaAzul";
                 parametros = "cdUsuario=" + cdUsuario + "&placa=" + spinnerPlaca.getSelectedItem().toString() + "&cidade=" + cidade.getText() +
-                        "&parquimetro=" + park + "&valorUtilizado=" + valor;
+                        "&parquimetro=" + parquimetro_filtrado + "&valorUtilizado=" + valor;
 
                 new SolicitaDados().execute(url);
             }
@@ -216,9 +216,9 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
                 //SmsManager smsManager = SmsManager.getDefault();
                 //smsManager.sendTextMessage("51997152881", null, "VagoTchê: Utilizado R$"+ df2.format(valor) +" do credVAGO." + " Data: " + data_completa, null, null);
 
-                //complain("Reserva efetuada com sucesso...");
-                //MenuActivity menuActivity = new MenuActivity();
-                //menuActivity.startChronometer();
+                alert("Reserva efetuada com sucesso...");
+//                MenuActivity menuActivity = new MenuActivity();
+//                menuActivity.startChronometer();
                 finish();
 
             } else if (resultado.contains("Crédito_insuficiente")) {
