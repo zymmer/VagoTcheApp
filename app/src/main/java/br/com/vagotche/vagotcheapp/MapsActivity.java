@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.hardware.Camera;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -70,18 +71,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LocationListener,
         View.OnClickListener{
 
-    //PubNub
-    public static final String DATASTREAM_PREFS = "br.com.vagotche.vagotcheapp.DATASTREAM_PREFS";
-    public static final String DATASTREAM_UUID = "br.com.vagotche.vagotcheapp.DATASTREAM_UUID";
-    public static final String PUBLISH_KEY = "pub-c-2964c738-755e-46eb-ad68-c47ca54e01f3";
-    public static final String SUBSCRIBE_KEY = "sub-c-717c68fc-c305-11e7-931e-8e9ef5f6aa39";
-    public static final String CHANNEL_NAME = "maps-channel";
-
-    private PubNub mPubNub;
-    private SharedPreferences mSharedPrefs;
-    private Polyline mPolyline;
-
-    private List<LatLng> mPoints = new ArrayList<>();
+//    //PubNub
+//    public static final String DATASTREAM_PREFS = "br.com.vagotche.vagotcheapp.DATASTREAM_PREFS";
+//    public static final String DATASTREAM_UUID = "br.com.vagotche.vagotcheapp.DATASTREAM_UUID";
+//    public static final String PUBLISH_KEY = "pub-c-2964c738-755e-46eb-ad68-c47ca54e01f3";
+//    public static final String SUBSCRIBE_KEY = "sub-c-717c68fc-c305-11e7-931e-8e9ef5f6aa39";
+//    public static final String CHANNEL_NAME = "maps-channel";
+//
+//    private PubNub mPubNub;
+//    private SharedPreferences mSharedPrefs;
+//    private Polyline mPolyline;
+//
+//    private List<LatLng> mPoints = new ArrayList<>();
 
     //Variaveis
     int cdUsuario;
@@ -382,6 +383,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         markerOptions.title("Você");
         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.mipmap.car32));
         mCurrLocationMarker = mMap.addMarker(markerOptions);
+
+
+//        String format = "geo:0,0?q=" + location.getLatitude() + "," + location.getLongitude() + "( Location title)";
+//
+//        Uri uri = Uri.parse(format);
+//
+//        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//        startActivity(intent);
 
         //move map camera
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));

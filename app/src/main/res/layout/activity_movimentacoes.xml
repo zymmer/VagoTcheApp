@@ -19,7 +19,6 @@
         android:id="@+id/include" />
 
     <LinearLayout
-        android:layout_marginBottom="380dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -35,22 +34,12 @@
             android:textStyle="bold"
             android:text=" Movimentações" />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:weightSum="1">
-
         <ExpandableListView
             android:background="@drawable/modelo_edit"
             android:layout_marginTop="20dp"
-            android:id="@+id/expandableListViewMovimentações"
+            android:id="@+id/expandableListViewMovimentacoes"
             android:layout_width="320dp"
-            android:layout_height="320dp"
+            android:layout_height="350dp"
             android:layout_gravity="center"
             android:ems="50"
             android:inputType="textMultiLine" />

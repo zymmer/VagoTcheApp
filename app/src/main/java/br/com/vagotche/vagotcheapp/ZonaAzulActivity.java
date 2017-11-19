@@ -151,7 +151,7 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
             //String cidade = spinnerCidade.getSelectedItem().toString();
             //String parquimetro = spinnerParquimetro.getSelectedItem().toString();
 
-            if (spinnerPlaca.getSelectedItem() == "" || spinnerPlaca.getSelectedItem() == null) {
+            if (spinnerPlaca.getSelectedItem() == "" || spinnerPlaca.getSelectedItem().equals(null)) {
 
                 complain("Nenhum veículo registrado foi encontrado");
 
@@ -208,8 +208,11 @@ public class ZonaAzulActivity extends AppCompatActivity implements View.OnClickL
 //                        "para utilização do parquímetro " + spinnerParquimetro.getSelectedItem().toString()+
 //                                " Sua vaga estará disponível até às " + hora_atual);
 
-                showNotification("Confirmação de Reserva","Reserva efetuada para utilização do parquímetro (" + parquimetro.getText().toString()+
-                        "). Sua vaga estará disponível até às " + hora_atual + ".");
+                if (getIntent().getBooleanExtra("status3", true)) {
+
+                    showNotification("Confirmação de Reserva", "Reserva efetuada para utilização do parquímetro (" + parquimetro.getText().toString() +
+                            "). Sua vaga estará disponível até às " + hora_atual + ".");
+                }
                 //TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
                 //String number = tm.getLine1Number();
                 //alert("numero: " +number);

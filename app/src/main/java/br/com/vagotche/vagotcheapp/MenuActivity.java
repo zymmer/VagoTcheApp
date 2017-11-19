@@ -54,7 +54,7 @@ public class MenuActivity extends AppCompatActivity
     private ShareDialog shareDialog;
     private Button logout;
     MenuItem nav_meusdados, nav_contato, nav_movimentacoes, nav_info, itemwww;
-    Intent zonaAzul, Maps;
+    Intent zonaAzul, Maps, creditoIntent, movimentacoes;
     FloatingActionButton zab;
     private Chronometer chronometer;
     private long milliseconds;
@@ -194,11 +194,6 @@ public class MenuActivity extends AppCompatActivity
                     }
                 }, 5000);
 
-//                Maps = new Intent(MenuActivity.this, MapsActivity.class);
-//                VerificaParquimetrosToMaps();
-//                VerificaParquimetrosIdososToMaps();
-//                VerificaParquimetrosDFToMaps();
-//                Maps.putExtra("id_usuario", cdUsuario);
             }
         });
 
@@ -222,6 +217,7 @@ public class MenuActivity extends AppCompatActivity
         cab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                auxiliar = "confAlertas";
                 VerificaConfs();
             }
         });
@@ -235,6 +231,7 @@ public class MenuActivity extends AppCompatActivity
                     zonaAzul.putExtra("parquimetro", getIntent().getStringExtra("parquimetro"));
                     auxiliar = "zonaazul";
                     VerificaCreditos();
+                    VerificaConfs();
                     VerificaPlacas();
                     VerificaParquimetrosZonaAzul();
                 } else {
@@ -407,13 +404,26 @@ public class MenuActivity extends AppCompatActivity
 
             for(int i=0; i < ja.length(); i++) {
                 JSONObject jo = ja.getJSONObject(i);
-                String cidade  = jo.getString("cidade");
+                String CodPagamento  = jo.getString("CodPagamento");
+                movimentacoesArray.add(CodPagamento);
+                String cidade  = jo.getString("Cidade");
                 movimentacoesArray.add(cidade);
-                String estado  = jo.getString("estado");
+                String estado  = jo.getString("Estado");
                 movimentacoesArray.add(estado);
+                String placa  = jo.getString("Placa");
+                movimentacoesArray.add(placa);
+                String parquimetro  = jo.getString("Parquimetro");
+                movimentacoesArray.add(parquimetro);
+                String Debito  = jo.getString("Debito");
+                movimentacoesArray.add(Debito);
+                String DataReferencia  = jo.getString("DataReferencia");
+                movimentacoesArray.add(DataReferencia);
+                String Hora  = jo.getString("Hora");
+                movimentacoesArray.add(Hora);
             }
 
-            zonaAzul.putStringArrayListExtra("movimentacoesArray", movimentacoesArray);
+            movimentacoes.putStringArrayListExtra("movimentacoesArray", movimentacoesArray);
+            startActivity(movimentacoes);
 
         }
         catch(JSONException e){ e.printStackTrace(); }
@@ -492,7 +502,13 @@ public class MenuActivity extends AppCompatActivity
         try{
             JSONArray ja = new JSONArray(data);
             Maps.putExtra("parquimetrosDFArray", ja.toString());
-            startActivityForResult(Maps,0);
+
+            Maps = getPackageManager().getLaunchIntentForPackage("com.google.android.apps.maps");
+            Maps.setAction(Intent.ACTION_VIEW);
+            Maps.setData(Uri.parse("google.navigation:/?free=1&mode=d&entry=fnls"));
+            startActivity(Maps);
+
+            //startActivityForResult(Maps,0);
         }
         catch(JSONException e){ e.printStackTrace(); }
 
@@ -508,7 +524,6 @@ public class MenuActivity extends AppCompatActivity
         if (networkInfo != null && networkInfo.isConnected()) {
 
             url = "http://fabrica.govbrsul.com.br/vagotche/index.php/Movimentacoes/VerificarMovimentacoes";
-
             parametros = "cdUsuario=" + cdUsuario;
 
             new SolicitaDadosMovimentacoes().execute(url);
@@ -527,10 +542,9 @@ public class MenuActivity extends AppCompatActivity
         if (networkInfo != null && networkInfo.isConnected()) {
 
             url = "http://fabrica.govbrsul.com.br/vagotche/index.php/ConfAlertas/VerificarAlertas";
-
             parametros = "cdUsuario=" + cdUsuario;
-
             new SolicitaDados().execute(url);
+
         } else {
             complain("Sem conexão com a Internet. O Wi-Fi ou os dados da rede celular devem estar ativos. Tente novamente.");
         }
@@ -676,15 +690,24 @@ public class MenuActivity extends AppCompatActivity
                     b4new = true;
                 }
 
-                Intent it = new Intent(MenuActivity.this, ConfiguracaoAlertasActivity.class);
-                it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                it.putExtra("status1", b1new);
-                it.putExtra("status2", b2new);
-                it.putExtra("status3", b3new);
-                it.putExtra("status4", b4new);
-                it.putExtra("id_usuario", cdUsuario);
-
-                startActivity(it);
+                switch (auxiliar) {
+                    case "credito":
+                        creditoIntent.putExtra("status2", b3new);
+                        break;
+                    case "zonaazul":
+                        zonaAzul.putExtra("status3", b3new);
+                        break;
+                    case "confAlertas":
+                        Intent it = new Intent(MenuActivity.this, ConfiguracaoAlertasActivity.class);
+                        it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        it.putExtra("status1", b1new);
+                        it.putExtra("status2", b2new);
+                        it.putExtra("status3", b3new);
+                        it.putExtra("status4", b4new);
+                        it.putExtra("id_usuario", cdUsuario);
+                        startActivity(it);
+                        break;
+                }
             }
 
             //VerificaSaldo
@@ -693,11 +716,11 @@ public class MenuActivity extends AppCompatActivity
                 String[] dadosSaldo = resultado.split(",");
 
                 if(auxiliar.contains("credito")) {
-                    Intent it = new Intent(MenuActivity.this, CreditosActivity.class);
-                    it.putExtra("saldo", df2.format(Double.parseDouble(dadosSaldo[1])));
-                    it.putExtra("id_usuario", cdUsuario);
-                    it.putExtra("token", token);
-                    startActivity(it);
+                    creditoIntent = new Intent(MenuActivity.this, CreditosActivity.class);
+                    creditoIntent.putExtra("saldo", df2.format(Double.parseDouble(dadosSaldo[1])));
+                    creditoIntent.putExtra("id_usuario", cdUsuario);
+                    creditoIntent.putExtra("token", token);
+                    startActivity(creditoIntent);
                 } else if (auxiliar.contains("zonaazul")) {
 
                     zonaAzul.putExtra("saldoZA", df2.format(Double.parseDouble(dadosSaldo[1])));
@@ -882,11 +905,11 @@ public class MenuActivity extends AppCompatActivity
             it.putExtra("email_usuario", getIntent().getExtras().getString("email_usuario"));
             startActivity(it);
         } else if (id == R.id.nav_movimentacoes) {
-            Intent it = new Intent(this, MovimentacoesActivity.class);
-            it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            it.putExtra("nome_usuario", getIntent().getExtras().getString("nome_usuario"));
-            it.putExtra("email_usuario", getIntent().getExtras().getString("email_usuario"));
-            startActivity(it);
+            movimentacoes = new Intent(this, MovimentacoesActivity.class);
+            movimentacoes.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            movimentacoes.putExtra("nome_usuario", getIntent().getExtras().getString("nome_usuario"));
+            movimentacoes.putExtra("email_usuario", getIntent().getExtras().getString("email_usuario"));
+            VerificaMovimentacoes();
         } else if (id == R.id.nav_info) {
             Intent it = new Intent(this, InfoActivity.class);
             it.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

@@ -286,9 +286,10 @@ public class CreditosActivity extends AppCompatActivity
             if (resultado.contains("credito_adquirido")) {
                 //alert("Créditos Adquiridos...");
 
-                showNotification("vagoCRED","Adquirido R$"+ df2.format(saldoVar) +" reais de crédito." +
-                        "\n" + "Data: " + data_completa + "Hora: " +hora_atual);
-
+                if (getIntent().getBooleanExtra("status3", true)) {
+                    showNotification("vagoCRED", "Adquirido R$" + df2.format(saldoVar) + " reais de crédito." +
+                            "\n" + "Data: " + data_completa + "Hora: " + hora_atual);
+                }
                 //TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);i
                 //String number = tm.getLine1Number();
                 //alert("numero: " +number);

@@ -17,9 +17,12 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by guilherme on 14/09/17.
@@ -42,6 +45,13 @@ public class MovimentacoesActivity extends AppCompatActivity
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
     }
 
+    //Formato de moeda
+    DecimalFormatSymbols dfs = new DecimalFormatSymbols (new Locale("pt", "BR"));
+    // Formato com sinal de menos -5.000,00
+    //DecimalFormat df1 = new DecimalFormat ("#,##0.00", dfs);
+    // Formato com parêntese (5.000,00)
+    DecimalFormat df2 = new DecimalFormat ("#,##0.00;(#,##0.00)", dfs);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,11 +69,10 @@ public class MovimentacoesActivity extends AppCompatActivity
         nav_info = (MenuItem) findViewById(R.id.nav_info);
         itemwww = (MenuItem) findViewById(R.id.itemwww);
 
-
         //ExpandableList
         buildList();
 
-        ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.expandableListViewMeusVeiculos);
+        ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.expandableListViewMovimentacoes);
         expandableListView.setAdapter(new ExpandableAdapter(MovimentacoesActivity.this, listGroup, listData) {
         });
 
@@ -107,23 +116,39 @@ public class MovimentacoesActivity extends AppCompatActivity
         listGroup = new ArrayList<String>();
         listData = new HashMap<String, List<String>>();
 
-        getIntent().getStringArrayListExtra("veiculosArray");
-
         int x = 0;
 
-        for (int i = 0; i < getIntent().getStringArrayListExtra("veiculosArray").size(); i = i + 4) {
+        for (int i = 0; i < getIntent().getStringArrayListExtra("movimentacoesArray").size(); i = i + 8) {
+
 
             //GROUP
-            listGroup.add(getIntent().getStringArrayListExtra("veiculosArray").get(i));
+            if (getIntent().getStringArrayListExtra("movimentacoesArray").get(i).equals("0")) {
+                listGroup.add("Total - "  + "Data Referência: " + getIntent().getStringArrayListExtra("movimentacoesArray").get(i + 6));
 
-            //CHILDREM
-            List<String> auxList = new ArrayList<String>();
-            auxList.add("Placa: " + getIntent().getStringArrayListExtra("veiculosArray").get(i + 1));
-            auxList.add("Ano-Fabricação: " + getIntent().getStringArrayListExtra("veiculosArray").get(i + 2));
-            auxList.add("Ano-Modelo: " + getIntent().getStringArrayListExtra("veiculosArray").get(i + 3));
+                //CHILDREM
+                List<String> auxList = new ArrayList<String>();
+                auxList.add("Total de Transações: " + x);
+                auxList.add("Débito Total Durante o Período: " + "R$" + df2.format(Double.parseDouble(getIntent().getStringArrayListExtra("movimentacoesArray").get(i + 5))));
 
-            listData.put(listGroup.get(x), auxList);
-            x = x + 1;
+                listData.put(listGroup.get(x), auxList);
+                x = x + 1;
+
+            } else {
+                listGroup.add("Ordem de Pagamento: " + getIntent().getStringArrayListExtra("movimentacoesArray").get(i));
+
+                //CHILDREM
+                List<String> auxList = new ArrayList<String>();
+                auxList.add("Cidade: " + getIntent().getStringArrayListExtra("movimentacoesArray").get(i + 1));
+                auxList.add("Estado: " + getIntent().getStringArrayListExtra("movimentacoesArray").get(i + 2));
+                auxList.add("Placa: " + getIntent().getStringArrayListExtra("movimentacoesArray").get(i + 3));
+                auxList.add("Parquímetro: " + getIntent().getStringArrayListExtra("movimentacoesArray").get(i + 4));
+                auxList.add("Débito: " + "R$" + df2.format(Double.parseDouble(getIntent().getStringArrayListExtra("movimentacoesArray").get(i + 5))));
+                auxList.add("Data: " + getIntent().getStringArrayListExtra("movimentacoesArray").get(i + 6));
+                auxList.add("Hora: " + getIntent().getStringArrayListExtra("movimentacoesArray").get(i + 7));
+
+                listData.put(listGroup.get(x), auxList);
+                x = x + 1;
+            }
 
         }
     }
