@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.hardware.Camera;
 import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
@@ -102,6 +103,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     MarkerOptions markerOptions = new MarkerOptions();
     LatLng latLng;
 
+    private LocationManager locationManager;
+
     private void alert(String s){
         Toast.makeText(this,s,Toast.LENGTH_LONG).show();
     }
@@ -113,14 +116,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        //initPubNub();
 
-//        mSharedPrefs = getSharedPreferences(DATASTREAM_PREFS, MODE_PRIVATE);
-//        if (!mSharedPrefs.contains(DATASTREAM_UUID)) {
-//            Intent toLogin = new Intent(this, MenuActivity.class);
-//            startActivity(toLogin);
-//            return;
-//        }
+//        // Create a LocationRequest object
+//        mLocationRequest = LocationRequest.create()
+//                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+//                .setInterval(10 * 1000)     // 10 seconds, in milliseconds
+//                .setFastestInterval(1 * 1000); // 1 second, in milliseconds
 
         //Teste Spinner
         mySpinner = (Spinner) findViewById(R.id.spinner1);
@@ -234,7 +235,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //Desligar Compasso
         mMap.getUiSettings().setCompassEnabled(true);
         //Desligar Gestures
-        //mMap.getUiSettings().isRotateGesturesEnabled(false);
+        //mMap.getUiSettings().isRotateGesturesEnabled();
 
 
         mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -325,6 +326,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     == PackageManager.PERMISSION_GRANTED) {
                 buildGoogleApiClient();
                 mMap.setMyLocationEnabled(true);
+            } else {
+                //Request Location Permission
+                checkLocationPermission();
             }
         }
         else {
@@ -348,7 +352,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(200);
         mLocationRequest.setFastestInterval(200);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -363,14 +367,23 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+
+        //stop location updates when Activity is no longer active
+        if (mGoogleApiClient != null) {
+            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+        }
+    }
+
+    @Override
     public void onLocationChanged(Location location) {
 
         mLastLocation = location;
         if (mCurrLocationMarker != null) {
             mCurrLocationMarker.remove();
 
-            //Place current location marker
-            latLng = new LatLng(location.getLatitude(), location.getLongitude());
+
         }
 
         //Testes
@@ -379,13 +392,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //Place current location marker
         latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
         markerOptions.title("Você");
         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.mipmap.car32));
         mCurrLocationMarker = mMap.addMarker(markerOptions);
 
 
-//        String format = "geo:0,0?q=" + location.getLatitude() + "," + location.getLongitude() + "( Location title)";
+//        String format = "geo:0,0?q=" + location.getLatitude() + "," + location.getLongitude() + " Minha Localização";
 //
 //        Uri uri = Uri.parse(format);
 //
@@ -407,11 +421,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .tilt(30)                   // Sets the tilt of the camera to 30 degrees
                 .build();                   // Creates a CameraPosition from the builder
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-
-        //stop location updates
-        if (mGoogleApiClient != null) {
-            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-        }
+        
 
         calcParquimetrosMaisProximos();
 

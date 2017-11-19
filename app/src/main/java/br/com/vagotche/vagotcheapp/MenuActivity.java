@@ -503,12 +503,12 @@ public class MenuActivity extends AppCompatActivity
             JSONArray ja = new JSONArray(data);
             Maps.putExtra("parquimetrosDFArray", ja.toString());
 
-            Maps = getPackageManager().getLaunchIntentForPackage("com.google.android.apps.maps");
-            Maps.setAction(Intent.ACTION_VIEW);
-            Maps.setData(Uri.parse("google.navigation:/?free=1&mode=d&entry=fnls"));
-            startActivity(Maps);
+//            Maps = getPackageManager().getLaunchIntentForPackage("com.google.android.apps.maps");
+//            Maps.setAction(Intent.ACTION_VIEW);
+//            Maps.setData(Uri.parse("google.navigation:/?free=1&mode=d&entry=fnls"));
+//            startActivity(Maps);
 
-            //startActivityForResult(Maps,0);
+            startActivityForResult(Maps,0);
         }
         catch(JSONException e){ e.printStackTrace(); }
 
