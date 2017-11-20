@@ -64,13 +64,6 @@ public class CreditosActivity extends AppCompatActivity
         implements IabBroadcastReceiver.IabBroadcastListener
 {
 
-    //private IabHelper mHelper;
-
-    // CONSTANTS
-//    private static final String[] PRODUCT_IDS = new String[]{"credito5",
-//            "credito10", "credito15"};
-//    private static final String base64EncodedPublicKey = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiI/sOn+Gs8sr/zhQn0zR0J7HsQJ8Fnrrvu4lRXwT5vsq7Zhnv6gg7/kr0TZznQrs45SQOyRriUW4VIZ6h4vbNbbvq/CxeTE27zPBXHemaoHMP7hEbmLe8J5HWnvxuPhxMF4iXfz0+z777h7wh8phgITMaYi6Ek7jeCY5QeSJ1qEjUP9jzLsNgPBb4sahb5N52xiIfTFnUe6rziLG4pdZqK2vzk7pFYt5XErf+wikPtkFl4NaNdki8qnb3xoE9YYmn1MzhwKjc1h2luRNRTDfVrj/Zj6neXtzuzE7TI2AHgwFMU+rc9U/41/J/Jc8pjKXNSFWy4Pji3TmxTJBU3H14wIDAQAB";
-
     //Variaveis
     int cdUsuario;
     TextView seuSaldo, valor, cred5, cred10, cred15, cred20, cred40, cred60;
@@ -88,10 +81,6 @@ public class CreditosActivity extends AppCompatActivity
     Double credVago20 = 20.00;
     Double credVago40 = 40.00;
     Double credVago60 = 60.00;
-
-//    private void alert(String s){
-//        Toast.makeText(this,s,Toast.LENGTH_LONG).show();
-//    }
 
     Date data = new Date();
 
@@ -111,22 +100,8 @@ public class CreditosActivity extends AppCompatActivity
     // Debug tag, for logging
     static final String TAG = "VagoTchê";
 
-    // Does the user have the premium upgrade?
-    boolean mIsPremium = false;
-
     // Does the user have an active subscription to the infinite gas plan?
     boolean mSubscribedToInfiniteGas = false;
-
-    // Will the subscription auto-renew?
-    boolean mAutoRenewEnabled = false;
-
-    // Tracks the currently owned infinite gas SKU, and the options in the Manage dialog
-    String mInfiniteGasSku = "";
-    String mFirstChoiceSku = "";
-    String mSecondChoiceSku = "";
-
-    // Used to select between purchasing gas on a monthly or yearly basis
-    String mSelectedSubscriptionPeriod = "";
 
     // SKUs for our products: the premium upgrade (non-consumable) and gas (consumable)
     //static final String SKU_PREMIUM = "premium";
@@ -137,22 +112,8 @@ public class CreditosActivity extends AppCompatActivity
     static final String credito40 = "credito40";
     static final String credito60 = "credito60";
 
-    // SKU for our subscription (infinite gas)
-    //static final String SKU_INFINITE_GAS_MONTHLY = "infinite_gas_monthly";
-    //static final String SKU_INFINITE_GAS_YEARLY = "infinite_gas_yearly";
-
     // (arbitrary) request code for the purchase flow
     static final int RC_REQUEST = 10001;
-
-    // Graphics for the gas gauge
-//         static int[] TANK_RES_IDS = { R.drawable.gas0, R.drawable.gas1, R.drawable.gas2,
-//                 R.drawable.gas3, R.drawable.gas4 };
-
-    // How many units (1/4 tank is our unit) fill in the tank.
-    //static final int TANK_MAX = 4;
-
-    // Current amount of gas in tank, in units
-    //int mTank;
 
     // The helper object
     IabHelper mHelper;

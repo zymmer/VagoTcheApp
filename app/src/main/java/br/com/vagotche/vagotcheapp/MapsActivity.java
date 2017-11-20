@@ -421,7 +421,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .tilt(30)                   // Sets the tilt of the camera to 30 degrees
                 .build();                   // Creates a CameraPosition from the builder
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-        
+
 
         calcParquimetrosMaisProximos();
 
@@ -826,7 +826,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         ListItemFiltroVagas item = new ListItemFiltroVagas();
 
         item = new ListItemFiltroVagas();
-        item.setData("Modo Localizar", R.mipmap.parquimetro_40x40);
+        item.setData("Modo Localizar", R.mipmap.search);
         allList.add(item);
 
 //        item = new ListItemFiltroVagas();
