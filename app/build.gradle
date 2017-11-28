@@ -7,29 +7,29 @@ android {
         applicationId "br.com.vagotche.vagotcheapp"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 3
-        versionName "3.0"
+        versionCode 4
+        versionName "4.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
-    //Debug Mode
-    signingConfigs{
-        key{
-            keyAlias 'vagotche'
-            keyPassword 'guisubtil@230988'
-            storeFile file('/home/guilherme/Android/APKs/VagoTchê/vagotche.jks')
-            storePassword 'guisubtil@230988'
-        }
-    }
+//    //Debug Mode
+//    signingConfigs{
+//        key{
+//            keyAlias 'vagotche'
+//            keyPassword 'guisubtil@230988'
+//            storeFile file('/home/guilherme/Android/APKs/VagoTchê/vagotche.jks')
+//            storePassword 'guisubtil@230988'
+//        }
+//    }
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-        //Debug Mode
-        debug{
-            signingConfig signingConfigs.key
-        }
+//        //Debug Mode
+//        debug{
+//            signingConfig signingConfigs.key
+//        }
     }
     useLibrary 'org.apache.http.legacy'
 
@@ -77,7 +77,7 @@ dependencies {
     compile 'com.google.firebase:firebase-core:11.0.4'
     compile 'com.google.firebase:firebase-messaging:11.0.4'
     // PubNub Realtime Google Maps
-    compile group: 'com.pubnub', name: 'pubnub', version: '4.2.3'
+    //compile group: 'com.pubnub', name: 'pubnub', version: '4.2.3'
 
 }
 

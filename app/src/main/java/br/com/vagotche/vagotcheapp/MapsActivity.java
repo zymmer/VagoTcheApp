@@ -13,6 +13,7 @@ import android.hardware.Camera;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
@@ -44,14 +45,7 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polyline;
-import com.google.android.gms.maps.model.PolylineOptions;
-import com.pubnub.api.callbacks.SubscribeCallback;
-import com.pubnub.api.PNConfiguration;
-import com.pubnub.api.PubNub;
-import com.pubnub.api.models.consumer.PNStatus;
-import com.pubnub.api.models.consumer.pubsub.PNMessageResult;
-import com.pubnub.api.models.consumer.pubsub.PNPresenceEventResult;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -71,19 +65,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener,
         View.OnClickListener{
-
-//    //PubNub
-//    public static final String DATASTREAM_PREFS = "br.com.vagotche.vagotcheapp.DATASTREAM_PREFS";
-//    public static final String DATASTREAM_UUID = "br.com.vagotche.vagotcheapp.DATASTREAM_UUID";
-//    public static final String PUBLISH_KEY = "pub-c-2964c738-755e-46eb-ad68-c47ca54e01f3";
-//    public static final String SUBSCRIBE_KEY = "sub-c-717c68fc-c305-11e7-931e-8e9ef5f6aa39";
-//    public static final String CHANNEL_NAME = "maps-channel";
-//
-//    private PubNub mPubNub;
-//    private SharedPreferences mSharedPrefs;
-//    private Polyline mPolyline;
-//
-//    private List<LatLng> mPoints = new ArrayList<>();
 
     //Variaveis
     int cdUsuario;
@@ -117,12 +98,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
 
 
-//        // Create a LocationRequest object
-//        mLocationRequest = LocationRequest.create()
-//                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-//                .setInterval(10 * 1000)     // 10 seconds, in milliseconds
-//                .setFastestInterval(1 * 1000); // 1 second, in milliseconds
-
         //Teste Spinner
         mySpinner = (Spinner) findViewById(R.id.spinner1);
         mySpinner.setAdapter(new MyAdapterFiltroVagas(this, R.layout.rowfiltrovagas, getAllList()));
@@ -132,6 +107,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
         }
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -153,69 +129,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         btnReservar.setOnClickListener(this);
     }
 
-//    private final void initPubNub() {
-//        PNConfiguration config = new PNConfiguration();
-//
-//        config.setPublishKey(PUBLISH_KEY);
-//        config.setSubscribeKey(SUBSCRIBE_KEY);
-//        config.setSecure(true);
-//
-//        this.mPubNub = new PubNub(config);
-//
-//        this.mPubNub.addListener(new SubscribeCallback() {
-//
-//            @Override
-//            public void status(PubNub pubnub, PNStatus status) {
-//                // no status handler for simplicity
-//            }
-//
-//            @Override
-//            public void message(PubNub pubnub, PNMessageResult message) {
-//                try {
-//                    Log.v(TAG, JsonUtil.asJson(message));
-//
-//                    Map<String, String> map = JsonUtil.convert(message.getMessage(), LinkedHashMap.class);
-//                    String lat = map.get("lat");
-//                    String lng = map.get("lng");
-//
-//                    updateLocation(new LatLng(Double.parseDouble(lat), Double.parseDouble(lng)));
-//                } catch (Exception e) {
-//                    throw new RuntimeException();
-//                }
-//            }
-//
-//            @Override
-//            public void presence(PubNub pubnub, PNPresenceEventResult presence) {
-//                // no presence handler for simplicity
-//            }
-//        });
-//
-//        this.mPubNub.subscribe().channels(Arrays.asList(CHANNEL_NAME)).execute();
-//    }
-
-//    private void updateLocation(final LatLng location) {
-//        this.runOnUiThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                mPoints.add(location);
-//
-//                if (MapsActivity.this.mCurrLocationMarker != null) {
-//                    MapsActivity.this.mCurrLocationMarker.setPosition(location);
-//                } else {
-//                    MapsActivity.this.mCurrLocationMarker = mMap.addMarker(new MarkerOptions().position(location));
-//                }
-//
-//                if (MapsActivity.this.mPolyline != null) {
-//                    MapsActivity.this.mPolyline.setPoints(mPoints);
-//                } else {
-//                    MapsActivity.this.mPolyline = mMap.addPolyline(new PolylineOptions().color(Color.BLUE).addAll(mPoints));
-//                }
-//
-//                mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
-//            }
-//        });
-//    }
-
     /**GoogleMapOptions options = new GoogleMapOptions().liteMode(true);
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -236,7 +149,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.getUiSettings().setCompassEnabled(true);
         //Desligar Gestures
         //mMap.getUiSettings().isRotateGesturesEnabled();
-
 
         mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -283,41 +195,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         });
 
-//        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-//
-//                switch (position) {
-//                    case 0: //Modo Localizar
-//                        //alert("Spinner item 1!" + parentView.getSelectedItem().toString());
-//                        mMap.clear();
-//                        onLocationChanged(mLastLocation);
-//                        break;
-//                    case 1: //Comuns
-//                        //alert("Spinner item 2!" + parentView.getSelectedItem().toString());
-//                        mMap.clear();
-//                        addParquimetrosArray();
-//                        break;
-//                    case 2: //Idosos
-//                        //alert("Spinner item 3!" + parentView.getSelectedItem().toString());
-//                        mMap.clear();
-//                        addParquimetrosIdososArray();
-//                        break;
-//                    case 3: //DF
-//                        //alert("Spinner item 4!" + parentView.getSelectedItem().toString());
-//                        mMap.clear();
-//                        addParquimetrosDFArray();
-//                        break;
-//                }
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parentView) {
-//                // your code here
-//                //addParquimetrosArray();
-//            }
-//
-//        });
 
         //Initialize Google Play Services
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -383,12 +260,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (mCurrLocationMarker != null) {
             mCurrLocationMarker.remove();
 
-
         }
 
-        //Testes
-        //location.setLatitude(-30.032563);
-        //location.setLongitude(-51.227797);
+//        //Testes
+//        location.setLatitude(-30.0185682);
+//        location.setLongitude(-51.1974655);
 
         //Place current location marker
         latLng = new LatLng(location.getLatitude(), location.getLongitude());
@@ -423,7 +299,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
 
-        calcParquimetrosMaisProximos();
+        //calcParquimetrosMaisProximos();
+        new MyAsyncTask().execute();
 
 
     }
@@ -499,87 +376,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-//    //Parquímetros
-//    public void addParquimetrosArray() {
-//
-//        try{
-//            ja = new JSONArray(getIntent().getStringExtra("parquimetrosArray"));
-//
-//            for(int i = 0; i < ja.length(); i++) {
-//                JSONObject jo = ja.getJSONObject(i);
-//
-//                MarkerOptions markerOptions = new MarkerOptions();
-//                markerOptions.title(jo.getString("cdEndereco"));
-//                LatLng latLng = new LatLng(Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")));
-//                markerOptions.position(latLng);
-//                markerOptions.snippet(  "Vagas Comuns ocupadas 0/" + jo.getString("nmVagasNormais") + "\n" +
-//                        "Vagas DF ocupadas 0/" + jo.getString("nmVagasDeficiente") +"\n" +
-//                        "Vagas Idosos ocupadas 0/" + jo.getString("nmVagasIdosos"));
-//                //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(R.mipmap.parquimetro_40x40));
-//                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-//                mMap.addMarker(markerOptions);
-//
-//            }
-//
-//        }
-//
-//        catch(JSONException e){ e.printStackTrace(); }
-//    }
-//
-//    //Parquímetros Idosos
-//    public void addParquimetrosIdososArray() {
-//
-//        try{
-//            ja = new JSONArray(getIntent().getStringExtra("parquimetrosIdososArray"));
-//
-//            for(int i = 0; i < ja.length(); i++) {
-//                JSONObject jo = ja.getJSONObject(i);
-//
-//                MarkerOptions markerOptions = new MarkerOptions();
-//                markerOptions.title(jo.getString("cdEndereco"));
-//                LatLng latLng = new LatLng(Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")));
-//                markerOptions.position(latLng);
-//                markerOptions.snippet(  "Vagas comuns ocupadas 0/" + jo.getString("nmVagasNormais") + "\n" +
-//                        "Vagas deficientes ocupadas 0/" + jo.getString("nmVagasDeficiente") +"\n" +
-//                        "Vagas idosos ocupadas 0/" + jo.getString("nmVagasIdosos"));
-//                //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(R.mipmap.parquimetro_40x40));
-//                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-//                mMap.addMarker(markerOptions);
-//
-//            }
-//
-//        }
-//
-//        catch(JSONException e){ e.printStackTrace(); }
-//    }
-//
-//    //Parquímetros Idosos
-//    public void addParquimetrosDFArray() {
-//
-//        try{
-//            ja = new JSONArray(getIntent().getStringExtra("parquimetrosDFArray"));
-//
-//            for(int i = 0; i < ja.length(); i++) {
-//                JSONObject jo = ja.getJSONObject(i);
-//
-//                MarkerOptions markerOptions = new MarkerOptions();
-//                markerOptions.title(jo.getString("cdEndereco"));
-//                LatLng latLng = new LatLng(Double.parseDouble(jo.getString("Latitude")), Double.parseDouble(jo.getString("Longitude")));
-//                markerOptions.position(latLng);
-//                markerOptions.snippet(  "Vagas comuns ocupadas 0/" + jo.getString("nmVagasNormais") + "\n" +
-//                        "Vagas deficientes ocupadas 0/" + jo.getString("nmVagasDeficiente") +"\n" +
-//                        "Vagas idosos ocupadas 0/" + jo.getString("nmVagasIdosos"));
-//                //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(R.mipmap.parquimetro_40x40));
-//                markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-//                mMap.addMarker(markerOptions);
-//
-//            }
-//
-//        }
-//
-//        catch(JSONException e){ e.printStackTrace(); }
-//    }
-
+    private class MyAsyncTask extends AsyncTask<Void, Void, Void>
+    {
+        @Override
+        protected Void doInBackground(Void... params) {
+            //calcParquimetrosMaisProximos();
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void result) {
+            calcParquimetrosMaisProximos();
+        }
+    }
 
     //Parquímetros mais proximos
     public void calcParquimetrosMaisProximos() {
@@ -611,7 +419,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Location.distanceBetween(mLastLocation.getLatitude(), mLastLocation.getLongitude(),
                         Float.parseFloat(jo.getString("Latitude")), Float.parseFloat(jo.getString("Longitude")), results);
 
-                float radius = 2000;// Medida em metros
+                float radius = 300;// Medida em metros
 
                 if (results[0] < radius) {
 
@@ -688,31 +496,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     item2.setData(parq2, R.mipmap.vehicle);
                     parquimetrosArray.add(item2);
 
-//                        if (indice == 0) {
-//                            porcentagemOcupacao.getCurrentTextColor();
-//                            quatidadeVagasDisponiveis.getCurrentTextColor();
-//                            nomeParquimetro.setTextColor(Color.WHITE);
-//                            nomeParquimetro.setText(parquimetro.getTitle());
-//                            quatidadeVagas.setText(jo.getString(tipoVaga));
-//                            quatidadeVagasDisponiveis.setText(Integer.toString(vagasOcupadas));
-//                            porcentagemOcupacao.setText(ocupacao);
-//                            parquimetro.showInfoWindow();
-//                            indiceCount = indiceCount + 1;
-//
-//                            if (Integer.parseInt(quatidadeVagasDisponiveis.getText().toString()) >= 1){
-//                                btnReservar.setBackgroundResource(R.drawable.txt_view_border_maps_green);
-//                                //btnReservar.setVisibility(View.VISIBLE);
-//                            } else {
-//                                btnReservar.setBackgroundResource(R.drawable.txt_view_border_maps_red);
-//                                //btnReservar.setVisibility(View.INVISIBLE);
-//                            }
-//
-//                        }
-
 
                 } else if (results[0] > radius && indiceCount == 0) {
                     nomeParquimetro.setTextColor(Color.RED);
-                    nomeParquimetro.setText("Não há parquímetros próximos num raio de 2km");
+                    nomeParquimetro.setText("Não há parquímetros próximos num raio de 300 metros");
                     quantidadeVagas.setText("");
                     quantidadeVagasOcupadas.setText("");
                     porcentagemOcupacao.setText("");
@@ -739,16 +526,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         Double.parseDouble(parquimetrosMaisProximosArray.get(0).getLongitude()));
                 Marker parquimetro = mMap.addMarker(new MarkerOptions()
                         .position(latLng)
-                        .title(parquimetrosMaisProximosArray.get(0).getNomeParquimetro())
+                        .title(parquimetrosMaisProximosArray.get(0).getNomeParquimetro()));
                         //.icon(BitmapDescriptorFactory.fromBitmap(bmp))
-                        .snippet(snippet + parquimetrosMaisProximosArray.get(0).getQuatidadeVagasOcupadas()
-                                + "/" + parquimetrosMaisProximosArray.get(0).getTipoVaga()));
+                        //.snippet(snippet + parquimetrosMaisProximosArray.get(0).getQuatidadeVagasOcupadas()
+                          //      + "/" + parquimetrosMaisProximosArray.get(0).getTipoVaga()));
 
 
                 if (parquimetrosMaisProximosArray.get(0).getColorText() == 0){
                     porcentagemOcupacao.setTextColor(Color.parseColor("#F06D2F"));
                     quantidadeVagasOcupadas.setTextColor(Color.parseColor("#F06D2F"));
-                } else {
+                } else{
                     porcentagemOcupacao.setTextColor(parquimetrosMaisProximosArray.get(0).getColorText());
                     quantidadeVagasOcupadas.setTextColor(parquimetrosMaisProximosArray.get(0).getColorText());
                     nomeParquimetro.setTextColor(Color.WHITE);
@@ -762,6 +549,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 if (parquimetrosMaisProximosArray.get(0).getTipoVaga().equals("0")){
                     quantidadeVagasOcupadas.setText("0");
+                    parquimetro.setSnippet("Parquímetro em Manutenção");
                 } else {
                     quantidadeVagasOcupadas.setText(parquimetrosMaisProximosArray.get(0).getQuatidadeVagasOcupadas());
                 }

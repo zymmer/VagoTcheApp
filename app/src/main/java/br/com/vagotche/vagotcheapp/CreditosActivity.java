@@ -245,7 +245,7 @@ public class CreditosActivity extends AppCompatActivity
             String hora_atual = dateFormat_hora.format(data_atual);
 
             if (resultado.contains("credito_adquirido")) {
-                //alert("Créditos Adquiridos...");
+                alert("" + getIntent().getBooleanExtra("status3", true));
 
                 if (getIntent().getBooleanExtra("status3", true)) {
                     showNotification("vagoCRED", "Adquirido R$" + df2.format(saldoVar) + " reais de crédito." +

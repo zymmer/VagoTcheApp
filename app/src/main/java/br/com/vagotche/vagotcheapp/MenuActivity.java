@@ -322,18 +322,18 @@ public class MenuActivity extends AppCompatActivity
         }
     }
 
-    public void startChronometer(){
-        millisecondsStop = millisecondsStop > 0 ? System.currentTimeMillis() - millisecondsStop : 0;
-        chronometer.setBase(SystemClock.elapsedRealtime() - (milliseconds + millisecondsStop));
-        chronometer.start();
-        millisecondsStop = 0;
-    }
-
-    public void pauseChronometer(View view){
-        millisecondsStop = System.currentTimeMillis();
-        milliseconds = SystemClock.elapsedRealtime() - chronometer.getBase();
-        chronometer.stop();
-    }
+//    public void startChronometer(){
+//        millisecondsStop = millisecondsStop > 0 ? System.currentTimeMillis() - millisecondsStop : 0;
+//        chronometer.setBase(SystemClock.elapsedRealtime() - (milliseconds + millisecondsStop));
+//        chronometer.start();
+//        millisecondsStop = 0;
+//    }
+//
+//    public void pauseChronometer(View view){
+//        millisecondsStop = System.currentTimeMillis();
+//        milliseconds = SystemClock.elapsedRealtime() - chronometer.getBase();
+//        chronometer.stop();
+//    }
 
 
 //    public void onTokenRefresh() {

@@ -52,20 +52,9 @@
             android:id="@+id/editNome"
             android:textAlignment="center"
             android:textStyle="bold"
-            android:text="
-VagoTchê LTDA.
-
-Av. Benjamin Constant 293 AP 303
-CEP 90-4500-00
-(051)-997152881
-suporte@vagotche.com.br
-
-Horários de Atendimento
-Segunda a Sexta-Feira: 8h às 19h
-Sábados: 8h às 13h
-
-www.vagotche.com.br
-Porto Alegre, Brasil."
+            android:text="VagoTchê LTDA.\n
+Av. Benjamin Constant 293 AP 303\nCEP 90-4500-00\n(051)-997152881
+\nsuporte@vagotche.com.br\nHorários de Atendimento\nSegunda a Sexta-Feira: 8h às 19h\nSábados: 8h às 13h\nwww.vagotche.com.br\nPorto Alegre, Brasil."
             />
 
 
